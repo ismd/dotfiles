@@ -53,8 +53,7 @@ values."
                markdown-live-preview-engine 'vmd)
      nlinum
      php
-     (python :variables
-             python-backend 'lsp)
+     python
      (ranger :variables
              ranger-show-preview t)
      semantic
@@ -327,8 +326,7 @@ values."
   (setq javascript-indent-level n) ; javascript-mode
   (setq js-indent-level n) ; js-mode
   (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
-  (setq css-indent-offset n) ; css-mode
-  (setq python-indent-offset n))
+  (setq css-indent-offset n))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; modes
@@ -407,7 +405,11 @@ values."
         scrollbar-mode 'right
         backward-delete-char-untabify-method nil)
 
+  ;; tab width
   (setq-default tab-width 4)
+
+  ;; cursor type
+  (setq-default cursor-type 'hbar)
 
   ;; utf-8
   (prefer-coding-system 'utf-8)
@@ -435,8 +437,25 @@ values."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun ismd/hooks ()
-  (defun ismd/coding-hook ()
+  (defun ismd/prog-mode-hook ()
     (auto-revert-mode t))
+
+  (defun ismd/python-mode-hook ()
+    (setq python-indent-offset 4)
+    (setq indent-tabs-mode nil)
+    (setq tab-width 4)
+
+    (setq flycheck-checker 'python-pylint
+          flycheck-checker-error-threshold 300)
+
+    ;; don't show anaconda mode error popup gaaarrhhgh
+    (remove-hook 'anaconda-mode-response-read-fail-hook
+                 'anaconda-mode-show-unreadable-response)
+
+    ;; smart tabs
+    (smart-tabs-advice py-indent-line py-indent-offset)
+    (smart-tabs-advice py-newline-and-indent py-indent-offset)
+    (smart-tabs-advice py-indent-region py-indent-offset))
 
   (defun ismd/web-mode-hook ()
     (setq web-mode-markup-indent-offset 4)
@@ -446,14 +465,34 @@ values."
     ;; (setq standard-indent nil)
     )
 
+  (defun ismd/js-mode-hook ()
+    (setq js2-basic-offset 4)
+    (setq js-indent-level 4)
+    (setq tab-width 4)
+    (setq indent-tabs-mode nil))
+
+  (defun ismd/c-mode-common-hook ()
+    (setq flycheck-gcc-language-standard "c++17")
+
+    ;; c-codingstyle
+    (jj/cstyle-hook))
+
+  (defun ismd/c++-mode-hook ()
+    (add-to-list 'c-doc-comment-style '(c++-mode . javadoc)))
+
   (defun ismd/dired-mode-hook ()
     (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
 
   (defun ismd/focus-out-hook ()
     (save-some-buffers t))
 
-  (add-hook 'prog-mode-hook 'ismd/coding-hook)
+  ;; hooks
+  (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
+  (add-hook 'python-mode-hook 'ismd/python-mode-hook)
   (add-hook 'web-mode-hook  'ismd/web-mode-hook)
+  (add-hook 'js-mode-hook 'ismd/js-mode-hook)
+  (add-hook 'c-mode-common-hook 'ismd/c-mode-common-hook)
+  (add-hook 'c-++-mode-hook 'ismd/c++-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-up-dir)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
 

@@ -555,7 +555,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
-  (setq custom-file "~/.spacemacs.d/custom.el")
+  (setq custom-file "~/.emacs.d/custom.el")
   (ismd/hooks))
 
 (defun dotspacemacs/user-config ()

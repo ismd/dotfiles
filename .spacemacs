@@ -82,6 +82,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(afternoon-theme
                                       cmake-ide
+                                      editorconfig
                                       mic-paren
                                       minimap
                                       neotree

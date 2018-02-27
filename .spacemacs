@@ -53,7 +53,9 @@ values."
                markdown-live-preview-engine 'vmd)
      nlinum
      php
-     python
+     (python :variables
+             python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t)
      (ranger :variables
              ranger-show-preview t)
      semantic
@@ -342,7 +344,7 @@ values."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun ismd/modes ()
-  ;; (global-company-mode)
+  (global-company-mode)
   ;; (global-whitespace-mode t)
   (delete-selection-mode t)
   (xterm-mouse-mode t)
@@ -380,26 +382,23 @@ values."
   (global-set-key (kbd "M-SPC") 'just-one-space)
 
   ;; delete region
-  (global-set-key (kbd "C-k") 'ismd/kill-line))
+  (global-set-key (kbd "C-k") 'ismd/kill-line)
+
+  ;; revert buffer
+  (global-set-key (kbd "C-x C-r") 'revert-buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; defaults
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun ismd/defaults ()
-  (setq lazy-highlight t                 ; highlight occurrences
-        lazy-highlight-cleanup nil       ; keep search term highlighted
-        lazy-highlight-max-at-a-time nil ; all occurences in file
-        mouse-yank-at-point t            ; paste as cursor instead of mouse position
-        python-fill-docstring-style 'symmetric
-        scrollbar-mode 'right
-        backward-delete-char-untabify-method nil)
+  (setq backward-delete-char-untabify-method nil)
 
   ;; tab width
   (setq-default tab-width 4)
 
   ;; cursor type
-  (setq evil-emacs-state-cursor '("chartreuse3" (bar . 2)))
+  (setq evil-emacs-state-cursor '("chartreuse3" (hbar . 2)))
 
   ;; utf-8
   (prefer-coding-system 'utf-8)
@@ -417,10 +416,7 @@ values."
   (setq warning-minimum-level :emergency)
 
   ;; no shell path warning
-  (setq exec-path-from-shell-check-startup-file nil)
-
-  ;; don't echo passwords when using interactive terminal programs
-  (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
+  (setq exec-path-from-shell-check-startup-file nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks
@@ -434,18 +430,20 @@ values."
     (setq python-indent-offset 4)
     (setq indent-tabs-mode nil)
     (setq tab-width 4)
+    (setq python-fill-docstring-style 'symmetric)
 
-    (setq flycheck-checker 'python-pylint
-          flycheck-checker-error-threshold 300)
+    ;; (setq flycheck-checker 'python-pylint
+    ;;       flycheck-checker-error-threshold 300)
 
     ;; don't show anaconda mode error popup gaaarrhhgh
-    (remove-hook 'anaconda-mode-response-read-fail-hook
-                 'anaconda-mode-show-unreadable-response)
+    ;; (remove-hook 'anaconda-mode-response-read-fail-hook
+    ;;              'anaconda-mode-show-unreadable-response)
 
     ;; smart tabs
-    (smart-tabs-advice py-indent-line py-indent-offset)
-    (smart-tabs-advice py-newline-and-indent py-indent-offset)
-    (smart-tabs-advice py-indent-region py-indent-offset))
+    ;; (smart-tabs-advice py-indent-line py-indent-offset)
+    ;; (smart-tabs-advice py-newline-and-indent py-indent-offset)
+    ;; (smart-tabs-advice py-indent-region py-indent-offset)
+    )
 
   (defun ismd/web-mode-hook ()
     (setq web-mode-markup-indent-offset 4)
@@ -490,8 +488,14 @@ values."
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
 
+  ;; isearch
+  (add-hook 'isearch-mode-end-hook 'spacemacs/evil-search-clear-highlight)
+
   ;; correct zsh coloring in shell:
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
+  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+  ;; don't echo passwords when using interactive terminal programs
+  (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; functions
@@ -534,7 +538,7 @@ values."
 
 (defun ismd/kill-line ()
   (interactive)
-  (delete-region (point) (progn (forward-line 1) (point))))
+  (delete-region (point) (line-end-position)))
 
 (defun ismd/dired-up-dir ()
   "Go up a directory."

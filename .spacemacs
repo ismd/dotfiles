@@ -454,10 +454,9 @@ values."
     )
 
   (defun ismd/js-mode-hook ()
-    (setq js2-basic-offset 4)
-    (setq js-indent-level 4)
-    (setq tab-width 4)
-    (setq indent-tabs-mode nil))
+    (setq-default js2-basic-offset 4)
+    (setq-default js-indent-level 2) ; json
+    )
 
   (defun ismd/c-mode-common-hook ()
     (setq flycheck-gcc-language-standard "c++17"))

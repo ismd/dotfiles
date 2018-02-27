@@ -29,9 +29,9 @@ values."
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
-   dotspacemacs-configuration-layers
-   '(
-     (auto-completion :variables
+    dotspacemacs-configuration-layers
+    '(
+      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
                       auto-completion-tab-key-behavior 'complete)
@@ -58,6 +58,9 @@ values."
      (ranger :variables
              ranger-show-preview t)
      semantic
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
      shell-scripts
      (spell-checking :variables
                      spell-checking-enable-by-default nil
@@ -73,11 +76,7 @@ values."
                       version-control-diff-tool 'git-gutter
                       version-control-diff-side 'left
                       version-control-global-margin t)
-     yaml
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
-     )
+     yaml)
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -85,9 +84,9 @@ values."
    dotspacemacs-additional-packages '(afternoon-theme
                                       cmake-ide
                                       mic-paren
+                                      minimap
                                       neotree
-                                      pdf-tools
-                                      pomidor)
+                                      pdf-tools)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -169,7 +168,7 @@ values."
    ;; quickly tweak the mode-line size to make separators look not too crappy.
 
    dotspacemacs-default-font '("SourceCodePro"
-                               :size 14
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.2)
@@ -324,20 +323,158 @@ values."
 ;;####################################################
 
 (defun ismd/setup-indent (n)
-  ;; java/c/c++
   (setq c-basic-offset n)
-  ;; web development
-  (setq tab-width n)
-  (setq coffee-tab-width n) ; coffeescript
   (setq javascript-indent-level n) ; javascript-mode
   (setq js-indent-level n) ; js-mode
   (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
-  (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
-  (setq web-mode-css-indent-offset n) ; web-mode, css in html file
-  (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
   (setq css-indent-offset n) ; css-mode
-  (setq python-indent-offset n)
-  )
+  (setq python-indent-offset n))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; modes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun ismd/modes ()
+  ;; (global-company-mode)
+  ;; (global-whitespace-mode t)
+  (delete-selection-mode t)
+  (xterm-mouse-mode t)
+  (editorconfig-mode t))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; keybindings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun ismd/keybindings ()
+  (interactive)
+
+  ;; arrow keys
+  (global-set-key (kbd "M-<left>") 'windmove-left)
+  (global-set-key (kbd "M-<right>") 'windmove-right)
+  (global-set-key (kbd "M-<up>") 'windmove-up)
+  (global-set-key (kbd "M-<down>") 'windmove-down)
+
+  (global-set-key (kbd "C-<left>") 'backward-word)
+  (global-set-key (kbd "C-<right>") 'forward-word)
+  (global-set-key (kbd "C-<up>") 'backward-paragraph)
+  (global-set-key (kbd "C-<down>") 'forward-paragraph)
+
+  ;; word deletion
+  (global-set-key (kbd "M-d") 'sp-delete-word)
+  (global-set-key (kbd "M-<backspace>") 'sp-backward-delete-word)
+  (global-set-key (kbd "C-<delete>") 'sp-delete-word)
+  (global-set-key (kbd "C-<backspace>") 'sp-backward-delete-word)
+
+  ;; tab
+  (global-set-key (kbd "C-<tab>") 'insert-tab)
+  (global-set-key (kbd "S-<tab>") 'tab-indent-or-complete)
+
+  ;; just one space
+  (global-set-key (kbd "M-SPC") 'just-one-space)
+
+  ;; delete region
+  (global-set-key (kbd "C-k") 'ismd/kill-line))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; mousescroll
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun ismd/mousescroll ()
+  ;; mouse-wheel scrolling
+  (setq
+    mouse-wheel-scroll-amount '(1 ((shift) . 1)
+                                 ((control)))             ; one line at a time
+    mouse-wheel-progressive-speed t                       ; accelerate scrolling
+    mouse-wheel-follow-mouse t)                           ; scroll- window under mouse
+
+  (setq
+    scroll-preserve-screen-position t                     ; keep relative column position when scrolling
+    scroll-margin 3                                       ; start scrolling n lines before window borders
+    scroll-conservatively 10                              ; scroll up to n lines to bring pointer back on screen
+    scroll-step 0                                         ; try scrolling n lines when pointer moves out
+    auto-window-vscroll nil))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; defaults
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun ismd/defaults ()
+  (setq lazy-highlight t                 ; highlight occurrences
+        lazy-highlight-cleanup nil       ; keep search term highlighted
+        lazy-highlight-max-at-a-time nil ; all occurences in file
+        mouse-yank-at-point t            ; paste as cursor instead of mouse position
+        python-fill-docstring-style 'symmetric
+        scrollbar-mode 'right
+        backward-delete-char-untabify-method nil)
+
+  (setq-default tab-width 4)
+
+  ;; utf-8
+  (prefer-coding-system 'utf-8)
+
+  ;; link to X primary clipboard
+  (setq x-select-enable-clipboard t)
+
+  ;; require a ending newline
+  (setq require-final-newline t)
+
+  ;; dired
+  (setq dired-listing-switches "-al --group-directories-first")
+
+  ;; warnings
+  (setq warning-minimum-level :emergency)
+
+  ;; no shell path warning
+  (setq exec-path-from-shell-check-startup-file nil)
+
+  ;; don't echo passwords when using interactive terminal programs
+  (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hooks
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun ismd/hooks ()
+  (defun ismd/coding-hook ()
+    (auto-revert-mode t))
+
+  (defun ismd/web-mode-hook ()
+    (setq web-mode-markup-indent-offset 4)
+    (setq web-mode-css-indent-offset 4)
+    (setq web-mode-code-indent-offset 4)
+    (setq web-mode-attr-indent-offset nil)
+    ;; (setq standard-indent nil)
+    )
+
+  (defun ismd/dired-mode-hook ()
+    (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
+
+  (defun ismd/focus-out-hook ()
+    (save-some-buffers t))
+
+  (add-hook 'prog-mode-hook 'ismd/coding-hook)
+  (add-hook 'web-mode-hook  'ismd/web-mode-hook)
+  (add-hook 'dired-mode-hook 'ismd/dired-up-dir)
+  (add-hook 'focus-out-hook 'ismd/focus-out-hook)
+
+  ;; correct zsh coloring in shell:
+  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun insert-tab ()
+  (interactive)
+  (insert-char ?\t))
+
+(defun tab-indent-or-complete ()
+  (interactive)
+  (if (minibufferp)
+    (minibuffer-complete)
+    (if (check-expansion)
+      (company-complete-common)
+      (indent-for-tab-command))))
 
 (defun ismd/reverse-input-method (input-method)
     "Build the reverse mapping of single letters from INPUT-METHOD."
@@ -362,33 +499,16 @@ values."
       (when input-method
         (activate-input-method current))))
 
+(defun ismd/kill-line ()
+  (interactive)
+  (delete-region (point) (progn (forward-line 1) (point))))
+
 (defun ismd/dired-up-dir ()
   "Go up a directory."
   (interactive)
   (let ((current-dir (dired-current-directory)))
     (find-alternate-file "..")
     (dired-goto-file current-dir)))
-
-(defun ismd/smart-beginning-of-line ()
-  "Move point to first non-whitespace character or beginning-of-line.
-
-Move point to the first non-whitespace character on this line.
-If point was already at that position, move point to beginning of line."
-  (interactive)
-  (let ((oldpos (point)))
-    (back-to-indentation)
-    (and (= oldpos (point))
-         (beginning-of-line))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; keybindings
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun ismd/keybindings ()
-  (interactive)
-
-  (global-set-key (kbd "C-<tab>") 'insert-tab)
-  (global-set-key (kbd "S-<tab>") 'tab-indent-or-complete))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spacemacs init hooks
@@ -404,7 +524,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (setq custom-file "~/.spacemacs.d/custom.el")
   (ismd/setup-indent 4)
-  )
+  (ismd/hooks))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -414,64 +534,21 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (global-company-mode)
-
-  ;; Server
+  ;; server
   (unless (server-running-p)
     (server-start))
 
-  ;; Scroll one line at a time
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-  (setq mouse-wheel-progressive-speed nil)
-  (setq mouse-wheel-follow-mouse 't)
-  (setq scroll-step 1)
-  (setq scroll-margin 3)
+  (ismd/modes)
+  (ismd/keybindings)
+  (ismd/defaults)
+  (ismd/mousescroll)
 
-  ;; Russian computer
-  ;; (defadvice read-passwd (around read-passwd act)
-  ;;   (let ((local-function-key-map nil))
-  ;;     ad-do-it))
-
-  (ismd/reverse-input-method 'russian-computer)
-
-  ;; Switching between windows
-  (global-set-key [M-left] 'windmove-left)
-  (global-set-key [M-right] 'windmove-right)
-  (global-set-key [M-up] 'windmove-up)
-  (global-set-key [M-down] 'windmove-down)
-
-  ;; dired
-  ;; (toggle-diredp-find-file-reuse-dir 1)
-  (setq dired-listing-switches "-al --group-directories-first")
-
-  (add-hook 'dired-mode-hook
-            (lambda ()
-              (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir)))
-              ;; (dired-omit-mode)))
-
-  ;; Delete selection mode
-  (delete-selection-mode 1)
-
-  ;; Remove trailing whitespace
-  ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (setq-default require-final-newline t)
-
-  ;; pomidor
-  (setq pomidor-sound-tick nil
-        pomidor-sound-tack nil)
-
-  (setq alert-default-style 'libnotify)
-
-  (setq warning-minimum-level :emergency)
-
+  ;; init
+  (fset 'yes-or-no-p 'y-or-n-p)
   (paren-activate)
 
-  ;; Save on focus loss
-  (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
-
-  ;; Beginning of line
-  ;; (global-set-key [home] 'smart-beginning-of-line)
-  ;; (global-set-key "\C-a" 'smart-beginning-of-line)
+  ;; russian computer
+  (ismd/reverse-input-method 'russian-computer)
 
   ;; C++
   (custom-set-variables
@@ -481,7 +558,4 @@ you should place your code here."
 
   ;; cmake-ide
   (cmake-ide-setup)
-
-  ;; git
-  ;; (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   )

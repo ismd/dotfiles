@@ -318,16 +318,24 @@ values."
    dotspacemacs-whitespace-cleanup 'changed
    ))
 
-;;####################################################
-;; My functions
-;;####################################################
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; mousescroll
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun ismd/setup-indent (n)
-  (setq c-basic-offset n)
-  (setq javascript-indent-level n) ; javascript-mode
-  (setq js-indent-level n) ; js-mode
-  (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
-  (setq css-indent-offset n))
+(defun ismd/mousescroll ()
+  ;; mouse-wheel scrolling
+  (setq
+   mouse-wheel-scroll-amount '(1 ((shift) . 1)
+                                 ((control)))             ; one line at a time
+   mouse-wheel-progressive-speed t                       ; accelerate scrolling
+   mouse-wheel-follow-mouse t)                           ; scroll- window under mouse
+
+  (setq
+   scroll-preserve-screen-position t                     ; keep relative column position when scrolling
+   scroll-margin 3                                       ; start scrolling n lines before window borders
+   scroll-conservatively 10                              ; scroll up to n lines to bring pointer back on screen
+   scroll-step 0                                         ; try scrolling n lines when pointer moves out
+   auto-window-vscroll nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; modes
@@ -375,25 +383,6 @@ values."
   (global-set-key (kbd "C-k") 'ismd/kill-line))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; mousescroll
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun ismd/mousescroll ()
-  ;; mouse-wheel scrolling
-  (setq
-    mouse-wheel-scroll-amount '(1 ((shift) . 1)
-                                 ((control)))             ; one line at a time
-    mouse-wheel-progressive-speed t                       ; accelerate scrolling
-    mouse-wheel-follow-mouse t)                           ; scroll- window under mouse
-
-  (setq
-    scroll-preserve-screen-position t                     ; keep relative column position when scrolling
-    scroll-margin 3                                       ; start scrolling n lines before window borders
-    scroll-conservatively 10                              ; scroll up to n lines to bring pointer back on screen
-    scroll-step 0                                         ; try scrolling n lines when pointer moves out
-    auto-window-vscroll nil))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; defaults
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -410,7 +399,7 @@ values."
   (setq-default tab-width 4)
 
   ;; cursor type
-  (setq-default cursor-type 'hbar)
+  (setq evil-emacs-state-cursor '("chartreuse3" (bar . 2)))
 
   ;; utf-8
   (prefer-coding-system 'utf-8)
@@ -473,13 +462,17 @@ values."
     (setq indent-tabs-mode nil))
 
   (defun ismd/c-mode-common-hook ()
-    (setq flycheck-gcc-language-standard "c++17")
-
-    ;; c-codingstyle
-    (jj/cstyle-hook))
+    (setq flycheck-gcc-language-standard "c++17"))
 
   (defun ismd/c++-mode-hook ()
-    (add-to-list 'c-doc-comment-style '(c++-mode . javadoc)))
+    (add-to-list 'c-doc-comment-style '(c++-mode . javadoc))
+
+    ;; (custom-set-variables
+    ;;  '(company-clang-arguments '("-std=c++17")))
+
+    ;; cmake-ide
+    ;; (cmake-ide-setup)
+    )
 
   (defun ismd/dired-mode-hook ()
     (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
@@ -494,7 +487,7 @@ values."
   (add-hook 'js-mode-hook 'ismd/js-mode-hook)
   (add-hook 'c-mode-common-hook 'ismd/c-mode-common-hook)
   (add-hook 'c-++-mode-hook 'ismd/c++-mode-hook)
-  (add-hook 'dired-mode-hook 'ismd/dired-up-dir)
+  (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
 
   ;; correct zsh coloring in shell:
@@ -563,7 +556,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
   (setq custom-file "~/.spacemacs.d/custom.el")
-  (ismd/setup-indent 4)
   (ismd/hooks))
 
 (defun dotspacemacs/user-config ()
@@ -588,14 +580,4 @@ you should place your code here."
   (paren-activate)
 
   ;; russian computer
-  (ismd/reverse-input-method 'russian-computer)
-
-  ;; C++
-  (custom-set-variables
-   '(company-clang-arguments '("-std=c++17")))
-
-  (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++17")))
-
-  ;; cmake-ide
-  (cmake-ide-setup)
-  )
+  (ismd/reverse-input-method 'russian-computer))

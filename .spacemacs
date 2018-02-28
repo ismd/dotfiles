@@ -85,7 +85,6 @@ values."
    dotspacemacs-additional-packages '(afternoon-theme
                                       cmake-ide
                                       editorconfig
-                                      mic-paren
                                       minimap
                                       neotree
                                       pdf-tools)
@@ -292,11 +291,11 @@ values."
    dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis t
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -450,8 +449,17 @@ values."
     (setq web-mode-css-indent-offset 4)
     (setq web-mode-code-indent-offset 4)
     (setq web-mode-attr-indent-offset nil)
-    ;; (setq standard-indent nil)
-    )
+    (setq-local company-idle-delay nil)
+
+    (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'company-complete)
+    (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'company-complete)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'company-complete)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'company-complete)
+    (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'company-complete)
+    (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'company-complete))
+
+  (defun ismd/emmet-mode-hook ()
+    (define-key emmet-mode-keymap (kbd "<C-return>") 'emmet-expand))
 
   (defun ismd/js-mode-hook ()
     (setq-default js2-basic-offset 4)
@@ -481,6 +489,7 @@ values."
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'python-mode-hook 'ismd/python-mode-hook)
   (add-hook 'web-mode-hook  'ismd/web-mode-hook)
+  (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'js-mode-hook 'ismd/js-mode-hook)
   (add-hook 'c-mode-common-hook 'ismd/c-mode-common-hook)
   (add-hook 'c-++-mode-hook 'ismd/c++-mode-hook)
@@ -580,7 +589,6 @@ you should place your code here."
 
   ;; init
   (fset 'yes-or-no-p 'y-or-n-p)
-  (paren-activate)
 
   ;; russian computer
   (ismd/reverse-input-method 'russian-computer))

@@ -40,7 +40,8 @@ values."
                       better-defaults-move-to-end-of-code-first nil)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support nil)
+            c-c++-enable-clang-support t)
+     cscope
      csv
      emacs-lisp
      git

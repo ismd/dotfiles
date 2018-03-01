@@ -306,7 +306,7 @@ values."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("ag" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
@@ -376,6 +376,7 @@ values."
   ;; tab
   (global-set-key (kbd "C-<tab>") 'insert-tab)
   (global-set-key (kbd "S-<tab>") 'tab-indent-or-complete)
+  (global-set-key (kbd "<backtab>") 'tab-indent-or-complete)
 
   ;; just one space
   (global-set-key (kbd "M-SPC") 'just-one-space)
@@ -451,12 +452,13 @@ values."
     (setq web-mode-attr-indent-offset nil)
     (setq-local company-idle-delay nil)
 
-    (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'company-complete)
-    (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'company-complete)
-    (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'company-complete)
-    (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'company-complete)
-    (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'company-complete)
-    (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'company-complete))
+    ;; (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'company-complete)
+    ;; (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'company-complete)
+    ;; (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'company-complete)
+    ;; (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'company-complete)
+    ;; (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'company-complete)
+    ;; (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'company-complete)
+    )
 
   (defun ismd/emmet-mode-hook ()
     (define-key emmet-mode-keymap (kbd "<C-return>") 'emmet-expand))
@@ -503,7 +505,11 @@ values."
   (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
   ;; don't echo passwords when using interactive terminal programs
-  (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
+  (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
+
+  ;; spacemacs buffer click
+  (add-hook 'spacemacs-buffer-mode-hook (lambda ()
+                                          (set (make-local-variable 'mouse-1-click-follows-link) nil))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; functions
@@ -512,6 +518,14 @@ values."
 (defun insert-tab ()
   (interactive)
   (insert-char ?\t))
+
+(defun check-expansion ()
+  (save-excursion
+    (if (looking-at "\\_>") t
+      (backward-char 1)
+      (if (looking-at "\\.") t
+        (backward-char 1)
+        (if (looking-at "->") t nil)))))
 
 (defun tab-indent-or-complete ()
   (interactive)
@@ -567,7 +581,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
-  (setq custom-file "~/.emacs.d/custom.el")
+  (setq custom-file "~/.cache/custom.el")
   (ismd/hooks))
 
 (defun dotspacemacs/user-config ()

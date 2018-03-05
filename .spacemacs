@@ -40,13 +40,13 @@ values."
                       better-defaults-move-to-end-of-code-first nil)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support t)
-     cscope
+            c-c++-enable-clang-support nil)
+     ;; cscope
      csv
      emacs-lisp
      git
-     (gtags :variables
-            gtags-enable-by-default nil)
+     ;; (gtags :variables
+     ;;        gtags-enable-by-default t)
      helm
      html
      javascript
@@ -84,11 +84,12 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(afternoon-theme
-                                      cmake-ide
+                                      ;; cmake-ide
                                       editorconfig
                                       minimap
                                       neotree
-                                      pdf-tools)
+                                      pdf-tools
+                                      rtags)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -215,7 +216,7 @@ values."
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts nil
+   dotspacemacs-auto-resume-layouts t
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -292,7 +293,7 @@ values."
    dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode t
+   dotspacemacs-smartparens-strict-mode nil
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
@@ -446,6 +447,9 @@ values."
     ;; (smart-tabs-advice py-indent-region py-indent-offset)
     )
 
+  (defun ismd/inferior-python-mode-hook ()
+    (setq python-indent-offset 4))
+
   (defun ismd/web-mode-hook ()
     (setq web-mode-markup-indent-offset 4)
     (setq web-mode-css-indent-offset 4)
@@ -459,7 +463,13 @@ values."
     ;; (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'company-complete)
     ;; (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'company-complete)
     ;; (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'company-complete)
-    )
+
+    (make-variable-buffer-local 'er/try-expand-list)
+    (setq er/try-expand-list (append
+                              er/try-expand-list
+                              '(er/mark-html-attribute
+                                er/mark-inner-tag
+                                er/mark-outer-tag))))
 
   (defun ismd/emmet-mode-hook ()
     (define-key emmet-mode-keymap (kbd "<C-return>") 'emmet-expand))
@@ -473,7 +483,11 @@ values."
     (setq flycheck-gcc-language-standard "c++17"))
 
   (defun ismd/c++-mode-hook ()
-    (add-to-list 'c-doc-comment-style '(c++-mode . javadoc))
+    (setq rtags-autostart-diagnostics t)
+    (rtags-diagnostics)
+    (setq rtags-completions-enabled t)
+    (push 'company-rtags company-backends)
+    (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
 
     ;; (custom-set-variables
     ;;  '(company-clang-arguments '("-std=c++17")))
@@ -491,6 +505,7 @@ values."
   ;; hooks
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'python-mode-hook 'ismd/python-mode-hook)
+  (add-hook 'inferior-python-mode-hook 'ismd/inferior-python-mode-hook)
   (add-hook 'web-mode-hook  'ismd/web-mode-hook)
   (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'js-mode-hook 'ismd/js-mode-hook)

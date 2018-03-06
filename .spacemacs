@@ -50,8 +50,8 @@ values."
      helm
      html
      javascript
-     (markdown :variables
-               markdown-live-preview-engine 'vmd)
+     markdown
+     nginx
      nlinum
      php
      (python :variables

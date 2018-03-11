@@ -50,7 +50,8 @@ values."
      helm
      html
      javascript
-     markdown
+     (markdown :variables
+               markdown-live-preview-engine 'vmd)
      nginx
      nlinum
      php
@@ -85,6 +86,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(afternoon-theme
                                       ;; cmake-ide
+                                      doom-themes
                                       editorconfig
                                       minimap
                                       neotree
@@ -145,7 +147,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'random
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
@@ -163,6 +165,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(;; afternoon
+                         doom-one
                          spacemacs-dark
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -287,7 +290,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -318,7 +321,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'changed
+   dotspacemacs-whitespace-cleanup nil
    ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -418,7 +421,12 @@ values."
   (setq warning-minimum-level :emergency)
 
   ;; no shell path warning
-  (setq exec-path-from-shell-check-startup-file nil))
+  (setq exec-path-from-shell-check-startup-file nil)
+
+  ;; spaceline
+  (spaceline-toggle-buffer-size-off)
+  (spaceline-toggle-column-off)
+  (spaceline-toggle-minor-modes-off))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks
@@ -502,6 +510,10 @@ values."
   (defun ismd/focus-out-hook ()
     (save-some-buffers t))
 
+  (defun ismd/neotree-mode-hook ()
+    (setq neo-mode-line-type 'none
+          neo-banner-message nil))
+
   ;; hooks
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'python-mode-hook 'ismd/python-mode-hook)
@@ -513,6 +525,7 @@ values."
   (add-hook 'c-++-mode-hook 'ismd/c++-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
+  (add-hook 'neotree-mode-hook 'ismd/neotree-mode-hook)
 
   ;; isearch
   (add-hook 'isearch-mode-end-hook 'spacemacs/evil-search-clear-highlight)
@@ -621,4 +634,7 @@ you should place your code here."
   (fset 'yes-or-no-p 'y-or-n-p)
 
   ;; russian computer
-  (ismd/reverse-input-method 'russian-computer))
+  (ismd/reverse-input-method 'russian-computer)
+
+  ;; neotree theme
+  (doom-themes-neotree-config))

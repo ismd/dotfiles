@@ -427,7 +427,11 @@ values."
   ;; spaceline
   (spaceline-toggle-buffer-size-off)
   (spaceline-toggle-column-off)
-  (spaceline-toggle-minor-modes-off))
+  (spaceline-toggle-minor-modes-off)
+
+  ;; neotree
+  (setq neo-mode-line-type 'none
+        neo-banner-message nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks
@@ -511,10 +515,6 @@ values."
   (defun ismd/focus-out-hook ()
     (save-some-buffers t))
 
-  (defun ismd/neotree-mode-hook ()
-    (setq neo-mode-line-type 'none
-          neo-banner-message nil))
-
   ;; hooks
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'python-mode-hook 'ismd/python-mode-hook)
@@ -526,7 +526,6 @@ values."
   (add-hook 'c-++-mode-hook 'ismd/c++-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
-  (add-hook 'neotree-mode-hook 'ismd/neotree-mode-hook)
 
   ;; isearch
   (add-hook 'isearch-mode-end-hook 'spacemacs/evil-search-clear-highlight)

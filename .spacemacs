@@ -353,8 +353,7 @@ values."
   ;; (global-whitespace-mode t)
   (delete-selection-mode t)
   (xterm-mouse-mode t)
-  (editorconfig-mode t)
-  (mouse-avoidance-mode 'banish))
+  (editorconfig-mode t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings

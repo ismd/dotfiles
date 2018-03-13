@@ -48,7 +48,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
 modules-center =
-modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = vpn filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -229,7 +229,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = vmnet8
+interface = enp2s0
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -242,6 +242,15 @@ format-disconnected =
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/vpn]
+type = custom/script
+exec = echo vpn
+exec-if = pgrep -x openvpn
+interval = 5
+format-underline = #268bd2
+format-prefix = "🖧 "
+format-prefix-foreground = #5b
 
 [module/date]
 type = internal/date

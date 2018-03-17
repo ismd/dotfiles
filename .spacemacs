@@ -430,8 +430,9 @@ values."
   (spaceline-toggle-minor-modes-off)
 
   ;; neotree
-  (setq neo-mode-line-type 'none
-        neo-banner-message nil))
+  (setq neo-banner-message nil
+        neo-mode-line-type 'none
+        neo-vc-integration (quote (face))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks

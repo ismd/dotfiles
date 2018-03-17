@@ -54,6 +54,7 @@ values."
                markdown-live-preview-engine 'vmd)
      nginx
      nlinum
+     org
      php
      (python :variables
              python-enable-yapf-format-on-save t
@@ -515,6 +516,9 @@ values."
   (defun ismd/focus-out-hook ()
     (save-some-buffers t))
 
+  (defun ismd/php-mode-hook ()
+    (setq c-hanging-semi&comma-criteria "stop"))
+
   ;; hooks
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'python-mode-hook 'ismd/python-mode-hook)
@@ -526,6 +530,7 @@ values."
   (add-hook 'c-++-mode-hook 'ismd/c++-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
+  (add-hook 'php-mode-hook 'ismd/php-mode-hook)
 
   ;; isearch
   (add-hook 'isearch-mode-end-hook 'spacemacs/evil-search-clear-highlight)
@@ -538,7 +543,15 @@ values."
 
   ;; spacemacs buffer click
   (add-hook 'spacemacs-buffer-mode-hook (lambda ()
-                                          (set (make-local-variable 'mouse-1-click-follows-link) nil))))
+                                          (set (make-local-variable 'mouse-1-click-follows-link) nil)))
+
+  ;; org
+  (spacemacs|use-package-add-hook org
+				  :pre-init
+				  (package-initialize))
+
+  (add-hook 'org-mode-hook (lambda ()
+                             (setq org-pomodoro-audio-player "/usr/bin/mplayer"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; functions
@@ -630,7 +643,7 @@ you should place your code here."
   (ismd/defaults)
   (ismd/mousescroll)
 
-  ;; init
+  ;; yes or no
   (fset 'yes-or-no-p 'y-or-n-p)
 
   ;; russian computer

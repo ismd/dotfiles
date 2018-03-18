@@ -469,13 +469,6 @@ values."
     (setq web-mode-attr-indent-offset nil)
     (setq-local company-idle-delay nil)
 
-    ;; (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'company-complete)
-    ;; (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'company-complete)
-    ;; (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'company-complete)
-    ;; (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'company-complete)
-    ;; (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'company-complete)
-    ;; (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'company-complete)
-
     (make-variable-buffer-local 'er/try-expand-list)
     (setq er/try-expand-list (append
                               er/try-expand-list

@@ -428,7 +428,8 @@ values."
   (spaceline-toggle-minor-modes-off)
 
   ;; neotree
-  (setq neo-banner-message nil
+  (setq neo-autorefresh t
+        neo-banner-message nil
         neo-mode-line-type 'none
         neo-vc-integration (quote (face))))
 

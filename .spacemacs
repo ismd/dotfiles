@@ -416,9 +416,6 @@ values."
   ;; require a ending newline
   (setq require-final-newline t)
 
-  ;; dired
-  (setq dired-listing-switches "-al --group-directories-first")
-
   ;; warnings
   (setq warning-minimum-level :emergency)
 
@@ -490,9 +487,11 @@ values."
     (define-key emmet-mode-keymap (kbd "<C-return>") 'emmet-expand))
 
   (defun ismd/js-mode-hook ()
-    (setq-default js2-basic-offset 4)
-    (setq-default js-indent-level 2) ; json
-    )
+    (setq-default js2-basic-offset 4))
+
+  (defun ismd/json-mode-hook ()
+    (make-local-variable 'js-indent-level)
+    (setq js-indent-level 2))
 
   (defun ismd/c-mode-common-hook ()
     (setq flycheck-gcc-language-standard "c++17"))
@@ -512,6 +511,8 @@ values."
     )
 
   (defun ismd/dired-mode-hook ()
+    (setq dired-listing-switches "-la --group-directories-first")
+    (setq delete-by-moving-to-trash nil)
     (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
 
   (defun ismd/focus-out-hook ()
@@ -527,6 +528,7 @@ values."
   (add-hook 'web-mode-hook  'ismd/web-mode-hook)
   (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'js-mode-hook 'ismd/js-mode-hook)
+  (add-hook 'json-mode-hook 'ismd/json-mode-hook)
   (add-hook 'c-mode-common-hook 'ismd/c-mode-common-hook)
   (add-hook 'c-++-mode-hook 'ismd/c++-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)

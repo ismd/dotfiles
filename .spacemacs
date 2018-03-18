@@ -512,7 +512,7 @@ values."
     (save-some-buffers t))
 
   (defun ismd/php-mode-hook ()
-    (setq c-hanging-semi&comma-criteria "stop"))
+    (setq c-auto-newline nil))
 
   ;; hooks
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)

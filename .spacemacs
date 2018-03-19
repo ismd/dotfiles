@@ -62,9 +62,10 @@ values."
      (ranger :variables
              ranger-show-preview t)
      semantic
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
+     ;; (shell :variables
+     ;;        shell-default-height 30
+     ;;        shell-default-position 'bottom)
+     shell
      shell-scripts
      (spell-checking :variables
                      spell-checking-enable-by-default nil
@@ -420,7 +421,7 @@ values."
   (setq warning-minimum-level :emergency)
 
   ;; no shell path warning
-  (setq exec-path-from-shell-check-startup-file nil)
+  ;; (setq exec-path-from-shell-check-startup-file nil)
 
   ;; spaceline
   (spaceline-toggle-buffer-size-off)
@@ -533,7 +534,7 @@ values."
   (add-hook 'isearch-mode-end-hook 'spacemacs/evil-search-clear-highlight)
 
   ;; correct zsh coloring in shell:
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+  ;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
   ;; don't echo passwords when using interactive terminal programs
   (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)

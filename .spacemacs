@@ -499,8 +499,7 @@ values."
     )
 
   (defun ismd/dired-mode-hook ()
-    ;; (setq dired-listing-switches "-a1 --group-directories-first")
-    (dired-hide-details-mode)
+    (setq dired-listing-switches "-lah --group-directories-first")
     (setq delete-by-moving-to-trash nil)
     (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
 

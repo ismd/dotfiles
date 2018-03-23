@@ -71,8 +71,7 @@ values."
                      spell-checking-enable-by-default nil
                      spell-checking-enable-auto-dictionary t
                      enable-flyspell-auto-completion nil)
-     (sql :variables
-          sql-capitalize-keywords t)
+     sql
      systemd
      (syntax-checking :variables
                       syntax-checking-enable-by-default nil
@@ -426,13 +425,7 @@ values."
   ;; spaceline
   (spaceline-toggle-buffer-size-off)
   (spaceline-toggle-column-off)
-  (spaceline-toggle-minor-modes-off)
-
-  ;; neotree
-  (setq neo-autorefresh t
-        neo-banner-message nil
-        neo-mode-line-type 'none
-        neo-vc-integration (quote (face))))
+  (spaceline-toggle-minor-modes-off))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks
@@ -506,7 +499,8 @@ values."
     )
 
   (defun ismd/dired-mode-hook ()
-    (setq dired-listing-switches "-la --group-directories-first")
+    ;; (setq dired-listing-switches "-a1 --group-directories-first")
+    (dired-hide-details-mode)
     (setq delete-by-moving-to-trash nil)
     (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
 
@@ -515,6 +509,13 @@ values."
 
   (defun ismd/php-mode-hook ()
     (setq c-auto-newline nil))
+
+  (defun ismd/neotree-mode-hook ()
+    (setq neo-autorefresh t
+          neo-banner-message nil
+          neo-confirm-change-root 'off-p
+          neo-mode-line-type 'none
+          neo-vc-integration '(face char)))
 
   ;; hooks
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
@@ -529,6 +530,7 @@ values."
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
   (add-hook 'php-mode-hook 'ismd/php-mode-hook)
+  (add-hook 'neotree-mode-hook 'ismd/neotree-mode-hook)
 
   ;; isearch
   (add-hook 'isearch-mode-end-hook 'spacemacs/evil-search-clear-highlight)

@@ -388,6 +388,9 @@ values."
   ;; find file
   (global-set-key (kbd "M-m f f") 'helm-find)
 
+  ;; neotree
+  (global-set-key (kbd "M-m 0") 'ismd/neotree-show)
+
   ;; just one space
   (global-set-key (kbd "M-SPC") 'just-one-space)
 
@@ -513,10 +516,11 @@ values."
     (setq c-auto-newline nil))
 
   (defun ismd/neotree-mode-hook ()
-    (setq neo-autorefresh t
+    (setq neo-autorefresh nil
           neo-banner-message nil
           neo-confirm-change-root 'off-p
           neo-mode-line-type 'none
+          neo-toggle-window-keep-p t
           neo-vc-integration '(face char)))
 
   ;; hooks
@@ -612,6 +616,11 @@ values."
   (let ((current-dir (dired-current-directory)))
     (find-alternate-file "..")
     (dired-goto-file current-dir)))
+
+(defun ismd/neotree-show ()
+  (interactive)
+  (neotree-show)
+  (neotree-projectile-action))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spacemacs init hooks

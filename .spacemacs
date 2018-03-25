@@ -517,7 +517,6 @@ values."
           neo-banner-message nil
           neo-confirm-change-root 'off-p
           neo-mode-line-type 'none
-          neo-toggle-window-keep-p t
           neo-vc-integration '(face char)))
 
   ;; hooks

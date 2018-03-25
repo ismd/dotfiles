@@ -106,4 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+autoload -U select-word-style
+select-word-style bash
+
 DEFAULT_USER="ismd"

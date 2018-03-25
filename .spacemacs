@@ -389,7 +389,7 @@ values."
   (global-set-key (kbd "M-m f f") 'helm-find)
 
   ;; neotree
-  (global-set-key (kbd "M-m 0") 'ismd/neotree-show)
+  (global-set-key (kbd "M-0") 'neotree-projectile-action)
 
   ;; just one space
   (global-set-key (kbd "M-SPC") 'just-one-space)

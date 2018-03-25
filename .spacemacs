@@ -385,6 +385,9 @@ values."
   (global-set-key (kbd "S-<tab>") 'tab-indent-or-complete)
   (global-set-key (kbd "<backtab>") 'tab-indent-or-complete)
 
+  ;; find file
+  (global-set-key (kbd "M-m f f") 'helm-find)
+
   ;; just one space
   (global-set-key (kbd "M-SPC") 'just-one-space)
 

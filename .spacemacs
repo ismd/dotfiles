@@ -87,6 +87,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(afternoon-theme
                                       ;; cmake-ide
+                                      cmake-mode
                                       doom-themes
                                       editorconfig
                                       minimap
@@ -389,7 +390,7 @@ values."
   (global-set-key (kbd "M-m f f") 'helm-find)
 
   ;; neotree
-  (global-set-key (kbd "M-0") 'neotree-projectile-action)
+  (global-set-key (kbd "M-m p n") 'neotree-projectile-action)
 
   ;; just one space
   (global-set-key (kbd "M-SPC") 'just-one-space)
@@ -431,7 +432,14 @@ values."
   ;; spaceline
   (spaceline-toggle-buffer-size-off)
   (spaceline-toggle-column-off)
-  (spaceline-toggle-minor-modes-off))
+  (spaceline-toggle-minor-modes-off)
+
+  ;; cmake
+  (setq auto-mode-alist
+        (append
+         '(("CMakeLists\\.txt\\'" . cmake-mode))
+         '(("\\.cmake\\'" . cmake-mode))
+         auto-mode-alist)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks
@@ -520,7 +528,7 @@ values."
           neo-banner-message nil
           neo-confirm-change-root 'off-p
           neo-mode-line-type 'none
-          neo-toggle-window-keep-p t
+          neo-toggle-window-keep-p nil
           neo-vc-integration '(face char)))
 
   ;; hooks

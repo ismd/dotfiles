@@ -76,6 +76,7 @@ values."
      (syntax-checking :variables
                       syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips t)
+     tabbar
      (version-control :variables
                       version-control-diff-tool 'git-gutter
                       version-control-diff-side 'left
@@ -439,7 +440,10 @@ values."
         (append
          '(("CMakeLists\\.txt\\'" . cmake-mode))
          '(("\\.cmake\\'" . cmake-mode))
-         auto-mode-alist)))
+         auto-mode-alist))
+
+  ;; projectile
+  (setq projectile-switch-project-action 'neotree-projectile-action))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks
@@ -624,11 +628,6 @@ values."
   (let ((current-dir (dired-current-directory)))
     (find-alternate-file "..")
     (dired-goto-file current-dir)))
-
-(defun ismd/neotree-show ()
-  (interactive)
-  (neotree-show)
-  (neotree-projectile-action))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spacemacs init hooks

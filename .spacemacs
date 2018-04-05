@@ -52,6 +52,7 @@ values."
      javascript
      (markdown :variables
                markdown-live-preview-engine 'vmd)
+     neotree
      nginx
      nlinum
      org
@@ -92,7 +93,6 @@ values."
                                       doom-themes
                                       editorconfig
                                       minimap
-                                      neotree
                                       pdf-tools
                                       rtags
                                       yasnippet-snippets)
@@ -390,9 +390,6 @@ values."
   ;; find file
   (global-set-key (kbd "M-m f f") 'helm-find)
 
-  ;; neotree
-  (global-set-key (kbd "M-m p n") 'neotree-projectile-action)
-
   ;; just one space
   (global-set-key (kbd "M-SPC") 'just-one-space)
 
@@ -443,7 +440,14 @@ values."
          auto-mode-alist))
 
   ;; projectile
-  (setq projectile-switch-project-action 'neotree-projectile-action))
+  (setq projectile-switch-project-action 'neotree-projectile-action)
+
+  ;; neotree
+  (setq neo-autorefresh nil
+        neo-banner-message nil
+        neo-confirm-change-root 'off-p
+        neo-mode-line-type 'none
+        neo-toggle-window-keep-p nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks
@@ -528,12 +532,7 @@ values."
     (setq c-auto-newline nil))
 
   (defun ismd/neotree-mode-hook ()
-    (setq neo-autorefresh nil
-          neo-banner-message nil
-          neo-confirm-change-root 'off-p
-          neo-mode-line-type 'none
-          neo-toggle-window-keep-p nil
-          neo-vc-integration '(face char)))
+    (setq neo-vc-integration '(face)))
 
   ;; hooks
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)

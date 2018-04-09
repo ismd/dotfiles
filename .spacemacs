@@ -40,7 +40,8 @@ values."
                       better-defaults-move-to-end-of-code-first nil)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support nil)
+            c-c++-enable-clang-support t
+            c-c++-enable-rtags-support t)
      ;; cscope
      csv
      emacs-lisp
@@ -62,7 +63,7 @@ values."
              python-sort-imports-on-save t)
      (ranger :variables
              ranger-show-preview t)
-     semantic
+     ;; semantic
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -94,7 +95,7 @@ values."
                                       editorconfig
                                       minimap
                                       pdf-tools
-                                      rtags
+                                      ;; rtags
                                       yasnippet-snippets)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -356,7 +357,8 @@ values."
   ;; (global-whitespace-mode t)
   (delete-selection-mode t)
   (xterm-mouse-mode t)
-  (editorconfig-mode t))
+  (editorconfig-mode t)
+  (global-auto-revert-mode t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
@@ -397,7 +399,10 @@ values."
   (global-set-key (kbd "C-k") 'ismd/kill-line)
 
   ;; revert buffer
-  (global-set-key (kbd "C-x C-r") 'revert-buffer))
+  (global-set-key (kbd "C-x C-r") 'revert-buffer)
+
+  ;; rtags
+  (rtags-enable-standard-keybindings))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; defaults
@@ -454,9 +459,6 @@ values."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun ismd/hooks ()
-  (defun ismd/prog-mode-hook ()
-    (auto-revert-mode t))
-
   (defun ismd/python-mode-hook ()
     (setq python-indent-offset 4)
     (setq indent-tabs-mode nil)
@@ -507,12 +509,6 @@ values."
     (setq flycheck-gcc-language-standard "c++17"))
 
   (defun ismd/c++-mode-hook ()
-    (setq rtags-autostart-diagnostics t)
-    (rtags-diagnostics)
-    (setq rtags-completions-enabled t)
-    (push 'company-rtags company-backends)
-    (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
-
     ;; (custom-set-variables
     ;;  '(company-clang-arguments '("-std=c++17")))
 
@@ -535,7 +531,6 @@ values."
     (setq neo-vc-integration '(face)))
 
   ;; hooks
-  (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'python-mode-hook 'ismd/python-mode-hook)
   (add-hook 'inferior-python-mode-hook 'ismd/inferior-python-mode-hook)
   (add-hook 'web-mode-hook  'ismd/web-mode-hook)
@@ -548,6 +543,11 @@ values."
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
   (add-hook 'php-mode-hook 'ismd/php-mode-hook)
   (add-hook 'neotree-mode-hook 'ismd/neotree-mode-hook)
+
+  ;; rtags
+  (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+  (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+  (add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
 
   ;; isearch
   (add-hook 'isearch-mode-end-hook 'spacemacs/evil-search-clear-highlight)
@@ -568,7 +568,10 @@ values."
 				  (package-initialize))
 
   (add-hook 'org-mode-hook (lambda ()
-                             (setq org-pomodoro-audio-player "/usr/bin/mplayer"))))
+                             (setq org-pomodoro-audio-player "/usr/bin/mplayer")))
+
+  ;; electric
+  (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; functions
@@ -627,6 +630,29 @@ values."
   (let ((current-dir (dired-current-directory)))
     (find-alternate-file "..")
     (dired-goto-file current-dir)))
+
+(defun ismd/revert-all-file-buffers ()
+  "Refresh all open file buffers without confirmation.
+Buffers in modified (not yet saved) state in emacs will not be reverted. They
+will be reverted though if they were modified outside emacs.
+Buffers visiting files which do not exist any more or are no longer readable
+will be killed."
+  (interactive)
+  (dolist (buf (buffer-list))
+    (let ((filename (buffer-file-name buf)))
+      ;; Revert only buffers containing files, which are not modified;
+      ;; do not try to revert non-file buffers like *Messages*.
+      (when (and filename
+                 (not (buffer-modified-p buf)))
+        (if (file-readable-p filename)
+            ;; If the file exists and is readable, revert the buffer.
+            (with-current-buffer buf
+              (revert-buffer :ignore-auto :noconfirm :preserve-modes))
+          ;; Otherwise, kill the buffer.
+          (let (kill-buffer-query-functions) ; No query done when killing buffer
+            (kill-buffer buf)
+            (message "Killed non-existing/unreadable file buffer: %s" filename))))))
+  (message "Finished reverting buffers containing unmodified files."))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spacemacs init hooks

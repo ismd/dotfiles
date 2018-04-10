@@ -32,14 +32,14 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
 
    ;; List of configuration layers to load.
-    dotspacemacs-configuration-layers
-    '(
-      ;; ----------------------------------------------------------------
-      ;; Example of useful layers you may want to use right away.
-      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-      ;; `M-m f e R' (Emacs style) to install them.
-      ;; ----------------------------------------------------------------
-      (auto-completion :variables
+   dotspacemacs-configuration-layers
+   '(
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
+     ;; `M-m f e R' (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
+     (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
                       auto-completion-tab-key-behavior 'complete)
@@ -100,8 +100,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(;; afternoon-theme
-                                      ;; cmake-ide
+   dotspacemacs-additional-packages '(;; cmake-ide
                                       cmake-mode
                                       doom-themes
                                       editorconfig
@@ -211,11 +210,10 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(;; afternoon
-                         ;; doom-one
-                         ;; spacemacs-dark
-                         ample-flat
-                         spacemacs-light)
+   dotspacemacs-themes '(spacemacs-light
+                         spacemacs-dark
+                         doom-one
+                         afternoon)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -224,7 +222,7 @@ It should only modify the values of Spacemacs settings."
    ;; to create your own spaceline theme. Value can be a symbol or list with\
    ;; additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(all-the-icons :separator none :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)

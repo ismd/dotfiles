@@ -93,6 +93,7 @@ This function should only modify configuration layer settings."
                       version-control-diff-side 'left
                       version-control-global-margin t)
      yaml)
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -100,7 +101,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(;; cmake-ide
+   dotspacemacs-additional-packages '(
                                       cmake-mode
                                       doom-themes
                                       editorconfig
@@ -108,6 +109,7 @@ This function should only modify configuration layer settings."
                                       pdf-tools
                                       ;; rtags
                                       yasnippet-snippets)
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -428,7 +430,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
 
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
@@ -480,18 +482,16 @@ It should only modify the values of Spacemacs settings."
 
 (defun ismd/mousescroll ()
   ;; mouse-wheel scrolling
-  (setq
-   mouse-wheel-scroll-amount '(1 ((shift) . 1)
-                                 ((control)))             ; one line at a time
-   mouse-wheel-progressive-speed t                       ; accelerate scrolling
-   mouse-wheel-follow-mouse t)                           ; scroll- window under mouse
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)
+                                      ((control)))  ; one line at a time
+        mouse-wheel-progressive-speed t             ; accelerate scrolling
+        mouse-wheel-follow-mouse t)                 ; scroll- window under mouse
 
-  (setq
-   scroll-preserve-screen-position t                     ; keep relative column position when scrolling
-   scroll-margin 3                                       ; start scrolling n lines before window borders
-   scroll-conservatively 10                              ; scroll up to n lines to bring pointer back on screen
-   scroll-step 0                                         ; try scrolling n lines when pointer moves out
-   auto-window-vscroll nil))
+  (setq scroll-preserve-screen-position t ; keep relative column position when scrolling
+        scroll-margin 3                   ; start scrolling n lines before window borders
+        scroll-conservatively 10          ; scroll up to n lines to bring pointer back on screen
+        scroll-step 0                     ; try scrolling n lines when pointer moves out
+        auto-window-vscroll nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; modes
@@ -674,6 +674,10 @@ It should only modify the values of Spacemacs settings."
   (defun ismd/neotree-mode-hook ()
     (setq-local neo-vc-integration '(face)))
 
+  (defun ismd/terminal-hook ()
+    (make-variable-buffer-local 'scroll-margin)
+    (setq-local scroll-margin 0))
+
   ;; hooks
   (add-hook 'python-mode-hook 'ismd/python-mode-hook)
   (add-hook 'web-mode-hook  'ismd/web-mode-hook)
@@ -686,6 +690,9 @@ It should only modify the values of Spacemacs settings."
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
   ;; (add-hook 'php-mode-hook 'ismd/php-mode-hook)
   (add-hook 'neotree-mode-hook 'ismd/neotree-mode-hook)
+  (add-hook 'term-mode-hook 'ismd/terminal-hook)
+  (add-hook 'eshell-mode-hook 'ismd/terminal-hook)
+  (add-hook 'shell-mode-hook 'ismd/terminal-hook)
 
   ;; flycheck
   (add-hook 'c-mode-hook 'flycheck-mode)

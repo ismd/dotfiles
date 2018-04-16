@@ -48,7 +48,7 @@ This function should only modify configuration layer settings."
                       better-defaults-move-to-end-of-code-first nil)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support t
+            c-c++-enable-clang-support nil
             c-c++-enable-rtags-support t)
      ;; cscope
      csv
@@ -72,10 +72,10 @@ This function should only modify configuration layer settings."
      (ranger :variables
              ranger-show-preview t)
      ;; semantic
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     shell
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom
+            shell-default-shell 'shell)
      shell-scripts
      (spell-checking :variables
                      spell-checking-enable-by-default nil
@@ -107,7 +107,6 @@ This function should only modify configuration layer settings."
                                       editorconfig
                                       minimap
                                       pdf-tools
-                                      ;; rtags
                                       yasnippet-snippets)
 
    ;; A list of packages that cannot be updated.
@@ -614,7 +613,10 @@ It should only modify the values of Spacemacs settings."
 
   ;; python
   (setq-default python-indent-offset 4)
-  (setq-default python-fill-docstring-style 'symmetric))
+  (setq-default python-fill-docstring-style 'symmetric)
+
+  ;; eshell
+  (setq-default pcomplete-cycle-completions t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hooks
@@ -656,6 +658,7 @@ It should only modify the values of Spacemacs settings."
   (defun ismd/c-mode-common-hook ())
 
   (defun ismd/c++-mode-hook ()
+    (push 'company-rtags company-backends)
     ;; cmake-ide
     ;; (cmake-ide-setup)
     )
@@ -693,6 +696,7 @@ It should only modify the values of Spacemacs settings."
   (add-hook 'term-mode-hook 'ismd/terminal-hook)
   (add-hook 'eshell-mode-hook 'ismd/terminal-hook)
   (add-hook 'shell-mode-hook 'ismd/terminal-hook)
+  (add-hook 'compilation-mode-hook 'ismd/terminal-hook)
 
   ;; flycheck
   (add-hook 'c-mode-hook 'flycheck-mode)

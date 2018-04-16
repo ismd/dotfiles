@@ -69,7 +69,6 @@ plugins=(
   python
   sudo
   systemd
-  tmux
   virtualenv
 )
 

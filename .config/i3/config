@@ -195,8 +195,8 @@ exec --no-startup-id xsetroot -solid "#333333"
 exec --no-startup-id wicd-gtk -t
 exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id twmnd
-exec --no-startup-id nextcloud
-exec --no-startup-id screenshotgun
+# exec --no-startup-id nextcloud
+# exec --no-startup-id screenshotgun
 exec --no-startup-id setxkbmap -model hhk -layout us,ru -option grp:toggle
 # exec --no-startup-id setxkbmap -layout us,ru -option grp:caps_toggle
 exec --no-startup-id udiskie --no-automount --no-notify --tray --use-udisks2

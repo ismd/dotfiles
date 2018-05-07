@@ -190,8 +190,8 @@ new_window 1pixel
 new_float 1pixel
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id feh --bg-fill ~/Pictures/city_night.jpg
-# exec --no-startup-id xsetroot -solid "#333333"
+# exec --no-startup-id feh --bg-fill ~/Pictures/city_night.jpg
+exec --no-startup-id xsetroot -solid "#333333"
 exec --no-startup-id wicd-gtk -t
 exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id twmnd

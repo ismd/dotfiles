@@ -679,7 +679,15 @@ It should only modify the values of Spacemacs settings."
 
   (defun ismd/terminal-hook ()
     (make-variable-buffer-local 'scroll-margin)
-    (setq-local scroll-margin 0))
+    (setq-local scroll-margin 0)
+    (setq-local show-trailing-whitespace nil))
+
+  (defun ismd/term-mode-hook ()
+    (define-key term-raw-map (kbd "C-p") 'term-send-up)
+    (define-key term-raw-map (kbd "C-n") 'term-send-down)
+    (define-key term-raw-map (kbd "C-r") 'term-send-reverse-search-history)
+    (define-key term-raw-map (kbd "M-.") 'term-send-raw-meta)
+    (add-to-list 'term-bind-key-alist '("M-<backspace>" . term-send-backward-kill-word)))
 
   ;; hooks
   (add-hook 'python-mode-hook 'ismd/python-mode-hook)
@@ -697,6 +705,7 @@ It should only modify the values of Spacemacs settings."
   (add-hook 'eshell-mode-hook 'ismd/terminal-hook)
   (add-hook 'shell-mode-hook 'ismd/terminal-hook)
   (add-hook 'compilation-mode-hook 'ismd/terminal-hook)
+  (add-hook 'term-mode-hook 'ismd/term-mode-hook)
 
   ;; flycheck
   (add-hook 'c-mode-hook 'flycheck-mode)

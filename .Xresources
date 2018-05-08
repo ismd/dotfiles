@@ -22,8 +22,8 @@ URxvt*scrollTtyKeypress: true
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*shading: 15
-! URxvt*termName: rxvt
+URxvt*termName: rxvt
 URxvt*transparent: true
 URxvt.url-launcher: /usr/bin/firefox
 
-! XTerm.vt100.faceName: Hack:size=16:antialias=true
+XTerm.vt100.faceName: Hack:size=16:antialias=true

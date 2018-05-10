@@ -111,3 +111,5 @@ autoload -U select-word-style
 select-word-style bash
 
 DEFAULT_USER="ismd"
+
+source /usr/share/nvm/init-nvm.sh

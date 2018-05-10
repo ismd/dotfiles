@@ -1,0 +1,13 @@
+[ui]
+username = Vladimir Kosteley <zzismd@gmail.com>
+ssh=ssh -4
+merge = emacs
+
+[pager]
+pager =
+
+[extensions]
+pager =
+
+[merge-tools]
+emacs.args = -q --eval "(require 'ediff)" --eval "(setq ediff-window-setup-function 'ediff-setup-windows-plain)" --eval "(add-hook 'ediff-quit-hook 'save-buffers-kill-emacs)" --eval "(ediff-merge-with-ancestor \""$local"\" \""$other"\" \""$base"\" nil \""$output"\")"

@@ -63,7 +63,7 @@ This function should only modify configuration layer settings."
                markdown-live-preview-engine 'vmd)
      neotree
      nginx
-     nlinum
+     ;; nlinum
      org
      php
      (python :variables
@@ -425,11 +425,11 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-highlight-delimiters 'all
 
    ;; If non-nil, start an Emacs server if one is not already running.
-   dotspacemacs-enable-server t
+   dotspacemacs-enable-server nil
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server t
+   dotspacemacs-persistent-server nil
 
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
@@ -561,7 +561,7 @@ It should only modify the values of Spacemacs settings."
   (setq-default js2-basic-offset 4)
 
   ;; cursor type
-  (setq-default evil-emacs-state-cursor '("chartreuse3" (hbar . 2)))
+  ;; (setq-default evil-emacs-state-cursor '("chartreuse3" (hbar . 2)))
 
   ;; utf-8
   (prefer-coding-system 'utf-8)

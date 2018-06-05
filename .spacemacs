@@ -231,8 +231,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Hack"
+                               :size 14
                                :weight normal
                                :width normal)
 
@@ -529,7 +529,8 @@ It should only modify the values of Spacemacs settings."
   (global-set-key (kbd "C-<backspace>") 'sp-backward-delete-word)
 
   ;; tab
-  (global-set-key (kbd "C-<tab>") 'insert-tab)
+  (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
+  ;; (global-set-key (kbd "C-<tab>") 'insert-tab)
   (global-set-key (kbd "S-<tab>") 'tab-indent-or-complete)
   (global-set-key (kbd "<backtab>") 'tab-indent-or-complete)
 
@@ -648,7 +649,14 @@ It should only modify the values of Spacemacs settings."
                                 er/mark-outer-tag))))
 
   (defun ismd/emmet-mode-hook ()
-    (define-key emmet-mode-keymap (kbd "<C-return>") 'emmet-expand))
+    (define-key emmet-mode-keymap (kbd "<C-return>") 'emmet-expand)
+    (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+    (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+  )
 
   (defun ismd/js-mode-hook ())
 

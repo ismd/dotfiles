@@ -63,7 +63,7 @@ This function should only modify configuration layer settings."
                markdown-live-preview-engine 'vmd)
      neotree
      nginx
-     nlinum
+     ;; nlinum
      org
      php
      (python :variables
@@ -231,8 +231,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Hack"
+                               :size 14
                                :weight normal
                                :width normal)
 
@@ -425,11 +425,11 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-highlight-delimiters 'all
 
    ;; If non-nil, start an Emacs server if one is not already running.
-   dotspacemacs-enable-server t
+   dotspacemacs-enable-server nil
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server t
+   dotspacemacs-persistent-server nil
 
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
@@ -529,7 +529,8 @@ It should only modify the values of Spacemacs settings."
   (global-set-key (kbd "C-<backspace>") 'sp-backward-delete-word)
 
   ;; tab
-  (global-set-key (kbd "C-<tab>") 'insert-tab)
+  (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
+  ;; (global-set-key (kbd "C-<tab>") 'insert-tab)
   (global-set-key (kbd "S-<tab>") 'tab-indent-or-complete)
   (global-set-key (kbd "<backtab>") 'tab-indent-or-complete)
 
@@ -561,7 +562,7 @@ It should only modify the values of Spacemacs settings."
   (setq-default js2-basic-offset 4)
 
   ;; cursor type
-  (setq-default evil-emacs-state-cursor '("chartreuse3" (hbar . 2)))
+  ;; (setq-default evil-emacs-state-cursor '("chartreuse3" (hbar . 2)))
 
   ;; utf-8
   (prefer-coding-system 'utf-8)
@@ -649,7 +650,14 @@ It should only modify the values of Spacemacs settings."
                                 er/mark-outer-tag))))
 
   (defun ismd/emmet-mode-hook ()
-    (define-key emmet-mode-keymap (kbd "<C-return>") 'emmet-expand))
+    (define-key emmet-mode-keymap (kbd "<C-return>") 'emmet-expand)
+    (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+    (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+  )
 
   (defun ismd/js-mode-hook ())
 

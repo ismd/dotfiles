@@ -568,6 +568,7 @@ It should only modify the values of Spacemacs settings."
 
   ;; link to X primary clipboard
   (setq-default x-select-enable-clipboard t)
+  (setq-default interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
   ;; require a ending newline
   (setq require-final-newline t)

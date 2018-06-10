@@ -585,7 +585,12 @@ It should only modify the values of Spacemacs settings."
   (prefer-coding-system 'utf-8)
 
   ;; link to X primary clipboard
+<<<<<<< HEAD
   ;; (setq-default x-select-enable-clipboard t)
+=======
+  (setq-default x-select-enable-clipboard t)
+  (setq-default interprogram-paste-function 'x-cut-buffer-or-selection-value)
+>>>>>>> a01ff22c91f9bd113b67469a10cccb2702afd666
 
   ;; require a ending newline
   (setq require-final-newline t)

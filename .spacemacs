@@ -63,7 +63,6 @@ This function should only modify configuration layer settings."
                markdown-live-preview-engine 'vmd)
      neotree
      nginx
-     ;; nlinum
      org
      php
      (python :variables
@@ -89,7 +88,7 @@ This function should only modify configuration layer settings."
      ;; tabbar
      themes-megapack
      (version-control :variables
-                      version-control-diff-tool 'git-gutter
+                      version-control-diff-tool 'diff-hl
                       version-control-diff-side 'left
                       version-control-global-margin t)
      yaml)
@@ -132,6 +131,25 @@ It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
+   ;; If non-nil then enable support for the portable dumper. You'll need
+   ;; to compile Emacs 27 from source following the instructions in file
+   ;; EXPERIMENTAL.org at to root of the git repository.
+   ;; (default nil)
+   dotspacemacs-enable-emacs-pdumper nil
+
+   ;; File path pointing to emacs 27.1 executable compiled with support
+   ;; for the portable dumper (this is currently the branch pdumper).
+   ;; (default "emacs-27.0.50")
+   dotspacemacs-emacs-pdumper-executable-file "emacs-27.0.50"
+
+   ;; Name of the Spacemacs dump file. This is the file will be created by the
+   ;; portable dumper in the cache directory under dumps sub-directory.
+   ;; To load it when starting Emacs add the parameter `--dump-file'
+   ;; when invoking Emacs 27.1 executable on the command line, for instance:
+   ;;   ./emacs --dump-file=~/.emacs.d/.cache/dumps/spacemacs.pdmp
+   ;; (default spacemacs.pdmp)
+   dotspacemacs-emacs-dumper-dump-file "spacemacs.pdmp"
+
    ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
    ;; environment, otherwise it is strongly recommended to let it set to t.
@@ -425,6 +443,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-highlight-delimiters 'all
 
    ;; If non-nil, start an Emacs server if one is not already running.
+   ;; (default nil)
    dotspacemacs-enable-server nil
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
@@ -509,8 +528,6 @@ It should only modify the values of Spacemacs settings."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun ismd/keybindings ()
-  (interactive)
-
   ;; arrow keys
   (global-set-key (kbd "M-<left>") 'windmove-left)
   (global-set-key (kbd "M-<right>") 'windmove-right)
@@ -523,15 +540,15 @@ It should only modify the values of Spacemacs settings."
   (global-set-key (kbd "C-<down>") 'forward-paragraph)
 
   ;; word deletion
-  (global-set-key (kbd "M-d") 'sp-delete-word)
-  (global-set-key (kbd "M-<backspace>") 'sp-backward-delete-word)
+  ;; (global-set-key (kbd "M-d") 'sp-delete-word)
+  ;; (global-set-key (kbd "M-<backspace>") 'sp-backward-delete-word)
   (global-set-key (kbd "C-<delete>") 'sp-delete-word)
   (global-set-key (kbd "C-<backspace>") 'sp-backward-delete-word)
 
   ;; tab
   (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
   ;; (global-set-key (kbd "C-<tab>") 'insert-tab)
-  (global-set-key (kbd "S-<tab>") 'tab-indent-or-complete)
+  ;; (global-set-key (kbd "S-<tab>") 'tab-indent-or-complete)
   (global-set-key (kbd "<backtab>") 'tab-indent-or-complete)
 
   ;; find file
@@ -568,16 +585,13 @@ It should only modify the values of Spacemacs settings."
   (prefer-coding-system 'utf-8)
 
   ;; link to X primary clipboard
-  (setq-default x-select-enable-clipboard t)
+  ;; (setq-default x-select-enable-clipboard t)
 
   ;; require a ending newline
   (setq require-final-newline t)
 
   ;; warnings
   (setq-default warning-minimum-level :emergency)
-
-  ;; no shell path warning
-  ;; (setq exec-path-from-shell-check-startup-file nil)
 
   ;; spaceline
   (spaceline-toggle-buffer-size-off)
@@ -592,7 +606,7 @@ It should only modify the values of Spacemacs settings."
          auto-mode-alist))
 
   ;; projectile
-  (setq-default projectile-switch-project-action 'neotree-projectile-action)
+  ;; (setq-default projectile-switch-project-action 'neotree-projectile-action)
 
   ;; neotree
   (setq-default neo-autorefresh nil
@@ -746,7 +760,8 @@ It should only modify the values of Spacemacs settings."
                              (setq org-pomodoro-audio-player "/usr/bin/mplayer")))
 
   ;; electric
-  (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1))))
+  ;; (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; functions

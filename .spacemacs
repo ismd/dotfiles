@@ -100,7 +100,8 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(cmake-mode
+   dotspacemacs-additional-packages '(cmake-ide
+                                      cmake-mode
                                       doom-themes
                                       editorconfig
                                       minimap
@@ -652,9 +653,7 @@ It should only modify the values of Spacemacs settings."
 
   (defun ismd/c++-mode-hook ()
     (push 'company-rtags company-backends)
-    ;; cmake-ide
-    ;; (cmake-ide-setup)
-    )
+    (cmake-ide-setup))
 
   (defun ismd/dired-mode-hook ()
     (setq dired-listing-switches "-lah --group-directories-first")

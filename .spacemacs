@@ -820,6 +820,19 @@ will be killed."
             (message "Killed non-existing/unreadable file buffer: %s" filename))))))
   (message "Finished reverting buffers containing unmodified files."))
 
+(defun ismd/term-send-c-x ()
+  (interactive)
+  (term-send-raw-string "\C-x"))
+
+(defun ismd/persp-remove-killed-buffers ()
+  (interactive)
+  (mapc #'(lambda (p)
+            (when p
+              (setf (persp-buffers p)
+                    (delete-if-not #'buffer-live-p
+                                   (persp-buffers p)))))
+        (persp-persps)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spacemacs init hooks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

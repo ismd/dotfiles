@@ -1,1 +1,1 @@
-export EDITOR=/usr/bin/emacsclient
+# export EDITOR="/usr/bin/emacsclient -c"

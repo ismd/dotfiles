@@ -51,7 +51,7 @@ This function should only modify configuration layer settings."
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t
-            c-c++-enable-rtags-support nil)
+            c-c++-enable-rtags-support t)
      csv
      (cmake :variables
             cmake-enable-cmake-ide-support t)

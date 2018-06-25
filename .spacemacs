@@ -495,6 +495,10 @@ It should only modify the values of Spacemacs settings."
   (setq-default indent-tabs-mode nil)
   (setq-default require-final-newline t)
 
+  ;; dired
+  (setq-default delete-by-moving-to-trash nil)
+  (setq-default dired-listing-switches "-lah --group-directories-first")
+
   ;; c++
   (setq-default flycheck-gcc-language-standard "c++17")
   (setq-default flycheck-clang-language-standard "c++17")
@@ -515,15 +519,34 @@ It should only modify the values of Spacemacs settings."
   )
 
 (defun ismd/hooks ()
+  (defun ismd/dired-mode-hook ()
+    (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
+
   (defun ismd/focus-out-hook ()
     (save-some-buffers t))
 
+  (defun ismd/term-mode-hook ()
+    (define-key term-raw-map (kbd "C-p") 'term-send-up)
+    (define-key term-raw-map (kbd "C-n") 'term-send-down)
+    (define-key term-raw-map (kbd "C-r") 'term-send-reverse-search-history)
+    (define-key term-raw-map (kbd "M-.") 'term-send-raw-meta)
+    (add-to-list 'term-bind-key-alist '("M-<backspace>" . term-send-backward-kill-word)))
+
+  (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
+  (add-hook 'term-mode-hook 'ismd/term-mode-hook)
   )
 
 (defun insert-tab ()
   (interactive)
   (insert-char ?\t))
+
+(defun ismd/dired-up-dir ()
+  "Go up a directory."
+  (interactive)
+  (let ((current-dir (dired-current-directory)))
+    (find-alternate-file "..")
+    (dired-goto-file current-dir)))
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -550,6 +573,7 @@ before packages are loaded."
   (delete-selection-mode t)
   (global-auto-revert-mode t)
 
+  ;; keybindings
   (global-set-key (kbd "C-x C-r") 'revert-buffer)
 
   (ismd/defaults)

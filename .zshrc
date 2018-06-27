@@ -114,3 +114,5 @@ select-word-style bash
 DEFAULT_USER="ismd"
 
 source /usr/share/nvm/init-nvm.sh
+
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh

@@ -43,6 +43,7 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup nil
                       auto-completion-enable-sort-by-usage nil
+                      auto-completion-idle-delay 0.2
                       auto-completion-tab-key-behavior nil
                       spacemacs-default-company-backends '(company-files))
      (better-defaults :variables
@@ -107,7 +108,8 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(doom-themes
+   dotspacemacs-additional-packages '(dired-k
+                                      doom-themes
                                       shrink-path
                                       )
 
@@ -519,6 +521,8 @@ It should only modify the values of Spacemacs settings."
   )
 
 (defun ismd/hooks ()
+  (add-hook 'dired-initial-position-hook 'dired-k)
+
   (defun ismd/dired-mode-hook ()
     (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
 

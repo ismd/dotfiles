@@ -537,6 +537,10 @@ It should only modify the values of Spacemacs settings."
   (defun ismd/focus-out-hook ()
     (save-some-buffers t))
 
+  (defun ismd/prog-mode-hook ()
+    (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
+    (global-set-key (kbd "<backtab>") 'completion-at-point))
+
   (defun ismd/term-mode-hook ()
     (define-key term-raw-map (kbd "<tab>") 'term-send-tab)
     (define-key term-raw-map (kbd "C-p") 'term-send-up)
@@ -548,6 +552,7 @@ It should only modify the values of Spacemacs settings."
   (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
+  (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'term-mode-hook 'ismd/term-mode-hook)
   )
 
@@ -604,9 +609,7 @@ before packages are loaded."
   (global-auto-revert-mode t)
 
   ;; keybindings
-  (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
   (global-set-key (kbd "C-x C-r") 'revert-buffer)
-  (global-set-key (kbd "<backtab>") 'completion-at-point)
 
   (ismd/defaults)
   (ismd/hooks)

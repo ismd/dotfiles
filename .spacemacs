@@ -538,8 +538,8 @@ It should only modify the values of Spacemacs settings."
     (save-some-buffers t))
 
   (defun ismd/prog-mode-hook ()
-    (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
-    (global-set-key (kbd "<backtab>") 'completion-at-point))
+    (define-key prog-mode-map (kbd "<tab>") 'tab-indent-or-complete)
+    (define-key prog-mode-map (kbd "<backtab>") 'company-complete))
 
   (defun ismd/term-mode-hook ()
     (define-key term-raw-map (kbd "<tab>") 'term-send-tab)

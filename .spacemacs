@@ -522,6 +522,14 @@ It should only modify the values of Spacemacs settings."
   (defun ismd/dired-mode-hook ()
     (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
 
+  (defun ismd/emmet-mode-hook ()
+    (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+    (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+    (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete))
+
   (defun ismd/focus-out-hook ()
     (save-some-buffers t))
 
@@ -533,6 +541,7 @@ It should only modify the values of Spacemacs settings."
     (define-key term-raw-map (kbd "M-.") 'term-send-raw-meta)
     (add-to-list 'term-bind-key-alist '("M-<backspace>" . term-send-backward-kill-word)))
 
+  (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
   (add-hook 'term-mode-hook 'ismd/term-mode-hook)
@@ -614,14 +623,14 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (yasnippet-snippets yapfify yaml-mode xterm-color ws-butler wolfram-mode winum wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe vala-snippets vala-mode uuidgen unfill treemacs-projectile treemacs ht pfuture toc-org thrift tagedit systemd symon string-inflection stan-mode sql-indent spaceline-all-the-icons spaceline powerline smex smeargle slim-mode shrink-path shell-pop scss-mode scad-mode sass-mode restart-emacs request rainbow-delimiters qml-mode pyvenv pytest pyenv-mode py-isort pug-mode popwin pkgbuild-mode pippel pipenv pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode password-generator paradox overseer org-bullets open-junk-file nginx-mode nameless mwim multi-term move-text mmm-mode matlab-mode markdown-toc magit-svn magit-gitflow macrostep lsp-ui markdown-mode lsp-python lsp-javascript-typescript typescript-mode lorem-ipsum logcat livid-mode skewer-mode live-py-mode link-hint kivy-mode julia-mode json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc ivy-yasnippet ivy-xref ivy-rtags ivy-rich ivy-purpose window-purpose imenu-list ivy-hydra insert-shebang indent-guide importmagic epc ctable concurrent deferred impatient-mode htmlize simple-httpd ibuffer-projectile hungry-delete hoon-mode hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make helm helm-core haml-mode google-translate google-c-style golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rtags flycheck-pos-tip flycheck-bashate flycheck flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig ebuild-mode dumb-jump drupal-mode doom-themes all-the-icons memoize disaster diff-hl define-word cython-mode csv-mode counsel-projectile projectile pkg-info epl counsel-css counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-php ac-php-core xcscope php-mode company-lsp lsp-mode company-c-headers company-anaconda company column-enforce-mode cmake-mode cmake-ide levenshtein clean-aindent-mode clang-format centered-cursor-mode browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed arduino-mode spinner anaconda-mode pythonic f dash s aggressive-indent ace-window ace-link avy ac-ispell auto-complete popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ evil goto-chg undo-tree diminish bind-map bind-key async)))
- '(safe-local-variable-values
-   (quote
-    ((helm-make-build-dir . "build/")
-     (javascript-backend . tern)
-     (javascript-backend . lsp)))))
+    '(package-selected-packages
+         (quote
+             (helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-ctest helm-css-scss helm-company helm-c-yasnippet helm-ag ace-jump-helm-line typit mmt sudoku pacmacs 2048-game yasnippet-snippets yapfify yaml-mode xterm-color ws-butler wolfram-mode winum wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe vala-snippets vala-mode uuidgen unfill treemacs-projectile treemacs ht pfuture toc-org thrift tagedit systemd symon string-inflection stan-mode sql-indent spaceline-all-the-icons spaceline powerline smex smeargle slim-mode shrink-path shell-pop scss-mode scad-mode sass-mode restart-emacs request rainbow-delimiters qml-mode pyvenv pytest pyenv-mode py-isort pug-mode popwin pkgbuild-mode pippel pipenv pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode password-generator paradox overseer org-bullets open-junk-file nginx-mode nameless mwim multi-term move-text mmm-mode matlab-mode markdown-toc magit-svn magit-gitflow macrostep lsp-ui markdown-mode lsp-python lsp-javascript-typescript typescript-mode lorem-ipsum logcat livid-mode skewer-mode live-py-mode link-hint kivy-mode julia-mode json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc ivy-yasnippet ivy-xref ivy-rtags ivy-rich ivy-purpose window-purpose imenu-list ivy-hydra insert-shebang indent-guide importmagic epc ctable concurrent deferred impatient-mode htmlize simple-httpd ibuffer-projectile hungry-delete hoon-mode hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make helm helm-core haml-mode google-translate google-c-style golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rtags flycheck-pos-tip flycheck-bashate flycheck flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig ebuild-mode dumb-jump drupal-mode doom-themes all-the-icons memoize disaster diff-hl define-word cython-mode csv-mode counsel-projectile projectile pkg-info epl counsel-css counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-rtags rtags company-quickhelp pos-tip company-php ac-php-core xcscope php-mode company-lsp lsp-mode company-c-headers company-anaconda company column-enforce-mode cmake-mode cmake-ide levenshtein clean-aindent-mode clang-format centered-cursor-mode browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed arduino-mode spinner anaconda-mode pythonic f dash s aggressive-indent ace-window ace-link avy ac-ispell auto-complete popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ evil goto-chg undo-tree diminish bind-map bind-key async)))
+    '(safe-local-variable-values
+         (quote
+             ((helm-make-build-dir . "build/")
+                 (javascript-backend . tern)
+                 (javascript-backend . lsp)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -189,23 +189,23 @@ bindsym $mod+Shift+i exec i3lock -c 000000
 new_window 1pixel
 new_float 1pixel
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always $HOME/.config/polybar/launch.sh
 # exec --no-startup-id feh --bg-fill ~/Pictures/city_night.jpg
-exec --no-startup-id xsetroot -solid "#333333"
-exec --no-startup-id xset -dpms
-exec --no-startup-id xset s off
-exec --no-startup-id urxvtd -q -o -f
-exec --no-startup-id twmnd
+exec xsetroot -solid "#333333"
+exec xset -dpms
+exec xset s off
+exec urxvtd -q -o -f
+exec twmnd
+exec pulseaudio --start
 # exec --no-startup-id xxkb
-# exec --no-startup-id pulseaudio --start
 # exec --no-startup-id compton -b
 # exec --no-startup-id xcompmgr
 # exec --no-startup-id syndaemon -i 0.3 -K -d
 
-exec --no-startup-id setxkbmap -model hhk -layout us,ru -option grp:toggle
+exec setxkbmap -model hhk -layout us,ru -option grp:toggle
 # exec --no-startup-id setxkbmap -layout us,ru -option grp:caps_toggle
 
-exec --no-startup-id wicd-gtk -t
-exec --no-startup-id udiskie --no-automount --no-notify --tray --use-udisks2
-# exec --no-startup-id nextcloud
+exec wicd-gtk -t
+exec udiskie --no-automount --no-notify --tray --use-udisks2
+# exec nextcloud
 # exec --no-startup-id screenshotgun

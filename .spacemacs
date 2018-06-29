@@ -62,7 +62,7 @@ This function should only modify configuration layer settings."
               ibuffer-group-buffers-by 'projects)
      (ivy :variables
           ivy-enable-advanced-buffer-information t
-          ivy-extra-directories nil
+          ;; ivy-extra-directories nil
           ivy-wrap nil)
      git
      html

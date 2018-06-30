@@ -196,7 +196,7 @@ exec xset -dpms
 exec xset s off
 exec urxvtd -q -o -f
 exec twmnd
-exec pulseaudio --start
+# exec pulseaudio --start
 # exec --no-startup-id xxkb
 # exec --no-startup-id compton -b
 # exec --no-startup-id xcompmgr

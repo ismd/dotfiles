@@ -1,0 +1,29 @@
+! Xft
+Xft.antialias: true
+Xft.autohint: 0
+! Xft.dpi: 96
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+
+! URxvt
+URxvt*background: rgba:0000/0000/0200/c800
+URxvt*depth: 32
+! URxvt*font: xft:hermit:pixelsize=14:antialias=true
+! URxvt*font: xft:SourceCodePro:pixelsize=16:antialias=true
+! URxvt*font: xft:DroidSansMono:pixelsize=16:antialias=true
+URxvt*font: xft:Hack:pixelsize=16:antialias=true
+URxvt*foreground: [85]#ffffff
+URxvt*pointerBlank: true
+URxvt*saveLines: 10000
+URxvt*scrollBar: false
+URxvt*scrollTtyKeypress: true
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*shading: 15
+URxvt*termName: rxvt
+URxvt*transparent: true
+URxvt.url-launcher: /usr/bin/firefox
+
+XTerm.vt100.faceName: Hack:size=16:antialias=true

@@ -197,13 +197,13 @@ exec xset s off
 exec urxvtd -q -o -f
 exec twmnd
 # exec pulseaudio --start
-# exec --no-startup-id xxkb
-# exec --no-startup-id compton -b
-# exec --no-startup-id xcompmgr
-# exec --no-startup-id syndaemon -i 0.3 -K -d
+# exec xxkb
+# exec compton -b
+# exec xcompmgr
+# exec syndaemon -i 0.3 -K -d
 
 exec setxkbmap -model hhk -layout us,ru -option grp:toggle
-# exec --no-startup-id setxkbmap -layout us,ru -option grp:caps_toggle
+# exec setxkbmap -layout us,ru -option grp:caps_toggle
 
 # exec wicd-gtk -t
 exec sleep 5s && nm-applet

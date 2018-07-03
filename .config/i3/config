@@ -205,7 +205,8 @@ exec twmnd
 exec setxkbmap -model hhk -layout us,ru -option grp:toggle
 # exec --no-startup-id setxkbmap -layout us,ru -option grp:caps_toggle
 
-exec wicd-gtk -t
-exec udiskie --no-automount --no-notify --tray --use-udisks2
-# exec nextcloud
-# exec --no-startup-id screenshotgun
+# exec wicd-gtk -t
+exec sleep 5s && nm-applet
+exec sleep 5s && udiskie --no-automount --no-notify --tray --use-udisks2
+exec sleep 5s && nextcloud
+exec sleep 5s && screenshotgun

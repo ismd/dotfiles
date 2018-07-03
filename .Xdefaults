@@ -15,6 +15,7 @@ URxvt*depth: 32
 ! URxvt*font: xft:DroidSansMono:pixelsize=16:antialias=true
 URxvt*font: xft:Hack:pixelsize=16:antialias=true
 URxvt*foreground: [85]#ffffff
+URxvt*geometry: 100x35
 URxvt*pointerBlank: true
 URxvt*saveLines: 10000
 URxvt*scrollBar: false

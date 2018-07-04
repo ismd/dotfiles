@@ -192,8 +192,6 @@ new_float 1pixel
 exec_always $HOME/.config/polybar/launch.sh
 # exec --no-startup-id feh --bg-fill ~/Pictures/city_night.jpg
 exec xsetroot -solid "#333333"
-exec xset -dpms
-exec xset s off
 exec urxvtd -q -o -f
 exec twmnd
 # exec pulseaudio --start
@@ -201,6 +199,9 @@ exec twmnd
 # exec compton -b
 # exec xcompmgr
 # exec syndaemon -i 0.3 -K -d
+
+exec sleep 5s && xset -dpms
+exec sleep 5s && xset s off
 
 exec setxkbmap -model hhk -layout us,ru -option grp:toggle
 # exec setxkbmap -layout us,ru -option grp:caps_toggle

@@ -608,6 +608,8 @@ before packages are loaded."
   (delete-selection-mode t)
   (global-auto-revert-mode t)
 
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
   ;; keybindings
   (global-set-key (kbd "C-x C-r") 'revert-buffer)
 

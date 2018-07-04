@@ -499,7 +499,7 @@ It should only modify the values of Spacemacs settings."
 
   ;; dired
   (setq-default delete-by-moving-to-trash nil)
-  (setq-default dired-listing-switches "-lah --group-directories-first")
+  (setq-default dired-listing-switches "-la --group-directories-first")
 
   ;; c++
   (setq-default flycheck-gcc-language-standard "c++17")

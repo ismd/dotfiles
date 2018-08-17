@@ -613,6 +613,7 @@ before packages are loaded."
 
   ;; keybindings
   (global-set-key (kbd "C-x C-r") 'revert-buffer)
+  (global-set-key (kbd "C-<tab>") 'insert-tab)
 
   (ismd/defaults)
   (ismd/hooks)

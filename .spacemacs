@@ -67,7 +67,7 @@ This function should only modify configuration layer settings."
      git
      html
      (javascript :variables
-                 javascript-backend 'tern
+                 javascript-backend 'lsp
                  js2-basic-offset 4
                  js-indent-level 2)
      json
@@ -111,6 +111,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(dired-k
                                       doom-themes
                                       shrink-path
+                                      (stylus-mode :location (recipe :fetcher github :repo "vladh/stylus-mode"))
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -165,7 +166,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 300
 
    ;; Set `gc-cons-threshold' and `gc-cons-percentage' when startup finishes.
    ;; This is an advanced option and should not be changed unless you suspect
@@ -618,4 +619,7 @@ before packages are loaded."
 
   ;; doom mode-line
   (setq powerline-image-apple-rgb nil)
+
+  ;; temporary fix https://github.com/syl20bnr/spacemacs/issues/11152
+  (setq projectile-keymap-prefix (kbd "C-c C-p"))
   )

@@ -67,7 +67,7 @@ This function should only modify configuration layer settings."
      git
      html
      (javascript :variables
-                 javascript-backend 'lsp
+                 javascript-backend 'tern
                  js2-basic-offset 4
                  js-indent-level 2)
      json
@@ -89,6 +89,8 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-by-default t
                       syntax-checking-enable-tooltips t)
      systemd
+     (tern :variables
+           tern-disable-port-files nil)
      theming
      (treemacs :variables
                treemacs-use-filewatch-mode t
@@ -110,6 +112,7 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(dired-k
                                       doom-themes
+                                      rg
                                       shrink-path
                                       (stylus-mode :location (recipe :fetcher github :repo "vladh/stylus-mode"))
                                       )
@@ -500,7 +503,7 @@ It should only modify the values of Spacemacs settings."
 
   ;; dired
   (setq-default delete-by-moving-to-trash nil)
-  (setq-default dired-listing-switches "-la --group-directories-first")
+  (setq-default dired-listing-switches "-laB --group-directories-first")
 
   ;; c++
   (setq-default flycheck-gcc-language-standard "c++17")

@@ -89,8 +89,7 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-by-default t
                       syntax-checking-enable-tooltips t)
      systemd
-     (tern :variables
-           tern-disable-port-files nil)
+     tern
      theming
      (treemacs :variables
                treemacs-use-filewatch-mode t

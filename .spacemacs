@@ -82,7 +82,7 @@ This function should only modify configuration layer settings."
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
-            shell-default-shell 'shell)
+            shell-default-shell 'multi-term)
      shell-scripts
      sql
      (syntax-checking :variables
@@ -542,7 +542,9 @@ It should only modify the values of Spacemacs settings."
 
   (defun ismd/prog-mode-hook ()
     (define-key prog-mode-map (kbd "<tab>") 'tab-indent-or-complete)
-    (define-key prog-mode-map (kbd "<backtab>") 'company-complete))
+    (define-key prog-mode-map (kbd "<backtab>") 'company-complete)
+
+    (spacemacs/toggle-line-numbers-on))
 
   (defun ismd/term-mode-hook ()
     (define-key term-raw-map (kbd "<tab>") 'term-send-tab)
@@ -593,6 +595,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq custom-file "~/.cache/custom.el")
+  (add-hook 'after-init-hook 'global-company-mode)
   )
 
 (defun dotspacemacs/user-load ()

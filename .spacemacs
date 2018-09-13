@@ -39,6 +39,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     ansible
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup nil
@@ -115,6 +116,7 @@ This function should only modify configuration layer settings."
                                       rg
                                       shrink-path
                                       (stylus-mode :location (recipe :fetcher github :repo "vladh/stylus-mode"))
+                                      vlf
                                       )
 
    ;; A list of packages that cannot be updated.

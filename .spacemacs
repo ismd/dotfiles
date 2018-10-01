@@ -115,7 +115,6 @@ This function should only modify configuration layer settings."
                                       doom-themes
                                       rg
                                       shrink-path
-                                      (stylus-mode :location (recipe :fetcher github :repo "vladh/stylus-mode"))
                                       vlf
                                       )
 
@@ -584,6 +583,18 @@ It should only modify the values of Spacemacs settings."
       (company-complete-common)
       (indent-for-tab-command))))
 
+(defun delete-word (arg)
+  "Delete characters until encountering the end of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (forward-word arg) (point))))
+
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
+
 (defun ismd/dired-up-dir ()
   "Go up a directory."
   (interactive)
@@ -597,7 +608,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq custom-file "~/.cache/custom.el")
   (add-hook 'after-init-hook 'global-company-mode)
   )
 
@@ -614,12 +624,19 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq custom-file "~/.cache/custom.el")
+  (load custom-file)
+
+  (setq frame-title-format nil)
+
   (delete-selection-mode t)
   (global-auto-revert-mode t)
 
   (defalias 'yes-or-no-p 'y-or-n-p)
 
   ;; keybindings
+  (global-set-key (kbd "M-d") 'delete-word)
+  (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
   (global-set-key (kbd "C-x C-r") 'revert-buffer)
   (global-set-key (kbd "C-<tab>") 'insert-tab)
 
@@ -631,4 +648,6 @@ before packages are loaded."
 
   ;; temporary fix https://github.com/syl20bnr/spacemacs/issues/11152
   (setq projectile-keymap-prefix (kbd "C-c C-p"))
+
+  (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))
   )

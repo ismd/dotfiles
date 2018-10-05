@@ -112,7 +112,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       dired-k
                                       rg
-                                      shrink-path
+                                      ;; shrink-path
                                       vlf
                                       )
 
@@ -255,8 +255,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Hack"
-                               :size 14
+   dotspacemacs-default-font '("Source Code Pro"
+                               :size 15
                                :weight normal
                                :width normal)
 
@@ -623,9 +623,6 @@ before packages are loaded."
 
   (ismd/defaults)
   (ismd/hooks)
-
-  ;; doom mode-line
-  (setq powerline-image-apple-rgb nil)
 
   ;; temporary fix https://github.com/syl20bnr/spacemacs/issues/11152
   (setq projectile-keymap-prefix (kbd "C-c C-p"))

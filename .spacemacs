@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp; lexical-binding: t -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; lisp-indent-offset: nil -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -94,6 +94,8 @@ This function should only modify configuration layer settings."
      (treemacs :variables
                treemacs-use-filewatch-mode t
                treemacs-use-follow-mode t)
+     (typescript :variables
+                 tide-tsserver-executable "/usr/bin/tsserver")
      (version-control :variables
                       version-control-diff-tool 'git-gutter
                       version-control-diff-side 'left
@@ -627,6 +629,7 @@ before packages are loaded."
   ;; temporary fix https://github.com/syl20bnr/spacemacs/issues/11152
   (setq projectile-keymap-prefix (kbd "C-c C-p"))
 
+  ;; Stylus
   (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))
   )
 

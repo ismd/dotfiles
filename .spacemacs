@@ -73,7 +73,8 @@ This function should only modify configuration layer settings."
      json
      lsp
      major-modes
-     markdown
+     (markdown :variables
+               markdown-live-preview-engine 'vmd)
      nginx
      php
      (python :variables

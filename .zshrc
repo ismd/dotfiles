@@ -113,6 +113,13 @@ select-word-style bash
 
 DEFAULT_USER="ismd"
 
+# nvm
 source /usr/share/nvm/init-nvm.sh
 
+# z
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+# virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+# source /usr/bin/virtualenvwrapper.sh
+source /usr/bin/virtualenvwrapper_lazy.sh

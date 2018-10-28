@@ -78,8 +78,7 @@ This function should only modify configuration layer settings."
      nginx
      php
      (python :variables
-             python-backend 'lsp
-             python-enable-yapf-format-on-save t)
+             python-backend 'lsp)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom

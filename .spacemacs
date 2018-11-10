@@ -52,6 +52,7 @@ This function should only modify configuration layer settings."
                       better-defaults-move-to-end-of-code-first t)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
+            c-c++-enable-c++11 t
             c-c++-enable-clang-support t
             c-c++-enable-rtags-support t)
      csv
@@ -583,6 +584,14 @@ With argument ARG, do this that many times."
   (let ((current-dir (dired-current-directory)))
     (find-alternate-file "..")
     (dired-goto-file current-dir)))
+
+(defun dotspacemacs/user-env ()
+  "Environment variables setup.
+This function defines the environment variables for your Emacs session. By
+default it calls `spacemacs/load-spacemacs-env' which loads the environment
+variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
+See the header of this file for more information."
+  (spacemacs/load-spacemacs-env))
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:

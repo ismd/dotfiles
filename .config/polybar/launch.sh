@@ -10,5 +10,4 @@ for m in $(polybar --list-monitors | cut -d":" -f1); do
     MONITOR=$m polybar my &
 done
 
-
 echo "Bars launched..."

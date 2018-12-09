@@ -53,8 +53,8 @@ This function should only modify configuration layer settings."
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-c++11 t
-            c-c++-enable-clang-support t
-            c-c++-enable-rtags-support t)
+            c-c++-enable-clang-support nil
+            c-c++-enable-rtags-support nil)
      csv
      (cmake :variables
             cmake-enable-cmake-ide-support t)
@@ -103,6 +103,7 @@ This function should only modify configuration layer settings."
                       version-control-global-margin t)
      xclipboard
      yaml
+     ycmd
      )
 
    ;; List of additional packages that will be installed without being
@@ -640,6 +641,10 @@ before packages are loaded."
 
   ;; Stylus
   (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))
+
+  ;; ycmd
+  (setq ycmd-server-command '("python" "/usr/share/vim/vimfiles/third_party/ycmd/ycmd"))
+  (setq ycmd-force-semantic-completion t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

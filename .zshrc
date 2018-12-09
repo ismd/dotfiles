@@ -123,3 +123,6 @@ source /usr/share/nvm/init-nvm.sh
 export WORKON_HOME=~/.virtualenvs
 # source /usr/bin/virtualenvwrapper.sh
 source /usr/bin/virtualenvwrapper_lazy.sh
+
+# ya
+source /home/ismd/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'

@@ -644,6 +644,7 @@ before packages are loaded."
 
   ;; ycmd
   (setq ycmd-server-command '("python" "/usr/share/vim/vimfiles/third_party/ycmd/ycmd"))
+  (setq ycmd-extra-conf-whitelist '("~/coding/*"))
   (setq ycmd-force-semantic-completion t)
   )
 

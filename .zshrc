@@ -125,7 +125,7 @@ export WORKON_HOME=~/.virtualenvs
 source /usr/bin/virtualenvwrapper_lazy.sh
 
 # ya
-source /home/ismd/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
+[ -f /home/ismd/.ya.completion/zsh/ya ] && source /home/ismd/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
 
 # added by travis gem
 [ -f /home/ismd/.travis/travis.sh ] && source /home/ismd/.travis/travis.sh

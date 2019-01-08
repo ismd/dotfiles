@@ -113,12 +113,9 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(
-                                      dired-k
+   dotspacemacs-additional-packages '(dired-k
                                       rg
-                                      ;; shrink-path
-                                      vlf
-                                      )
+                                      vlf)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -638,6 +635,7 @@ before packages are loaded."
 
   ;; temporary fix https://github.com/syl20bnr/spacemacs/issues/11152
   (setq projectile-keymap-prefix (kbd "C-c C-p"))
+  (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
 
   ;; Stylus
   (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))

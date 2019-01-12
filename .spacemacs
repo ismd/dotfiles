@@ -77,6 +77,8 @@ This function should only modify configuration layer settings."
      (markdown :variables
                markdown-live-preview-engine 'vmd)
      nginx
+     (org :variables
+          org-enable-trello-support t)
      php
      (python :variables
              python-backend 'lsp)
@@ -537,12 +539,15 @@ It should only modify the values of Spacemacs settings."
     (define-key term-raw-map (kbd "M-.") 'term-send-raw-meta)
     (add-to-list 'term-bind-key-alist '("M-<backspace>" . term-send-backward-kill-word)))
 
+  (defun ismd/js2-mode-hook ()
+    (define-key prog-mode-map (kbd "<tab>") 'js2-indent-bounce))
+
   (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'term-mode-hook 'ismd/term-mode-hook)
-  )
+  (add-hook 'js2-mode-hook 'ismd/js2-mode-hook))
 
 (defun insert-tab ()
   (interactive)
@@ -644,6 +649,9 @@ before packages are loaded."
   (setq ycmd-server-command '("python" "/usr/share/vim/vimfiles/third_party/ycmd/ycmd"))
   (setq ycmd-extra-conf-whitelist '("~/coding/*"))
   (setq ycmd-force-semantic-completion t)
+
+  ;; javascript
+  (setq-default js2-bounce-indent-p t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

@@ -211,3 +211,4 @@ exec sleep 5s && nm-applet
 exec sleep 5s && udiskie --no-automount --no-notify --tray --use-udisks2
 exec sleep 5s && nextcloud
 exec sleep 5s && screenshotgun
+exec sleep 5s && unclutter --timeout 2

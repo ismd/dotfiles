@@ -77,6 +77,10 @@ This function should only modify configuration layer settings."
      (markdown :variables
                markdown-live-preview-engine 'vmd)
      nginx
+     (org :variables
+          org-enable-github-support t
+          org-enable-hugo-support t
+          org-enable-trello-support t)
      php
      (python :variables
              python-backend 'lsp)

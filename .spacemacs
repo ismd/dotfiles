@@ -117,12 +117,9 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(
-                                      dired-k
+   dotspacemacs-additional-packages '(dired-k
                                       rg
-                                      ;; shrink-path
-                                      vlf
-                                      )
+                                      vlf)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -544,12 +541,15 @@ It should only modify the values of Spacemacs settings."
     (define-key term-raw-map (kbd "M-.") 'term-send-raw-meta)
     (add-to-list 'term-bind-key-alist '("M-<backspace>" . term-send-backward-kill-word)))
 
+  (defun ismd/js2-mode-hook ()
+    (define-key prog-mode-map (kbd "<tab>") 'js2-indent-bounce))
+
   (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'term-mode-hook 'ismd/term-mode-hook)
-  )
+  (add-hook 'js2-mode-hook 'ismd/js2-mode-hook))
 
 (defun insert-tab ()
   (interactive)
@@ -642,6 +642,7 @@ before packages are loaded."
 
   ;; temporary fix https://github.com/syl20bnr/spacemacs/issues/11152
   (setq projectile-keymap-prefix (kbd "C-c C-p"))
+  (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
 
   ;; Stylus
   (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))
@@ -650,6 +651,9 @@ before packages are loaded."
   (setq ycmd-server-command '("python" "/usr/share/vim/vimfiles/third_party/ycmd/ycmd"))
   (setq ycmd-extra-conf-whitelist '("~/coding/*"))
   (setq ycmd-force-semantic-completion t)
+
+  ;; javascript
+  (setq-default js2-bounce-indent-p t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

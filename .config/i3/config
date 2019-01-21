@@ -177,6 +177,7 @@ bindsym $mod+r mode "resize"
 # bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 # bindsym XF86AudioMute exec amixer -q set Master toggle
 
+bindsym $mod+F10 exec amixer set Master toggle
 bindsym $mod+F11 exec amixer set Master 5%-
 bindsym $mod+F12 exec amixer set Master 5%+
 
@@ -185,7 +186,10 @@ bindsym $mod+F12 exec amixer set Master 5%+
 #bindsym XF86AudioNext exec mocp --next
 #bindsym XF86AudioPrev exec mocp --previous
 
-bindsym $mod+Shift+i exec i3lock -c 000000
+bindsym $mod+Shift+braceleft exec i3-msg move workspace to output left
+bindsym $mod+Shift+braceright exec i3-msg move workspace to output right
+
+bindsym $mod+Shift+i exec i3lock -f -e -t -c 000000
 new_window 1pixel
 new_float 1pixel
 
@@ -194,6 +198,7 @@ exec_always $HOME/.config/polybar/launch.sh
 exec xsetroot -solid "#333333"
 exec urxvtd -q -o -f
 exec twmnd
+exec unclutter --timeout 2
 # exec pulseaudio --start
 # exec xxkb
 # exec compton -b

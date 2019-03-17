@@ -84,6 +84,7 @@ This function should only modify configuration layer settings."
      php
      (python :variables
              python-backend 'lsp)
+     react
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
@@ -496,11 +497,19 @@ It should only modify the values of Spacemacs settings."
   (setq-default flycheck-clang-language-standard "c++17")
   (setq-default company-clang-arguments '("-std=c++17"))
 
+  (setq-default js2-basic-offset 2)
+  (setq-default css-indent-offset 2)
+
   ;; web-mode
   (setq-default web-mode-markup-indent-offset 4)
   (setq-default web-mode-css-indent-offset 4)
   (setq-default web-mode-code-indent-offset 4)
-  (setq-default web-mode-attr-indent-offset nil)
+  (setq-default web-mode-attr-indent-offset 4)
+
+  (with-eval-after-load 'web-mode
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
   ;; python
   (setq-default python-indent-offset 4)

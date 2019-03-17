@@ -625,6 +625,7 @@ before packages are loaded."
   (load custom-file)
 
   (setq frame-title-format nil)
+  (setq select-enable-clipboard t)
 
   (delete-selection-mode t)
   (global-auto-revert-mode t)

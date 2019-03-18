@@ -79,8 +79,7 @@ This function should only modify configuration layer settings."
      nginx
      (org :variables
           org-enable-github-support t
-          org-enable-hugo-support t
-          org-enable-trello-support t)
+          org-enable-hugo-support t)
      php
      (python :variables
              python-backend 'lsp)
@@ -508,8 +507,9 @@ It should only modify the values of Spacemacs settings."
 
   (with-eval-after-load 'web-mode
     (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
-    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
+    (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil)))
 
   ;; python
   (setq-default python-indent-offset 4)

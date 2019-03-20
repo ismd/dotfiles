@@ -51,6 +51,7 @@ This function should only modify configuration layer settings."
                       better-defaults-move-to-beginning-of-code-first t
                       better-defaults-move-to-end-of-code-first t)
      (c-c++ :variables
+            ;; c-c++-backend 'rtags
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-c++11 t
             c-c++-enable-clang-support nil
@@ -84,6 +85,7 @@ This function should only modify configuration layer settings."
      (python :variables
              python-backend 'lsp)
      react
+     semantic
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
@@ -658,8 +660,9 @@ before packages are loaded."
   (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))
 
   ;; ycmd
-  (setq ycmd-server-command '("python" "/usr/share/vim/vimfiles/third_party/ycmd/ycmd"))
-  (setq ycmd-extra-conf-whitelist '("~/coding/*"))
+  ;; (setq ycmd-server-command '("python" "/usr/share/vim/vimfiles/third_party/ycmd/ycmd"))
+  (setq ycmd-server-command '("/home/ismd/.ya/tools/v3/200081604/bin/python2" "/home/ismd/.ya/tools/v3/286292072/ycm/third_party/ycmd/ycmd"))
+  (setq ycmd-extra-conf-whitelist '("~/*"))
   (setq ycmd-force-semantic-completion t)
 
   ;; javascript

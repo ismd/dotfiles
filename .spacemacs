@@ -81,7 +81,6 @@ This function should only modify configuration layer settings."
      (org :variables
           org-enable-github-support t
           org-enable-hugo-support t)
-     php
      (python :variables
              python-backend 'lsp)
      react

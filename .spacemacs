@@ -51,7 +51,7 @@ This function should only modify configuration layer settings."
                       better-defaults-move-to-beginning-of-code-first t
                       better-defaults-move-to-end-of-code-first t)
      (c-c++ :variables
-            ;; c-c++-backend 'rtags
+            c-c++-backend 'rtags
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-c++11 t
             c-c++-enable-clang-support nil

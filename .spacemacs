@@ -497,6 +497,9 @@ It should only modify the values of Spacemacs settings."
   (setq-default flycheck-clang-language-standard "c++17")
   (setq-default company-clang-arguments '("-std=c++17"))
 
+  (c-set-offset 'arglist-intro 4)
+  (c-set-offset 'inlambda 0)
+
   (setq-default js2-basic-offset 2)
   (setq-default css-indent-offset 2)
 

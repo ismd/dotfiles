@@ -119,6 +119,7 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(dired-k
+                                      edit-server
                                       rg
                                       vlf)
 
@@ -669,6 +670,9 @@ before packages are loaded."
 
   ;; javascript
   (setq-default js2-bounce-indent-p t)
+
+  ;; edit-server
+  (edit-server-start)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

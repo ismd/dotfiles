@@ -108,7 +108,6 @@ This function should only modify configuration layer settings."
                       version-control-global-margin t)
      xclipboard
      yaml
-     ycmd
      )
 
    ;; List of additional packages that will be installed without being
@@ -661,18 +660,10 @@ before packages are loaded."
   (ismd/defaults)
   (ismd/hooks)
 
-  ;; temporary fix https://github.com/syl20bnr/spacemacs/issues/11152
-  (setq projectile-keymap-prefix (kbd "C-c C-p"))
   (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
 
   ;; Stylus
   (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))
-
-  ;; ycmd
-  ;; (setq ycmd-server-command '("python" "/usr/share/vim/vimfiles/third_party/ycmd/ycmd"))
-  (setq ycmd-server-command '("/home/ismd/.ya/tools/v3/200081604/bin/python2" "/home/ismd/.ya/tools/v3/286292072/ycm/third_party/ycmd/ycmd"))
-  (setq ycmd-extra-conf-whitelist '("~/*"))
-  (setq ycmd-force-semantic-completion t)
 
   ;; javascript
   (setq-default js2-bounce-indent-p t)

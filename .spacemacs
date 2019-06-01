@@ -119,7 +119,6 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(dired-k
                                       edit-server
-                                      focus
                                       rg
                                       vlf)
 
@@ -545,9 +544,7 @@ It should only modify the values of Spacemacs settings."
     (define-key prog-mode-map (kbd "<tab>") 'tab-indent-or-complete)
     (define-key prog-mode-map (kbd "<backtab>") 'company-complete)
 
-    (spacemacs/toggle-line-numbers-on)
-
-    (focus-mode))
+    (spacemacs/toggle-line-numbers-on))
 
   (defun ismd/term-mode-hook ()
     (define-key term-raw-map (kbd "<tab>") 'term-send-tab)

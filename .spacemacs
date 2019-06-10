@@ -651,8 +651,8 @@ before packages are loaded."
   (global-set-key (kbd "C-x C-r") 'revert-buffer)
   (global-set-key (kbd "C-<tab>") 'insert-tab)
 
-  (global-set-key "\M-n" "\C-u1\C-v")
-  (global-set-key "\M-p" "\C-u1\M-v")
+  (global-set-key "\M-n" "\C-u3\C-v")
+  (global-set-key "\M-p" "\C-u3\M-v")
 
   (ismd/defaults)
   (ismd/hooks)
@@ -667,6 +667,11 @@ before packages are loaded."
 
   ;; edit-server
   (edit-server-start)
+
+  ;;; scroll
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; three lines at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

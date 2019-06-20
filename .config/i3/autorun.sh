@@ -11,7 +11,6 @@ xsetroot -solid "#333333"
 xset -dpms
 xset s off
 setxkbmap -layout us,ru -option grp:toggle
-source ~/.dmenurc
 
 run alacritty -e tmux
 run nextcloud

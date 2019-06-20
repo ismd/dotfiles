@@ -59,7 +59,7 @@ modules-left = i3 xwindow
 modules-center =
 modules-right = vpn volume xkeyboard battery date
 
-tray-position = center
+tray-position = ${env:TRAY_POS}
 tray-maxsize = 16
 tray-padding = 8
 tray-transparent = false

@@ -177,6 +177,15 @@ default_border pixel 1
 default_floating_border pixel 1
 hide_edge_borders both
 
+# class                 border  backgr. text    indicator child_border
+client.focused          #3e646f #3e646f #bcbcbc #2e9ef4   #3e646f
+client.focused_inactive #5f676a #5f676a #bcbcbc #484e50   #5f676a
+client.unfocused        #1c1c22 #1c1c22 #888888 #292d2e   #1c1c22
+client.urgent           #900000 #900000 #bcbcbc #900000   #900000
+client.placeholder      #000000 #0c0c0c #bcbcbc #000000   #0c0c0c
+
+client.background       #ffffff
+
 # volume control
 bindsym XF86AudioRaiseVolume exec --no-startup-id Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id Master 5%-

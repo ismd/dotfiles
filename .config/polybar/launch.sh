@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 # Terminate already running bar instances
 killall -q polybar
@@ -10,4 +10,4 @@ for m in $(polybar --list-monitors | cut -d":" -f1); do
     MONITOR=$m polybar my &
 done
 
-echo "Bars launched..."
+echo "Polybar launched..."

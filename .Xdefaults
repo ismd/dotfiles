@@ -1,13 +1,13 @@
-! Xft
+! xft
 Xft.antialias: true
-Xft.autohint: 0
-! Xft.dpi: 96
+Xft.autohint: false
+Xft.dpi: 96
 Xft.hinting: true
-Xft.hintstyle: hintfull
+Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-! URxvt
+! urxvt
 URxvt*background: rgba:0000/0000/0200/c800
 URxvt*depth: 32
 ! URxvt*font: xft:hermit:pixelsize=14:antialias=true
@@ -27,5 +27,6 @@ URxvt*termName: rxvt
 URxvt*transparent: true
 URxvt.url-launcher: /usr/bin/firefox
 
+! xterm
 XTerm.vt100.faceName: Liberation Mono:size=10:antialias=false
 XTerm.vt100.font: 7x13

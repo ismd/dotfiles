@@ -7,10 +7,10 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 for m in $(polybar --list-monitors | cut -d":" -f1); do
-    if [ $m == 'HDMI-A-0' ] 
+    if [ $m == 'HDMI-A-0' ]
     then
         echo $m
-        MONITOR=$m TRAY_POS=center polybar --reload my &
+        MONITOR=$m TRAY_POS=right polybar --reload my &
     else
         echo $m
         MONITOR=$m TRAY_POS=none polybar --reload my &

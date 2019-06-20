@@ -64,7 +64,7 @@ tray-maxsize = 16
 tray-padding = 8
 tray-transparent = false
 tray-offset-y = 0%
-tray-offset-x = 32%
+tray-offset-x = 0%
 tray-detached = false
 tray-background = ${colors.background}
 

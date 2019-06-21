@@ -171,11 +171,13 @@ bindsym $mod+Shift+braceright exec  --no-startup-id i3-msg move workspace to out
 
 bindsym $mod+Shift+i exec i3lock -f -e -t -c 000000
 
+# options
 workspace_layout tabbed
 default_orientation horizontal
 default_border pixel 1
 default_floating_border pixel 1
 hide_edge_borders both
+popup_during_fullscreen leave_fullscreen
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #3e646f #3e646f #bcbcbc #2e9ef4   #3e646f

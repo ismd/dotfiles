@@ -12,7 +12,7 @@ xset -dpms
 xset s off
 setxkbmap -layout us,ru -option grp:toggle
 
-run alacritty -e tmux
+run konsole -e tmux
 run nextcloud
 run nm-applet
 run screenshotgun

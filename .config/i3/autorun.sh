@@ -18,4 +18,4 @@ run screenshotgun
 run telegram-desktop
 run udiskie --no-automount --no-notify --tray --use-udisks2
 run unclutter --timeout 2
-run wicd-gtk
+run wicd-client -t

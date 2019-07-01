@@ -1,7 +1,7 @@
 PATH="~/bin:$PATH"
 
 export EDITOR=/usr/bin/emacsclient
-export TERMINAL=/usr/bin/alacritty
+export TERMINAL=/usr/bin/konsole
 
 PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 export GEM_HOME=$HOME/.gem

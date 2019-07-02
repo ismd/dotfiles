@@ -12,10 +12,9 @@ xset -dpms
 xset s off
 setxkbmap -layout us,ru -option grp:toggle
 
-run konsole -e tmux
 run nextcloud
 run screenshotgun
 run telegram-desktop
+run terminator -e tmux
 run udiskie --no-automount --no-notify --tray --use-udisks2
 run unclutter --timeout 2
-run wicd-client -t

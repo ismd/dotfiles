@@ -1,4 +1,4 @@
-PATH="~/bin:$PATH"
+PATH="/home/ismd/bin:$PATH"
 
 export EDITOR=/usr/bin/emacsclient
 export TERMINAL=/usr/bin/terminator

@@ -650,6 +650,7 @@ before packages are loaded."
   (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
   (global-set-key (kbd "C-x C-r") 'revert-buffer)
   (global-set-key (kbd "C-<tab>") 'insert-tab)
+  (global-set-key (kbd "M-g") 'goto-line)
 
   (global-set-key "\M-n" "\C-u3\C-v")
   (global-set-key "\M-p" "\C-u3\M-v")

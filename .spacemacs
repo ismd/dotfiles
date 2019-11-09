@@ -618,8 +618,13 @@ With argument ARG, do this that many times."
 
 (defun ismd/kill-line ()
   (interactive)
-  (delete-region (point) (save-excursion (move-end-of-line 1) (point)))
-  (delete-char 1))
+  (cond ((ismd/current-line-empty-p) (delete-char 1))
+        (t (delete-region (point) (line-end-position)))))
+
+(defun ismd/current-line-empty-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at "[[:space:]]*$")))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.

@@ -258,10 +258,10 @@
     # Xev might be helpful to find names for keys.
 
     # Close notification.
-    close = alt+q
+    close = mod1+q
 
     # Close all notifications.
-    close_all = alt+shift+q
+    close_all = mod1+shift+q
 
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
@@ -374,7 +374,7 @@
 
 [ignore]
     # This notification will not be displayed
-    summary = "Этот сайт был обновлен в фоновом режиме"
+    body = "*Этот сайт был обновлен в фоновом режиме*"
     format = ""
 
 #[history-ignore]

@@ -18,5 +18,5 @@ run dunst
 run screenshotgun
 run telegram-desktop
 run terminator -e tmux
-run udiskie --no-automount --no-notify --tray --use-udisks2
+run udiskie --no-automount --no-notify --tray
 run unclutter --timeout 2

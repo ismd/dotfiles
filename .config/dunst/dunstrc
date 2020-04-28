@@ -372,9 +372,14 @@
 #    summary = "*script*"
 #    script = dunst_test.sh
 
-[ignore]
+[yandex-browser]
     # This notification will not be displayed
     body = "*Этот сайт был обновлен в фоновом режиме*"
+    format = ""
+
+[turbo]
+    # This notification will not be displayed
+    body = "*Поддержка Турбо-страниц*"
     format = ""
 
 #[history-ignore]

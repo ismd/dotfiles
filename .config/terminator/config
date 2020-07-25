@@ -1,8 +1,8 @@
 [global_config]
-  borderless = True
+  borderless = False
   inactive_color_offset = 1.0
   tab_position = bottom
-  title_font = Hack 15
+  title_font = Hack 14
 [keybindings]
 [layouts]
   [[default]]
@@ -17,7 +17,7 @@
   [[default]]
     background_color = "#002b36"
     cursor_color = "#aaaaaa"
-    font = Hack 17
+    font = Hack 16
     foreground_color = "#839496"
     scrollbar_position = hidden
     show_titlebar = False

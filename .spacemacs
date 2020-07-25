@@ -41,11 +41,12 @@ This function should only modify configuration layer settings."
      ansible
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
-                      auto-completion-enable-snippets-in-popup nil
-                      auto-completion-enable-sort-by-usage nil
-                      auto-completion-idle-delay 0.2
+                      auto-completion-enable-sort-by-usage t
+                      ;; auto-completion-idle-delay 0.1
                       auto-completion-tab-key-behavior nil
-                      spacemacs-default-company-backends '(company-capf company-files))
+                      ;; spacemacs-default-company-backends '((company-semantic company-dabbrev-code company-gtags company-etags company-keywords)
+                      ;;                                      company-files company-dabbrev company-capf)
+                      )
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t
                       better-defaults-move-to-end-of-code-first t)
@@ -53,61 +54,83 @@ This function should only modify configuration layer settings."
             c-c++-adopt-subprojects t
             c-c++-backend 'lsp-clangd
             c-c++-lsp-enable-semantic-highlight t)
-     csv
+     chrome
      (cmake :variables
             cmake-enable-cmake-ide-support t)
      emacs-lisp
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
      (ivy :variables
-          ivy-enable-advanced-buffer-information t
-          ;; ivy-extra-directories nil
-          ivy-wrap nil)
+          ivy-enable-advanced-buffer-information t)
      git
-     html
+     helpful
+     (html :variables
+           css-enable-lsp t
+           html-enable-lsp t
+           less-enable-lsp t
+           scss-enable-lsp t
+           web-fmt-tool 'web-beautify)
      (javascript :variables
-                 javascript-backend 'tern
+                 javascript-backend 'lsp
+                 javascript-fmt-tool 'web-beautify
+                 javascript-import-tool 'import-js
+                 ;; javascript-lsp-linter nil
+                 js-indent-level 4
                  js2-basic-offset 4
-                 js-indent-level 2)
-     json
+                 ;; js2-mode-show-parse-errors nil
+                 ;; js2-mode-show-strict-warnings nil
+                 node-add-modules-path t)
+     (json :variables
+           js-indent-level 2
+           json-fmt-tool 'web-beautify)
      lsp
      major-modes
      (markdown :variables
                markdown-live-preview-engine 'vmd)
+     (multiple-cursors :variables
+                       multiple-cursors-backend 'mc)
      nginx
      (org :variables
           org-enable-github-support t
-          org-enable-hugo-support t)
+          org-enable-hugo-support t
+          org-enable-trello-support t)
+     pdf
+     protobuf
      (python :variables
              python-backend 'lsp)
      react
-     semantic
+     selectric
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
             shell-default-shell 'multi-term)
-     shell-scripts
+     (shell-scripts :variables
+                    shell-scripts-backend 'lsp)
+     (spell-checking :variables
+                     spell-checking-enable-by-default nil)
      sql
      (syntax-checking :variables
                       syntax-checking-enable-by-default t
                       syntax-checking-enable-tooltips t)
      systemd
-     tern
      theming
      (treemacs :variables
-               treemacs-use-filewatch-mode t
-               treemacs-use-follow-mode t)
+               treemacs-use-git-mode 'deferred
+               treemacs-use-scope-type 'Perspectives)
      (typescript :variables
-                 tide-tsserver-executable "/usr/bin/tsserver"
+                 tide-tsserver-executable "/home/ismd/.nvm/versions/node/v12.14.1/bin/tsserver"
+                 ;; typescript-backend 'lsp
                  typescript-backend 'tide
-                 typescript-linter 'tslint)
+                 typescript-fmt-tool 'typescript-formatter
+                 typescript-linter 'eslint
+                 ;; typescript-lsp-linter nil
+                 )
      (version-control :variables
                       version-control-diff-tool 'git-gutter
                       version-control-diff-side 'left
                       version-control-global-margin t)
      xclipboard
      yaml
-     ycmd
      )
 
    ;; List of additional packages that will be installed without being
@@ -118,8 +141,12 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(dired-k
-                                      edit-server
                                       rg
+                                      (sunrise-commander
+                                       :location
+                                       (recipe :fetcher github
+                                               :repo "sunrise-commander/sunrise-commander"))
+                                      reverse-im
                                       vlf)
 
    ;; A list of packages that cannot be updated.
@@ -160,9 +187,9 @@ It should only modify the values of Spacemacs settings."
    ;; portable dumper in the cache directory under dumps sub-directory.
    ;; To load it when starting Emacs add the parameter `--dump-file'
    ;; when invoking Emacs 27.1 executable on the command line, for instance:
-   ;;   ./emacs --dump-file=~/.emacs.d/.cache/dumps/spacemacs.pdmp
-   ;; (default spacemacs.pdmp)
-   dotspacemacs-emacs-dumper-dump-file "spacemacs.pdmp"
+   ;;   ./emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs-27.1.pdmp
+   ;; (default spacemacs-27.1.pdmp)
+   dotspacemacs-emacs-dumper-dump-file (format "spacemacs-%s.pdmp" emacs-version)
 
    ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
@@ -181,6 +208,13 @@ It should only modify the values of Spacemacs settings."
    ;; performance issues due to garbage collection operations.
    ;; (default '(100000000 0.1))
    dotspacemacs-gc-cons '(100000000 0.1)
+
+   ;; Set `read-process-output-max' when startup finishes.
+   ;; This defines how much data is read from a foreign process.
+   ;; Setting this >= 1 MB should increase performance for lsp servers
+   ;; in emacs 27.
+   ;; (default (* 1024 1024))
+   dotspacemacs-read-process-output-max (* 1024 1024)
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
@@ -209,6 +243,11 @@ It should only modify the values of Spacemacs settings."
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
    dotspacemacs-editing-style 'emacs
+
+   ;; If non-nil show the version string in the Spacemacs buffer. It will
+   ;; appear as (spacemacs version)@(emacs version)
+   ;; (default t)
+   dotspacemacs-startup-buffer-show-version t
 
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -245,8 +284,28 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(doom-nord
+                         spacemacs-dark
+                         misterioso
+                         tsdh-dark
+                         spacemacs-light
+                         doom-dracula
+                         doom-nova
+                         doom-opera
+                         doom-Iosvkem
+                         doom-peacock
+                         doom-vibrant
+                         doom-sourcerer
+                         doom-spacegrey
+                         doom-one-light
+                         doom-nord-light
+                         doom-city-lights
+                         doom-opera-light
+                         doom-tomorrow-day
+                         doom-tomorrow-night
+                         doom-challenger-deep
+                         doom-solarized-light
+                         doom-molokai)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -286,8 +345,10 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-major-mode-leader-key ","
 
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
-   ;; (default "C-M-m")
-   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   ;; (default "C-M-m" for terminal mode, "<M-return>" for GUI mode).
+   ;; Thus M-RET should work as leader key in both GUI and terminal modes.
+   ;; C-M-m also should work in terminal mode, but not in GUI mode.
+   dotspacemacs-major-mode-emacs-leader-key (if window-system "<M-return>" "C-M-m")
 
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs `C-i', `TAB' and `C-m', `RET'.
@@ -415,7 +476,15 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers '(:relative nil
+                                         :visual nil
+                                         :disabled-for-modes dired-mode
+                                         doc-view-mode
+                                         markdown-mode
+                                         org-mode
+                                         pdf-view-mode
+                                         text-mode
+                                         :size-limit-kb 1000)
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -485,6 +554,13 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-whitespace-cleanup 'changed
 
+   ;; If non nil activate `clean-aindent-mode' which tries to correct
+   ;; virtual indentation of simple modes. This can interfer with mode specific
+   ;; indent handling like has been reported for `go-mode'.
+   ;; If it does deactivate it here.
+   ;; (default t)
+   dotspacemacs-use-clean-aindent-mode t
+
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
    dotspacemacs-zone-out-when-idle nil
@@ -502,6 +578,7 @@ It should only modify the values of Spacemacs settings."
   ;; dired
   (setq-default delete-by-moving-to-trash nil)
   (setq-default dired-listing-switches "-laB --group-directories-first")
+  (setq-default sunrise-listing-switches "-laB --group-directories-first")
 
   ;; c++
   (setq-default flycheck-gcc-language-standard "c++17")
@@ -511,8 +588,9 @@ It should only modify the values of Spacemacs settings."
   (c-set-offset 'arglist-intro 4)
   (c-set-offset 'inlambda 0)
 
-  (setq-default js2-basic-offset 2)
-  (setq-default css-indent-offset 2)
+  ;; web
+  (setq-default js2-basic-offset 4)
+  (setq-default css-indent-offset 4)
 
   ;; web-mode
   (setq-default web-mode-markup-indent-offset 4)
@@ -532,7 +610,9 @@ It should only modify the values of Spacemacs settings."
 
   ;; eshell
   (setq-default pcomplete-cycle-completions t)
-  )
+
+  ;; lsp
+  (setq-default lsp-ui-sideline-delay 5))
 
 (defun ismd/hooks ()
   (add-hook 'dired-initial-position-hook 'dired-k)
@@ -540,22 +620,23 @@ It should only modify the values of Spacemacs settings."
   (defun ismd/dired-mode-hook ()
     (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
 
-  (defun ismd/emmet-mode-hook ()
-    (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
-    (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
-    (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
-    (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
-    (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
-    (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete))
+  ;; (defun ismd/emmet-mode-hook ()
+  ;;   (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete))
 
   (defun ismd/focus-out-hook ()
     (save-some-buffers t))
 
   (defun ismd/prog-mode-hook ()
-    (define-key prog-mode-map (kbd "<tab>") 'tab-indent-or-complete)
+    ;; (define-key prog-mode-map (kbd "<tab>") 'tab-indent-or-complete)
     (define-key prog-mode-map (kbd "<backtab>") 'company-complete)
 
-    (spacemacs/toggle-line-numbers-on))
+    ;; (spacemacs/toggle-line-numbers-on)
+    )
 
   (defun ismd/term-mode-hook ()
     (define-key term-raw-map (kbd "<tab>") 'term-send-tab)
@@ -565,15 +646,21 @@ It should only modify the values of Spacemacs settings."
     (define-key term-raw-map (kbd "M-.") 'term-send-raw-meta)
     (add-to-list 'term-bind-key-alist '("M-<backspace>" . term-send-backward-kill-word)))
 
-  (defun ismd/js2-mode-hook ()
-    (define-key prog-mode-map (kbd "<tab>") 'js2-indent-bounce))
+  ;; (defun ismd/js2-mode-hook ()
+  ;;   (define-key prog-mode-map (kbd "<tab>") 'js2-indent-bounce))
 
-  (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
+  (defun ismd/sunrise-mode-hook ()
+    (local-set-key (kbd "a") #'sunrise-advertised-find-file)
+    (local-set-key (kbd "<backspace>") #'sunrise-dired-prev-subdir))
+
+  ;; (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'term-mode-hook 'ismd/term-mode-hook)
-  (add-hook 'js2-mode-hook 'ismd/js2-mode-hook))
+  ;; (add-hook 'js2-mode-hook 'ismd/js2-mode-hook)
+  (add-hook 'sunrise-mode-hook 'ismd/sunrise-mode-hook)
+  )
 
 (defun insert-tab ()
   (interactive)
@@ -638,10 +725,9 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq custom-file "~/.config/custom.el")
+  (setq custom-file "~/Yandex.Disk/configs/emacs/custom.el")
 
-  (add-hook 'after-init-hook 'global-company-mode)
-  )
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
@@ -656,6 +742,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (add-to-list 'load-path "/home/ismd/Yandex.Disk/configs/emacs")
   (load custom-file)
 
   (setq frame-title-format nil)
@@ -663,6 +750,7 @@ before packages are loaded."
 
   (delete-selection-mode t)
   (global-auto-revert-mode t)
+  (global-git-commit-mode t)
 
   (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -670,12 +758,15 @@ before packages are loaded."
   (global-set-key (kbd "C-k") 'ismd/kill-line)
   (global-set-key (kbd "M-d") 'delete-word)
   (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
-  (global-set-key (kbd "C-x C-r") 'revert-buffer)
+  (global-set-key (kbd "M-s") 'revert-buffer)
   (global-set-key (kbd "C-<tab>") 'insert-tab)
   (global-set-key (kbd "M-g") 'goto-line)
+  (global-set-key (kbd "C-c C-f") 'evil-toggle-fold)
 
   (global-set-key "\M-n" "\C-u3\C-v")
   (global-set-key "\M-p" "\C-u3\M-v")
+
+  (global-set-key (kbd "C-c C-s") 'sunrise)
 
   (ismd/defaults)
   (ismd/hooks)
@@ -686,16 +777,48 @@ before packages are loaded."
   (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))
 
   ;; javascript
-  (setq-default js2-bounce-indent-p t)
+  ;; (setq-default js2-bounce-indent-p t)
 
-  ;; edit-server
-  (edit-server-start)
-
-  ;;; scroll
+  ;; scroll
   (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))) ;; two lines at a time
   (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-  )
+
+  ;; modeline
+  (setq doom-modeline-buffer-file-name-style 'file-name)
+
+  ;; Избавляемся от сообщения Error running timer semantic-idle-scheduler-function Unmatched text during lexical analysis
+  (advice-add 'semantic-idle-scheduler-function :around #'ignore)
+
+  ;; spell
+  (with-eval-after-load "ispell"
+    (setq ispell-program-name "hunspell")
+    ;; ispell-set-spellchecker-params has to be called
+    ;; before ispell-hunspell-add-multi-dic will work
+    (ispell-set-spellchecker-params)
+    (ispell-hunspell-add-multi-dic "ru_RU,en_US")
+    (setq ispell-dictionary "ru_RU,en_US"))
+
+  ;; git
+  (setq magit-repository-directories
+        '(("~/coding/" . 1)))
+
+  ;; org-trello major mode for all .trello files
+  (add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
+
+  ;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (let ((filename (buffer-file-name (current-buffer))))
+                (when (and filename (string= "trello" (file-name-extension filename)))
+                  (org-trello-mode)))))
+
+  ;; sunrise-mode
+  (sunrise-popviewer-mode)
+
+  ;; reverse-im
+  (reverse-im-mode t)
+  (reverse-im-activate "russian-computer"))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

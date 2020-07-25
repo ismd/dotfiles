@@ -45,16 +45,14 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-sort-by-usage nil
                       auto-completion-idle-delay 0.2
                       auto-completion-tab-key-behavior nil
-                      spacemacs-default-company-backends '(company-files))
+                      spacemacs-default-company-backends '(company-capf company-files))
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t
                       better-defaults-move-to-end-of-code-first t)
      (c-c++ :variables
-            c-c++-backend 'rtags
-            c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-c++11 t
-            c-c++-enable-clang-support nil
-            c-c++-enable-rtags-support nil)
+            c-c++-adopt-subprojects t
+            c-c++-backend 'lsp-clangd
+            c-c++-lsp-enable-semantic-highlight t)
      csv
      (cmake :variables
             cmake-enable-cmake-ide-support t)

@@ -52,7 +52,9 @@ This function should only modify configuration layer settings."
                       better-defaults-move-to-end-of-code-first t)
      (c-c++ :variables
             c-c++-adopt-subprojects t
-            c-c++-backend 'lsp-clangd
+            c-c++-backend 'lsp-ccls
+            ;; c-c++-enable-google-newline t
+            ;; c-c++-enable-google-style t
             c-c++-lsp-enable-semantic-highlight t)
      chrome
      (cmake :variables
@@ -653,6 +655,9 @@ It should only modify the values of Spacemacs settings."
     (local-set-key (kbd "a") #'sunrise-advertised-find-file)
     (local-set-key (kbd "<backspace>") #'sunrise-dired-prev-subdir))
 
+  (defun ismd/c++-mode-hook ()
+    (c-set-style "java"))
+
   ;; (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
@@ -660,7 +665,7 @@ It should only modify the values of Spacemacs settings."
   (add-hook 'term-mode-hook 'ismd/term-mode-hook)
   ;; (add-hook 'js2-mode-hook 'ismd/js2-mode-hook)
   (add-hook 'sunrise-mode-hook 'ismd/sunrise-mode-hook)
-  )
+  (add-hook 'c++-mode-hook 'ismd/c++-mode-hook))
 
 (defun insert-tab ()
   (interactive)

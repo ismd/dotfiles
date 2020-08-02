@@ -767,7 +767,9 @@ before packages are loaded."
   (global-set-key (kbd "C-<tab>") 'insert-tab)
   (global-set-key (kbd "M-g") 'goto-line)
   (global-set-key (kbd "C-c C-f") 'evil-toggle-fold)
+
   (define-key company-active-map (kbd "C-d") nil)
+  (define-key company-active-map (kbd "<tab>") nil)
 
   (global-set-key "\M-n" "\C-u3\C-v")
   (global-set-key "\M-p" "\C-u3\M-v")

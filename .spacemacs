@@ -656,7 +656,11 @@ It should only modify the values of Spacemacs settings."
     (local-set-key (kbd "<backspace>") #'sunrise-dired-prev-subdir))
 
   (defun ismd/c++-mode-hook ()
-    (c-set-style "java"))
+    (c-set-style "java")
+
+    (c-set-offset 'arglist-cont-nonempty '+)
+    (c-set-offset 'arglist-intro '+)
+    (c-set-offset 'inlambda '0))
 
   ;; (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)

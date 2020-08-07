@@ -658,9 +658,13 @@ It should only modify the values of Spacemacs settings."
   (defun ismd/c++-mode-hook ()
     (c-set-style "java")
 
+    (c-set-offset 'access-label '-)
+    (c-set-offset 'arglist-close '0)
     (c-set-offset 'arglist-cont-nonempty '+)
     (c-set-offset 'arglist-intro '+)
-    (c-set-offset 'inlambda '0))
+    (c-set-offset 'case-label '+)
+    (c-set-offset 'inlambda '0)
+    (c-set-offset 'topmost-intro '0))
 
   ;; (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)

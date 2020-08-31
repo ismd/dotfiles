@@ -7,7 +7,8 @@ function run {
     fi
 }
 
-xsetroot -solid "#333333"
+#xsetroot -solid "#333333"
+~/.fehbg
 xset -dpms
 xset s off
 setxkbmap -layout us,ru -option grp:toggle

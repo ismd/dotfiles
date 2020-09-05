@@ -21,3 +21,4 @@ run telegram-desktop
 run terminator -e tmux
 run udiskie --no-automount --no-notify --tray
 run unclutter --timeout 2
+run xxkb

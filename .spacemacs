@@ -106,8 +106,7 @@ This function should only modify configuration layer settings."
             shell-default-height 30
             shell-default-position 'bottom
             shell-default-shell 'multi-term)
-     (shell-scripts :variables
-                    shell-scripts-backend 'lsp)
+     shell-scripts
      (spell-checking :variables
                      spell-checking-enable-by-default nil)
      sql

@@ -382,6 +382,11 @@
     body = "*Поддержка Турбо-страниц*"
     format = ""
 
+[canvas-fingerprint-defender]
+    # This notification will not be displayed
+    summary = "*Canvas Fingerprint Defender*"
+    format = ""
+
 #[history-ignore]
 #    # This notification will not be saved in history
 #    summary = "foobar"

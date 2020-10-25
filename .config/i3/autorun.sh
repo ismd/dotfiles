@@ -22,3 +22,4 @@ run terminator -e tmux
 run udiskie --no-automount --no-notify --tray
 run unclutter --timeout 2
 run xxkb
+run redshift-gtk

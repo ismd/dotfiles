@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-max '/home/ismd/Yandex.Disk/Pictures/wallpaper-NINJARCH-code.png' 

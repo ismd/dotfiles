@@ -1,0 +1,11 @@
+name: default
+root: ~/
+windows:
+  - root:
+      layout: d0fd,147x39,0,0,0
+      panes:
+        - clear && sudo su
+  - mc:
+      layout: d0fe,147x39,0,0,1
+      panes:
+        - clear && mc

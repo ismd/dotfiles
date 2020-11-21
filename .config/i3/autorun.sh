@@ -18,8 +18,6 @@ run compton -f --vsync drm
 run dunst
 run screenshotgun
 run telegram-desktop
-# Doesn't work
-#run terminator -e "tmuxinator default"
 run udiskie --no-automount --no-notify --tray
 run unclutter --timeout 2
 run xxkb

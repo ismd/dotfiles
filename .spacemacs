@@ -59,6 +59,7 @@ This function should only modify configuration layer settings."
      chrome
      (cmake :variables
             cmake-enable-cmake-ide-support t)
+     colors
      emacs-lisp
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)

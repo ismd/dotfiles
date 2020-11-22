@@ -120,7 +120,7 @@ This function should only modify configuration layer settings."
                treemacs-use-git-mode 'deferred
                treemacs-use-scope-type 'Perspectives)
      (typescript :variables
-                 tide-tsserver-executable "/home/ismd/.nvm/versions/node/v12.14.1/bin/tsserver"
+                 tide-tsserver-executable "/home/ismd/.nvm/versions/node/v15.2.1/bin/tsserver"
                  ;; typescript-backend 'lsp
                  typescript-backend 'tide
                  typescript-fmt-tool 'typescript-formatter
@@ -796,8 +796,11 @@ before packages are loaded."
   (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
   (global-set-key (kbd "M-s") 'revert-buffer)
   (global-set-key (kbd "C-<tab>") 'insert-tab)
-  (global-set-key (kbd "M-g") 'goto-line)
   (global-set-key (kbd "C-c C-f") 'evil-toggle-fold)
+
+  ;; avy
+  (global-set-key (kbd "M-g f") 'avy-goto-line)
+  (global-set-key (kbd "M-g c") 'avy-goto-char-timer)
 
   (define-key company-active-map (kbd "C-d") nil)
   (define-key company-active-map (kbd "<tab>") nil)

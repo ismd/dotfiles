@@ -281,7 +281,7 @@ popup_during_fullscreen leave_fullscreen
 force_display_urgency_hint 500 ms
 
 # Locker configuration
-set $Locker i3lock -d -c $black0 -f
+set $Locker i3lock -d -c 000000 -f
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown, (b) off-screen
 mode "$mode_system" {

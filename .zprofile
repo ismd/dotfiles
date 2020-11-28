@@ -6,6 +6,3 @@ export BROWSER=/usr/bin/firefox
 
 PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 export GEM_HOME=$HOME/.gem
-
-#export SSH_ASKPASS=ksshaskpass
-#export SSH_ASKPASS=x11-ssh-askpass

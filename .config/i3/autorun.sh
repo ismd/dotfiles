@@ -19,7 +19,7 @@ run compton -f --vsync drm
 run dunst
 run screenshotgun
 run telegram-desktop
-run udiskie --no-automount --no-notify --tray
+run udiskie --no-automount --tray
 run unclutter --timeout 2
 run xxkb
 run redshift-gtk -t 5500:4500

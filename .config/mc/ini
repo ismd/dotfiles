@@ -15,7 +15,6 @@ confirm_exit=false
 confirm_directory_hotlist_delete=false
 confirm_view_dir=false
 safe_delete=false
-safe_overwrite=false
 use_8th_bit_as_meta=false
 mouse_move_pages_viewer=true
 mouse_close_dialog=false
@@ -85,19 +84,21 @@ mcview_eof=
 skin=nicedark
 filepos_max_saved_entries=1024
 
+safe_overwrite=false
+
 [Layout]
-output_lines=0
-left_panel_size=119
-top_panel_size=0
 message_visible=true
 keybar_visible=true
 xterm_title=true
+output_lines=0
 command_prompt=true
 menubar_visible=true
 free_space=true
 horizontal_split=false
 vertical_equal=true
+left_panel_size=190
 horizontal_equal=true
+top_panel_size=1
 
 [Misc]
 timeformat_recent=%b %e %H:%M
@@ -112,7 +113,7 @@ clipboard_paste=
 
 [Colors]
 base_color=
-rxvt-unicode-256color=
+xterm-256color=
 color_terminals=
 
 tmux-256color=
@@ -138,8 +139,10 @@ torben_fj_mode=false
 quick_search_mode=2
 select_flags=6
 
+simple_swap=false
+
 [Panelize]
-Find *.orig after patching=find . -name \\*.orig -print
-Find SUID and SGID programs=find . \\( \\( -perm -04000 -a -perm /011 \\) -o \\( -perm -02000 -a -perm /01 \\) \\) -print
-Find rejects after patching=find . -name \\*.rej -print
-Modified git files=git ls-files --modified
+Изменённые файлы под контролем git=git ls-files --modified
+Найти корректуры, отвергнутые командой patch=find . -name \\*.rej -print
+Найти оригиналы (*.orig) после команды patch=find . -name \\*.orig -print
+Найти программы с установленными SUID/SGID битами=find . \\( \\( -perm -04000 -a -perm /011 \\) -o \\( -perm -02000 -a -perm /01 \\) \\) -print

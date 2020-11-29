@@ -74,6 +74,7 @@ plugins=(
   sudo
   systemd
   virtualenv
+  zsh-z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -116,9 +117,6 @@ DEFAULT_USER="ismd"
 
 # nvm
 source /usr/share/nvm/init-nvm.sh
-
-# z
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs

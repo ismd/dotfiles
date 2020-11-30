@@ -636,6 +636,8 @@ It should only modify the values of Spacemacs settings."
 
   ;; eshell
   (setq-default pcomplete-cycle-completions t)
+  (setq-default explicit-shell-file-name "/bin/zsh")
+  (setq-default shell-file-name "/bin/zsh")
 
   ;; lsp
   (setq-default lsp-response-timeout 120)

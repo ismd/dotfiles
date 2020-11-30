@@ -120,9 +120,9 @@ This function should only modify configuration layer settings."
                treemacs-use-git-mode 'deferred
                treemacs-use-scope-type 'Perspectives)
      (typescript :variables
-                 tide-tsserver-executable "/home/ismd/.nvm/versions/node/v15.2.1/bin/tsserver"
-                 ;; typescript-backend 'lsp
-                 typescript-backend 'tide
+                 ;; tide-tsserver-executable "/usr/bin/tsserver"
+                 typescript-backend 'lsp
+                 ;; typescript-backend 'tide
                  typescript-fmt-tool 'typescript-formatter
                  typescript-linter 'eslint
                  ;; typescript-lsp-linter nil
@@ -637,6 +637,7 @@ It should only modify the values of Spacemacs settings."
   (setq-default pcomplete-cycle-completions t)
 
   ;; lsp
+  (setq-default lsp-response-timeout 120)
   (setq-default lsp-ui-sideline-delay 5))
 
 (defun ismd/hooks ()

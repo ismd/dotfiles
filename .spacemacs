@@ -614,8 +614,9 @@ It should only modify the values of Spacemacs settings."
   (c-set-offset 'inlambda 0)
 
   ;; web
-  (setq-default js2-basic-offset 4)
+  ;; (setq-default js2-basic-offset 4)
   (setq-default css-indent-offset 4)
+  (setq-default sgml-basic-offset 4)
 
   ;; web-mode
   (setq-default web-mode-markup-indent-offset 4)

@@ -265,9 +265,7 @@ bar {
 bindsym $modkey+m bar mode toggle
 
 bindsym $mod+Shift+braceleft exec --no-startup-id i3-msg move workspace to output left
-bindsym $mod+Shift+braceright exec  --no-startup-id i3-msg move workspace to output right
-
-bindsym $mod+Shift+i exec i3lock -f -e -t -c 000000
+bindsym $mod+Shift+braceright exec --no-startup-id i3-msg move workspace to output right
 
 # options
 workspace_layout tabbed
@@ -281,7 +279,8 @@ popup_during_fullscreen leave_fullscreen
 force_display_urgency_hint 500 ms
 
 # Locker configuration
-set $Locker i3lock -d -c 000000 -f
+set $Locker i3lock -f -e -t -c 000000
+bindsym $mod+Shift+i exec --no-startup-id $Locker
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown, (b) off-screen
 mode "$mode_system" {

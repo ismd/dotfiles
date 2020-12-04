@@ -297,12 +297,12 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(zerodark
+   dotspacemacs-themes '(spacemacs-light
+                         zerodark
                          doom-nord
                          spacemacs-dark
                          misterioso
                          tsdh-dark
-                         spacemacs-light
                          doom-dracula
                          doom-nova
                          doom-opera
@@ -336,7 +336,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+                               :size 15
                                :weight normal
                                :width normal)
 
@@ -803,8 +803,8 @@ before packages are loaded."
   (global-set-key (kbd "C-c C-f") 'evil-toggle-fold)
 
   ;; avy
-  (global-set-key (kbd "M-g f") 'avy-goto-line)
-  (global-set-key (kbd "M-g c") 'avy-goto-char-timer)
+  (global-set-key (kbd "C-c g") 'avy-goto-line)
+  (global-set-key (kbd "M-g") 'avy-goto-char-timer)
 
   (define-key company-active-map (kbd "C-d") nil)
   (define-key company-active-map (kbd "<tab>") nil)

@@ -113,7 +113,7 @@ This function should only modify configuration layer settings."
      sql
      (syntax-checking :variables
                       syntax-checking-enable-by-default t
-                      syntax-checking-enable-tooltips t)
+                      syntax-checking-enable-tooltips nil)
      systemd
      theming
      (treemacs :variables
@@ -798,13 +798,14 @@ before packages are loaded."
   (global-set-key (kbd "C-k") 'ismd/kill-line)
   (global-set-key (kbd "M-d") 'delete-word)
   (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
-  (global-set-key (kbd "M-s") 'revert-buffer)
+  (global-set-key (kbd "M-g") 'revert-buffer)
   (global-set-key (kbd "C-<tab>") 'insert-tab)
   (global-set-key (kbd "C-c C-f") 'evil-toggle-fold)
+  (global-set-key (kbd "C-c g") 'goto-line)
 
   ;; avy
-  (global-set-key (kbd "C-c g") 'avy-goto-line)
-  (global-set-key (kbd "M-g") 'avy-goto-char-timer)
+  (global-set-key (kbd "C-c C-g") 'avy-goto-line)
+  (global-set-key (kbd "M-s") 'avy-goto-char-timer)
 
   (define-key company-active-map (kbd "C-d") nil)
   (define-key company-active-map (kbd "<tab>") nil)

@@ -765,7 +765,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq custom-file "~/Yandex.Disk/configs/emacs/custom.el")
+  (setq custom-file "~/.custom.el")
 
   (add-hook 'after-init-hook 'global-company-mode))
 
@@ -782,7 +782,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (add-to-list 'load-path "/home/ismd/Yandex.Disk/configs/emacs")
   (load custom-file)
 
   (setq frame-title-format nil)

@@ -74,7 +74,6 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     archlinux
-    emacs
     git
     node
     npm

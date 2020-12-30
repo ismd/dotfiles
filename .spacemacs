@@ -112,6 +112,7 @@ This function should only modify configuration layer settings."
                      spell-checking-enable-by-default nil)
      sql
      (syntax-checking :variables
+                      syntax-checking-auto-hide-tooltips 1
                       syntax-checking-enable-by-default t
                       syntax-checking-enable-tooltips nil)
      systemd

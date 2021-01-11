@@ -144,6 +144,7 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(dired-k
+                                      nvm
                                       rg
                                       (sunrise-commander
                                        :location
@@ -865,7 +866,10 @@ before packages are loaded."
 
   ;; reverse-im
   (reverse-im-mode t)
-  (reverse-im-activate "russian-computer"))
+  (reverse-im-activate "russian-computer")
+
+  ;; nvm
+  (nvm-use "v14.15.4"))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

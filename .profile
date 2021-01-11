@@ -9,3 +9,6 @@ export TERMINAL=/usr/bin/urxvt
 export NODE_OPTIONS=--max-old-space-size=8192
 export SHELL=/bin/zsh
 export ESHELL=/bin/zsh
+
+# nvm
+[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh

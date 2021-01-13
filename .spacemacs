@@ -868,12 +868,13 @@ before packages are loaded."
   (reverse-im-activate "russian-computer")
 
   ;; tramp
-  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+  ;; (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 
-  (add-to-list 'tramp-connection-properties
-               (list (regexp-quote "ismd.ui.yandex.ru")
-                     "remote-shell" "/usr/bin/zsh"))
-  (customize-set-variable 'tramp-encoding-shell "/usr/bin/zsh"))
+  ;; (add-to-list 'tramp-connection-properties
+  ;;              (list (regexp-quote "ismd.ui.yandex.net")
+  ;;                    "remote-shell" "/usr/bin/zsh"))
+  ;; (customize-set-variable 'tramp-encoding-shell "/usr/bin/zsh")
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

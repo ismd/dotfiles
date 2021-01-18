@@ -127,3 +127,7 @@ select-word-style bash
 
 # added by travis gem
 #[ -f /home/ismd/.travis/travis.sh ] && source /home/ismd/.travis/travis.sh
+
+# History
+setopt noincappendhistory
+setopt nosharehistory

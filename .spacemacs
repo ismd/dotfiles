@@ -95,9 +95,10 @@ This function should only modify configuration layer settings."
      nginx
      (org :variables
           org-enable-github-support t
-          org-enable-hugo-support t
-          org-enable-trello-support t)
+          org-enable-hugo-support t)
      pdf
+     php
+     prettier
      protobuf
      (python :variables
              python-backend 'lsp)
@@ -124,7 +125,7 @@ This function should only modify configuration layer settings."
                  ;; tide-tsserver-executable "/usr/bin/tsserver"
                  typescript-backend 'lsp
                  ;; typescript-backend 'tide
-                 typescript-fmt-tool 'typescript-formatter
+                 typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
                  ;; typescript-lsp-linter nil
                  )
@@ -851,14 +852,14 @@ before packages are loaded."
         '(("~/coding/" . 1)))
 
   ;; org-trello major mode for all .trello files
-  (add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
 
   ;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (let ((filename (buffer-file-name (current-buffer))))
-                (when (and filename (string= "trello" (file-name-extension filename)))
-                  (org-trello-mode)))))
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda ()
+  ;;             (let ((filename (buffer-file-name (current-buffer))))
+  ;;               (when (and filename (string= "trello" (file-name-extension filename)))
+  ;;                 (org-trello-mode)))))
 
   ;; sunrise-mode
   (sunrise-popviewer-mode)

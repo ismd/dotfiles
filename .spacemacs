@@ -695,6 +695,13 @@ It should only modify the values of Spacemacs settings."
     (c-set-offset 'inlambda '0)
     (c-set-offset 'topmost-intro '0))
 
+  (defun ismd/lsp-ui-mode-hook ()
+    ;; (set-variable lsp-headerline-breadcrumb-path-error-face ((t (:inherit lsp-headerline-breadcrumb-path-face :underline "Red1"))))
+    ;; (set-variable lsp-headerline-breadcrumb-path-warning-face ((t (:inherit lsp-headerline-breadcrumb-path-face))))
+    ;; (set-variable lsp-headerline-breadcrumb-symbols-error-face ((t (:inherit lsp-headerline-breadcrumb-symbols-face :underline "Red1"))))
+    ;; (set-variable lsp-headerline-breadcrumb-symbols-warning-face ((t (:inherit lsp-headerline-breadcrumb-symbols-face))))
+    )
+
   ;; (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
@@ -702,7 +709,8 @@ It should only modify the values of Spacemacs settings."
   (add-hook 'term-mode-hook 'ismd/term-mode-hook)
   ;; (add-hook 'js2-mode-hook 'ismd/js2-mode-hook)
   (add-hook 'sunrise-mode-hook 'ismd/sunrise-mode-hook)
-  (add-hook 'c++-mode-hook 'ismd/c++-mode-hook))
+  (add-hook 'c++-mode-hook 'ismd/c++-mode-hook)
+  (add-hook 'lsp-ui-mode-hook 'ismd/lsp-ui-mode-hook))
 
 (defun insert-tab ()
   (interactive)
@@ -767,8 +775,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq custom-file "~/.custom.el")
-
   (add-hook 'after-init-hook 'global-company-mode))
 
 (defun dotspacemacs/user-load ()
@@ -835,7 +841,7 @@ before packages are loaded."
   ;; modeline
   (setq doom-modeline-buffer-file-name-style 'file-name)
 
-  ;; Избавляемся от сообщения Error running timer semantic-idle-scheduler-function Unmatched text during lexical analysis
+  ;; removing message: Error running timer semantic-idle-scheduler-function Unmatched text during lexical analysis
   (advice-add 'semantic-idle-scheduler-function :around #'ignore)
 
   ;; spell
@@ -853,6 +859,7 @@ before packages are loaded."
 
   ;; org-trello major mode for all .trello files
   ;; (add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
+  ;; (setq org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
 
   ;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
   ;; (add-hook 'org-mode-hook
@@ -875,7 +882,7 @@ before packages are loaded."
   ;;              (list (regexp-quote "ismd.ui.yandex.net")
   ;;                    "remote-shell" "/usr/bin/zsh"))
   ;; (customize-set-variable 'tramp-encoding-shell "/usr/bin/zsh")
-  )
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

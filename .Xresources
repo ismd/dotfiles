@@ -57,12 +57,14 @@ XTerm*selectToClipboard: true
 Xcursor.theme: xcursor-breeze
 Xcursor.size:                     0
 
-!URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
-
-! alternative font settings with 'terminus':
-URxvt.font:      -xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso10646-1
-URxvt.bold.font: -xos4-terminus-bold-r-normal--20-200-72-72-c-100-iso10646-1
-!! terminus names see end of file!
+URxvt.font:                       xft:MesloLGL Nerd Font Mono:style=Medium:size=13
+URxvt.boldFont:                   xft:MesloLGL Nerd Font Mono:style=Bold:size=13
+URxvt.italicFont:                 xft:MesloLGL Nerd Font Mono:style=Italic:size=13
+URxvt.boldItalicFont:             xft:MesloLGL Nerd Font Mono:style=Bold\ Italic:size=13
+! URxvt.font:                       xft:TerminessTTF\ Nerd\ Font\ Mono:style=Medium:size=17
+! URxvt.boldFont:                   xft:TerminessTTF\ Nerd\ Font\ Mono:style=Bold:size=17
+! URxvt.italicFont:                 xft:TerminessTTF\ Nerd\ Font\ Mono:style=Italic:size=17
+! URxvt.boldItalicFont:             xft:TerminessTTF\ Nerd\ Font\ Mono:style=Bold\ Italic:size=17
 
 URxvt.depth:                      32
 URxvt.background:                 [100]#222D31
@@ -234,5 +236,3 @@ URxvt.keysym.Shift-Control-Down:  \033[1;6B
 ! -xos4-terminus-bold-r-normal--24-240-72-72-c-120-iso10646-1
 ! -xos4-terminus-bold-r-normal--28-280-72-72-c-140-iso10646-1
 ! -xos4-terminus-bold-r-normal--32-320-72-72-c-160-iso10646-1
-
-URxvt.perl-ext-common: "default, -searchable-scrollback"

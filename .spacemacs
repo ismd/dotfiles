@@ -38,7 +38,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ansible
+     ;; ansible
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
@@ -56,10 +56,11 @@ This function should only modify configuration layer settings."
             ;; c-c++-enable-google-newline t
             ;; c-c++-enable-google-style t
             c-c++-lsp-enable-semantic-highlight t)
-     chrome
+     ;; chrome
      (cmake :variables
             cmake-enable-cmake-ide-support t)
      colors
+     dap
      emacs-lisp
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
@@ -75,7 +76,7 @@ This function should only modify configuration layer settings."
            web-fmt-tool 'web-beautify)
      (javascript :variables
                  javascript-backend 'lsp
-                 javascript-fmt-tool 'web-beautify
+                 javascript-fmt-tool 'prettier
                  javascript-import-tool 'import-js
                  ;; javascript-lsp-linter nil
                  js-indent-level 4
@@ -86,7 +87,8 @@ This function should only modify configuration layer settings."
      (json :variables
            js-indent-level 2
            json-fmt-tool 'web-beautify)
-     lsp
+     (lsp :variables
+          lsp-enable-indentation nil)
      major-modes
      (markdown :variables
                markdown-live-preview-engine 'vmd)
@@ -103,7 +105,6 @@ This function should only modify configuration layer settings."
      (python :variables
              python-backend 'lsp)
      react
-     selectric
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
@@ -146,10 +147,6 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(dired-k
                                       rg
-                                      (sunrise-commander
-                                       :location
-                                       (recipe :fetcher github
-                                               :repo "sunrise-commander/sunrise-commander"))
                                       reverse-im
                                       vlf
                                       zerodark-theme)
@@ -299,10 +296,10 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(doom-nord
+                         spacemacs-dark
                          zerodark
                          spacemacs-light
-                         doom-nord
                          misterioso
                          tsdh-dark
                          doom-dracula
@@ -338,7 +335,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+                               :size 17
                                :weight normal
                                :width normal)
 
@@ -605,18 +602,13 @@ It should only modify the values of Spacemacs settings."
   ;; dired
   (setq-default delete-by-moving-to-trash nil)
   (setq-default dired-listing-switches "-laB --group-directories-first")
-  (setq-default sunrise-listing-switches "-laB --group-directories-first")
 
   ;; c++
   (setq-default flycheck-gcc-language-standard "c++17")
   (setq-default flycheck-clang-language-standard "c++17")
   (setq-default company-clang-arguments '("-std=c++17"))
 
-  (c-set-offset 'arglist-intro 4)
-  (c-set-offset 'inlambda 0)
-
   ;; web
-  ;; (setq-default js2-basic-offset 4)
   (setq-default css-indent-offset 4)
   (setq-default sgml-basic-offset 4)
 
@@ -663,11 +655,7 @@ It should only modify the values of Spacemacs settings."
     (save-some-buffers t))
 
   (defun ismd/prog-mode-hook ()
-    ;; (define-key prog-mode-map (kbd "<tab>") 'tab-indent-or-complete)
-    (define-key prog-mode-map (kbd "<backtab>") 'company-complete)
-
-    ;; (spacemacs/toggle-line-numbers-on)
-    )
+    (define-key prog-mode-map (kbd "<backtab>") 'company-complete))
 
   (defun ismd/term-mode-hook ()
     (define-key term-raw-map (kbd "<tab>") 'term-send-tab)
@@ -680,11 +668,7 @@ It should only modify the values of Spacemacs settings."
   ;; (defun ismd/js2-mode-hook ()
   ;;   (define-key prog-mode-map (kbd "<tab>") 'js2-indent-bounce))
 
-  (defun ismd/sunrise-mode-hook ()
-    (local-set-key (kbd "a") #'sunrise-advertised-find-file)
-    (local-set-key (kbd "<backspace>") #'sunrise-dired-prev-subdir))
-
-  (defun ismd/c++-mode-hook ()
+  (defun ismd/c-mode-hook ()
     (c-set-style "java")
 
     (c-set-offset 'access-label '-)
@@ -702,15 +686,19 @@ It should only modify the values of Spacemacs settings."
     ;; (set-variable lsp-headerline-breadcrumb-symbols-warning-face ((t (:inherit lsp-headerline-breadcrumb-symbols-face))))
     )
 
+  (defun ismd/typescript-mode-hook ()
+    (require 'dap-node)
+    (dap-node-setup))
+
   ;; (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
   (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
   (add-hook 'focus-out-hook 'ismd/focus-out-hook)
   (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
   (add-hook 'term-mode-hook 'ismd/term-mode-hook)
   ;; (add-hook 'js2-mode-hook 'ismd/js2-mode-hook)
-  (add-hook 'sunrise-mode-hook 'ismd/sunrise-mode-hook)
-  (add-hook 'c++-mode-hook 'ismd/c++-mode-hook)
-  (add-hook 'lsp-ui-mode-hook 'ismd/lsp-ui-mode-hook))
+  (add-hook 'c-mode-hook 'ismd/c-mode-hook)
+  (add-hook 'lsp-ui-mode-hook 'ismd/lsp-ui-mode-hook)
+  (add-hook 'typescript-mode-hook 'ismd/typescript-mode-hook))
 
 (defun insert-tab ()
   (interactive)
@@ -732,13 +720,13 @@ It should only modify the values of Spacemacs settings."
       (company-complete-common)
       (indent-for-tab-command))))
 
-(defun delete-word (arg)
+(defun ismd/delete-word (arg)
   "Delete characters until encountering the end of a word.
 With argument ARG, do this that many times."
   (interactive "p")
   (delete-region (point) (progn (forward-word arg) (point))))
 
-(defun backward-delete-word (arg)
+(defun ismd/backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times."
   (interactive "p")
@@ -803,8 +791,8 @@ before packages are loaded."
 
   ;; keybindings
   (global-set-key (kbd "C-k") 'ismd/kill-line)
-  (global-set-key (kbd "M-d") 'delete-word)
-  (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
+  (global-set-key (kbd "M-d") 'ismd/delete-word)
+  (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
   (global-set-key (kbd "M-g") 'revert-buffer)
   (global-set-key (kbd "C-<tab>") 'insert-tab)
   (global-set-key (kbd "C-c C-f") 'evil-toggle-fold)
@@ -820,18 +808,10 @@ before packages are loaded."
   (global-set-key "\M-n" "\C-u3\C-v")
   (global-set-key "\M-p" "\C-u3\M-v")
 
-  (global-set-key (kbd "C-c C-s") 'sunrise)
-
   (ismd/defaults)
   (ismd/hooks)
 
   (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
-
-  ;; Stylus
-  (add-to-list 'auto-mode-alist '("\\.styl$" . scss-mode))
-
-  ;; javascript
-  ;; (setq-default js2-bounce-indent-p t)
 
   ;; scroll
   (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))) ;; two lines at a time
@@ -839,10 +819,10 @@ before packages are loaded."
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 
   ;; modeline
-  (setq doom-modeline-buffer-file-name-style 'file-name)
+  ;; (setq doom-modeline-buffer-file-name-style 'file-name)
 
   ;; removing message: Error running timer semantic-idle-scheduler-function Unmatched text during lexical analysis
-  (advice-add 'semantic-idle-scheduler-function :around #'ignore)
+  ;; (advice-add 'semantic-idle-scheduler-function :around #'ignore)
 
   ;; spell
   (with-eval-after-load "ispell"
@@ -868,9 +848,6 @@ before packages are loaded."
   ;;               (when (and filename (string= "trello" (file-name-extension filename)))
   ;;                 (org-trello-mode)))))
 
-  ;; sunrise-mode
-  (sunrise-popviewer-mode)
-
   ;; reverse-im
   (reverse-im-mode t)
   (reverse-im-activate "russian-computer")
@@ -886,3 +863,21 @@ before packages are loaded."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)

@@ -89,19 +89,21 @@ With argument ARG, do this that many times."
 (setq large-file-warning-threshold nil)
 (setq company-idle-delay 0)
 (setq company-tooltip-idle-delay 0)
-
+(setq which-key-idle-delay 0.3)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 
 (global-set-key (kbd "C-k") 'ismd/kill-line)
 (global-set-key (kbd "M-d") 'ismd/delete-word)
 (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
-(global-set-key (kbd "C-M-g") 'revert-buffer)
+(global-set-key (kbd "C-M-r") 'revert-buffer)
 (global-set-key (kbd "M-s s") 'avy-goto-char-timer)
 (global-set-key (kbd "M-n") "\C-u3\C-v")
 (global-set-key (kbd "M-p") "\C-u3\M-v")
 (global-set-key (kbd "C-s") '+default/search-buffer)
 (global-set-key (kbd "C-c <tab>") 'previous-buffer)
+(global-set-key (kbd "C-c w <") '+workspace/swap-left)
+(global-set-key (kbd "C-c w >") '+workspace/swap-right)
 
 (global-set-key (kbd "M-0") 'treemacs-select-window)
 (global-set-key (kbd "M-1") 'winum-select-window-1)

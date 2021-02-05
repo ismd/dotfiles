@@ -122,6 +122,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ec="emacsclient"
 alias ta="tmux attach"
+alias td="tmuxinator default"
 
 autoload -U select-word-style
 select-word-style bash

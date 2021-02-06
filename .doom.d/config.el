@@ -85,7 +85,7 @@ With argument ARG, do this that many times."
 (setq-default tab-width 4)
 (global-auto-revert-mode 1)
 (+global-word-wrap-mode)
-(doom/set-frame-opacity 95)
+(doom/set-frame-opacity 92)
 (setq large-file-warning-threshold nil)
 (setq company-idle-delay 0)
 (setq company-tooltip-idle-delay 0)
@@ -104,6 +104,7 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "C-c <tab>") 'previous-buffer)
 (global-set-key (kbd "C-c w <") '+workspace/swap-left)
 (global-set-key (kbd "C-c w >") '+workspace/swap-right)
+(global-set-key (kbd "C-c s r") 'ivy-resume)
 
 (global-set-key (kbd "M-0") 'treemacs-select-window)
 (global-set-key (kbd "M-1") 'winum-select-window-1)

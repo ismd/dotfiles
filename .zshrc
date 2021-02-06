@@ -122,14 +122,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ec="emacsclient"
-alias ta="tmux attach"
-alias td="tmuxinator default"
 
 autoload -U select-word-style
 select-word-style bash
-
-# nvm
-[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 
 # ya
 #[ -f /home/ismd/.ya.completion/zsh/ya ] && source /home/ismd/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'

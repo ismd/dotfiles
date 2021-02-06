@@ -80,17 +80,18 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    archlinux
+    docker
+    docker-compose
+    dotenv
     git
-    node
     npm
+    nvm
     pip
-    pyenv
-    python
     sudo
     systemd
-    virtualenv
-    zsh-z
+    tmux
+    tmuxinator
+    z
 )
 
 source $ZSH/oh-my-zsh.sh

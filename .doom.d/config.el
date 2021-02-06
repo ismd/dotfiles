@@ -92,6 +92,7 @@ With argument ARG, do this that many times."
 (setq which-key-idle-delay 0.3)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq ivy-extra-directories '())
 
 (global-set-key (kbd "C-k") 'ismd/kill-line)
 (global-set-key (kbd "M-d") 'ismd/delete-word)

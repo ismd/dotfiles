@@ -84,7 +84,6 @@ With argument ARG, do this that many times."
 (set-default-coding-systems 'utf-8)
 (setq-default tab-width 4)
 (global-auto-revert-mode 1)
-(+global-word-wrap-mode)
 (doom/set-frame-opacity 92)
 (setq large-file-warning-threshold nil)
 (setq company-idle-delay 0)
@@ -93,6 +92,7 @@ With argument ARG, do this that many times."
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq ivy-extra-directories '())
+(setq-default truncate-lines nil)
 
 (global-set-key (kbd "C-k") 'ismd/kill-line)
 (global-set-key (kbd "M-d") 'ismd/delete-word)

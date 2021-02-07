@@ -126,3 +126,6 @@ With argument ARG, do this that many times."
 
 (after! ivy
   (setq ivy-wrap nil))
+
+(after! c
+  (c-set-style "java"))

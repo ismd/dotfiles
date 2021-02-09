@@ -457,13 +457,11 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-set $GetVolume awk -F'[][]' '/Left:/ { print $2 }' <(amixer sget Master)
+# Volume control
+bindsym XF86AudioMute exec --no-startup-id ~/bin/volume.sh toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/bin/volume.sh down
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/bin/volume.sh up
 
-# volume control
-bindsym XF86AudioMute exec --no-startup-id "amixer set Master toggle; notify-send `$GetVolume`"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer set Master 5%-; notify-send `$GetVolume`"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer set Master 5%+; notify-send `$GetVolume`"
-
-bindsym $mod+F10 exec --no-startup-id "amixer set Master toggle; notify-send `$GetVolume`"
-bindsym $mod+F11 exec --no-startup-id "amixer set Master 5%-; notify-send `$GetVolume`"
-bindsym $mod+F12 exec --no-startup-id "amixer set Master 5%+; notify-send `$GetVolume`"
+bindsym $mod+F10 exec --no-startup-id ~/bin/volume.sh toggle
+bindsym $mod+F11 exec --no-startup-id ~/bin/volume.sh down
+bindsym $mod+F12 exec --no-startup-id ~/bin/volume.sh up

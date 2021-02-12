@@ -1,4 +1,4 @@
-PATH="$HOME/bin:$HOME/.emacs.d/bin:$PATH"
+PATH="$HOME/bin:$HOME/.emacs.d/bin:$PATH:$HOME/.local/bin"
 
 export EDITOR=/usr/bin/emacsclient
 export BROWSER=/usr/bin/firefox

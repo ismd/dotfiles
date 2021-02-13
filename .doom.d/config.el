@@ -93,6 +93,7 @@ With argument ARG, do this that many times."
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq ivy-extra-directories '("./"))
 (setq-default truncate-lines nil)
+(setq centaur-tabs-enable-key-bindings t)
 
 (global-set-key (kbd "C-k") 'ismd/kill-line)
 (global-set-key (kbd "M-d") 'ismd/delete-word)

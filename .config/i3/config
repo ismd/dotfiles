@@ -251,7 +251,7 @@ bindsym $mod+Shift+r restart
 set $Locker ~/bin/lock-screen.sh
 
 bindsym $mod+Shift+e mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system (l)ock, (t)urn off screen, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym s exec --no-startup-id systemctl hybrid-sleep, mode "default"
@@ -259,7 +259,7 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
-    bindsym o exec --no-startup-id xset dpms force off, mode "default"
+    bindsym t exec --no-startup-id xset dpms force off, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"
@@ -458,8 +458,8 @@ mode "$mode_gaps_outer" {
 }
 
 # Brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%-
 
 # Volume control
 bindsym XF86AudioMute exec --no-startup-id ~/bin/volume.sh toggle

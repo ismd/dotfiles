@@ -78,6 +78,13 @@ With argument ARG, do this that many times."
     (beginning-of-line)
     (looking-at "[[:space:]]*$")))
 
+(defun ismd/dired-up-dir ()
+  "Go up a directory."
+  (interactive)
+  (let ((current-dir (dired-current-directory)))
+    (find-alternate-file "..")
+    (dired-goto-file current-dir)))
+
 ;;
 ;; Init
 ;;
@@ -86,7 +93,7 @@ With argument ARG, do this that many times."
 (global-auto-revert-mode 1)
 (doom/set-frame-opacity 92)
 (setq large-file-warning-threshold nil)
-(setq company-idle-delay 0)
+(setq company-idle-delay 0.5)
 (setq company-tooltip-idle-delay 0)
 (setq which-key-idle-delay 0.3)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -103,7 +110,8 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "M-n") "\C-u3\C-v")
 (global-set-key (kbd "M-p") "\C-u3\M-v")
 (global-set-key (kbd "C-s") '+default/search-buffer)
-(global-set-key (kbd "C-c <tab>") 'previous-buffer)
+(global-set-key (kbd "C-c <tab>") 'centaur-tabs-forward)
+(global-set-key (kbd "C-c <backtab>") 'centaur-tabs-backward)
 (global-set-key (kbd "C-c w <") '+workspace/swap-left)
 (global-set-key (kbd "C-c w >") '+workspace/swap-right)
 (global-set-key (kbd "C-c s r") 'ivy-resume)

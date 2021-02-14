@@ -138,3 +138,8 @@ With argument ARG, do this that many times."
 
 (after! c
   (c-set-style "java"))
+
+(map! :map indent-rigidly-map "b" #'indent-rigidly-left)
+(map! :map indent-rigidly-map "f" #'indent-rigidly-right)
+(map! :map indent-rigidly-map "B" #'indent-rigidly-left-to-tab-stop)
+(map! :map indent-rigidly-map "F" #'indent-rigidly-right-to-tab-stop)

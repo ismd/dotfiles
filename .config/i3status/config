@@ -56,6 +56,7 @@ battery 0 {
 }
 
 run_watch lsyncd {
+    format = "⤻⃔  %title"
     pidfile = "/tmp/lsyncd.pid"
 }
 
@@ -88,7 +89,7 @@ disk "/" {
 
 volume master {
     format = " %volume"
-    format_muted = " "
+    format_muted = ""
     device = "default"
     mixer = "Master"
     mixer_idx = 0

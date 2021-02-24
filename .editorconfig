@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.json,*.yml,*.el,*.sh]
+[*.json]
 indent_size = 2
 
 [*.yml]
@@ -21,6 +21,9 @@ indent_size = 2
 indent_size = 2
 
 [*.sh]
+indent_size = 2
+
+[*.pug]
 indent_size = 2
 
 [Makefile]

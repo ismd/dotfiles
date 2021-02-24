@@ -7,7 +7,6 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-source $HOME/.profile
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -132,10 +131,6 @@ select-word-style bash
 
 # added by travis gem
 #[ -f /home/ismd/.travis/travis.sh ] && source /home/ismd/.travis/travis.sh
-
-# History
-setopt noincappendhistory
-setopt nosharehistory
 
 # Powerlevel10k theme
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

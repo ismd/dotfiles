@@ -132,6 +132,10 @@ select-word-style bash
 # added by travis gem
 #[ -f /home/ismd/.travis/travis.sh ] && source /home/ismd/.travis/travis.sh
 
+# History
+setopt inc_append_history
+setopt no_share_history
+
 # Powerlevel10k theme
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 

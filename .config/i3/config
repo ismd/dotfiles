@@ -322,7 +322,7 @@ exec --no-startup-id screenshotgun
 exec --no-startup-id telegram-desktop
 exec --no-startup-id udiskie --no-automount --tray
 exec --no-startup-id unclutter --timeout 2
-exec --no-startup-id redshift -O 5750
+exec --no-startup-id redshift -O 6000
 #exec --no-startup-id blueberry-tray
 
 # Color palette used for the terminal ( ~/.Xresources file )

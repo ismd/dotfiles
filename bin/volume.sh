@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # https://askubuntu.com/questions/26068/how-do-you-mute-from-the-command-line
 
-DEFAULT_SINK=$(pactl info | grep "Default Sink" | cut -d " " -f3)
+DEFAULT_SINK=$(LC_ALL=en_US.UTF-8 pactl info | grep "Default Sink" | cut -d " " -f3)
 
-IS_MUTE=$(pactl list | grep -E "Name: $DEFAULT_SINK$|Mute" | grep "Name:" -A1 | tail -1 |cut -d: -f2| tr -d " ")
+IS_MUTE=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Mute" | grep "Name:" -A1 | tail -1 |cut -d: -f2| tr -d " ")
 
 if [ "$IS_MUTE" == no ]; then
   UNMUTE=1
@@ -15,7 +15,7 @@ case "$1" in
   up)
   {
     pactl set-sink-volume "$DEFAULT_SINK" +5%
-    VOLUME=$(pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
+    VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
 
     if [ "$UNMUTE" == 1 ]; then
       ICON="$(echo -ne "\U1F50A")"
@@ -29,7 +29,7 @@ case "$1" in
   down)
   {
     pactl set-sink-volume "$DEFAULT_SINK" -5%
-    VOLUME=$(pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
+    VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
 
     if [ "$UNMUTE" == 1 ]; then
       ICON="$(echo -ne "\U1F509")"
@@ -44,7 +44,7 @@ case "$1" in
   {
     pactl set-sink-mute "$DEFAULT_SINK" "$UNMUTE"
     sudo sh -c 'echo 0 > /sys/devices/platform/thinkpad_acpi/leds/platform::mute/brightness'
-    VOLUME=$(pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
+    VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
 
     if [ "$UNMUTE" == 1 ]; then
       ICON="$(echo -ne "\U1F507")"

@@ -115,6 +115,8 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "C-c w <") '+workspace/swap-left)
 (global-set-key (kbd "C-c w >") '+workspace/swap-right)
 (global-set-key (kbd "C-c s r") 'ivy-resume)
+(global-set-key (kbd "C-c <tab>") 'previous-buffer)
+(global-set-key (kbd "C-c S-<iso-lefttab>") 'next-buffer)
 
 (global-set-key (kbd "M-0") 'treemacs-select-window)
 (global-set-key (kbd "M-1") 'winum-select-window-1)
@@ -143,3 +145,8 @@ With argument ARG, do this that many times."
 (map! :map indent-rigidly-map "f" #'indent-rigidly-right)
 (map! :map indent-rigidly-map "B" #'indent-rigidly-left-to-tab-stop)
 (map! :map indent-rigidly-map "F" #'indent-rigidly-right-to-tab-stop)
+
+;; C++
+(after! ccls
+  (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
+  (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom

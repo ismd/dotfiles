@@ -1,26 +1,25 @@
 #!/bin/sh
 
-userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
-sysresources=/etc/X11/xinit/.Xresources
-sysmodmap=/etc/X11/xinit/.Xmodmap
-
 # merge in defaults and keymaps
 
-if [ -f $sysresources ]; then
-    xrdb -merge $sysresources
+if [ -f /etc/X11/xinit/.Xresources ]; then
+    xrdb -merge /etc/X11/xinit/.Xresources
 fi
 
-if [ -f $sysmodmap ]; then
-    xmodmap $sysmodmap
+if [ -f /etc/X11/xinit/.Xmodmap ]; then
+    xmodmap /etc/X11/xinit/.Xmodmap
 fi
 
-if [ -f "$userresources" ]; then
-    xrdb -merge "$userresources"
+if [ -f "$HOME/.Xresources" ]; then
+    xrdb -merge "$HOME/.Xresources"
 fi
 
-if [ -f "$usermodmap" ]; then
-    xmodmap "$usermodmap"
+if [ -f "$HOME/.Xmodmap" ]; then
+    xmodmap "$HOME/.Xmodmap"
+fi
+
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
 fi
 
 # start some nice programs

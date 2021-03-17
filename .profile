@@ -1,4 +1,4 @@
-export PATH=~/bin:~/.emacs.d/bin:~/.local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$PATH
 
 export EDITOR=/usr/bin/emacsclient
 export BROWSER=/usr/bin/firefox

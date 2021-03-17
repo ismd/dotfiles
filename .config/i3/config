@@ -317,6 +317,7 @@ exec_always --no-startup-id xset -dpms
 exec_always --no-startup-id xset s off
 exec_always --no-startup-id xset r rate 250 20
 exec_always --no-startup-id setxkbmap -layout us,ru -option grp:toggle
+exec_always --no-startup-id xmodmap ~/.Xmodmap
 
 exec --no-startup-id screenshotgun
 exec --no-startup-id telegram-desktop

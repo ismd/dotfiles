@@ -122,6 +122,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ec="emacsclient"
+alias ssh="kitty +kitten ssh"
 
 autoload -U select-word-style
 select-word-style bash

@@ -123,6 +123,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ec="emacsclient"
 alias ssh="kitty +kitten ssh"
+alias pssh="TERM='xterm-256color' pssh"
 
 autoload -U select-word-style
 select-word-style bash

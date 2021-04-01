@@ -151,3 +151,5 @@ With argument ARG, do this that many times."
 (after! ccls
   (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
   (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
+
+(map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)

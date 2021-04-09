@@ -100,8 +100,17 @@ With argument ARG, do this that many times."
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq ivy-extra-directories '("./"))
 (setq-default truncate-lines nil)
-(setq centaur-tabs-enable-key-bindings t)
 (setq +lsp-company-backends '(company-capf))
+(electric-indent-mode 0)
+
+;; Centaur tabs
+(setq centaur-tabs-enable-key-bindings t)
+(setq centaur-tabs-style "wave")
+(setq centaur-tabs-height 17)
+(setq centaur-tabs-set-bar nil)
+(setq centaur-tabs-set-bar 'under)
+(setq x-underline-at-descent-line t)
+(setq centaur-tabs-adjust-buffer-order t)
 
 (global-set-key (kbd "C-k") 'ismd/kill-line)
 (global-set-key (kbd "M-d") 'ismd/delete-word)

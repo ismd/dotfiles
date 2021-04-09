@@ -143,3 +143,6 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# The next line updates PATH for Yandex Cloud Private CLI.
+if [ -f '~/ycp/path.bash.inc' ]; then source '~/ycp/path.bash.inc'; fi

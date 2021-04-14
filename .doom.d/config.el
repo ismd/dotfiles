@@ -105,11 +105,10 @@ With argument ARG, do this that many times."
 
 ;; Centaur tabs
 (setq centaur-tabs-enable-key-bindings t)
-(setq centaur-tabs-style "wave")
+(setq centaur-tabs-style "chamfer")
 (setq centaur-tabs-height 17)
 (setq centaur-tabs-set-bar nil)
-(setq centaur-tabs-set-bar 'under)
-(setq x-underline-at-descent-line t)
+(setq centaur-tabs-set-bar nil)
 (setq centaur-tabs-adjust-buffer-order t)
 
 (global-set-key (kbd "C-k") 'ismd/kill-line)

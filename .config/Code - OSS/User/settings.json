@@ -1,0 +1,11 @@
+{
+    "files.autoSave": "onFocusChange",
+    "editor.fontSize": 16,
+    "editor.fontFamily": "'Source Code Pro', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "window.zoomLevel": 0.5,
+    "git.autofetch": true,
+    "window.titleBarStyle": "custom",
+    "window.customMenuBarAltFocus": false,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true
+}

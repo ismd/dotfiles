@@ -38,6 +38,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     ;; ansible
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
@@ -55,6 +56,7 @@ This function should only modify configuration layer settings."
             ;; c-c++-enable-google-newline t
             ;; c-c++-enable-google-style t
             c-c++-lsp-enable-semantic-highlight t)
+     ;; chrome
      (cmake :variables
             cmake-enable-cmake-ide-support t)
      colors
@@ -133,17 +135,21 @@ This function should only modify configuration layer settings."
                       version-control-diff-side 'left
                       version-control-global-margin t)
      xclipboard
-     yaml)
+     yaml
+     )
 
-   ;; List of additional packages that will be installed without being wrapped
-   ;; in a layer (generally the packages are installed only and should still be
-   ;; loaded using load/require/use-package in the user-config section below in
-   ;; this file). If you need some configuration for these packages, then
-   ;; consider creating a layer. You can also put the configuration in
-   ;; `dotspacemacs/user-config'. To use a local version of a package, use the
-   ;; `:location' property: '(your-package :location "~/path/to/your-package/")
+   ;; List of additional packages that will be installed without being
+   ;; wrapped in a layer. If you need some configuration for these
+   ;; packages, then consider creating a layer. You can also put the
+   ;; configuration in `dotspacemacs/user-config'.
+   ;; To use a local version of a package, use the `:location' property:
+   ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(dired-k
+                                      rg
+                                      reverse-im
+                                      vlf
+                                      zerodark-theme)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -197,7 +203,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 300
 
    ;; Set `gc-cons-threshold' and `gc-cons-percentage' when startup finishes.
    ;; This is an advanced option and should not be changed unless you suspect
@@ -253,29 +259,19 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'random
+   dotspacemacs-startup-banner 'official
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
-   ;; `recents' `recents-by-project' `bookmarks' `projects' `agenda' `todos'.
+   ;; `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   ;; The exceptional case is `recents-by-project', where list-type must be a
-   ;; pair of numbers, e.g. `(recents-by-project . (7 .  5))', where the first
-   ;; number is the project limit and the second the limit on the recent files
-   ;; within a project.
    dotspacemacs-startup-lists '((recents . 5)
                                 (projects . 7))
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
-
-   ;; Show numbers before the startup list lines. (default t)
-   dotspacemacs-show-startup-list-numbers t
-
-   ;; The minimum delay in seconds between number key presses. (default 0.4)
-   dotspacemacs-startup-buffer-multi-digit-delay 0.4
 
    ;; Default major mode for a new empty buffer. Possible values are mode
    ;; names such as `text-mode'; and `nil' to use Fundamental mode.
@@ -302,7 +298,27 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(doom-nord
                          spacemacs-dark
-                         spacemacs-light)
+                         zerodark
+                         spacemacs-light
+                         misterioso
+                         tsdh-dark
+                         doom-dracula
+                         doom-nova
+                         doom-opera
+                         doom-Iosvkem
+                         doom-peacock
+                         doom-vibrant
+                         doom-sourcerer
+                         doom-spacegrey
+                         doom-one-light
+                         doom-nord-light
+                         doom-city-lights
+                         doom-opera-light
+                         doom-tomorrow-day
+                         doom-tomorrow-night
+                         doom-challenger-deep
+                         doom-solarized-light
+                         doom-molokai)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -317,11 +333,9 @@ It should only modify the values of Spacemacs settings."
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
 
-   ;; Default font or prioritized list of fonts. The `:size' can be specified as
-   ;; a non-negative integer (pixel size), or a floating-point (point size).
-   ;; Point size is recommended, because it's device independent. (default 10.0)
+   ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13.0
+                               :size 17
                                :weight normal
                                :width normal)
 
@@ -381,7 +395,7 @@ It should only modify the values of Spacemacs settings."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'original
+   dotspacemacs-auto-save-file-location 'cache
 
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
@@ -424,7 +438,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
@@ -457,10 +471,6 @@ It should only modify the values of Spacemacs settings."
    ;; when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
 
-   ;; Show the scroll bar while scrolling. The auto hide time can be configured
-   ;; by setting this variable to a number. (default t)
-   dotspacemacs-scroll-bar-while-scrolling t
-
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
    ;; `prog-mode' and `text-mode' derivatives. If set to `relative', line
@@ -479,25 +489,28 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers '(:relative nil
+                               :visual nil
+                               :disabled-for-modes dired-mode
+                                                   doc-view-mode
+                                                   ;; markdown-mode
+                                                   org-mode
+                                                   pdf-view-mode
+                                                   ;; text-mode
+                               :size-limit-kb 1000)
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
 
-   ;; If non-nil and `dotspacemacs-activate-smartparens-mode' is also non-nil,
-   ;; `smartparens-strict-mode' will be enabled in programming modes.
+   ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
-
-   ;; If non-nil smartparens-mode will be enabled in programming modes.
-   ;; (default t)
-   dotspacemacs-activate-smartparens-mode t
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis t
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
@@ -517,7 +530,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
 
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
@@ -540,18 +553,12 @@ It should only modify the values of Spacemacs settings."
    ;; %n - Narrow if appropriate
    ;; %z - mnemonics of buffer, terminal, and keyboard coding systems
    ;; %Z - like %z, but including the end-of-line format
-   ;; If nil then Spacemacs uses default `frame-title-format' to avoid
-   ;; performance issues, instead of calculating the frame title by
-   ;; `spacemacs/title-prepare' all the time.
    ;; (default "%I@%S")
    dotspacemacs-frame-title-format "%I@%S"
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
    dotspacemacs-icon-title-format nil
-
-   ;; Show trailing whitespace (default t)
-   dotspacemacs-show-trailing-whitespace t
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
    ;; to aggressively delete empty line and long sequences of whitespace,
@@ -566,9 +573,6 @@ It should only modify the values of Spacemacs settings."
    ;; If it does deactivate it here.
    ;; (default t)
    dotspacemacs-use-clean-aindent-mode t
-
-   ;; Accept SPC as y for prompts if non nil. (default nil)
-   dotspacemacs-use-SPC-as-y nil
 
    ;; If non-nil shift your number row to match the entered keyboard layout
    ;; (only in insert state). Currently supported keyboard layouts are:
@@ -588,10 +592,145 @@ It should only modify the values of Spacemacs settings."
 
    ;; If nil the home buffer shows the full path of agenda items
    ;; and todos. If non nil only the file name is shown.
-   dotspacemacs-home-shorten-agenda-source nil
+   dotspacemacs-home-shorten-agenda-source nil))
 
-   ;; If non-nil then byte-compile some of Spacemacs files.
-   dotspacemacs-byte-compile nil))
+(defun ismd/defaults ()
+  (prefer-coding-system 'utf-8)
+  (setq-default indent-tabs-mode nil)
+  (setq-default require-final-newline t)
+
+  ;; dired
+  (setq-default delete-by-moving-to-trash nil)
+  (setq-default dired-listing-switches "-laB --group-directories-first")
+
+  ;; c++
+  (setq-default flycheck-gcc-language-standard "c++17")
+  (setq-default flycheck-clang-language-standard "c++17")
+  (setq-default company-clang-arguments '("-std=c++17"))
+
+  ;; web
+  (setq-default css-indent-offset 4)
+  (setq-default sgml-basic-offset 4)
+
+  ;; web-mode
+  (setq-default web-mode-markup-indent-offset 4)
+  (setq-default web-mode-css-indent-offset 4)
+  (setq-default web-mode-code-indent-offset 4)
+  (setq-default web-mode-attr-indent-offset 4)
+
+  (with-eval-after-load 'web-mode
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil)))
+
+  ;; python
+  (setq-default python-indent-offset 4)
+  (setq-default python-fill-docstring-style 'symmetric)
+
+  ;; eshell
+  (setq-default pcomplete-cycle-completions t)
+  (setq-default explicit-shell-file-name "/bin/zsh")
+  (setq-default shell-file-name "/bin/zsh")
+
+  ;; lsp
+  (setq-default lsp-response-timeout 120)
+  (setq-default lsp-ui-sideline-delay 5))
+
+(defun ismd/hooks ()
+  (add-hook 'dired-initial-position-hook 'dired-k)
+
+  (defun ismd/dired-mode-hook ()
+    (local-set-key (kbd "<backspace>") #'ismd/dired-up-dir))
+
+  ;; (defun ismd/emmet-mode-hook ()
+  ;;   (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'tab-indent-or-complete)
+  ;;   (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'tab-indent-or-complete))
+
+  (defun ismd/focus-out-hook ()
+    (save-some-buffers t))
+
+  (defun ismd/prog-mode-hook ()
+    (define-key prog-mode-map (kbd "<backtab>") 'company-complete))
+
+  (defun ismd/term-mode-hook ()
+    (define-key term-raw-map (kbd "<tab>") 'term-send-tab)
+    (define-key term-raw-map (kbd "C-p") 'term-send-up)
+    (define-key term-raw-map (kbd "C-n") 'term-send-down)
+    (define-key term-raw-map (kbd "C-r") 'term-send-reverse-search-history)
+    (define-key term-raw-map (kbd "M-.") 'term-send-raw-meta)
+    (add-to-list 'term-bind-key-alist '("M-<backspace>" . term-send-backward-kill-word)))
+
+  ;; (defun ismd/js2-mode-hook ()
+  ;;   (define-key prog-mode-map (kbd "<tab>") 'js2-indent-bounce))
+
+  (defun ismd/c-mode-hook ()
+    (c-set-style "java")
+
+    (c-set-offset 'access-label '-)
+    (c-set-offset 'arglist-close '0)
+    (c-set-offset 'arglist-cont-nonempty '+)
+    (c-set-offset 'arglist-intro '+)
+    (c-set-offset 'case-label '+)
+    (c-set-offset 'inlambda '0)
+    (c-set-offset 'topmost-intro '0))
+
+  (defun ismd/lsp-ui-mode-hook ()
+    ;; (set-variable lsp-headerline-breadcrumb-path-error-face ((t (:inherit lsp-headerline-breadcrumb-path-face :underline "Red1"))))
+    ;; (set-variable lsp-headerline-breadcrumb-path-warning-face ((t (:inherit lsp-headerline-breadcrumb-path-face))))
+    ;; (set-variable lsp-headerline-breadcrumb-symbols-error-face ((t (:inherit lsp-headerline-breadcrumb-symbols-face :underline "Red1"))))
+    ;; (set-variable lsp-headerline-breadcrumb-symbols-warning-face ((t (:inherit lsp-headerline-breadcrumb-symbols-face))))
+    )
+
+  (defun ismd/typescript-mode-hook ()
+    (require 'dap-node)
+    (dap-node-setup))
+
+  ;; (add-hook 'emmet-mode-hook 'ismd/emmet-mode-hook)
+  (add-hook 'dired-mode-hook 'ismd/dired-mode-hook)
+  (add-hook 'focus-out-hook 'ismd/focus-out-hook)
+  (add-hook 'prog-mode-hook 'ismd/prog-mode-hook)
+  (add-hook 'term-mode-hook 'ismd/term-mode-hook)
+  ;; (add-hook 'js2-mode-hook 'ismd/js2-mode-hook)
+  (add-hook 'c-mode-hook 'ismd/c-mode-hook)
+  (add-hook 'lsp-ui-mode-hook 'ismd/lsp-ui-mode-hook)
+  (add-hook 'typescript-mode-hook 'ismd/typescript-mode-hook))
+
+(defun insert-tab ()
+  (interactive)
+  (insert-char ?\t))
+
+(defun check-expansion ()
+  (save-excursion
+    (if (looking-at "\\_>") t
+      (backward-char 1)
+      (if (looking-at "\\.") t
+        (backward-char 1)
+        (if (looking-at "->") t nil)))))
+
+(defun tab-indent-or-complete ()
+  (interactive)
+  (if (minibufferp)
+    (minibuffer-complete)
+    (if (check-expansion)
+      (company-complete-common)
+      (indent-for-tab-command))))
+
+(defun ismd/delete-word (arg)
+  "Delete characters until encountering the end of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (forward-word arg) (point))))
+
+(defun ismd/backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
 
 (defun ismd/dired-up-dir ()
   "Go up a directory."
@@ -599,6 +738,16 @@ It should only modify the values of Spacemacs settings."
   (let ((current-dir (dired-current-directory)))
     (find-alternate-file "..")
     (dired-goto-file current-dir)))
+
+(defun ismd/kill-line ()
+  (interactive)
+  (cond ((ismd/current-line-empty-p) (delete-char 1))
+        (t (delete-region (point) (line-end-position)))))
+
+(defun ismd/current-line-empty-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at "[[:space:]]*$")))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
@@ -613,15 +762,15 @@ See the header of this file for more information."
 This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
-If you are unsure, try setting them in `dotspacemacs/user-config' first.")
-
+If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
-dump.")
-
+dump."
+  )
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -629,31 +778,106 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-    (set-default-coding-systems 'utf-8)
-    (setq-default tab-width 4)
-    (global-auto-revert-mode 1)
-    (setq large-file-warning-threshold nil)
-    (setq company-idle-delay 0.5)
-    (setq company-tooltip-idle-delay 0)
-    (setq which-key-idle-delay 0.3)
-    (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-    (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-    (setq ivy-extra-directories '("./"))
-    (setq-default truncate-lines nil)
-    (setq +lsp-company-backends '(company-capf))
-    (setq shell-default-shell 'vterm)
-    (electric-indent-mode 0)
+  (load custom-file)
 
-    (global-set-key (kbd "C-M-r") 'revert-buffer)
-    (global-set-key (kbd "M-n") "\C-u3\C-v")
-    (global-set-key (kbd "M-p") "\C-u3\M-v")
-    (global-set-key (kbd "<iso-lefttab>") 'company-complete)
+  (setq frame-title-format nil)
+  (setq select-enable-clipboard t)
 
-    ;; dired
-    (setq-default delete-by-moving-to-trash nil)
-    (setq-default dired-listing-switches "-laB --group-directories-first")
-    (define-key dired-mode-map (kbd "<backspace>") 'ismd/dired-up-dir))
+  (delete-selection-mode t)
+  (global-auto-revert-mode t)
+  (global-git-commit-mode t)
 
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
+  ;; keybindings
+  (global-set-key (kbd "C-k") 'ismd/kill-line)
+  (global-set-key (kbd "M-d") 'ismd/delete-word)
+  (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
+  (global-set-key (kbd "M-g") 'revert-buffer)
+  (global-set-key (kbd "C-<tab>") 'insert-tab)
+  (global-set-key (kbd "C-c C-f") 'evil-toggle-fold)
+  (global-set-key (kbd "C-c g") 'goto-line)
+
+  ;; avy
+  (global-set-key (kbd "C-c C-g") 'avy-goto-line)
+  (global-set-key (kbd "M-s") 'avy-goto-char-timer)
+
+  (define-key company-active-map (kbd "C-d") nil)
+  (define-key company-active-map (kbd "<tab>") nil)
+
+  (global-set-key "\M-n" "\C-u3\C-v")
+  (global-set-key "\M-p" "\C-u3\M-v")
+
+  (ismd/defaults)
+  (ismd/hooks)
+
+  (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
+
+  ;; scroll
+  (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))) ;; two lines at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+
+  ;; modeline
+  ;; (setq doom-modeline-buffer-file-name-style 'file-name)
+
+  ;; removing message: Error running timer semantic-idle-scheduler-function Unmatched text during lexical analysis
+  ;; (advice-add 'semantic-idle-scheduler-function :around #'ignore)
+
+  ;; spell
+  (with-eval-after-load "ispell"
+    (setq ispell-program-name "hunspell")
+    ;; ispell-set-spellchecker-params has to be called
+    ;; before ispell-hunspell-add-multi-dic will work
+    (ispell-set-spellchecker-params)
+    (ispell-hunspell-add-multi-dic "ru_RU,en_US")
+    (setq ispell-dictionary "ru_RU,en_US"))
+
+  ;; git
+  (setq magit-repository-directories
+        '(("~/coding/" . 1)))
+
+  ;; org-trello major mode for all .trello files
+  ;; (add-to-list 'auto-mode-alist '("\\.trello$" . org-mode))
+  ;; (setq org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+
+  ;; add a hook function to check if this is trello file, then activate the org-trello minor mode.
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda ()
+  ;;             (let ((filename (buffer-file-name (current-buffer))))
+  ;;               (when (and filename (string= "trello" (file-name-extension filename)))
+  ;;                 (org-trello-mode)))))
+
+  ;; reverse-im
+  (reverse-im-mode t)
+  (reverse-im-activate "russian-computer")
+
+  ;; tramp
+  ;; (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
+  ;; (add-to-list 'tramp-connection-properties
+  ;;              (list (regexp-quote "ismd.ui.yandex.net")
+  ;;                    "remote-shell" "/usr/bin/zsh"))
+  ;; (customize-set-variable 'tramp-encoding-shell "/usr/bin/zsh")
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)

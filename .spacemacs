@@ -600,6 +600,9 @@ It should only modify the values of Spacemacs settings."
     (find-alternate-file "..")
     (dired-goto-file current-dir)))
 
+(defun ismd/focus-out-hook ()
+  (save-some-buffers t))
+
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
 This function defines the environment variables for your Emacs session. By
@@ -629,31 +632,33 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-    (set-default-coding-systems 'utf-8)
-    (setq-default tab-width 4)
-    (global-auto-revert-mode 1)
-    (setq large-file-warning-threshold nil)
-    (setq company-idle-delay 0.5)
-    (setq company-tooltip-idle-delay 0)
-    (setq which-key-idle-delay 0.3)
-    (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-    (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-    (setq ivy-extra-directories '("./"))
-    (setq-default truncate-lines nil)
-    (setq +lsp-company-backends '(company-capf))
-    (setq shell-default-shell 'vterm)
-    (electric-indent-mode 0)
+  (load custom-file)
 
-    (global-set-key (kbd "C-M-r") 'revert-buffer)
-    (global-set-key (kbd "M-n") "\C-u3\C-v")
-    (global-set-key (kbd "M-p") "\C-u3\M-v")
-    (global-set-key (kbd "<iso-lefttab>") 'company-complete)
+  (set-default-coding-systems 'utf-8)
+  (setq-default tab-width 4)
+  (global-auto-revert-mode 1)
+  (setq large-file-warning-threshold nil)
+  (setq company-idle-delay 0.5)
+  (setq company-tooltip-idle-delay 0)
+  (setq which-key-idle-delay 0.3)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq ivy-extra-directories '("./"))
+  (setq-default truncate-lines nil)
+  (setq +lsp-company-backends '(company-capf))
+  (setq shell-default-shell 'vterm)
+  (electric-indent-mode 0)
+  (delete-selection-mode t)
 
-    ;; dired
-    (setq-default delete-by-moving-to-trash nil)
-    (setq-default dired-listing-switches "-laB --group-directories-first")
-    (define-key dired-mode-map (kbd "<backspace>") 'ismd/dired-up-dir))
+  (global-set-key (kbd "C-M-r") 'revert-buffer)
+  (global-set-key (kbd "M-n") "\C-u3\C-v")
+  (global-set-key (kbd "M-p") "\C-u3\M-v")
+  (global-set-key (kbd "<iso-lefttab>") 'company-complete)
 
+  ;; dired
+  (setq-default delete-by-moving-to-trash nil)
+  (setq-default dired-listing-switches "-laB --group-directories-first")
+  (define-key dired-mode-map (kbd "<backspace>") 'ismd/dired-up-dir)
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+  ;; focus
+  (add-hook 'focus-out-hook 'ismd/focus-out-hook))

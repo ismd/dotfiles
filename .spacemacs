@@ -653,7 +653,7 @@ before packages are loaded."
   (global-set-key (kbd "C-M-r") 'revert-buffer)
   (global-set-key (kbd "M-n") "\C-u3\C-v")
   (global-set-key (kbd "M-p") "\C-u3\M-v")
-  (global-set-key (kbd "<iso-lefttab>") 'company-complete)
+  (global-set-key (kbd "M-.") 'company-complete)
 
   ;; dired
   (setq-default delete-by-moving-to-trash nil)

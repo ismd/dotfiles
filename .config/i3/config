@@ -255,7 +255,7 @@ set $mode_system (l)ock, turn off (d)isplay, toggle (n)otifications, (e)xit, swi
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym s exec --no-startup-id systemctl hybrid-sleep, mode "default"
-    #bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"

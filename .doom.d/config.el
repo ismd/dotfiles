@@ -98,7 +98,6 @@ With argument ARG, do this that many times."
 (setq which-key-idle-delay 0.3)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq ivy-extra-directories '("./"))
 (setq-default truncate-lines nil)
 (setq +lsp-company-backends '(company-capf))
 (electric-indent-mode 0)
@@ -145,7 +144,8 @@ With argument ARG, do this that many times."
   (setq super-save-auto-save-when-idle t))
 
 (after! ivy
-  (setq ivy-wrap nil))
+  (setq ivy-wrap nil)
+  (setq ivy-extra-directories '("./")))
 
 (after! c
   (c-set-style "java"))

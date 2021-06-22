@@ -92,15 +92,19 @@ With argument ARG, do this that many times."
 (setq-default tab-width 4)
 (global-auto-revert-mode 1)
 (doom/set-frame-opacity 92)
-(setq large-file-warning-threshold nil)
-(setq company-idle-delay 0.5)
-(setq company-tooltip-idle-delay 0)
-(setq which-key-idle-delay 0.3)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq-default truncate-lines nil)
-(setq +lsp-company-backends '(company-capf))
 (electric-indent-mode 0)
+(setq-default truncate-lines nil)
+(setq doom-font (font-spec :family "FiraCode" :size 17)
+  doom-variable-pitch-font (font-spec :family "Hack" :size 17)
+  doom-big-font (font-spec :family "FiraCode" :size 20)
+  large-file-warning-threshold nil
+  company-idle-delay 0.5
+  company-tooltip-idle-delay 0
+  which-key-idle-delay 0.3
+  mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
+  mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
+  ;; +lsp-company-backends '(company-capf)
+  )
 
 ;; Centaur tabs
 (setq centaur-tabs-enable-key-bindings t)

@@ -91,7 +91,7 @@ With argument ARG, do this that many times."
 (set-default-coding-systems 'utf-8)
 (setq-default tab-width 4)
 (global-auto-revert-mode 1)
-(doom/set-frame-opacity 92)
+;; (doom/set-frame-opacity 92)
 (electric-indent-mode 0)
 (setq-default truncate-lines nil)
 (setq doom-font (font-spec :family "FiraCode" :size 17)
@@ -103,7 +103,7 @@ With argument ARG, do this that many times."
   which-key-idle-delay 0.3
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
   mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
-  ;; +lsp-company-backends '(company-capf)
+  +lsp-company-backends '(company-capf)
   )
 
 ;; Centaur tabs

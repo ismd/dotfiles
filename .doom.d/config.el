@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'night-owl)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -104,7 +104,7 @@ With argument ARG, do this that many times."
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
   mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
   +lsp-company-backends '(company-capf)
-  )
+  dired-du-size-format t)
 
 ;; Centaur tabs
 (setq centaur-tabs-enable-key-bindings t)
@@ -165,3 +165,4 @@ With argument ARG, do this that many times."
   (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
 
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
+(map! :map dired-mode-map "C-x M-r" #'dired-du-mode)

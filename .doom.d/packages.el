@@ -49,5 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+(package! dired-du)
+(package! night-owl-theme)
 (package! rg)
 (package! super-save)

@@ -146,3 +146,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # The next line updates PATH for Yandex Cloud Private CLI.
 if [ -f '~/ycp/path.bash.inc' ]; then source '~/ycp/path.bash.inc'; fi
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
+fi

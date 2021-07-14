@@ -98,12 +98,12 @@ With argument ARG, do this that many times."
   doom-variable-pitch-font (font-spec :family "Hack" :size 17)
   doom-big-font (font-spec :family "FiraCode" :size 20)
   large-file-warning-threshold nil
-  company-idle-delay 0.5
+  company-idle-delay 0
   company-tooltip-idle-delay 0
   which-key-idle-delay 0.3
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
   mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
-  +lsp-company-backends '(company-capf)
+  +lsp-company-backends '(company-tabnine)
   dired-du-size-format t)
 
 ;; Centaur tabs
@@ -164,5 +164,13 @@ With argument ARG, do this that many times."
   (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
   (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
 
+;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
 (map! :map dired-mode-map "C-x M-r" #'dired-du-mode)
+
+;; TabNine
+(use-package company-tabnine :ensure t)
+(add-to-list 'company-backends #'company-tabnine)
+
+(after! web-mode
+  (map! :map web-mode-map "M-/" #'dabbrev-expand))

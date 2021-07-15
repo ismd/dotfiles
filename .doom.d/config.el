@@ -104,7 +104,6 @@ With argument ARG, do this that many times."
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
   mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
   dired-du-size-format t
-  +lsp-company-backends '(company-tabnine) ;; By default uses company-capf, we don't need it
   )
 
 ;; Centaur tabs
@@ -142,25 +141,28 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "M-8") 'winum-select-window-8)
 (global-set-key (kbd "M-9") 'winum-select-window-9)
 
+;; Super save
 (use-package! super-save
   :ensure t
   :config
   (super-save-mode +1)
   (setq super-save-auto-save-when-idle t))
 
+;; Ivy
 (after! ivy
   (setq ivy-wrap nil)
   (setq ivy-extra-directories '("./")))
 
-(after! c
-  (c-set-style "java"))
-
+;; Indent rigidly
 (map! :map indent-rigidly-map "b" #'indent-rigidly-left)
 (map! :map indent-rigidly-map "f" #'indent-rigidly-right)
 (map! :map indent-rigidly-map "B" #'indent-rigidly-left-to-tab-stop)
 (map! :map indent-rigidly-map "F" #'indent-rigidly-right-to-tab-stop)
 
-;; C++
+;; C/C++
+(after! c
+  (c-set-style "java"))
+
 (after! ccls
   (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
   (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
@@ -171,10 +173,9 @@ With argument ARG, do this that many times."
 
 ;; TabNine
 (use-package company-tabnine :ensure t)
-(after! elisp-mode
-  (add-to-list 'company-backends #'company-tabnine))
-(after! prog-mode
-  (add-to-list 'company-backends #'company-tabnine))
+(after! company
+  (add-to-list 'company-backends 'company-tabnine))
 
+;; Web mode
 (after! web-mode
   (map! :map web-mode-map "M-/" #'dabbrev-expand))

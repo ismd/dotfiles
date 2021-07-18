@@ -142,16 +142,18 @@ select-word-style bash
 setopt inc_append_history
 setopt no_share_history
 
-# Powerlevel10k theme
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+if [ ! -z $DISPLAY ]; then
+    # Powerlevel10k theme
+    source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 # The next line updates PATH for Yandex Cloud Private CLI.
 if [ -f '~/ycp/path.bash.inc' ]; then source '~/ycp/path.bash.inc'; fi
 
 # startx
-# if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-#     exec startx
-# fi
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && [ ! -f /usr/bin/sway ]; then
+    exec startx
+fi

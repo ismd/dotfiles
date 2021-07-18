@@ -33,8 +33,6 @@ fi
 
 if [ -n "$1" ]; then
     session=$1
-elif [ -f /usr/bin/startxfce4 ]; then
-    session="xfce"
 else
     session="i3"
 fi

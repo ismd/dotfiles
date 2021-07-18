@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # If you come from bash you might have to change your $PATH.
@@ -10,9 +10,9 @@ fi
 
 # Path to your oh-my-zsh installation.
 if [ -d "/usr/share/oh-my-zsh" ]; then
-  export ZSH="/usr/share/oh-my-zsh"
+    export ZSH="/usr/share/oh-my-zsh"
 else
-  export ZSH="$HOME/.oh-my-zsh"
+    export ZSH="$HOME/.oh-my-zsh"
 fi
 
 # Set name of the theme to load --- if set to "random", it will
@@ -151,6 +151,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # The next line updates PATH for Yandex Cloud Private CLI.
 if [ -f '~/ycp/path.bash.inc' ]; then source '~/ycp/path.bash.inc'; fi
 
-#if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-#  exec startx
-#fi
+# startx
+# if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+#     exec startx
+# fi

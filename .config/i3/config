@@ -12,7 +12,7 @@ default_border pixel 1
 default_floating_border normal
 
 # Hide borders
-hide_edge_borders none
+hide_edge_borders both
 
 # change borders
 #bindsym $mod+u border none
@@ -21,7 +21,7 @@ hide_edge_borders none
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font xft:Hack 11
+font pango:SourceCodePro Medium 10
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -322,9 +322,9 @@ exec_always --no-startup-id xmodmap ~/.Xmodmap
 
 exec --no-startup-id screenshotgun
 exec --no-startup-id telegram-desktop
-exec --no-startup-id udiskie --no-automount --tray
+exec --no-startup-id udiskie --no-automount --tray --notify
 exec --no-startup-id unclutter --timeout 2
-exec --no-startup-id redshift -O 6000
+exec --no-startup-id gammastep -O 6000
 #exec --no-startup-id blueberry-tray
 
 # Color palette used for the terminal ( ~/.Xresources file )
@@ -370,7 +370,7 @@ bar {
 
     bindsym button4 nop
     bindsym button5 nop
-#   font xft:URWGothic-Book 11
+    font pango:SourceCodePro Medium 11
     strip_workspace_numbers yes
     separator_symbol "| "
 

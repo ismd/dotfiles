@@ -18,7 +18,7 @@ general {
 
 order += "volume master"
 #order += "disk /home"
-order += "run_watch lsyncd"
+#order += "run_watch lsyncd"
 #order += "ipv6"
 #order += "run_watch VPN"
 order += "wireless wlp0s20f3"

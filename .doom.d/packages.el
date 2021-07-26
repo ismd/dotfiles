@@ -53,4 +53,5 @@
 (package! dired-du)
 (package! night-owl-theme)
 (package! rg)
+(package! sunrise-commander)
 (package! super-save)

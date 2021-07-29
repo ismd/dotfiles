@@ -9,7 +9,7 @@ fi
 export PATH="$HOME/bin:$HOME/.dotfiles/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$PATH"
 
 # Environment variables
-export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+#export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 export EDITOR=/usr/bin/emacsclient
 export NODE_OPTIONS="--max-old-space-size=4096"
 export SHELL=/bin/zsh

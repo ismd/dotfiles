@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# environment variables
+export BROWSER=/usr/bin/firefox
+export TERMINAL=/usr/bin/kitty
+
 # merge in defaults and keymaps
 
 if [ -f /etc/X11/xinit/.Xresources ]; then

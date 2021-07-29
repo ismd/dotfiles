@@ -6,7 +6,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/bin:$HOME/.dotfiles/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$PATH"
+
+# Environment variables
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+export EDITOR=/usr/bin/emacsclient
+export NODE_OPTIONS="--max-old-space-size=4096"
+export SHELL=/bin/zsh
+export ESHELL=/bin/zsh
+
+# Multiple monitors for Wayland
+export WLR_DRM_NO_MODIFIERS DEFAULT=1
 
 # Path to your oh-my-zsh installation.
 if [ -d "/usr/share/oh-my-zsh" ]; then

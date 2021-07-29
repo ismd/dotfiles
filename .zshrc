@@ -157,3 +157,9 @@ if [ -f '~/ycp/path.bash.inc' ]; then source '~/ycp/path.bash.inc'; fi
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && [ ! -f /usr/bin/sway ]; then
     exec startx
 fi
+
+# terraform
+if [ -f /usr/bin/terraform ]; then
+   autoload -U +X bashcompinit && bashcompinit
+   complete -o nospace -C /usr/bin/terraform terraform
+fi

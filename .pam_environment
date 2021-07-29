@@ -1,6 +1,6 @@
 SSH_AUTH_SOCK DEFAULT="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
-PATH DEFAULT="@{HOME}/bin:@{HOME}/.emacs.d/bin:@{HOME}/.local/bin:${PATH}"
+PATH DEFAULT="@{HOME}/bin:@{HOME}/.dotfiles/bin:@{HOME}/.emacs.d/bin:@{HOME}/.local/bin:${PATH}"
 
 EDITOR DEFAULT=/usr/bin/emacsclient
 BROWSER DEFAULT=/usr/bin/firefox

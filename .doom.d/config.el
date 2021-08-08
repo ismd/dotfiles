@@ -172,9 +172,11 @@ With argument ARG, do this that many times."
 (map! :map dired-mode-map "C-x M-r" #'dired-du-mode)
 
 ;; TabNine
-(use-package company-tabnine :ensure t)
-(after! company
-  (add-to-list 'company-backends 'company-tabnine))
+(use-package! company-tabnine
+  :ensure t
+  :after company
+  :config
+  (add-to-list '+company-backend-alist '(text-mode company-tabnine)))
 
 ;; Web mode
 (after! web-mode

@@ -106,6 +106,13 @@ With argument ARG, do this that many times."
   dired-du-size-format t
   )
 
+(setq +company-backend-alist '(
+  (c-mode company-capf company-tabnine)
+  (org-mode company-capf)
+  (text-mode company-tabnine)
+  (prog-mode company-capf company-yasnippet)
+  (conf-mode company-capf company-dabbrev-code company-yasnippet)))
+
 ;; Centaur tabs
 (setq centaur-tabs-enable-key-bindings t)
 (setq centaur-tabs-style "chamfer")
@@ -172,11 +179,7 @@ With argument ARG, do this that many times."
 (map! :map dired-mode-map "C-x M-r" #'dired-du-mode)
 
 ;; TabNine
-(use-package! company-tabnine
-  :ensure t
-  :after company
-  :config
-  (add-to-list '+company-backend-alist '(text-mode company-tabnine)))
+(use-package! company-tabnine)
 
 ;; Web mode
 (after! web-mode

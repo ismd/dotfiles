@@ -13,7 +13,7 @@ if [ -z "$TMUX" ]; then
     export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 fi
 export EDITOR=/usr/bin/emacsclient
-export NODE_OPTIONS="--max-old-space-size=4096"
+export NODE_OPTIONS="--max-old-space-size=8192"
 export SHELL=/bin/zsh
 export ESHELL=/bin/zsh
 

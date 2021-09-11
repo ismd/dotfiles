@@ -144,12 +144,6 @@ alias pssh="TERM='xterm-256color' pssh"
 autoload -U select-word-style
 select-word-style bash
 
-# ya
-#[ -f /home/ismd/.ya.completion/zsh/ya ] && source /home/ismd/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
-
-# added by travis gem
-#[ -f /home/ismd/.travis/travis.sh ] && source /home/ismd/.travis/travis.sh
-
 # History
 setopt inc_append_history
 setopt no_share_history
@@ -162,16 +156,25 @@ if [ ! -z $DISPLAY ]; then
     [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
 
+# ya
+#[ -f ~/.ya.completion/zsh/ya ] && source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
+
+# added by travis gem
+#[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
 # The next line updates PATH for Yandex Cloud Private CLI.
 if [ -f '~/ycp/path.bash.inc' ]; then source '~/ycp/path.bash.inc'; fi
+
+# Terraform
+if [ -f /usr/bin/terraform ]; then
+   autoload -U +X bashcompinit && bashcompinit
+   complete -o nospace -C /usr/bin/terraform terraform
+fi
+
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # startx
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && [ ! -f /usr/bin/sway ]; then
     exec startx
-fi
-
-# terraform
-if [ -f /usr/bin/terraform ]; then
-   autoload -U +X bashcompinit && bashcompinit
-   complete -o nospace -C /usr/bin/terraform terraform
 fi

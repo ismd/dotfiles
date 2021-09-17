@@ -189,16 +189,16 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Putting workspaces on specific screens
-workspace $ws1 output DP-1-3
-workspace $ws2 output DP-1-2
-workspace $ws3 output DP-1-3
-workspace $ws4 output DP-1-3
-workspace $ws5 output DP-1-3
-workspace $ws6 output DP-1-3
-workspace $ws7 output DP-1-3
-workspace $ws8 output DP-1-3
-workspace $ws9 output DP-1-2
-workspace $ws10 output eDP-1
+workspace $ws1 output DP1-3
+workspace $ws2 output DP1-2
+workspace $ws3 output DP1-3
+workspace $ws4 output DP1-3
+workspace $ws5 output DP1-3
+workspace $ws6 output DP1-3
+workspace $ws7 output DP1-3
+workspace $ws8 output DP1-3
+workspace $ws9 output DP1-2
+workspace $ws10 output eDP1
 
 # Open applications on specific workspaces
 # assign [class="Thunderbird"] $ws1

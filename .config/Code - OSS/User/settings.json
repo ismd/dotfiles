@@ -9,7 +9,10 @@
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "tabnine.experimentalAutoImports": true,
-    "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "modifications",
-    "workbench.colorTheme": "Night Owl (No Italics)"
+    "workbench.colorTheme": "Night Owl (No Italics)",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "explorer.confirmDelete": false
 }

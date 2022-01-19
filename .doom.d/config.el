@@ -106,16 +106,16 @@ With argument ARG, do this that many times."
   dired-du-size-format t
   )
 
-(setq +lsp-company-backends '(:separate company-capf company-yasnippet company-tabnine))
+(setq +lsp-company-backends '(:separate company-capf company-tabnine))
 (setq +company-backend-alist '(
-  ;; (typescript-mode company-tide company-capf company-yasnippet company-tabnine)
-  ;; (typescript-mode company-lsp company-capf company-yasnippet company-css company-web-html company-tabnine)
-  ;; (typescript-tsx-mode company-lsp company-capf company-yasnippet company-css company-web-html company-tabnine)
+  ;; (typescript-mode company-tide company-capf company-tabnine)
+  ;; (typescript-mode company-lsp company-capf company-css company-web-html company-tabnine)
+  ;; (typescript-tsx-mode company-lsp company-capf company-css company-web-html company-tabnine)
   (c-mode company-capf company-tabnine)
   (org-mode company-capf company-tabnine)
   (text-mode company-tabnine)
-  (prog-mode company-capf company-yasnippet company-tabnine)
-  (conf-mode company-capf company-dabbrev-code company-yasnippet company-tabnine)))
+  (prog-mode company-capf company-tabnine)
+  (conf-mode company-capf company-dabbrev-code company-tabnine)))
 
 ;; Centaur tabs
 (setq centaur-tabs-enable-key-bindings t)

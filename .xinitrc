@@ -2,7 +2,7 @@
 
 # environment variables
 export BROWSER=/usr/bin/firefox
-export TERMINAL=/usr/bin/kitty
+export TERMINAL=/usr/bin/terminator
 
 # merge in defaults and keymaps
 

@@ -1,2 +1,3 @@
 flycheck_*
 .dir-locals.el
+.idea

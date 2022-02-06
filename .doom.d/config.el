@@ -104,6 +104,7 @@ With argument ARG, do this that many times."
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
   mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
   dired-du-size-format t
+  counsel-find-file-ignore-regexp "\\(?:[#~]$\\)"
   )
 
 (setq +lsp-company-backends '(:separate company-capf company-tabnine))

@@ -95,7 +95,7 @@ With argument ARG, do this that many times."
 (electric-indent-mode 0)
 (setq-default truncate-lines nil)
 (setq doom-font (font-spec :family "FiraCode" :size 17)
-  doom-variable-pitch-font (font-spec :family "Hack" :size 17)
+  doom-variable-pitch-font (font-spec :family "FiraCode" :size 17)
   doom-big-font (font-spec :family "FiraCode" :size 20)
   large-file-warning-threshold nil
   company-idle-delay 0
@@ -105,6 +105,7 @@ With argument ARG, do this that many times."
   mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
   dired-du-size-format t
   counsel-find-file-ignore-regexp "\\(?:[#~]$\\)"
+  vterm-shell "/usr/bin/fish"
   )
 
 (setq +lsp-company-backends '(:separate company-capf company-tabnine))

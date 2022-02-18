@@ -98,7 +98,7 @@ With argument ARG, do this that many times."
   doom-variable-pitch-font (font-spec :family "FiraCode" :size 17)
   doom-big-font (font-spec :family "FiraCode" :size 20)
   large-file-warning-threshold nil
-  company-idle-delay 0
+  company-idle-delay 0.8
   company-tooltip-idle-delay 0
   which-key-idle-delay 0.3
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time

@@ -1,4 +1,6 @@
 [global_config]
+  focus = system
+  tab_position = bottom
   scroll_tabbar = True
   homogeneous_tabbar = False
   title_use_system_font = False

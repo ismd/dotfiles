@@ -316,7 +316,7 @@ exec_always --no-startup-id xset r rate 250 20
 exec_always --no-startup-id setxkbmap -layout us,ru -option grp:toggle
 exec_always --no-startup-id xmodmap ~/.Xmodmap
 exec_always --no-startup-id xinput set-prop "pointer:A4TECH USB Device" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 1.5
-exec_always --no-startup-id xinput set-prop "pointer:Razer Razer DeathAdder Essential" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 2.5
+exec_always --no-startup-id xinput set-prop "pointer:Razer Razer DeathAdder Essential" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 3.5
 
 exec --no-startup-id screenshotgun
 exec --no-startup-id telegram-desktop

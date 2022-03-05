@@ -2,6 +2,7 @@
   focus = mouse
   tab_position = bottom
   scroll_tabbar = True
+  inactive_color_offset = 1.0
   title_use_system_font = False
   title_font = MesloLGS NF 14
 [keybindings]

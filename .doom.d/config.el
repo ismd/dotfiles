@@ -98,7 +98,7 @@ With argument ARG, do this that many times."
   doom-variable-pitch-font (font-spec :family "FiraCode" :size 17)
   doom-big-font (font-spec :family "FiraCode" :size 20)
   large-file-warning-threshold nil
-  company-idle-delay 0.8
+  company-idle-delay nil
   company-tooltip-idle-delay 0
   which-key-idle-delay 0.3
   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
@@ -190,3 +190,44 @@ With argument ARG, do this that many times."
 ;; Web mode
 (after! web-mode
   (map! :map web-mode-map "M-/" #'dabbrev-expand))
+
+;; Flycheck
+(use-package! flycheck
+  :commands flycheck-list-errors flycheck-buffer
+  :hook (doom-first-buffer . global-flycheck-mode)
+  :config
+  (setq flycheck-emacs-lisp-load-path 'inherit)
+
+  ;; Rerunning checks on every newline is a mote excessive.
+  (delq 'new-line flycheck-check-syntax-automatically)
+  ;; And don't recheck on idle as often
+  (setq flycheck-idle-change-delay 1.0)
+
+  ;; For the above functionality, check syntax in a buffer that you switched to
+  ;; only briefly. This allows "refreshing" the syntax check state for several
+  ;; buffers quickly after e.g. changing a config file.
+  (setq flycheck-buffer-switch-check-intermediate-buffers t)
+
+  ;; Display errors a little quicker (default is 0.9s)
+  (setq flycheck-display-errors-delay 0.25)
+
+  ;; Don't commandeer input focus if the error message pops up (happens when
+  ;; tooltips and childframes are disabled).
+  (set-popup-rules!
+    '(("^\\*Flycheck error messages\\*" :select nil)
+      ("^\\*Flycheck errors\\*" :size 0.25)))
+
+  (add-hook! 'doom-escape-hook :append
+    (defun +syntax-check-buffer-h ()
+      "Flycheck buffer on ESC in normal mode."
+      (when flycheck-mode
+        (ignore-errors (flycheck-buffer))
+        nil)))
+
+  (map! :map flycheck-error-list-mode-map
+        :n "C-n"    #'flycheck-error-list-next-error
+        :n "C-p"    #'flycheck-error-list-previous-error
+        :n "j"      #'flycheck-error-list-next-error
+        :n "k"      #'flycheck-error-list-previous-error
+        :n "RET"    #'flycheck-error-list-goto-error
+        :n [return] #'flycheck-error-list-goto-error))

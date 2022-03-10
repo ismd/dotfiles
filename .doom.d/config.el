@@ -231,3 +231,7 @@ With argument ARG, do this that many times."
         :n "k"      #'flycheck-error-list-previous-error
         :n "RET"    #'flycheck-error-list-goto-error
         :n [return] #'flycheck-error-list-goto-error))
+
+;; flycheck-pos-tip
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))

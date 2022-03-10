@@ -52,6 +52,7 @@
 (package! company-tabnine)
 (package! dired-du)
 (package! flycheck)
+(package! flycheck-pos-tip)
 (package! night-owl-theme)
 (package! rg)
 (package! sunrise-commander)

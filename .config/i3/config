@@ -319,7 +319,7 @@ exec_always --no-startup-id xinput set-prop "pointer:A4TECH USB Device" "Coordin
 exec_always --no-startup-id xinput set-prop "pointer:Razer Razer DeathAdder Essential" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 2.5
 
 exec --no-startup-id screenshotgun
-exec --no-startup-id telegram-desktop
+#exec --no-startup-id telegram-desktop
 exec --no-startup-id udiskie --no-automount --tray --notify
 exec --no-startup-id unclutter --timeout 2
 #exec --no-startup-id gammastep -P -O 6000

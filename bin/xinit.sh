@@ -6,3 +6,4 @@ setxkbmap -layout us,ru -option grp:toggle
 xmodmap ~/.Xmodmap
 feh --bg-fill --randomize ~/Pictures/Wallpapers
 #gammastep -P -O 6200
+autorandr -c

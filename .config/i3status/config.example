@@ -21,8 +21,9 @@ order += "volume master"
 #order += "run_watch lsyncd"
 #order += "ipv6"
 #order += "run_watch VPN"
-order += "wireless wlp0s20f3"
-order += "ethernet enp0s31f6"
+order += "wireless wlp42s0f1u1"
+order += "ethernet enp39s0"
+order += "ethernet wg0"
 order += "battery 0"
 order += "cpu_temperature 0"
 order += "cpu_usage 0"
@@ -30,14 +31,19 @@ order += "load"
 order += "disk /"
 order += "tztime local"
 
-wireless wlp0s20f3 {
+wireless wlp42s0f1u1 {
     format_up = "%quality %essid"
-    format_down = ""
+    format_down = " down"
 }
 
-ethernet enp0s31f6 {
+ethernet enp39s0 {
     #if you use %speed, i3status requires root privileges
-    format_up = "%ip (%speed)"
+    format_up = "🖧 %ip (%speed)"
+    format_down = "🖧 down"
+}
+
+ethernet wg0 {
+    format_up = "wg: %ip"
     format_down = ""
 }
 

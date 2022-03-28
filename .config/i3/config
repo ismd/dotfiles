@@ -310,6 +310,7 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id gxkb
 #exec --no-startup-id xautolock -time 10 -locker blurlock
 
+exec_always --no-startup-id autorandr -c
 exec_always --no-startup-id xset -dpms
 exec_always --no-startup-id xset s off
 exec_always --no-startup-id xset r rate 250 20

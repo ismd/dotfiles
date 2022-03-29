@@ -302,7 +302,7 @@ bindsym $mod+Shift+i exec --no-startup-id $Locker
 #exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id feh --bg-fill --randomize ~/Pictures/Wallpapers
 exec --no-startup-id picom -b
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 #exec --no-startup-id xfce4-power-manager
 #exec --no-startup-id pamac-tray
 #exec --no-startup-id clipit

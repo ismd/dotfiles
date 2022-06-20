@@ -91,12 +91,12 @@ With argument ARG, do this that many times."
 (set-default-coding-systems 'utf-8)
 (setq-default tab-width 4)
 (global-auto-revert-mode 1)
-;; (doom/set-frame-opacity 92)
+(doom/set-frame-opacity 92)
 (electric-indent-mode 0)
 (setq-default truncate-lines nil)
 (setq doom-font (font-spec :family "FiraCode" :size 17)
   doom-variable-pitch-font (font-spec :family "FiraCode" :size 17)
-  doom-big-font (font-spec :family "FiraCode" :size 20)
+  doom-big-font (font-spec :family "FiraCode" :size 18)
   large-file-warning-threshold nil
   company-idle-delay nil
   company-tooltip-idle-delay 0

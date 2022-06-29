@@ -5,38 +5,59 @@
 
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
+;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Vladimir Kosteley"
       user-mail-address "zzismd@gmail.com")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
+;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;; - `doom-font' -- the primary font to use
+;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
+;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
+;; - `doom-unicode-font' -- for unicode glyphs
+;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+;; See 'C-h v doom-font' for documentation and more examples of what they
+;; accept. For example:
+;;
+(setq doom-font (font-spec :family "Fira Code" :size 17 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Fira Code" :size 17 :weight 'semi-light)
+      doom-big-font (font-spec :family "Fira Code" :size 18))
+;;
+;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
+;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
+;; refresh your font settings. If Emacs still can't find your font, it likely
+;; wasn't installed correctly. Font issues are rarely Doom issues!
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-vibrant)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-;; (setq org-directory "~/Documents/org/")
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/Yandex.Disk/Documents/org/")
 
-;; Here are some additional functions/macros that could help you configure Doom:
+
+;; Whenever you reconfigure a package, make sure to wrap your config in an
+;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
+;;
+;;   (after! PACKAGE
+;;     (setq x y))
+;;
+;; The exceptions to this rule:
+;;
+;;   - Setting file/directory variables (like `org-directory')
+;;   - Setting variables which explicitly tell you to set them before their
+;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
+;;   - Setting doom variables (which start with 'doom-' or '+').
+;;
+;; Here are some additional functions/macros that will help you configure Doom.
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
@@ -49,6 +70,8 @@
 ;; To get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
 ;; This will open documentation for it, including demos of how they are used.
+;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
+;; etc).
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
@@ -86,63 +109,13 @@ With argument ARG, do this that many times."
     (dired-goto-file current-dir)))
 
 ;;
-;; Init
+;; Keybindings
 ;;
-(set-default-coding-systems 'utf-8)
-(setq-default tab-width 4)
-(global-auto-revert-mode 1)
-(doom/set-frame-opacity 92)
-(electric-indent-mode 0)
-(setq-default truncate-lines nil)
-(setq doom-font (font-spec :family "FiraCode" :size 17)
-  doom-variable-pitch-font (font-spec :family "FiraCode" :size 17)
-  doom-big-font (font-spec :family "FiraCode" :size 18)
-  large-file-warning-threshold nil
-  company-idle-delay nil
-  company-tooltip-idle-delay 0
-  which-key-idle-delay 0.3
-  mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
-  mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
-  dired-du-size-format t
-  counsel-find-file-ignore-regexp "\\(?:[#~]$\\)"
-  vterm-shell "/usr/bin/fish"
-  )
-
-(setq +lsp-company-backends '(:separate company-capf company-tabnine))
-(setq +company-backend-alist '(
-  ;; (typescript-mode company-tide company-capf company-tabnine)
-  ;; (typescript-mode company-lsp company-capf company-css company-web-html company-tabnine)
-  ;; (typescript-tsx-mode company-lsp company-capf company-css company-web-html company-tabnine)
-  (c-mode company-capf company-tabnine)
-  (org-mode company-capf company-tabnine)
-  (text-mode company-tabnine)
-  (prog-mode company-capf company-tabnine)
-  (conf-mode company-capf company-dabbrev-code company-tabnine)))
-
-;; Centaur tabs
-(setq centaur-tabs-enable-key-bindings t)
-(setq centaur-tabs-style "chamfer")
-(setq centaur-tabs-height 17)
-(setq centaur-tabs-set-bar nil)
-(setq centaur-tabs-set-bar nil)
-(setq centaur-tabs-adjust-buffer-order t)
-
-(global-set-key (kbd "C-k") 'ismd/kill-line)
-(global-set-key (kbd "M-d") 'ismd/delete-word)
-(global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
-(global-set-key (kbd "C-M-r") 'revert-buffer)
-(global-set-key (kbd "M-s s") 'avy-goto-char-timer)
+;; Move cursor with M-n and M-p
 (global-set-key (kbd "M-n") "\C-u3\C-v")
 (global-set-key (kbd "M-p") "\C-u3\M-v")
-(global-set-key (kbd "C-s") '+default/search-buffer)
-(global-set-key (kbd "C-<tab>") 'centaur-tabs-forward)
-(global-set-key (kbd "C-S-<iso-lefttab>") 'centaur-tabs-backward)
-(global-set-key (kbd "C-c w <") '+workspace/swap-left)
-(global-set-key (kbd "C-c w >") '+workspace/swap-right)
-(global-set-key (kbd "C-c s r") 'ivy-resume)
-(global-set-key (kbd "C-c <tab>") 'previous-buffer)
-(global-set-key (kbd "C-c S-<iso-lefttab>") 'next-buffer)
 
+;; Winum select window
 (global-set-key (kbd "M-0") 'treemacs-select-window)
 (global-set-key (kbd "M-1") 'winum-select-window-1)
 (global-set-key (kbd "M-2") 'winum-select-window-2)
@@ -154,6 +127,23 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "M-8") 'winum-select-window-8)
 (global-set-key (kbd "M-9") 'winum-select-window-9)
 
+;; Revert buffer
+(global-set-key (kbd "C-M-r") 'revert-buffer)
+
+;; Avy
+(global-set-key (kbd "M-s s") 'avy-goto-char-timer)
+
+;; Kill, delete
+(global-set-key (kbd "C-k") 'ismd/kill-line)
+(global-set-key (kbd "M-d") 'ismd/delete-word)
+(global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
+
+;;
+;; Init
+;;
+;; Opacity
+(doom/set-frame-opacity 92)
+
 ;; Super save
 (use-package! super-save
   :ensure t
@@ -161,77 +151,163 @@ With argument ARG, do this that many times."
   (super-save-mode +1)
   (setq super-save-auto-save-when-idle t))
 
-;; Ivy
-(after! ivy
-  (setq ivy-wrap nil)
-  (setq ivy-extra-directories '("./")))
-
-;; Indent rigidly
-(map! :map indent-rigidly-map "b" #'indent-rigidly-left)
-(map! :map indent-rigidly-map "f" #'indent-rigidly-right)
-(map! :map indent-rigidly-map "B" #'indent-rigidly-left-to-tab-stop)
-(map! :map indent-rigidly-map "F" #'indent-rigidly-right-to-tab-stop)
-
-;; C/C++
-(after! c
-  (c-set-style "java"))
-
-(after! ccls
-  (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
-  (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
-
 ;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
 (map! :map dired-mode-map "C-x M-r" #'dired-du-mode)
 
-;; TabNine
-(use-package! company-tabnine)
 
-;; Web mode
-(after! web-mode
-  (map! :map web-mode-map "M-/" #'dabbrev-expand))
+;; OLD
 
-;; Flycheck
-(use-package! flycheck
-  :commands flycheck-list-errors flycheck-buffer
-  :hook (doom-first-buffer . global-flycheck-mode)
-  :config
-  (setq flycheck-emacs-lisp-load-path 'inherit)
+;;
+;; Init
+;;
+;; (set-default-coding-systems 'utf-8)
+;; (setq-default tab-width 4)
+;; (global-auto-revert-mode 1)
+;; (doom/set-frame-opacity 92)
+;; (electric-indent-mode 0)
+;; (setq-default truncate-lines nil)
+;; (setq doom-font (font-spec :family "FiraCode" :size 17)
+;;   doom-variable-pitch-font (font-spec :family "FiraCode" :size 17)
+;;   doom-big-font (font-spec :family "FiraCode" :size 18)
+;;   large-file-warning-threshold nil
+;;   company-idle-delay nil
+;;   company-tooltip-idle-delay 0
+;;   which-key-idle-delay 0.3
+;;   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
+;;   mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
+;;   dired-du-size-format t
+;;   counsel-find-file-ignore-regexp "\\(?:[#~]$\\)"
+;;   vterm-shell "/usr/bin/fish"
+;;   )
 
-  ;; Rerunning checks on every newline is a mote excessive.
-  (delq 'new-line flycheck-check-syntax-automatically)
-  ;; And don't recheck on idle as often
-  (setq flycheck-idle-change-delay 1.0)
+;; (setq +lsp-company-backends '(:separate company-capf company-tabnine))
+;; (setq +company-backend-alist '(
+;;   ;; (typescript-mode company-tide company-capf company-tabnine)
+;;   ;; (typescript-mode company-lsp company-capf company-css company-web-html company-tabnine)
+;;   ;; (typescript-tsx-mode company-lsp company-capf company-css company-web-html company-tabnine)
+;;   (c-mode company-capf company-tabnine)
+;;   (org-mode company-capf company-tabnine)
+;;   (text-mode company-tabnine)
+;;   (prog-mode company-capf company-tabnine)
+;;   (conf-mode company-capf company-dabbrev-code company-tabnine)))
 
-  ;; For the above functionality, check syntax in a buffer that you switched to
-  ;; only briefly. This allows "refreshing" the syntax check state for several
-  ;; buffers quickly after e.g. changing a config file.
-  (setq flycheck-buffer-switch-check-intermediate-buffers t)
+;; ;; Centaur tabs
+;; (setq centaur-tabs-enable-key-bindings t)
+;; (setq centaur-tabs-style "chamfer")
+;; (setq centaur-tabs-height 17)
+;; (setq centaur-tabs-set-bar nil)
+;; (setq centaur-tabs-set-bar nil)
+;; (setq centaur-tabs-adjust-buffer-order t)
 
-  ;; Display errors a little quicker (default is 0.9s)
-  (setq flycheck-display-errors-delay 0.25)
+;; (global-set-key (kbd "C-k") 'ismd/kill-line)
+;; (global-set-key (kbd "M-d") 'ismd/delete-word)
+;; (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
+;; (global-set-key (kbd "C-M-r") 'revert-buffer)
+;; (global-set-key (kbd "M-s s") 'avy-goto-char-timer)
+;; (global-set-key (kbd "M-n") "\C-u3\C-v")
+;; (global-set-key (kbd "M-p") "\C-u3\M-v")
+;; (global-set-key (kbd "C-s") '+default/search-buffer)
+;; (global-set-key (kbd "C-<tab>") 'centaur-tabs-forward)
+;; (global-set-key (kbd "C-S-<iso-lefttab>") 'centaur-tabs-backward)
+;; (global-set-key (kbd "C-c w <") '+workspace/swap-left)
+;; (global-set-key (kbd "C-c w >") '+workspace/swap-right)
+;; (global-set-key (kbd "C-c s r") 'ivy-resume)
+;; (global-set-key (kbd "C-c <tab>") 'previous-buffer)
+;; (global-set-key (kbd "C-c S-<iso-lefttab>") 'next-buffer)
 
-  ;; Don't commandeer input focus if the error message pops up (happens when
-  ;; tooltips and childframes are disabled).
-  (set-popup-rules!
-    '(("^\\*Flycheck error messages\\*" :select nil)
-      ("^\\*Flycheck errors\\*" :size 0.25)))
+;; (global-set-key (kbd "M-0") 'treemacs-select-window)
+;; (global-set-key (kbd "M-1") 'winum-select-window-1)
+;; (global-set-key (kbd "M-2") 'winum-select-window-2)
+;; (global-set-key (kbd "M-3") 'winum-select-window-3)
+;; (global-set-key (kbd "M-4") 'winum-select-window-4)
+;; (global-set-key (kbd "M-5") 'winum-select-window-5)
+;; (global-set-key (kbd "M-6") 'winum-select-window-6)
+;; (global-set-key (kbd "M-7") 'winum-select-window-7)
+;; (global-set-key (kbd "M-8") 'winum-select-window-8)
+;; (global-set-key (kbd "M-9") 'winum-select-window-9)
 
-  (add-hook! 'doom-escape-hook :append
-    (defun +syntax-check-buffer-h ()
-      "Flycheck buffer on ESC in normal mode."
-      (when flycheck-mode
-        (ignore-errors (flycheck-buffer))
-        nil)))
+;; ;; Super save
+;; (use-package! super-save
+;;   :ensure t
+;;   :config
+;;   (super-save-mode +1)
+;;   (setq super-save-auto-save-when-idle t))
 
-  (map! :map flycheck-error-list-mode-map
-        :n "C-n"    #'flycheck-error-list-next-error
-        :n "C-p"    #'flycheck-error-list-previous-error
-        :n "j"      #'flycheck-error-list-next-error
-        :n "k"      #'flycheck-error-list-previous-error
-        :n "RET"    #'flycheck-error-list-goto-error
-        :n [return] #'flycheck-error-list-goto-error))
+;; ;; Ivy
+;; (after! ivy
+;;   (setq ivy-wrap nil)
+;;   (setq ivy-extra-directories '("./")))
 
-;; flycheck-pos-tip
-(with-eval-after-load 'flycheck
-  (flycheck-pos-tip-mode))
+;; ;; Indent rigidly
+;; (map! :map indent-rigidly-map "b" #'indent-rigidly-left)
+;; (map! :map indent-rigidly-map "f" #'indent-rigidly-right)
+;; (map! :map indent-rigidly-map "B" #'indent-rigidly-left-to-tab-stop)
+;; (map! :map indent-rigidly-map "F" #'indent-rigidly-right-to-tab-stop)
+
+;; ;; C/C++
+;; (after! c
+;;   (c-set-style "java"))
+
+;; (after! ccls
+;;   (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
+;;   (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
+
+;; ;; Dired
+;; (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
+;; (map! :map dired-mode-map "C-x M-r" #'dired-du-mode)
+
+;; ;; TabNine
+;; (use-package! company-tabnine)
+
+;; ;; Web mode
+;; (after! web-mode
+;;   (map! :map web-mode-map "M-/" #'dabbrev-expand))
+
+;; ;; Flycheck
+;; (use-package! flycheck
+;;   :commands flycheck-list-errors flycheck-buffer
+;;   :hook (doom-first-buffer . global-flycheck-mode)
+;;   :config
+;;   (setq flycheck-emacs-lisp-load-path 'inherit)
+
+;;   ;; Rerunning checks on every newline is a mote excessive.
+;;   (delq 'new-line flycheck-check-syntax-automatically)
+;;   ;; And don't recheck on idle as often
+;;   (setq flycheck-idle-change-delay 1.0)
+
+;;   ;; For the above functionality, check syntax in a buffer that you switched to
+;;   ;; only briefly. This allows "refreshing" the syntax check state for several
+;;   ;; buffers quickly after e.g. changing a config file.
+;;   (setq flycheck-buffer-switch-check-intermediate-buffers t)
+
+;;   ;; Display errors a little quicker (default is 0.9s)
+;;   (setq flycheck-display-errors-delay 0.25)
+
+;;   ;; Don't commandeer input focus if the error message pops up (happens when
+;;   ;; tooltips and childframes are disabled).
+;;   (set-popup-rules!
+;;     '(("^\\*Flycheck error messages\\*" :select nil)
+;;       ("^\\*Flycheck errors\\*" :size 0.25)))
+
+;;   (add-hook! 'doom-escape-hook :append
+;;     (defun +syntax-check-buffer-h ()
+;;       "Flycheck buffer on ESC in normal mode."
+;;       (when flycheck-mode
+;;         (ignore-errors (flycheck-buffer))
+;;         nil)))
+
+;;   (map! :map flycheck-error-list-mode-map
+;;         :n "C-n"    #'flycheck-error-list-next-error
+;;         :n "C-p"    #'flycheck-error-list-previous-error
+;;         :n "j"      #'flycheck-error-list-next-error
+;;         :n "k"      #'flycheck-error-list-previous-error
+;;         :n "RET"    #'flycheck-error-list-goto-error
+;;         :n [return] #'flycheck-error-list-goto-error))
+
+;; ;; flycheck-pos-tip
+;; (with-eval-after-load 'flycheck
+;;   (flycheck-pos-tip-mode))
+
+;; ;; Vertico
+;; (setq vertico-cycle nil)

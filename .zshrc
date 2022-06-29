@@ -19,6 +19,8 @@ export NODE_OPTIONS="--max-old-space-size=8192"
 export SHELL=/bin/zsh
 export ESHELL=/bin/zsh
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+export BROWSER=/usr/bin/chromium
+export TERMINAL=/usr/bin/terminator
 
 # Multiple monitors for Wayland
 export WLR_DRM_NO_MODIFIERS DEFAULT=1

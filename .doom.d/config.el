@@ -138,6 +138,10 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "M-d") 'ismd/delete-word)
 (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
 
+;; Workspaces swap
+(global-set-key (kbd "C-c w <") '+workspace/swap-left)
+(global-set-key (kbd "C-c w >") '+workspace/swap-right)
+
 ;;
 ;; Init
 ;;
@@ -210,8 +214,6 @@ With argument ARG, do this that many times."
 ;; (global-set-key (kbd "C-s") '+default/search-buffer)
 ;; (global-set-key (kbd "C-<tab>") 'centaur-tabs-forward)
 ;; (global-set-key (kbd "C-S-<iso-lefttab>") 'centaur-tabs-backward)
-;; (global-set-key (kbd "C-c w <") '+workspace/swap-left)
-;; (global-set-key (kbd "C-c w >") '+workspace/swap-right)
 ;; (global-set-key (kbd "C-c s r") 'ivy-resume)
 ;; (global-set-key (kbd "C-c <tab>") 'previous-buffer)
 ;; (global-set-key (kbd "C-c S-<iso-lefttab>") 'next-buffer)

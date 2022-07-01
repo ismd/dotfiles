@@ -23,7 +23,8 @@
 ;;
 (setq doom-font (font-spec :family "Fira Code" :size 17 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Fira Code" :size 17 :weight 'semi-light)
-      doom-big-font (font-spec :family "Fira Code" :size 18))
+      doom-big-font (font-spec :family "Fira Code" :size 20)
+      doom-unicode-font (font-spec :family "MesloLGS Nerd Font Mono"))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -142,6 +143,10 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "C-c w <") '+workspace/swap-left)
 (global-set-key (kbd "C-c w >") '+workspace/swap-right)
 
+;; Centaur tabs
+(global-set-key (kbd "C-c <")  'centaur-tabs-move-current-tab-to-left)
+(global-set-key (kbd "C-c >") 'centaur-tabs-move-current-tab-to-right)
+
 ;;
 ;; Init
 ;;
@@ -158,6 +163,10 @@ With argument ARG, do this that many times."
 ;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
 (map! :map dired-mode-map "C-x M-r" #'dired-du-mode)
+
+;; Centaur tabs
+(after! centaur-tabs
+  (centaur-tabs-group-by-projectile-project))
 
 
 ;; OLD

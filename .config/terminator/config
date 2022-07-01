@@ -16,6 +16,7 @@
   switch_to_tab_8 = <Primary><Alt>8
   switch_to_tab_9 = <Primary><Alt>9
   switch_to_tab_10 = <Primary><Alt>0
+  edit_tab_title = <Primary><Alt>t
 [profiles]
   [[default]]
     background_color = "#282828"

@@ -142,8 +142,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ec="emacsclient"
-#alias ssh="kitty +kitten ssh"
+alias ec="emacsclient -c -a 'emacs'"
 alias pssh="TERM='xterm-256color' pssh"
 
 autoload -U select-word-style

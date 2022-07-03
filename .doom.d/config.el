@@ -147,11 +147,17 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "C-c <")  'centaur-tabs-move-current-tab-to-left)
 (global-set-key (kbd "C-c >") 'centaur-tabs-move-current-tab-to-right)
 
+;; Search
+(global-set-key (kbd "C-s") '+default/search-buffer)
+
 ;;
 ;; Init
 ;;
 ;; Opacity
 (doom/set-frame-opacity 92)
+(global-auto-revert-mode 1)
+
+(setq tab-width 4)
 
 ;; Super save
 (use-package! super-save
@@ -168,6 +174,19 @@ With argument ARG, do this that many times."
 (after! centaur-tabs
   (centaur-tabs-group-by-projectile-project))
 
+;; Indent rigidly
+(map! :map indent-rigidly-map "b" #'indent-rigidly-left)
+(map! :map indent-rigidly-map "f" #'indent-rigidly-right)
+(map! :map indent-rigidly-map "B" #'indent-rigidly-left-to-tab-stop)
+(map! :map indent-rigidly-map "F" #'indent-rigidly-right-to-tab-stop)
+
+;; Vertico
+(setq vertico-cycle nil)
+
+;; C/C++
+(after! c
+  (c-set-style "java"))
+
 
 ;; OLD
 
@@ -175,11 +194,9 @@ With argument ARG, do this that many times."
 ;; Init
 ;;
 ;; (set-default-coding-systems 'utf-8)
-;; (setq-default tab-width 4)
-;; (global-auto-revert-mode 1)
 ;; (doom/set-frame-opacity 92)
 ;; (electric-indent-mode 0)
-;; (setq-default truncate-lines nil)
+;; (setq truncate-lines nil)
 ;; (setq doom-font (font-spec :family "FiraCode" :size 17)
 ;;   doom-variable-pitch-font (font-spec :family "FiraCode" :size 17)
 ;;   doom-big-font (font-spec :family "FiraCode" :size 18)
@@ -213,60 +230,21 @@ With argument ARG, do this that many times."
 ;; (setq centaur-tabs-set-bar nil)
 ;; (setq centaur-tabs-adjust-buffer-order t)
 
-;; (global-set-key (kbd "C-k") 'ismd/kill-line)
-;; (global-set-key (kbd "M-d") 'ismd/delete-word)
-;; (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
-;; (global-set-key (kbd "C-M-r") 'revert-buffer)
-;; (global-set-key (kbd "M-s s") 'avy-goto-char-timer)
-;; (global-set-key (kbd "M-n") "\C-u3\C-v")
-;; (global-set-key (kbd "M-p") "\C-u3\M-v")
-;; (global-set-key (kbd "C-s") '+default/search-buffer)
+
 ;; (global-set-key (kbd "C-<tab>") 'centaur-tabs-forward)
 ;; (global-set-key (kbd "C-S-<iso-lefttab>") 'centaur-tabs-backward)
 ;; (global-set-key (kbd "C-c s r") 'ivy-resume)
 ;; (global-set-key (kbd "C-c <tab>") 'previous-buffer)
 ;; (global-set-key (kbd "C-c S-<iso-lefttab>") 'next-buffer)
 
-;; (global-set-key (kbd "M-0") 'treemacs-select-window)
-;; (global-set-key (kbd "M-1") 'winum-select-window-1)
-;; (global-set-key (kbd "M-2") 'winum-select-window-2)
-;; (global-set-key (kbd "M-3") 'winum-select-window-3)
-;; (global-set-key (kbd "M-4") 'winum-select-window-4)
-;; (global-set-key (kbd "M-5") 'winum-select-window-5)
-;; (global-set-key (kbd "M-6") 'winum-select-window-6)
-;; (global-set-key (kbd "M-7") 'winum-select-window-7)
-;; (global-set-key (kbd "M-8") 'winum-select-window-8)
-;; (global-set-key (kbd "M-9") 'winum-select-window-9)
-
-;; ;; Super save
-;; (use-package! super-save
-;;   :ensure t
-;;   :config
-;;   (super-save-mode +1)
-;;   (setq super-save-auto-save-when-idle t))
-
 ;; ;; Ivy
 ;; (after! ivy
 ;;   (setq ivy-wrap nil)
 ;;   (setq ivy-extra-directories '("./")))
 
-;; ;; Indent rigidly
-;; (map! :map indent-rigidly-map "b" #'indent-rigidly-left)
-;; (map! :map indent-rigidly-map "f" #'indent-rigidly-right)
-;; (map! :map indent-rigidly-map "B" #'indent-rigidly-left-to-tab-stop)
-;; (map! :map indent-rigidly-map "F" #'indent-rigidly-right-to-tab-stop)
-
-;; ;; C/C++
-;; (after! c
-;;   (c-set-style "java"))
-
 ;; (after! ccls
 ;;   (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
 ;;   (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
-
-;; ;; Dired
-;; (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
-;; (map! :map dired-mode-map "C-x M-r" #'dired-du-mode)
 
 ;; ;; TabNine
 ;; (use-package! company-tabnine)
@@ -319,6 +297,3 @@ With argument ARG, do this that many times."
 ;; ;; flycheck-pos-tip
 ;; (with-eval-after-load 'flycheck
 ;;   (flycheck-pos-tip-mode))
-
-;; ;; Vertico
-;; (setq vertico-cycle nil)

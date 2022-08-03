@@ -225,7 +225,7 @@ bindsym $mod+Shift+r restart
 set $Locker ~/.dotfiles/bin/lock-screen.sh
 
 bindsym $mod+Shift+e mode "$mode_system"
-set $mode_system (l)ock, turn off (d)isplay, toggle (n)otifications, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (x)init.sh, (k)eyboard layout, (Shift+s)hutdown
+set $mode_system (l)ock, turn off (d)isplay, toggle (n)otifications, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (x)init.sh, (k)eyboard layout, (p)ulseaudio-equalizer, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym s exec --no-startup-id systemctl hybrid-sleep, mode "default"
@@ -237,6 +237,7 @@ mode "$mode_system" {
     bindsym n exec --no-startup-id ~/.dotfiles/bin/notifications.sh toggle, mode "default"
     bindsym x exec --no-startup-id ~/.dotfiles/bin/xinit.sh toggle, mode "default"
     bindsym k exec --no-startup-id ~/.dotfiles/bin/keyboard-layout.sh toggle, mode "default"
+    bindsym p exec --no-startup-id pulseaudio-equalizer enable, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"

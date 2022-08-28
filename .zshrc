@@ -20,7 +20,7 @@ export SHELL=/bin/zsh
 export ESHELL=/bin/zsh
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export BROWSER=/usr/bin/chromium
-export TERMINAL=/usr/bin/terminator
+export TERMINAL=/usr/bin/kitty
 
 # Multiple monitors for Wayland
 export WLR_DRM_NO_MODIFIERS DEFAULT=1
@@ -182,3 +182,6 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && [ ! -f /usr/bin/sway ]; then
     exec startx
 fi
+
+# Kitty
+[[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"

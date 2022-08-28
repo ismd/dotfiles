@@ -24,7 +24,8 @@
 (setq doom-font (font-spec :family "Fira Code" :size 17 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Fira Code" :size 17 :weight 'semi-light)
       doom-big-font (font-spec :family "Fira Code" :size 20)
-      doom-unicode-font (font-spec :family "MesloLGS Nerd Font Mono"))
+      doom-unicode-font (font-spec :family "MesloLGS Nerd Font Mono")
+      doom-serif-font (font-spec :family "Fira Code" :size 17 :weight 'semi-light))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -34,7 +35,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-one-light)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -158,6 +159,8 @@ With argument ARG, do this that many times."
 (global-auto-revert-mode 1)
 
 (setq tab-width 4)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 
 ;; Super save
 (use-package! super-save
@@ -165,6 +168,8 @@ With argument ARG, do this that many times."
   :config
   (super-save-mode +1)
   (setq super-save-auto-save-when-idle t))
+
+;; (setq super-save-exclude '(".org" ".md"))
 
 ;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)

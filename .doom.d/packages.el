@@ -49,12 +49,12 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+(package! company-tabnine)
 (package! super-save)
 
 
 ;; OLD
 
-;; (package! company-tabnine)
 ;; (package! dired-du)
 ;; (package! flycheck)
 ;; (package! flycheck-pos-tip)

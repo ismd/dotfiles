@@ -19,8 +19,10 @@ export NODE_OPTIONS="--max-old-space-size=8192"
 export SHELL=/bin/zsh
 export ESHELL=/bin/zsh
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-export BROWSER=/usr/bin/chromium
+export BROWSER=/usr/bin/firefox
 export TERMINAL=/usr/bin/kitty
+# Install qgnomeplatform-qt5 
+export QT_QPA_PLATFORMTHEME=gnome
 
 # Multiple monitors for Wayland
 export WLR_DRM_NO_MODIFIERS DEFAULT=1
@@ -178,10 +180,10 @@ fi
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Kitty
+[[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
+
 # startx
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && [ ! -f /usr/bin/sway ]; then
     exec startx
 fi
-
-# Kitty
-[[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"

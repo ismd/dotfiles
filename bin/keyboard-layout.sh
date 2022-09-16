@@ -2,5 +2,5 @@
 xset -dpms
 xset s off
 xset r rate 250 20
-setxkbmap -model hhk -layout us,ru -option grp:toggle
-xmodmap ~/.Xmodmap
+#setxkbmap -layout us,ru -option "grp:toggle,ctrl:nocaps"
+#xmodmap ~/.Xmodmap

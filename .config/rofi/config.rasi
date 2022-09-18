@@ -2,4 +2,10 @@ configuration {
 	font: "Hack 14";
 }
 
-@theme "/usr/share/rofi/themes/android_notification.rasi"
+// @theme "/usr/share/rofi/themes/android_notification.rasi"
+
+/* Dark theme. */
+@import "~/.cache/wal/colors-rofi-dark"
+
+/* Light theme. */
+// @import "~/.cache/wal/colors-rofi-light"

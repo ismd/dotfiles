@@ -35,7 +35,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-oceanic-next)
+(setq doom-theme 'ewal-doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -155,7 +155,7 @@ With argument ARG, do this that many times."
 ;; Init
 ;;
 ;; Opacity
-(doom/set-frame-opacity 92)
+(doom/set-frame-opacity 80)
 (global-auto-revert-mode 1)
 
 (setq tab-width 4)

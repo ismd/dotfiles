@@ -50,6 +50,7 @@
 ;(unpin! t)
 
 (package! company-tabnine)
+(package! ewal-doom-themes)
 (package! super-save)
 
 

@@ -183,6 +183,9 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # Kitty
 [[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
 
+# pywal
+(cat ~/.cache/wal/sequences &)
+
 # startx
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && [ ! -f /usr/bin/sway ]; then
     exec startx

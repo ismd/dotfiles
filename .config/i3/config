@@ -225,7 +225,7 @@ bindsym $mod+Shift+r restart
 set $Locker ~/.dotfiles/bin/lock-screen.sh
 
 bindsym $mod+Shift+e mode "$mode_system"
-set $mode_system (l)ock, turn off (d)isplay, toggle (n)otifications, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (x)init.sh, (k)eyboard layout, (p)ulseaudio-equalizer, (a)utorandr, (Shift+s)hutdown
+set $mode_system (l)ock, turn off (d)isplay, toggle (n)otifications, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (p)ulseaudio-equalizer, (a)utorandr, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym s exec --no-startup-id systemctl hybrid-sleep, mode "default"
@@ -235,8 +235,6 @@ mode "$mode_system" {
     bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
     bindsym d exec --no-startup-id xset dpms force off, mode "default"
     bindsym n exec --no-startup-id $HOME/.dotfiles/bin/notifications.sh toggle, mode "default"
-    # bindsym x exec --no-startup-id $HOME/.dotfiles/bin/xinit.sh toggle, mode "default"
-    # bindsym k exec --no-startup-id $HOME/.dotfiles/bin/keyboard-layout.sh toggle, mode "default"
     bindsym z exec --no-startup-id pulseaudio-equalizer enable, mode "default"
     bindsym a exec --no-startup-id $HOME/.dotfiles/bin/autorandr.sh, mode "default"
     bindsym w exec --no-startup-id $HOME/.dotfiles/bin/wal.sh, mode "default"
@@ -278,7 +276,6 @@ bindsym $mod+Shift+i exec --no-startup-id $Locker
 # Background
 #exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 #exec --no-startup-id nitrogen --restore
-#exec_always --no-startup-id ~/.dotfiles/bin/wallpaper.sh
 
 # Autostart applications
 exec --no-startup-id $HOME/.config/polybar/launch.sh

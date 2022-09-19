@@ -278,33 +278,20 @@ bindsym $mod+Shift+i exec --no-startup-id $Locker
 #exec --no-startup-id nitrogen --restore
 
 # Autostart applications
-exec --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id picom -b
-exec --no-startup-id nm-applet
-#exec --no-startup-id xfce4-power-manager
-#exec --no-startup-id pamac-tray
-#exec --no-startup-id clipit
-exec --no-startup-id blueman-applet
-exec --no-startup-id gxkb
-#exec --no-startup-id xautolock -time 10 -locker blurlock
-#exec --no-startup-id emacs --daemon
+exec --no-startup-id $HOME/.dotfiles/bin/autorandr.sh && $HOME/.config/polybar/launch.sh
 
-#exec_always --no-startup-id autorandr -c
-exec_always --no-startup-id xset -dpms
-exec_always --no-startup-id xset s off
-exec_always --no-startup-id xset r rate 250 20
-#exec_always --no-startup-id setxkbmap -layout us,ru -option grp:toggle
-#exec_always --no-startup-id xmodmap ~/.Xmodmap
 exec_always --no-startup-id xinput set-prop "pointer:A4TECH USB Device" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 1.5
 exec_always --no-startup-id xinput set-prop "pointer:Razer Razer DeathAdder Essential" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 2.5
 
+exec --no-startup-id picom -b
+exec --no-startup-id nm-applet
 exec --no-startup-id screenshotgun
-#exec --no-startup-id telegram-desktop
+exec --no-startup-id telegram-desktop
 exec --no-startup-id udiskie --no-automount --tray --notify
 exec --no-startup-id unclutter --timeout 2
-#exec --no-startup-id gammastep -P -O 6000
 exec --no-startup-id gammastep-indicator
-#exec --no-startup-id blueberry-tray
+exec --no-startup-id blueman-applet
+exec --no-startup-id gxkb
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

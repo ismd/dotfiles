@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-wal -i ~/Pictures/Wallpapers
+
+INPUT=${1:-$HOME/Pictures/Wallpapers}
+
+wal -i $INPUT
 pywalfox update
 wal-telegram -w

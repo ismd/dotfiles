@@ -155,7 +155,7 @@ With argument ARG, do this that many times."
 ;; Init
 ;;
 ;; Opacity
-(doom/set-frame-opacity 80)
+(doom/set-frame-opacity 90)
 (global-auto-revert-mode 1)
 
 (setq tab-width 4)

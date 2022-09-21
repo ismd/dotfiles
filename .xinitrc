@@ -31,6 +31,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
+# X
+xset -dpms
+xset s off
+xset r rate 250 22
+
 # pywal restore
 wal -R
 

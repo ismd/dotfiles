@@ -191,19 +191,19 @@ With argument ARG, do this that many times."
 ;; Projectile
 (setq projectile-project-search-path '(("~/coding/" . 1) ("~/a/data-ui/" . 1)))
 
-(projectile-register-project-type 'npm '("package.json")
-  :project-file "package.json"
-  :compile "npm install"
-  :test "npm test"
-  :run "npm start"
-  :test-suffix ".spec")
+;; (projectile-register-project-type 'npm '("package.json")
+;;   :project-file "package.json"
+;;   :compile "npm install"
+;;   :test "npm test"
+;;   :run "npm start"
+;;   :test-suffix ".spec")
 
-(projectile-register-project-type 'arcadia '("a.yaml")
-  :project-file "a.yaml"
-  :compile "npm install"
-  :test "npm test"
-  :run "npm start"
-  :test-suffix ".spec")
+;; (projectile-register-project-type 'arcadia '("a.yaml")
+;;   :project-file "a.yaml"
+;;   :compile "npm install"
+;;   :test "npm test"
+;;   :run "npm start"
+;;   :test-suffix ".spec")
 
 ;; C/C++
 (after! c

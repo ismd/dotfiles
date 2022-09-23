@@ -273,7 +273,7 @@ mode "resize" {
 bindsym $mod+Shift+i exec --no-startup-id $Locker
 
 # Autostart applications
-exec --no-startup-id sleep 3s && $HOME/.dotfiles/bin/autorandr.sh && sleep 2s && $HOME/.config/polybar/launch.sh
+exec --no-startup-id sleep 3s && $HOME/.dotfiles/bin/autorandr.sh
 
 exec_always --no-startup-id xinput set-prop "pointer:A4TECH USB Device" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 1.5
 exec_always --no-startup-id xinput set-prop "pointer:Razer Razer DeathAdder Essential" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 2.5

@@ -21,6 +21,8 @@ export ESHELL=/bin/zsh
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export BROWSER=/usr/bin/firefox
 export TERMINAL=/usr/bin/kitty
+# https://www.reddit.com/r/linux/comments/72mfv8/psa_for_firefox_users_set_moz_use_xinput21_to/
+export MOZ_USE_XINPUT2=1
 # Install qgnomeplatform-qt5 
 export QT_QPA_PLATFORMTHEME=gnome
 

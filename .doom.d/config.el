@@ -186,7 +186,8 @@ With argument ARG, do this that many times."
 (map! :map indent-rigidly-map "F" #'indent-rigidly-right-to-tab-stop)
 
 ;; Vertico
-(setq vertico-cycle nil)
+(after! vertico
+  (setq vertico-cycle nil))
 
 ;; Projectile
 (setq projectile-project-search-path '(("~/coding/" . 1) ("~/a/data-ui/" . 1)))

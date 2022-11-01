@@ -21,11 +21,11 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Fira Code" :size 20 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Code" :size 20 :weight 'semi-light)
-      doom-big-font (font-spec :family "Fira Code" :size 22)
+(setq doom-font (font-spec :family "Fira Code" :size 19 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Fira Code" :size 19 :weight 'semi-light)
+      doom-big-font (font-spec :family "Fira Code" :size 21)
       doom-unicode-font (font-spec :family "MesloLGS Nerd Font Mono")
-      doom-serif-font (font-spec :family "Fira Code" :size 20 :weight 'semi-light))
+      doom-serif-font (font-spec :family "Fira Code" :size 19 :weight 'semi-light))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -155,7 +155,7 @@ With argument ARG, do this that many times."
 ;; Init
 ;;
 ;; Opacity
-(doom/set-frame-opacity 90)
+;; (doom/set-frame-opacity 90)
 (global-auto-revert-mode 1)
 
 (setq tab-width 4)

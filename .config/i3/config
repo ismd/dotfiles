@@ -269,6 +269,20 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+# vpn
+bindsym $mod+Shift+v mode "$mode_vpn"
+set $mode_vpn Yandex up (y), Yandex down (u), world-city up (w), world-city down (s)
+mode "$mode_vpn" {
+    bindsym y exec --no-startup-id nmcli c up fd964dc4-133c-4ec4-b88a-b425b3d77a07, mode "default"
+    bindsym u exec --no-startup-id nmcli c down fd964dc4-133c-4ec4-b88a-b425b3d77a07, mode "default"
+    bindsym w exec --no-startup-id nmcli c up 2f1a43f2-e1a1-426d-9e78-53d13239090a, mode "default"
+    bindsym s exec --no-startup-id nmcli c down 2f1a43f2-e1a1-426d-9e78-53d13239090a, mode "default"
+
+# exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 # Lock screen
 bindsym $mod+Shift+i exec --no-startup-id $Locker
 

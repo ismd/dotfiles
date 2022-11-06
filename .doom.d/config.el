@@ -227,6 +227,13 @@ With argument ARG, do this that many times."
   ;; Trigger completion immediately.
   (setq company-idle-delay 1.2))
 
+;; Ivy
+(after! ivy
+  (setq ivy-extra-directories '("./"))
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-wrap nil)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume))
+
 ;; OLD
 
 ;;

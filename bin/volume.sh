@@ -55,6 +55,38 @@ case "$1" in
     notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume $VOLUME%"
   };;
 
+  on)
+  {
+    UNMUTE=0
+    pactl set-sink-mute "$DEFAULT_SINK" "$UNMUTE"
+    sudo sh -c 'echo 0 > /sys/devices/platform/thinkpad_acpi/leds/platform::mute/brightness'
+    VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
+
+    if [ "$UNMUTE" == 1 ]; then
+      ICON="$(echo -ne "\U1F507")"
+    else
+      ICON="🔊"
+    fi
+
+    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume $VOLUME%"
+  };;
+
+  off)
+  {
+    UNMUTE=1
+    pactl set-sink-mute "$DEFAULT_SINK" "$UNMUTE"
+    sudo sh -c 'echo 0 > /sys/devices/platform/thinkpad_acpi/leds/platform::mute/brightness'
+    VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
+
+    if [ "$UNMUTE" == 1 ]; then
+      ICON="$(echo -ne "\U1F507")"
+    else
+      ICON="🔊"
+    fi
+
+    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume $VOLUME%"
+  };;
+
   *)
     echo invalid option;;
 esac;

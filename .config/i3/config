@@ -314,10 +314,25 @@ exec --no-startup-id blueman-applet
 # to:
 # background $term_background
 # Same logic applied to everything else.
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
-set_from_resource $color1 i3wm.color8 #f0f0f0
-set_from_resource $color8 i3wm.color8 #f0f0f0
+set_from_resource $background i3wm.color1
+set_from_resource $foreground i3wm.color7
+
+set_from_resource $color0 i3wm.color0
+set_from_resource $color1 i3wm.color1
+set_from_resource $color2 i3wm.color2
+set_from_resource $color3 i3wm.color3
+set_from_resource $color4 i3wm.color4
+set_from_resource $color5 i3wm.color5
+set_from_resource $color6 i3wm.color6
+set_from_resource $color7 i3wm.color7
+set_from_resource $color8 i3wm.color8
+set_from_resource $color9 i3wm.color9
+set_from_resource $color10 i3wm.color10
+set_from_resource $color11 i3wm.color11
+set_from_resource $color12 i3wm.color12
+set_from_resource $color13 i3wm.color13
+set_from_resource $color14 i3wm.color14
+set_from_resource $color15 i3wm.color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
@@ -340,15 +355,15 @@ bar {
     separator_symbol "| "
 
     colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
+        background #282a2e
+        statusline $foreground
+        separator  $foreground
 
 #                      border  backgr. text
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #222D31 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
+        focused_workspace  #282a2e #282a2e $foreground
+        active_workspace   #282a2e #282a2e $foreground
+        inactive_workspace $background $background $foreground
+        binding_mode       #5b4a3e #5b4a3e $foreground
         urgent_workspace   #16a085 #FDF6E3 #E5201D
     }
 }
@@ -361,7 +376,7 @@ bindsym $mod+Shift+braceright exec --no-startup-id i3-msg move workspace to outp
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-client.focused            #675748 #675748 #b8b6c6 #282a2e
+client.focused            #5b4a3e #5b4a3e #b8b6c6 #282a2e
 client.focused_inactive   #373b41 #373b41 #969896 #282a2e
 client.unfocused          #282a2e #282a2e #969896 #282a2e
 client.urgent             #373b41 #cc6666 #ffffff #cc6666

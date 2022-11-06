@@ -161,6 +161,7 @@ With argument ARG, do this that many times."
 (setq tab-width 4)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq treemacs-width 25)
 
 ;; Super save
 (use-package! super-save

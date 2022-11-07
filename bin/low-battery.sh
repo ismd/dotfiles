@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-./volume.sh off
+/home/ismd/.dotfiles/bin/volume.sh off
 /usr/bin/systemctl hibernate

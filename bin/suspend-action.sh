@@ -2,5 +2,5 @@
 
 DIRNAME="$(dirname -- "$0")"
 
+$DIRNAME/lock-screen.sh
 $DIRNAME/volume.sh off
-/usr/bin/systemctl hibernate

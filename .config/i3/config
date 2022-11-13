@@ -37,10 +37,6 @@ bindsym $mod+d exec --no-startup-id rofi -show run -show-icons
 
 ################################################################################################
 
-# Screen brightness controls
-#bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-#bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
-
 # Start Applications
 bindsym $mod+Shift+x --release exec --no-startup-id xkill
 
@@ -442,8 +438,8 @@ mode "$mode_gaps_outer" {
 }
 
 # Brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.dotfiles/bin/backlight.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.dotfiles/bin/backlight.sh down
 
 # Volume control
 bindsym XF86AudioMute exec --no-startup-id ~/.dotfiles/bin/volume.sh toggle

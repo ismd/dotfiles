@@ -2,7 +2,6 @@
 # https://askubuntu.com/questions/26068/how-do-you-mute-from-the-command-line
 
 DEFAULT_SINK=$(LC_ALL=en_US.UTF-8 pactl info | grep "Default Sink" | cut -d " " -f3)
-
 IS_MUTE=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Mute" | grep "Name:" -A1 | tail -1 |cut -d: -f2| tr -d " ")
 
 if [ "$IS_MUTE" == no ]; then
@@ -14,7 +13,7 @@ fi
 case "$1" in
   up)
   {
-    pactl set-sink-volume "$DEFAULT_SINK" +5%
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
     VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
 
     if [ "$UNMUTE" == 1 ]; then
@@ -23,12 +22,12 @@ case "$1" in
       ICON="$(echo -ne "\U1F507")"
     fi
 
-    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume $VOLUME%"
+    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume: $VOLUME%"
   };;
 
   down)
   {
-    pactl set-sink-volume "$DEFAULT_SINK" -5%
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
     VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
 
     if [ "$UNMUTE" == 1 ]; then
@@ -37,12 +36,12 @@ case "$1" in
       ICON="$(echo -ne "\U1F507")"
     fi
 
-    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume $VOLUME%"
+    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume: $VOLUME%"
   };;
 
   toggle)
   {
-    pactl set-sink-mute "$DEFAULT_SINK" "$UNMUTE"
+    pactl set-sink-mute @DEFAULT_SINK@ $UNMUTE
     sudo sh -c 'echo 0 > /sys/devices/platform/thinkpad_acpi/leds/platform::mute/brightness'
     VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
 
@@ -52,13 +51,13 @@ case "$1" in
       ICON="🔊"
     fi
 
-    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume $VOLUME%"
+    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume: $VOLUME%"
   };;
 
   on)
   {
     UNMUTE=0
-    pactl set-sink-mute "$DEFAULT_SINK" "$UNMUTE"
+    pactl set-sink-mute @DEFAULT_SINK@ $UNMUTE
     sudo sh -c 'echo 0 > /sys/devices/platform/thinkpad_acpi/leds/platform::mute/brightness'
     VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
 
@@ -68,13 +67,13 @@ case "$1" in
       ICON="🔊"
     fi
 
-    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume $VOLUME%"
+    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume: $VOLUME%"
   };;
 
   off)
   {
     UNMUTE=1
-    pactl set-sink-mute "$DEFAULT_SINK" "$UNMUTE"
+    pactl set-sink-mute @DEFAULT_SINK@ $UNMUTE
     sudo sh -c 'echo 0 > /sys/devices/platform/thinkpad_acpi/leds/platform::mute/brightness'
     VOLUME=$(LC_ALL=en_US.UTF-8 pactl list | grep -E "Name: $DEFAULT_SINK$|Volume" | grep "Name:" -A1 | tail -1 | cut -d% -f1 | cut -d/ -f2 | tr -d " ")
 
@@ -84,7 +83,7 @@ case "$1" in
       ICON="🔊"
     fi
 
-    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume $VOLUME%"
+    notify-send -t 2000 -h string:x-canonical-private-synchronous:volume "$ICON Volume: $VOLUME%"
   };;
 
   *)

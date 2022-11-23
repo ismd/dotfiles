@@ -21,11 +21,11 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Fira Code" :size 19 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Code" :size 19 :weight 'semi-light)
-      doom-big-font (font-spec :family "Fira Code" :size 21)
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 19)
+      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 19)
+      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 21)
       doom-unicode-font (font-spec :family "MesloLGS Nerd Font Mono")
-      doom-serif-font (font-spec :family "Fira Code" :size 19 :weight 'semi-light))
+      doom-serif-font (font-spec :family "FiraCode Nerd Font" :size 19))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -155,7 +155,7 @@ With argument ARG, do this that many times."
 ;; Init
 ;;
 ;; Opacity
-;; (doom/set-frame-opacity 90)
+;;(doom/set-frame-opacity 90)
 (global-auto-revert-mode 1)
 
 (setq tab-width 4)
@@ -200,12 +200,12 @@ With argument ARG, do this that many times."
 ;;   :run "npm start"
 ;;   :test-suffix ".spec")
 
-;; (projectile-register-project-type 'arcadia '("a.yaml")
-;;   :project-file "a.yaml"
-;;   :compile "npm install"
-;;   :test "npm test"
-;;   :run "npm start"
-;;   :test-suffix ".spec")
+(projectile-register-project-type 'arcadia '("a.yaml")
+  :project-file "a.yaml"
+  :compile "npm install"
+  :test "npm test"
+  :run "npm start"
+  :test-suffix ".spec")
 
 ;; C/C++
 (after! c
@@ -231,116 +231,5 @@ With argument ARG, do this that many times."
 ;; Ivy
 (after! ivy
   (setq ivy-extra-directories '("./"))
-  (setq ivy-use-virtual-buffers t)
   (setq ivy-wrap nil)
   (global-set-key (kbd "C-c C-r") 'ivy-resume))
-
-;; OLD
-
-;;
-;; Init
-;;
-;; (set-default-coding-systems 'utf-8)
-;; (doom/set-frame-opacity 92)
-;; (electric-indent-mode 0)
-;; (setq truncate-lines nil)
-;; (setq doom-font (font-spec :family "FiraCode" :size 17)
-;;   doom-variable-pitch-font (font-spec :family "FiraCode" :size 17)
-;;   doom-big-font (font-spec :family "FiraCode" :size 18)
-;;   large-file-warning-threshold nil
-;;   company-idle-delay nil
-;;   company-tooltip-idle-delay 0
-;;   which-key-idle-delay 0.3
-;;   mouse-wheel-scroll-amount '(1 ((shift) . 1)) ;; one line at a time
-;;   mouse-wheel-progressive-speed nil ;; don't accelerate scrolling
-;;   dired-du-size-format t
-;;   counsel-find-file-ignore-regexp "\\(?:[#~]$\\)"
-;;   vterm-shell "/usr/bin/fish"
-;;   )
-
-;; (setq +lsp-company-backends '(:separate company-capf company-tabnine))
-;; (setq +company-backend-alist '(
-;;   ;; (typescript-mode company-tide company-capf company-tabnine)
-;;   ;; (typescript-mode company-lsp company-capf company-css company-web-html company-tabnine)
-;;   ;; (typescript-tsx-mode company-lsp company-capf company-css company-web-html company-tabnine)
-;;   (c-mode company-capf company-tabnine)
-;;   (org-mode company-capf company-tabnine)
-;;   (text-mode company-tabnine)
-;;   (prog-mode company-capf company-tabnine)
-;;   (conf-mode company-capf company-dabbrev-code company-tabnine)))
-
-;; ;; Centaur tabs
-;; (setq centaur-tabs-enable-key-bindings t)
-;; (setq centaur-tabs-style "chamfer")
-;; (setq centaur-tabs-height 17)
-;; (setq centaur-tabs-set-bar nil)
-;; (setq centaur-tabs-set-bar nil)
-;; (setq centaur-tabs-adjust-buffer-order t)
-
-
-;; (global-set-key (kbd "C-<tab>") 'centaur-tabs-forward)
-;; (global-set-key (kbd "C-S-<iso-lefttab>") 'centaur-tabs-backward)
-;; (global-set-key (kbd "C-c s r") 'ivy-resume)
-;; (global-set-key (kbd "C-c <tab>") 'previous-buffer)
-;; (global-set-key (kbd "C-c S-<iso-lefttab>") 'next-buffer)
-
-;; ;; Ivy
-;; (after! ivy
-;;   (setq ivy-wrap nil)
-;;   (setq ivy-extra-directories '("./")))
-
-;; (after! ccls
-;;   (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
-;;   (set-lsp-priority! 'ccls 2)) ; optional as ccls is the default in Doom
-
-;; ;; TabNine
-;; (use-package! company-tabnine)
-
-;; ;; Web mode
-;; (after! web-mode
-;;   (map! :map web-mode-map "M-/" #'dabbrev-expand))
-
-;; ;; Flycheck
-;; (use-package! flycheck
-;;   :commands flycheck-list-errors flycheck-buffer
-;;   :hook (doom-first-buffer . global-flycheck-mode)
-;;   :config
-;;   (setq flycheck-emacs-lisp-load-path 'inherit)
-
-;;   ;; Rerunning checks on every newline is a mote excessive.
-;;   (delq 'new-line flycheck-check-syntax-automatically)
-;;   ;; And don't recheck on idle as often
-;;   (setq flycheck-idle-change-delay 1.0)
-
-;;   ;; For the above functionality, check syntax in a buffer that you switched to
-;;   ;; only briefly. This allows "refreshing" the syntax check state for several
-;;   ;; buffers quickly after e.g. changing a config file.
-;;   (setq flycheck-buffer-switch-check-intermediate-buffers t)
-
-;;   ;; Display errors a little quicker (default is 0.9s)
-;;   (setq flycheck-display-errors-delay 0.25)
-
-;;   ;; Don't commandeer input focus if the error message pops up (happens when
-;;   ;; tooltips and childframes are disabled).
-;;   (set-popup-rules!
-;;     '(("^\\*Flycheck error messages\\*" :select nil)
-;;       ("^\\*Flycheck errors\\*" :size 0.25)))
-
-;;   (add-hook! 'doom-escape-hook :append
-;;     (defun +syntax-check-buffer-h ()
-;;       "Flycheck buffer on ESC in normal mode."
-;;       (when flycheck-mode
-;;         (ignore-errors (flycheck-buffer))
-;;         nil)))
-
-;;   (map! :map flycheck-error-list-mode-map
-;;         :n "C-n"    #'flycheck-error-list-next-error
-;;         :n "C-p"    #'flycheck-error-list-previous-error
-;;         :n "j"      #'flycheck-error-list-next-error
-;;         :n "k"      #'flycheck-error-list-previous-error
-;;         :n "RET"    #'flycheck-error-list-goto-error
-;;         :n [return] #'flycheck-error-list-goto-error))
-
-;; ;; flycheck-pos-tip
-;; (with-eval-after-load 'flycheck
-;;   (flycheck-pos-tip-mode))

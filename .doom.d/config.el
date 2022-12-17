@@ -21,11 +21,11 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 19)
-      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 19)
-      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 21)
-      doom-unicode-font (font-spec :family "MesloLGS Nerd Font Mono")
-      doom-serif-font (font-spec :family "FiraCode Nerd Font" :size 19))
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 11.0)
+      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 11.0)
+      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 14.0)
+      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 11.0)
+      doom-serif-font (font-spec :family "FiraCode Nerd Font" :size 11.0))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to

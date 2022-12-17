@@ -24,7 +24,7 @@
        company           ; the ultimate code completion backend
        ;;(helm +fuzzy +icons) ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy +fuzzy +icons +prescient) ; a search engine for love and life
+       (ivy +icons +prescient) ; a search engine for love and life
        ;;(vertico +icons)  ; the search engine of the future
 
        :ui

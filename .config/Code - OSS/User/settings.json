@@ -10,7 +10,6 @@
     "files.trimFinalNewlines": true,
     "tabnine.experimentalAutoImports": true,
     "editor.formatOnSaveMode": "modifications",
-    "workbench.colorTheme": "Night Owl (No Italics)",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "files.insertFinalNewline": true,

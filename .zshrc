@@ -14,7 +14,7 @@ export PATH="$HOME/bin:$HOME/.dotfiles/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$
 if [ -z "$TMUX" ]; then
     export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 fi
-export EDITOR=/usr/bin/emacsclient
+export EDITOR="/usr/local/bin/ec"
 export NODE_OPTIONS="--max-old-space-size=8192"
 export SHELL=/bin/zsh
 export ESHELL=/bin/zsh
@@ -146,7 +146,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ec="emacsclient -c -a 'emacs'"
+#alias ec="emacsclient -c -a 'emacs'"
 alias pssh="TERM='xterm-256color' pssh"
 
 autoload -U select-word-style

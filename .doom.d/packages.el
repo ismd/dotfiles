@@ -49,17 +49,4 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(package! company-tabnine)
-(package! ewal-doom-themes)
 (package! super-save)
-
-
-;; OLD
-
-;; (package! dired-du)
-;; (package! flycheck)
-;; (package! flycheck-pos-tip)
-;; (package! night-owl-theme)
-;; (package! rg)
-;; (package! sunrise-commander)
-;; (package! super-save)

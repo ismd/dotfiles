@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Vladimir Kosteley"
-      user-mail-address "zzismd@gmail.com")
+      user-mail-address "chezero@pm.me")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -21,16 +21,18 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 11.0)
-      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 11.0)
-      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 14.0)
-      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 11.0)
-      doom-serif-font (font-spec :family "FiraCode Nerd Font" :size 11.0))
+;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
+;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 10.0)
+      doom-variable-pitch-font (font-spec :family "NotoSans Nerd Font" :size 10.0)
+      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 18.0)
+      doom-unicode-font (font-spec :family "FiraCode Nerd Font" :size 10.0)
+      doom-serif-font (font-spec :family "NotoSerif Nerd Font" :size 10.0))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -43,7 +45,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Yandex.Disk/Documents/org/")
+(setq org-directory "~/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -144,41 +146,22 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "C-c w <") '+workspace/swap-left)
 (global-set-key (kbd "C-c w >") '+workspace/swap-right)
 
-;; Centaur tabs
-(global-set-key (kbd "C-c <")  'centaur-tabs-move-current-tab-to-left)
-(global-set-key (kbd "C-c >") 'centaur-tabs-move-current-tab-to-right)
-
 ;; Search
 (global-set-key (kbd "C-s") '+default/search-buffer)
 
 ;;
 ;; Init
 ;;
-;; Opacity
 ;;(doom/set-frame-opacity 90)
-(global-auto-revert-mode 1)
+(setq auto-save-default nil)
+(+global-word-wrap-mode +1)
 
-(setq tab-width 4)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq treemacs-width 25)
-
-;; Super save
-(use-package! super-save
-  :ensure t
-  :config
-  (super-save-mode +1)
-  (setq super-save-auto-save-when-idle t))
-
-;; (setq super-save-exclude '(".org" ".md"))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 
 ;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
-(map! :map dired-mode-map "C-x M-r" #'dired-du-mode)
-
-;; Centaur tabs
-(after! centaur-tabs
-  (centaur-tabs-group-by-projectile-project))
 
 ;; Indent rigidly
 (map! :map indent-rigidly-map "b" #'indent-rigidly-left)
@@ -190,46 +173,51 @@ With argument ARG, do this that many times."
 (after! vertico
   (setq vertico-cycle nil))
 
+;; Ws-butler
+(after! ws-butler
+  (add-to-list 'ws-butler-global-exempt-modes 'org-mode))
+
+;; Super save
+(use-package! super-save
+  :ensure t
+  :config
+  (super-save-mode +1)
+  (setq super-save-auto-save-when-idle t))
+
+;; Company
+(setq company-idle-delay nil)
+;; (setq +company-backend-alist '(
+;;   (org-mode company-capf)
+;;   (text-mode company-yasnippet)
+;;   (prog-mode company-capf company-yasnippet)
+;;   (conf-mode company-capf company-dabbrev-code company-yasnippet)))
+
 ;; Projectile
 (setq projectile-project-search-path '(("~/coding/" . 1) ("~/a/data-ui/" . 1)))
 
-;; (projectile-register-project-type 'npm '("package.json")
-;;   :project-file "package.json"
+;; (projectile-register-project-type 'arcadia '("a.yaml")
+;;   :project-file "a.yaml"
 ;;   :compile "npm install"
 ;;   :test "npm test"
 ;;   :run "npm start"
 ;;   :test-suffix ".spec")
 
-(projectile-register-project-type 'arcadia '("a.yaml")
-  :project-file "a.yaml"
-  :compile "npm install"
-  :test "npm test"
-  :run "npm start"
-  :test-suffix ".spec")
+;; Org-agenda
+(setq
+  org-fancy-priorities-list '("⚡" "☝" "⚑")
+  org-agenda-block-separator 8411)
 
-;; C/C++
-(after! c
-  (c-set-style "java"))
+(setq org-agenda-custom-commands
+      '(("v" "A better agenda view"
+         ((tags "work"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Work tasks:")))
+           (tags "private"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Private tasks:")))
 
-;; ws-butler
-;; Doesn't work right now
-;; (remove-hook 'doom-first-buffer-hook #'ws-butler-global-mode)
-;; It works
-(after! ws-butler
-  (add-to-list 'ws-butler-global-exempt-modes 'org-mode))
-;; (add-hook! org 'doom-disable-delete-trailing-whitespace-h)
+          (agenda "")))))
 
-;; Tabnine
-(use-package! company-tabnine
-  :ensure t
-  :after company
-  :config
-  (add-to-list 'company-backends #'company-tabnine)
-  ;; Trigger completion immediately.
-  (setq company-idle-delay 1.2))
-
-;; Ivy
-(after! ivy
-  (setq ivy-extra-directories '("./"))
-  (setq ivy-wrap nil)
-  (global-set-key (kbd "C-c C-r") 'ivy-resume))
+;; Centaur tabs
+(after! centaur-tabs
+  (centaur-tabs-group-by-projectile-project))

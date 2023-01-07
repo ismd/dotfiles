@@ -1,152 +1,34 @@
-fpath+=~/.zfunc
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Use powerline
+USE_POWERLINE="true"
+# Source manjaro-zsh-configuration
+# if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+#   source /usr/share/zsh/manjaro-zsh-config
+# fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
 fi
-
-# If you come from bash you might have to change your $PATH.
-export PATH="$HOME/bin:$HOME/.dotfiles/bin:$HOME/.emacs.d/bin:$HOME/.local/bin:$PATH"
-
-# Environment variables
-if [ -z "$TMUX" ]; then
-    export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
-fi
-export EDITOR="/usr/local/bin/ec"
-export NODE_OPTIONS="--max-old-space-size=8192"
-export SHELL=/bin/zsh
-export ESHELL=/bin/zsh
-export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-export BROWSER=/usr/bin/firefox
-export TERMINAL=/usr/bin/kitty
-# https://www.reddit.com/r/linux/comments/72mfv8/psa_for_firefox_users_set_moz_use_xinput21_to/
-export MOZ_USE_XINPUT2=1
-# Install qgnomeplatform-qt5 
-export QT_QPA_PLATFORMTHEME=gnome
-
-# Multiple monitors for Wayland
-export WLR_DRM_NO_MODIFIERS DEFAULT=1
 
 # Path to your oh-my-zsh installation.
 if [ -d "/usr/share/oh-my-zsh" ]; then
-    export ZSH="/usr/share/oh-my-zsh"
+  export ZSH="/usr/share/oh-my-zsh"
 else
     export ZSH="$HOME/.oh-my-zsh"
 fi
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-if [ -n "$INSIDE_EMACS" ]; then
-    ZSH_THEME="robbyrussell"
-else
-    ZSH_THEME="strug"
-fi
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    docker
-    docker-compose
-    dotenv
-    git
-    npm
-    nvm
-    pip
-    sudo
-    systemd
-    tmux
-    tmuxinator
-    z
+  dotenv
+  kubectl
+  nvm
 )
+
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' lazy-cmd eslint prettier typescript
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#alias ec="emacsclient -c -a 'emacs'"
+# Aliases
+[[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
 alias pssh="TERM='xterm-256color' pssh"
 
 autoload -U select-word-style
@@ -156,39 +38,13 @@ select-word-style bash
 setopt inc_append_history
 setopt no_share_history
 
-if [ ! -z $DISPLAY ]; then
-    # Powerlevel10k theme
-    source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
-    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-fi
-
-# ya
-#[ -f ~/.ya.completion/zsh/ya ] && source ~/.ya.completion/zsh/ya # YA_COMPLETION NAME='ya'
-
-# added by travis gem
-#[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
-
-# The next line updates PATH for Yandex Cloud Private CLI.
-if [ -f '~/ycp/path.bash.inc' ]; then source '~/ycp/path.bash.inc'; fi
-
-# Terraform
-if [ -f /usr/bin/terraform ]; then
-   autoload -U +X bashcompinit && bashcompinit
-   complete -o nospace -C /usr/bin/terraform terraform
-fi
-
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Kitty
-[[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
+# Set up Node Version Manager
+source /usr/share/nvm/init-nvm.sh
 
-# pywal
-[[ -f ~/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)
-
-# startx
-if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && [ ! -f /usr/bin/sway ]; then
-    exec startx
+# SSH agent
+if [ -z "$TMUX" ]; then
+  export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 fi

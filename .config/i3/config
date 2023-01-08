@@ -358,8 +358,8 @@ bar {
 	position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-	#tray_output primary
-	tray_output DP-2
+	tray_output primary
+	#tray_output DP-2
     tray_padding 2
 
 	bindsym button4 nop

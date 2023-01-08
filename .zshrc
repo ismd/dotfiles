@@ -1,19 +1,17 @@
-# Use powerline
 USE_POWERLINE="true"
-# Source manjaro-zsh-configuration
-# if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
-#   source /usr/share/zsh/manjaro-zsh-config
-# fi
-# Use manjaro zsh prompt
+
 if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   source /usr/share/zsh/manjaro-zsh-prompt
 fi
 
-# Path to your oh-my-zsh installation.
-if [ -d "/usr/share/oh-my-zsh" ]; then
+if [[ -e /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
+  source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+fi
+
+if [[ -d "/usr/share/oh-my-zsh" ]]; then
   export ZSH="/usr/share/oh-my-zsh"
 else
-    export ZSH="$HOME/.oh-my-zsh"
+  export ZSH="$HOME/.oh-my-zsh"
 fi
 
 plugins=(

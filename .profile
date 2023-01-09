@@ -12,3 +12,4 @@ export MOZ_USE_XINPUT2=1
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export QT_QPA_PLATFORMTHEME=xdgdesktopportal
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+export QT_AUTO_SCREEN_SCALE_FACTOR=0

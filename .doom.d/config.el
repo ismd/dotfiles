@@ -155,6 +155,7 @@ With argument ARG, do this that many times."
 ;;(doom/set-frame-opacity 90)
 (setq auto-save-default nil)
 (+global-word-wrap-mode +1)
+(setq-default cursor-type 'bar)
 
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
@@ -220,4 +221,10 @@ With argument ARG, do this that many times."
 
 ;; Centaur tabs
 (after! centaur-tabs
-  (centaur-tabs-group-by-projectile-project))
+  (centaur-tabs-change-fonts "Anonymice Nerd Font" 130)
+  (centaur-tabs-group-by-projectile-project)
+  (centaur-tabs-headline-match)
+  (centaur-tabs-enable-buffer-reordering)
+  (setq centaur-tabs-height 50
+    centaur-tabs-set-bar nil
+    centaur-tabs-adjust-buffer-order t))

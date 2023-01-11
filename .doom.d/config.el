@@ -157,10 +157,6 @@ With argument ARG, do this that many times."
 (+global-word-wrap-mode +1)
 (setq-default cursor-type 'bar)
 
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
-
 ;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
 
@@ -228,3 +224,6 @@ With argument ARG, do this that many times."
   (setq centaur-tabs-height 50
     centaur-tabs-set-bar nil
     centaur-tabs-adjust-buffer-order t))
+
+;; Tramp
+(setq tramp-terminal-type "tramp")

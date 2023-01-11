@@ -19,7 +19,7 @@ order += "do_not_disturb"
 order += "clock"
 
 clock {
-    format_time = "{icon} %H:%M  %d.%m.%Y "
+    format_time = "%H:%M  %d.%m.%Y "
 }
 
 do_not_disturb {

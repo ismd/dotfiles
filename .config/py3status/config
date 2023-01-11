@@ -11,15 +11,14 @@ general {
 }
 
 order += "window"
-order += "external_script ikea"
+#order += "external_script ikea"
 order += "weather_owm"
-#order += "sysdata"
-order += "vpn_status"
 order += "do_not_disturb"
+order += "vpn_status"
 order += "clock"
 
 clock {
-    format_time = "%H:%M  %d.%m.%Y "
+    format_time = "{icon} %H:%M    %d.%m.%Y "
 }
 
 do_not_disturb {
@@ -33,6 +32,25 @@ weather_owm {
     format = "{city} {icon} {temperature}"
     format_temperature = "[\?color=all {current:.0f}°]"
     unit_temperature = "c"
+}
+
+battery_level {
+    cache_timeout = 10
+    color_bad = "#FF0000"
+    color_charging = "#FCE94F"
+    color_degraded = "#ff7a00"
+    color_good = "#00FF00"
+
+    format_notify_charging = "charging"
+    format_notify_discharging = "discharging {percent}"
+    hide_when_full = False
+    hide_seconds = True
+    notification = True
+    notify_low_level = True
+    blocks = ""
+    charging_character = ""
+    format = "{icon}  {percent}% {time_remaining}"
+    color_charging = "#FFFFFF"
 }
 
 external_script ikea {

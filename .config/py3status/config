@@ -12,10 +12,10 @@ general {
 
 order += "window"
 order += "external_script ikea"
-order += "do_not_disturb"
 order += "weather_owm"
 #order += "sysdata"
 order += "vpn_status"
+order += "do_not_disturb"
 order += "clock"
 
 clock {
@@ -23,14 +23,14 @@ clock {
 }
 
 do_not_disturb {
-    format = "[\?color=state [\?if=state DND ON|DND OFF]]"
-    thresholds = [(0, "darkgray"), (1, "#78df1c")]
+    format = "[\?color=state [\?if=state 🔇|🔈]]"
+    thresholds = [(0, "#2AA198"), (1, "#DC322F")]
 }
 
 weather_owm {
     api_key = "703c3fb67262ecc95c8a2db4f64dcff6"
     city = "Belgrade"
-    format = "{city} {icon} {temperature}[ {rain}] {description}"
+    format = "{city} {icon} {temperature}"
     format_temperature = "[\?color=all {current:.0f}°]"
     unit_temperature = "c"
 }

@@ -151,10 +151,10 @@ set $ws2 2:work
 set $ws3 3:dev
 set $ws4 4:term
 set $ws5 5:chat
-set $ws6 6:misc
-set $ws7 7:misc-2
+set $ws6 6:apps
+set $ws7 7:hack
 set $ws8 8:remote
-set $ws9 9:misc-3
+set $ws9 9:misc
 set $ws10 10:multihead
 
 # switch to workspace

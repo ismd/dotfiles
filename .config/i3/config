@@ -319,7 +319,7 @@ exec --no-startup-id xset r rate 270 22
 exec --no-startup-id setxkbmap -model pc104 -layout us,ru -option grp:toggle,ctrl:nocaps
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 exec --no-startup-id volumeicon
-exec --no-startup-id sbxkb # fbxkb?
+# exec --no-startup-id sbxkb # fbxkb?
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

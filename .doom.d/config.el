@@ -199,6 +199,9 @@ With argument ARG, do this that many times."
 ;;   :run "npm start"
 ;;   :test-suffix ".spec")
 
+;; Org
+(setq calendar-week-start-day 1)
+
 ;; Org-agenda
 (setq
   org-fancy-priorities-list '("⚡" "☝" "⚑")

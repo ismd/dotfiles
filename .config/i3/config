@@ -320,6 +320,7 @@ exec --no-startup-id setxkbmap -model pc104 -layout us,ru -option grp:toggle,ctr
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id volumeicon
 # exec --no-startup-id sbxkb # fbxkb?
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -353,36 +354,36 @@ set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-	i3bar_command i3bar
-	status_command py3status
-	position bottom
+# bar {
+# 	i3bar_command i3bar
+# 	status_command py3status
+# 	position bottom
 
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-	tray_output primary
-	#tray_output DP-2
-    tray_padding 2
+# ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+# 	tray_output primary
+# 	#tray_output DP-2
+#     tray_padding 2
 
-	bindsym button4 nop
-	bindsym button5 nop
-	#font xft:URWGothic-Book 11
-    workspace_min_width 60
-    strip_workspace_numbers yes
-    # strip_workspace_name yes
+# 	bindsym button4 nop
+# 	bindsym button5 nop
+# 	#font xft:URWGothic-Book 11
+#     workspace_min_width 60
+#     strip_workspace_numbers yes
+#     # strip_workspace_name yes
 
-    colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
+#     colors {
+#         background #222D31
+#         statusline #F9FAF9
+#         separator  #454947
 
-#                      border  backgr. text
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #222D31 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
-    }
-}
+# #                      border  backgr. text
+#         focused_workspace  #F9FAF9 #16a085 #292F34
+#         active_workspace   #595B5B #353836 #FDF6E3
+#         inactive_workspace #595B5B #222D31 #EEE8D5
+#         binding_mode       #16a085 #2C2C2C #F9FAF9
+#         urgent_workspace   #16a085 #FDF6E3 #E5201D
+#     }
+# }
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
@@ -405,8 +406,8 @@ bindsym $mod+Shift+braceright move workspace to output right
 #############################
 
 # Set inner/outer gaps
-gaps inner 14
-gaps outer -2
+gaps inner 10
+gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>

@@ -24,6 +24,8 @@ plugins=(
   dotenv
   kubectl
   nvm
+  systemd
+  tmux
 )
 
 zstyle ':omz:plugins:nvm' lazy yes

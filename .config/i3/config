@@ -322,6 +322,7 @@ exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id volumeicon
 # exec --no-startup-id sbxkb # fbxkb?
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id ssh-add-all-keys.sh
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

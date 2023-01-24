@@ -156,6 +156,7 @@ With argument ARG, do this that many times."
 (setq auto-save-default nil)
 (+global-word-wrap-mode +1)
 (setq-default cursor-type 'bar)
+(blink-cursor-mode)
 
 ;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)

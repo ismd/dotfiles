@@ -231,3 +231,12 @@ With argument ARG, do this that many times."
 
 ;; Tramp
 (setq tramp-terminal-type "tramp")
+
+;; JSON
+;; Uncomment if 4 spaces again
+;; (add-hook 'json-mode-hook
+;;   (lambda ()
+;;     (make-local-variable 'js-indent-level)
+;;     (setq js-indent-level 2)))
+
+(setq-hook! 'json-mode-hook +format-with-lsp nil)

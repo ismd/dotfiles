@@ -51,7 +51,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Set up Node Version Manager
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -68,3 +68,9 @@ pastefinish() {
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
+
+# Random color script
+colorscript random
+
+# Powerlevel10k
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet

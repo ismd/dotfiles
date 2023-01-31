@@ -152,7 +152,7 @@ With argument ARG, do this that many times."
 ;;
 ;; Init
 ;;
-(doom/set-frame-opacity 80)
+(doom/set-frame-opacity 90)
 (setq auto-save-default nil)
 (+global-word-wrap-mode +1)
 (setq-default cursor-type 'bar)

@@ -69,7 +69,7 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
-# Random color script
+# Random color script (package shell-color-scripts)
 colorscript random
 
 # Powerlevel10k

@@ -323,6 +323,7 @@ exec --no-startup-id setxkbmap -model pc104 -layout us,ru -option grp:toggle,ctr
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id volumeicon
 # exec --no-startup-id sbxkb # fbxkb?
+exec --no-startup-id screenshotgun
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id ssh-add-all-keys.sh
 

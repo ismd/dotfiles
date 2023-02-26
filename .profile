@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-export PATH="$HOME/bin:$HOME/.dotfiles/bin:$HOME/Yandex.Disk/bin:$HOME/.emacs.d/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
+export PATH="$HOME/bin:$HOME/.dotfiles/bin:$HOME/Yandex.Disk/bin:$HOME/.config/emacs/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 export EDITOR=ec	# Terminal editor
 export VISUAL=ec	# GUI editor
 export NODE_OPTIONS="--max-old-space-size=8192"

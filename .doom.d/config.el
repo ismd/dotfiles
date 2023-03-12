@@ -190,9 +190,6 @@ With argument ARG, do this that many times."
 ;;   (prog-mode company-capf company-yasnippet)
 ;;   (conf-mode company-capf company-dabbrev-code company-yasnippet)))
 
-;; Projectile
-(setq projectile-project-search-path '(("~/coding/" . 1) ("~/a/data-ui/" . 1)))
-
 ;; (projectile-register-project-type 'arcadia '("a.yaml")
 ;;   :project-file "a.yaml"
 ;;   :compile "npm install"

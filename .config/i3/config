@@ -318,7 +318,7 @@ exec --no-startup-id unclutter --timeout 2
 # exec --no-startup-id udiskie --no-automount --tray --notify
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
-exec --no-startup-id xset r rate 300 22
+exec --no-startup-id xset r rate 400 40
 exec --no-startup-id setxkbmap -model pc104 -layout us,ru -option grp:toggle,ctrl:nocaps
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 # exec --no-startup-id volumeicon

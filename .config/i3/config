@@ -320,7 +320,9 @@ exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
 exec --no-startup-id xset r rate 400 40
 exec --no-startup-id setxkbmap -model pc104 -layout us,ru -option grp:toggle,ctrl:nocaps
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+# exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+exec --no-startup-id $HOME/.dotfiles/bin/wallpaper.sh
+exec --no-startup-id picom -b
 # exec --no-startup-id volumeicon
 # exec --no-startup-id sbxkb # fbxkb?
 exec --no-startup-id screenshotgun

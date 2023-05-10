@@ -49,4 +49,5 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+(package! ibuffer-projectile)
 (package! super-save)

@@ -37,7 +37,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-palenight)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -146,13 +146,19 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "C-c w <") '+workspace/swap-left)
 (global-set-key (kbd "C-c w >") '+workspace/swap-right)
 
+;; Tabs
+(global-set-key (kbd "C-<iso-lefttab>") 'centaur-tabs-backward-tab)
+(global-set-key (kbd "C-<tab>") 'centaur-tabs-forward-tab)
+(global-set-key (kbd "C-<") 'centaur-tabs-move-current-tab-to-left)
+(global-set-key (kbd "C->") 'centaur-tabs-move-current-tab-to-right)
+
 ;; Search
-(global-set-key (kbd "C-s") '+default/search-buffer)
+;; (global-set-key (kbd "C-s") '+default/search-buffer)
 
 ;;
 ;; Init
 ;;
-(doom/set-frame-opacity 90)
+(doom/set-frame-opacity 95)
 (setq auto-save-default nil)
 (+global-word-wrap-mode +1)
 (setq-default cursor-type 'bar)
@@ -183,19 +189,22 @@ With argument ARG, do this that many times."
   (setq super-save-auto-save-when-idle t))
 
 ;; Company
-(setq company-idle-delay nil)
-;; (setq +company-backend-alist '(
-;;   (org-mode company-capf)
-;;   (text-mode company-yasnippet)
-;;   (prog-mode company-capf company-yasnippet)
-;;   (conf-mode company-capf company-dabbrev-code company-yasnippet)))
+(after! company
+  (setq
+    company-idle-delay 0
+    company-minimum-prefix-length 1)
+  (add-to-list 'company-frontends 'company-preview-frontend))
 
-;; (projectile-register-project-type 'arcadia '("a.yaml")
-;;   :project-file "a.yaml"
-;;   :compile "npm install"
-;;   :test "npm test"
-;;   :run "npm start"
-;;   :test-suffix ".spec")
+(setq +company-backend-alist '(
+                               (conf-mode (:separate company-files :separate company-capf :separate company-dabbrev-code company-dabbrev :separate company-yasnippet))
+                               (prog-mode (:separate company-files :separate company-capf :with company-yasnippet :separate company-dabbrev-code))
+                               ;; (terraform-mode (:separate company-files :separate company-terraform :with company-yasnippet))
+                               (text-mode (:separate company-files :separate company-capf :separate company-dabbrev-code company-dabbrev :separate company-ispell :separate company-yasnippet))))
+
+(after! terraform-mode
+  (set-company-backend! 'terraform-mode '(:separate company-files :separate company-terraform :with company-yasnippet)))
+
+(global-set-key (kbd "C-c C-/") #'company-other-backend)
 
 ;; Org
 (setq calendar-week-start-day 1)
@@ -218,22 +227,30 @@ With argument ARG, do this that many times."
 
 ;; Centaur tabs
 (after! centaur-tabs
-  (centaur-tabs-change-fonts "Anonymice Nerd Font" 130)
+  ;; (centaur-tabs-change-fonts "Anonymice Nerd Font" 130)
   (centaur-tabs-group-by-projectile-project)
-  (centaur-tabs-headline-match)
-  (centaur-tabs-enable-buffer-reordering)
-  (setq centaur-tabs-height 50
-    centaur-tabs-set-bar nil
-    centaur-tabs-adjust-buffer-order t))
+  ;; (centaur-tabs-headline-match)
+  ;; (centaur-tabs-enable-buffer-reordering)
+  (setq ;; centaur-tabs-height 50
+    ;; centaur-tabs-set-bar 'under
+    centaur-tabs-show-count t
+    centaur-tabs-show-new-tab-button nil
+    ;; centaur-tabs-adjust-buffer-order t
+    x-underline-at-descent-line t
+    ))
 
 ;; Tramp
 (setq tramp-terminal-type "tramp")
 
-;; JSON
-;; Uncomment if 4 spaces again
-;; (add-hook 'json-mode-hook
-;;   (lambda ()
-;;     (make-local-variable 'js-indent-level)
-;;     (setq js-indent-level 2)))
-
 (setq-hook! 'json-mode-hook +format-with-lsp nil)
+
+;; Ibuffer
+;; (add-hook 'ibuffer-hook
+;;   (lambda ()
+;;     (ibuffer-projectile-set-filter-groups)
+;;     (unless (eq ibuffer-sorting-mode 'alphabetic)
+;;       (ibuffer-do-sort-by-alphabetic))))
+(add-hook! ibuffer
+  (ibuffer-projectile-set-filter-groups)
+  (unless (eq ibuffer-sorting-mode 'alphabetic)
+    (ibuffer-do-sort-by-alphabetic)))

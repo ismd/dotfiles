@@ -29,7 +29,7 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
-      doom-variable-pitch-font (font-spec :family "NotoSansMono Nerd Font" :size 13.0)
+      doom-variable-pitch-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
       doom-big-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 18.0)
       doom-unicode-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
       doom-serif-font (font-spec :family "NotoSerif Nerd Font" :size 13.0))

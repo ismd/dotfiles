@@ -1,49 +1,31 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
-font pango:SourceCodePro Medium 10
-
-# Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
-default_floating_border normal
-
-# Hide borders
-hide_edge_borders both
-
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
+
 set $left b
 set $down n
 set $up p
 set $right f
 # Your preferred terminal emulator
-set $term terminator
+set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu rofi -show run | xargs swaymsg exec --
-
-set $Locker ~/bin/lock-screen.sh
+set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $HOME/Pictures/Wallpapers/alonso-reyes-haZNHEV2WXQ-unsplash.jpg fill
+output DP-3 scale 1.5
+
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output eDP-1 resolution 1920x1080 position 0,0
-output DP-7 resolution 2560x1440 position 1920,0
-output DP-6 resolution 2560x1440 position 4480,0
 
 ### Idle configuration
 #
@@ -51,7 +33,7 @@ output DP-6 resolution 2560x1440 position 4480,0
 #
 # exec swayidle -w \
 #          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 #          before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -73,17 +55,12 @@ output DP-6 resolution 2560x1440 position 4480,0
 # Read `man 5 sway-input` for more information about this section.
 input * {
     xkb_layout "us,ru"
-    xkb_options "grp:toggle"
+    xkb_variant ""
+    xkb_options "grp:toggle,ctrl:nocaps"
 }
 
-input type:keyboard {
-    repeat_delay 250
-    repeat_rate 20
-}
-
-input type:touchpad {
-    tap enabled
-}
+input * repeat_delay 400
+input * repeat_rate 40
 
 ### Key bindings
 #
@@ -109,25 +86,7 @@ input type:touchpad {
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-    bindsym $mod+Shift+e mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym s exec --no-startup-id systemctl hybrid-sleep, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
-    #bindsym d exec --no-startup-id xset dpms force off, mode "default"
-    #bindsym n exec --no-startup-id ~/bin/notifications.sh toggle, mode "default"
-    #bindsym x exec --no-startup-id ~/bin/xinit.sh toggle, mode "default"
-
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-    bindsym $mod+Shift+e mode "$mode_system"
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -179,17 +138,6 @@ mode "$mode_system" {
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
-
-workspace 1 output DP-7
-workspace 2 output DP-6
-workspace 3 output DP-7
-workspace 4 output DP-7
-workspace 5 output DP-7
-workspace 6 output DP-7
-workspace 7 output DP-7
-workspace 8 output DP-7
-workspace 9 output DP-6
-workspace 10 output eDP-1
 #
 # Layout stuff:
 #
@@ -253,32 +201,30 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
+# Custom:
+#
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86Search exec $menu
+
+#
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    status_command i3status
-    position bottom
+bar swaybar_command waybar
 
-    tray_output primary
-
-    bindsym button4 nop
-    bindsym button5 nop
-    font pango:SourceCodePro Medium 11
-    strip_workspace_numbers yes
-    separator_symbol "| "
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+exec nm-applet
+exec pamac-tray
+exec blueman-applet
+exec gammastep-indicator
+exec unclutter --timeout 2
 
 include /etc/sway/config.d/*
-
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
-exec --no-startup-id udiskie --no-automount --tray --notify
-exec --no-startup-id unclutter --timeout 2
-exec --no-startup-id gammastep -O 6000
+include $HOME/.config/i3/custom.conf

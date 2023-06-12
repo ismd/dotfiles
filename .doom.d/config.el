@@ -28,11 +28,11 @@
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
-(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
-      doom-variable-pitch-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
+(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0)
+      doom-variable-pitch-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0)
       doom-big-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 18.0)
-      doom-unicode-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
-      doom-serif-font (font-spec :family "NotoSerif Nerd Font" :size 13.0))
+      doom-unicode-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0)
+      doom-serif-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -153,7 +153,7 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "C->") 'centaur-tabs-move-current-tab-to-right)
 
 ;; Search
-;; (global-set-key (kbd "C-s") '+default/search-buffer)
+(global-set-key (kbd "C-s") '+default/search-buffer)
 
 ;;
 ;; Init
@@ -161,7 +161,7 @@ With argument ARG, do this that many times."
 (doom/set-frame-opacity 95)
 (setq auto-save-default nil)
 (+global-word-wrap-mode +1)
-(setq-default cursor-type 'bar)
+;; (setq-default cursor-type 'bar)
 (blink-cursor-mode)
 
 ;; Dired
@@ -245,11 +245,6 @@ With argument ARG, do this that many times."
 (setq-hook! 'json-mode-hook +format-with-lsp nil)
 
 ;; Ibuffer
-;; (add-hook 'ibuffer-hook
-;;   (lambda ()
-;;     (ibuffer-projectile-set-filter-groups)
-;;     (unless (eq ibuffer-sorting-mode 'alphabetic)
-;;       (ibuffer-do-sort-by-alphabetic))))
 (add-hook! ibuffer
   (ibuffer-projectile-set-filter-groups)
   (unless (eq ibuffer-sorting-mode 'alphabetic)

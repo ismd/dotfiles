@@ -51,3 +51,4 @@
 
 (package! ibuffer-projectile)
 (package! super-save)
+(package! vlf)

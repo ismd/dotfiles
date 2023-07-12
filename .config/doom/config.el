@@ -28,16 +28,16 @@
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
-(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0)
-      doom-variable-pitch-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0)
+(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
+      doom-variable-pitch-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
       doom-big-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 18.0)
-      doom-unicode-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0)
-      doom-serif-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14.0))
+      doom-unicode-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0)
+      doom-serif-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 13.0))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-palenight)
+(setq doom-theme 'doom-vibrant)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -132,7 +132,7 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "M-9") 'winum-select-window-9)
 
 ;; Revert buffer
-(global-set-key (kbd "C-M-r") 'revert-buffer)
+;;(global-set-key (kbd "C-M-r") 'revert-buffer)
 
 ;; Avy
 (global-set-key (kbd "M-s s") 'avy-goto-char-timer)
@@ -158,11 +158,19 @@ With argument ARG, do this that many times."
 ;;
 ;; Init
 ;;
-;(doom/set-frame-opacity 95)
-;(setq auto-save-default nil)
-;(+global-word-wrap-mode +1)
-;; (setq-default cursor-type 'bar)
-;(blink-cursor-mode)
+
+;; Opacity
+;;(doom/set-frame-opacity 95)
+
+;; Cursor
+;;(setq-default cursor-type 'bar)
+(blink-cursor-mode)
+
+;; Auto save
+(setq auto-save-default nil)
+
+;; Word wrap
+;;(+global-word-wrap-mode +1)
 
 ;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
@@ -249,3 +257,11 @@ With argument ARG, do this that many times."
   (ibuffer-projectile-set-filter-groups)
   (unless (eq ibuffer-sorting-mode 'alphabetic)
     (ibuffer-do-sort-by-alphabetic)))
+
+;; Org-modern
+(with-eval-after-load 'org (global-org-modern-mode))
+
+;; Ivy
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+(setq +ivy-buffer-preview 'everything)

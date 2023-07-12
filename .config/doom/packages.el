@@ -50,5 +50,6 @@
 ;(unpin! t)
 
 (package! ibuffer-projectile)
+(package! org-modern)
 (package! super-save)
 (package! vlf)

@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Vladimir Kosteley"
-      user-mail-address "chezero@pm.me")
+      user-mail-address "cz@cqz.me")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -158,11 +158,11 @@ With argument ARG, do this that many times."
 ;;
 ;; Init
 ;;
-(doom/set-frame-opacity 95)
-(setq auto-save-default nil)
-(+global-word-wrap-mode +1)
+;(doom/set-frame-opacity 95)
+;(setq auto-save-default nil)
+;(+global-word-wrap-mode +1)
 ;; (setq-default cursor-type 'bar)
-(blink-cursor-mode)
+;(blink-cursor-mode)
 
 ;; Dired
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)

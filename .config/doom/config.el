@@ -44,10 +44,8 @@
         doom-modeline-major-mode-icon t))
 
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 13.0)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 12.0)
-      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 18.0)
-      doom-unicode-font (font-spec :family "FiraCode Nerd Font Mono" :size 13.0)
-      doom-serif-font (font-spec :family "FiraCode Nerd Font Mono" :size 13.0))
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
+      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 20.0))
 
 (add-hook! ibuffer
   (ibuffer-projectile-set-filter-groups)
@@ -62,6 +60,9 @@
 ;; (setq-hook! 'json-mode-hook +format-with-lsp nil)
 
 (global-set-key (kbd "M-s s") 'avy-goto-char-timer)
+
+(global-set-key (kbd "C-c <") 'previous-buffer)
+(global-set-key (kbd "C-c >") 'next-buffer)
 
 (defun ismd/delete-word (arg)
   "Delete characters until encountering the end of a word.

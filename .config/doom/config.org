@@ -152,10 +152,8 @@ If you or Emacs can't find your font, use 'M-x describe-font' to look them up, `
 
 #+begin_src emacs-lisp
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 13.0)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 12.0)
-      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 18.0)
-      doom-unicode-font (font-spec :family "FiraCode Nerd Font Mono" :size 13.0)
-      doom-serif-font (font-spec :family "FiraCode Nerd Font Mono" :size 13.0))
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 13.0)
+      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 20.0))
 #+end_src
 
 * Ibuffer
@@ -188,6 +186,13 @@ If you or Emacs can't find your font, use 'M-x describe-font' to look them up, `
 
 #+begin_src emacs-lisp
 (global-set-key (kbd "M-s s") 'avy-goto-char-timer)
+#+end_src
+
+*** Buffers
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c <") 'previous-buffer)
+(global-set-key (kbd "C-c >") 'next-buffer)
 #+end_src
 
 *** Delete word, backward delete word

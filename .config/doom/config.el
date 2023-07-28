@@ -46,7 +46,8 @@
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 13.0)
       doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 13.0)
       doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 20.0)
-      doom-unicode-font (font-spec :family "Iosevka Nerd Font Mono" :size 13.0))
+      ;; doom-unicode-font (font-spec :family "Iosevka Nerd Font Mono" :size 13.0)
+      )
 
 (add-hook! ibuffer
   (ibuffer-projectile-set-filter-groups)

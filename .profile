@@ -16,5 +16,3 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export QT_SCREEN_SCALE_FACTORS="eDP-1=1;HDMI-1=1;DP-1=1;DP-2=1;DP-3=1.25;DP-4=1;"
-
-/usr/bin/setxkbmap -option "ctrl:nocaps"

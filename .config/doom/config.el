@@ -192,6 +192,11 @@ With argument ARG, do this that many times."
    ))
 
 (setq doom-theme 'doom-oceanic-next)
+;; (setq doom-theme 'doom-rouge)
+;; (setq doom-theme 'doom-meltbus)
+;; (setq doom-theme 'deeper-blue)
+;; (setq doom-theme 'modus-operandi)
+;; (setq doom-theme 'modus-operandi-tritanopia)
 
 (setq tramp-terminal-type "tramp")
 

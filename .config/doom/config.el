@@ -43,9 +43,9 @@
         doom-modeline-persp-icon t
         doom-modeline-major-mode-icon t))
 
-(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 13.0)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 13.0)
-      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 20.0)
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0 :dpi 192)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 14.0 :dpi 192)
+      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 22.0 :dpi 192)
       ;; doom-unicode-font (font-spec :family "Iosevka Nerd Font Mono" :size 13.0)
       )
 
@@ -151,7 +151,9 @@ With argument ARG, do this that many times."
    lsp-ui-imenu-enable t
    lsp-ui-sideline-enable t))
 
-;; (doom/set-frame-opacity 95)
+;; (doom/set-frame-opacity 50)
+
+(add-to-list 'default-frame-alist '(alpha-background . 50))
 
 (setq calendar-week-start-day 1)
 (setq org-startup-with-inline-images t

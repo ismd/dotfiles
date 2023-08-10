@@ -43,9 +43,9 @@
         doom-modeline-persp-icon t
         doom-modeline-major-mode-icon t))
 
-(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0 :dpi 192)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 14.0 :dpi 192)
-      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 22.0 :dpi 192)
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 14.0)
+      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 22.0)
       ;; doom-unicode-font (font-spec :family "Iosevka Nerd Font Mono" :size 13.0)
       )
 

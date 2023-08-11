@@ -191,12 +191,7 @@ With argument ARG, do this that many times."
    x-underline-at-descent-line t
    ))
 
-(setq doom-theme 'doom-oceanic-next)
-;; (setq doom-theme 'doom-rouge)
-;; (setq doom-theme 'doom-meltbus)
-;; (setq doom-theme 'deeper-blue)
-;; (setq doom-theme 'modus-operandi)
-;; (setq doom-theme 'modus-operandi-tritanopia)
+(setq doom-theme 'doom-one)
 
 (setq tramp-terminal-type "tramp")
 

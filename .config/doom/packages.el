@@ -49,7 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(package! dired-subtree)
+;; (package! dired-subtree)
 (package! ibuffer-projectile)
 (package! lsp-ui)
 (package! org-modern)

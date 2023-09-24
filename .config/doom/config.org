@@ -12,6 +12,7 @@ options: toc:2
 - [[#cursor][Cursor]]
 - [[#doom-modeline][Doom-modeline]]
 - [[#font][Font]]
+- [[#format-on-save][Format on save]]
 - [[#ibuffer][Ibuffer]]
 - [[#ivy][Ivy]]
 - [[#json][JSON]]
@@ -158,6 +159,12 @@ If you or Emacs can't find your font, use 'M-x describe-font' to look them up, `
       )
 #+end_src
 
+* Format on save
+
+#+begin_src emacs-lisp
+(setq +format-on-save-enabled-modes '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode yaml-mode))
+#+end_src
+
 * Ibuffer
 
 #+begin_src emacs-lisp
@@ -214,6 +221,8 @@ With argument ARG, do this that many times."
 
 ;; (global-set-key (kbd "M-d") 'ismd/delete-word)
 ;; (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
+(global-set-key (kbd "M-d") 'ismd/delete-word)
+(global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
 #+end_src
 
 *** Dired
@@ -336,7 +345,7 @@ Doom style
 
 New emacs 29 style
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 50))
+;; (add-to-list 'default-frame-alist '(alpha-background . 50))
 #+end_src
 
 * Org

@@ -49,6 +49,8 @@
       ;; doom-unicode-font (font-spec :family "Iosevka Nerd Font Mono" :size 13.0)
       )
 
+(setq +format-on-save-enabled-modes '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode yaml-mode))
+
 (add-hook! ibuffer
   (ibuffer-projectile-set-filter-groups)
   (unless (eq ibuffer-sorting-mode 'alphabetic)
@@ -80,6 +82,8 @@ With argument ARG, do this that many times."
 
 ;; (global-set-key (kbd "M-d") 'ismd/delete-word)
 ;; (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
+(global-set-key (kbd "M-d") 'ismd/delete-word)
+(global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
 
 (defun ismd/dired-up-dir ()
   "Go up a directory."
@@ -153,7 +157,7 @@ With argument ARG, do this that many times."
 
 ;; (doom/set-frame-opacity 50)
 
-(add-to-list 'default-frame-alist '(alpha-background . 50))
+;; (add-to-list 'default-frame-alist '(alpha-background . 50))
 
 (setq calendar-week-start-day 1)
 (setq org-startup-with-inline-images t

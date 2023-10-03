@@ -46,7 +46,8 @@
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
       doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 14.0)
       doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 22.0)
-      ;; doom-unicode-font (font-spec :family "Iosevka Nerd Font Mono" :size 13.0)
+      doom-unicode-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
+      doom-serif-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
       )
 
 (setq +format-on-save-enabled-modes '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode yaml-mode))

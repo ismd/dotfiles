@@ -1,0 +1,50 @@
+--- config.el
++++ config.el
+@@ -46,7 +46,8 @@
+ (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
+       doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 14.0)
+       doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 22.0)
+-      ;; doom-unicode-font (font-spec :family "Iosevka Nerd Font Mono" :size 13.0)
++      doom-unicode-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
++      doom-serif-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
+       )
+ 
+ (setq +format-on-save-enabled-modes '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode yaml-mode))
+--- config.org
++++ config.org
+@@ -155,7 +155,8 @@ If you or Emacs can't find your font, use 'M-x describe-font' to look them up, `
+ (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
+       doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 14.0)
+       doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 22.0)
+-      ;; doom-unicode-font (font-spec :family "Iosevka Nerd Font Mono" :size 13.0)
++      doom-unicode-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
++      doom-serif-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0)
+       )
+ #+end_src
+ 
+--- config.ini
++++ config.ini
+@@ -1,8 +1,8 @@
+ [general]
+-temp-day=5800
+-temp-night=5000
++temp-day=6400
++temp-night=6000
+ fade=1
+-gamma=0.8
++gamma=0.9
+ adjustment-method=randr
+ location-provider=manual
+ 
+--- tmux.conf
++++ tmux.conf
+@@ -24,5 +24,9 @@ bind-key -T copy-mode-vi v send-keys -X begin-selection
+ bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+ bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+ 
++# Start windows and panes at 1, not 0
++set -g base-index 1
++setw -g pane-base-index 1
++
+ # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+ run '~/.tmux/plugins/tpm/tpm'

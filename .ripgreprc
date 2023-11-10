@@ -1,1 +1,1 @@
---glob=!node_modules/*
+--smart-case

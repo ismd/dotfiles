@@ -19,7 +19,7 @@
 
 (after! company
   (setq
-    company-idle-delay 0
+    company-idle-delay 1
     company-minimum-prefix-length 1)
   (add-to-list 'company-frontends 'company-preview-frontend))
 
@@ -42,6 +42,22 @@
         doom-modeline-persp-name t
         doom-modeline-persp-icon t
         doom-modeline-major-mode-icon t))
+
+(defun set-exec-path-from-shell-PATH ()
+  "Set up Emacs' `exec-path' and PATH environment variable to match
+that used by the user's shell.
+
+This is particularly useful under Mac OS X and macOS, where GUI
+apps are not started from a shell."
+  (interactive)
+  (let ((path-from-shell (replace-regexp-in-string
+        "[ \t\n]*$" "" (shell-command-to-string
+            "$SHELL --login -c 'string join : $PATH'"
+            ))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(set-exec-path-from-shell-PATH)
 
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14.0 :dpi 144)
       doom-variable-pitch-font (font-spec :family "JetBrainsMonoNL Nerd Font" :size 14.0 :dpi 144)

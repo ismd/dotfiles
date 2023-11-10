@@ -1,3 +1,5 @@
 flycheck_*
 .dir-locals.el
 .idea
+.terraform
+node_modules

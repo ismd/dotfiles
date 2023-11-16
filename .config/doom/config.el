@@ -100,7 +100,7 @@ apps are not started from a shell."
 
 ;; (setq-hook! 'json-mode-hook +format-with-lsp nil)
 
-(global-set-key (kbd "M-s s") 'avy-goto-char-timer)
+(global-set-key (kbd "M-s") 'avy-goto-char-timer)
 
 (global-set-key (kbd "C-c <") 'previous-buffer)
 (global-set-key (kbd "C-c >") 'next-buffer)

@@ -236,7 +236,7 @@ If you or Emacs can't find your font, use 'M-x describe-font' to look them up, `
 *** Avy
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "M-s s") 'avy-goto-char-timer)
+(global-set-key (kbd "M-s") 'avy-goto-char-timer)
 #+end_src
 
 *** Buffers

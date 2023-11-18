@@ -21,36 +21,25 @@
   (setq
     company-idle-delay 1
     company-minimum-prefix-length 1)
-  (add-to-list 'company-frontends 'company-preview-frontend))
+  ;; (add-to-list 'company-frontends 'company-preview-frontend)
+  )
 
-;; (setq +company-backend-alist '(
-;;                                ;;(conf-mode (:separate company-files :separate company-capf :separate company-dabbrev-code company-dabbrev :separate company-yasnippet))
-;;                                (conf-mode ((:separate company-capf company-files) (company-dabbrev-code company-keywords) company-dabbrev company-yasnippet))
-;;                                (rjsx-mode ((:separate company-capf company-files) (company-dabbrev-code company-keywords) company-dabbrev company-yasnippet))
-;;                                ;;(prog-mode (:separate company-files :separate company-capf :with company-yasnippet :separate company-dabbrev-code))
-;;                                (prog-mode ((:separate company-capf company-files) (company-dabbrev-code company-keywords) company-dabbrev company-yasnippet))
-;;                                ;;(terraform-mode ((:separate company-capf company-files company-terraform) (company-dabbrev-code company-keywords) company-dabbrev company-yasnippet))
-;;                                ;;(text-mode (:separate company-files :separate company-capf :separate company-dabbrev-code company-dabbrev :separate company-ispell :separate company-yasnippet))))
-;;                                (text-mode ((:separate company-capf company-files) (company-dabbrev-code company-keywords) company-ispell company-dabbrev company-yasnippet))))
+(setq +lsp-company-backends nil)
 
-;;(setq lsp-completion-provider :none)
-(setq +lsp-company-backends '(:separate company-capf company-files company-dabbrev-code))
-;;(setq +lsp-company-backends nil)
+(after! prog-mode
+  (set-company-backend! 'prog-mode
+    '(:separate company-capf company-files)
+    '(:separate company-dabbrev-code company-keywords)))
+
 ;; (after! terraform-mode
-;;   (set-company-backend! 'terraform-mode '(:separate company-files :separate company-capf :separate company-terraform :with company-yasnippet)))
+;;   (set-company-backend! 'terraform-mode
+;;     '(:separate company-terraform company-capf company-files)
+;;     '(:separate company-dabbrev-code company-keywords)))
 
-;; (when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
-;;   (use-package! lsp-mode :defer t :config
-;;     (add-hook! lsp-after-open
-;;       (setq company-backends (remove 'company-capf company-backends)))))
-
-;; (after! js2-mode
-;;   (set-company-backend! 'js2-mode
-;;     '((company-dabbrev-code company-keywords) company-dabbrev company-yasnippet)))
-
-;; (after! sh-script
-;;   (set-company-backend! 'sh-mode
-;;     '(company-shell :with company-yasnippet)))
+;; (after! web-mode
+;;   (set-company-backend! 'web-mode
+;;     '(:separate company-capf company-files)
+;;     '(:separate company-dabbrev-code company-keywords)))
 
 (global-set-key (kbd "C-c C-/") #'company-other-backend)
 
@@ -231,6 +220,10 @@ With argument ARG, do this that many times."
    ;; centaur-tabs-adjust-buffer-order t
    x-underline-at-descent-line t
    ))
+
+(use-package lsp-mode
+  :ensure t
+  :hook ((terraform-mode . lsp-deferred)))
 
 (setq doom-theme 'doom-one)
 

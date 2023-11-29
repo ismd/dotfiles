@@ -71,7 +71,7 @@ apps are not started from a shell."
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15.0 :dpi 144)
       doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 15.0 :dpi 144)
       doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 25.0 :dpi 144)
-      doom-unicode-font (font-spec :family "Symbols Nerd Font Mono" :size 15.0 :dpi 144)
+      doom-symbols-font (font-spec :family "Symbols Nerd Font Mono" :size 15.0 :dpi 144)
       doom-serif-font (font-spec :family "Ubuntu Nerd Font" :size 15.0 :dpi 144)
       )
 

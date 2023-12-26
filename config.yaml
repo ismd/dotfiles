@@ -1,0 +1,78 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: files
+dotfiles:
+  f_editorconfig:
+    src: editorconfig
+    dst: ~/.editorconfig
+  f_fdignore:
+    src: fdignore
+    dst: ~/.fdignore
+  f_rgignore:
+    src: rgignore
+    dst: ~/.rgignore
+  f_ripgreprc:
+    src: ripgreprc
+    dst: ~/.ripgreprc
+  d_gammastep:
+    src: config/gammastep
+    dst: ~/.config/gammastep
+  f_ini:
+    src: config/mc/ini
+    dst: ~/.config/mc/ini
+  d_doom:
+    src: config/doom
+    dst: ~/.config/doom
+    cmpignore:
+    - '*/custom.el'
+    - '*/env.el'
+  d_fish:
+    src: config/fish
+    dst: ~/.config/fish
+    cmpignore:
+    - '*/fish_variables'
+  f_mimeapps.list:
+    src: config/mimeapps.list
+    dst: ~/.config/mimeapps.list
+  f_user-dirs.dirs:
+    src: config/user-dirs.dirs
+    dst: ~/.config/user-dirs.dirs
+  f_user-dirs.locale:
+    src: config/user-dirs.locale
+    dst: ~/.config/user-dirs.locale
+  f_ec.desktop:
+    src: local/share/applications/ec.desktop
+    dst: ~/.local/share/applications/ec.desktop
+  d_bin:
+    src: bin
+    dst: ~/.bin
+  f_00-keyboard.conf:
+    src: etc/X11/xorg.conf.d/00-keyboard.conf
+    dst: /etc/X11/xorg.conf.d/00-keyboard.conf
+  f_vconsole.conf:
+    src: etc/vconsole.conf
+    dst: /etc/vconsole.conf
+  f_theme.bash:
+    src: config/i3/themes/landscape/theme.bash
+    dst: ~/.config/i3/themes/landscape/theme.bash
+profiles:
+  bg-city:
+    dotfiles:
+    - f_editorconfig
+    - f_fdignore
+    - f_rgignore
+    - f_ripgreprc
+    - d_gammastep
+    - f_ini
+    - d_doom
+    - d_fish
+    - f_mimeapps.list
+    - f_user-dirs.dirs
+    - f_user-dirs.locale
+    - f_ec.desktop
+    - d_bin
+    - f_00-keyboard.conf
+    - f_vconsole.conf
+    - f_theme.bash

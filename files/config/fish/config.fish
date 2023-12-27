@@ -12,3 +12,6 @@ alias nv=nvim
 
 # dotdrop
 alias dotdrop='dotdrop --cfg=~/.dotfiles/config.yaml'
+
+# ripgrep
+export RIPGREP_CONFIG_PATH=~/.ripgreprc

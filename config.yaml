@@ -64,6 +64,9 @@ dotfiles:
     src: bin/gammastep.sh
     dst: ~/.bin/gammastep.sh
     chmod: '755'
+  f_tmux.conf:
+    src: config/tmux/tmux.conf
+    dst: ~/.config/tmux/tmux.conf
 profiles:
   bg-city:
     dotfiles:
@@ -85,6 +88,7 @@ profiles:
     - f_theme.bash
     - f_xprofile
     - f_gammastep.sh
+    - f_tmux.conf
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -105,3 +109,4 @@ profiles:
     - f_theme.bash
     - f_xprofile
     - f_gammastep.sh
+    - f_tmux.conf

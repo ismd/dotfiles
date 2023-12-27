@@ -5,6 +5,7 @@ end
 # PATH
 fish_add_path -p ~/.bin
 fish_add_path -p ~/.local/share/nvm/v20.9.0/bin
+fish_add_path -p ~/.config/emacs/bin
 
 # nvim
 alias nv=nvim

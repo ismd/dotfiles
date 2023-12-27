@@ -57,6 +57,13 @@ dotfiles:
   f_theme.bash:
     src: config/i3/themes/landscape/theme.bash
     dst: ~/.config/i3/themes/landscape/theme.bash
+  f_xprofile:
+    src: xprofile
+    dst: ~/.xprofile
+  f_gammastep.sh:
+    src: bin/gammastep.sh
+    dst: ~/.bin/gammastep.sh
+    chmod: '755'
 profiles:
   bg-city:
     dotfiles:
@@ -76,6 +83,8 @@ profiles:
     - f_00-keyboard.conf
     - f_vconsole.conf
     - f_theme.bash
+    - f_xprofile
+    - f_gammastep.sh
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -94,3 +103,5 @@ profiles:
     - f_00-keyboard.conf
     - f_vconsole.conf
     - f_theme.bash
+    - f_xprofile
+    - f_gammastep.sh

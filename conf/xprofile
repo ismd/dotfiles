@@ -1,5 +1,5 @@
 export BROWSER=brave
-export EDITOR=ec
+export EDITOR=nvim
 {%@@ if profile == "bg-city" @@%}
 export GDK_SCALE=2
 export QT_ENABLE_HIGHDPI_SCALING=1

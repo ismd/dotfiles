@@ -72,6 +72,9 @@ dotfiles:
   f_tmux.conf:
     src: config/tmux/tmux.conf
     dst: ~/.config/tmux/tmux.conf
+  f_config.kdl:
+    src: config/zellij/config.kdl
+    dst: ~/.config/zellij/config.kdl
 profiles:
   bg-city:
     dotfiles:
@@ -94,6 +97,7 @@ profiles:
     - f_xprofile
     - f_gammastep.sh
     - f_tmux.conf
+    - f_config.kdl
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -115,3 +119,4 @@ profiles:
     - f_xprofile
     - f_gammastep.sh
     - f_tmux.conf
+    - f_config.kdl

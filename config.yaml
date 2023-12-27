@@ -28,10 +28,15 @@ dotfiles:
     cmpignore:
     - '*/custom.el'
     - '*/env.el'
+    upignore:
+    - '*/custom.el'
+    - '*/env.el'
   d_fish:
     src: config/fish
     dst: ~/.config/fish
     cmpignore:
+    - '*/fish_variables'
+    upignore:
     - '*/fish_variables'
   f_mimeapps.list:
     src: config/mimeapps.list

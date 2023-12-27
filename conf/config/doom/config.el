@@ -183,7 +183,7 @@ With argument ARG, do this that many times."
 
 ;; (doom/set-frame-opacity 50)
 
-;; (add-to-list 'default-frame-alist '(alpha-background . 50))
+(add-to-list 'default-frame-alist '(alpha-background . 92))
 
 (setq calendar-week-start-day 1)
 (setq org-startup-with-inline-images t

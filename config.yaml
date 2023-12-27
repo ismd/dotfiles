@@ -76,3 +76,21 @@ profiles:
     - f_00-keyboard.conf
     - f_vconsole.conf
     - f_theme.bash
+  cz-work:
+    dotfiles:
+    - f_editorconfig
+    - f_fdignore
+    - f_rgignore
+    - f_ripgreprc
+    - d_gammastep
+    - f_ini
+    - d_doom
+    - d_fish
+    - f_mimeapps.list
+    - f_user-dirs.dirs
+    - f_user-dirs.locale
+    - f_ec.desktop
+    - d_bin
+    - f_00-keyboard.conf
+    - f_vconsole.conf
+    - f_theme.bash

@@ -9,3 +9,6 @@ fish_add_path -p ~/.config/emacs/bin
 
 # nvim
 alias nv=nvim
+
+# dotdrop
+alias dotdrop='dotdrop --cfg=~/.dotfiles/config.yaml'

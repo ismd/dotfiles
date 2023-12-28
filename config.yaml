@@ -78,6 +78,12 @@ dotfiles:
   d_scripts:
     src: config/i3/scripts
     dst: ~/.config/i3/scripts
+  f_config.sh:
+    src: config/dmenu-translate/config.sh
+    dst: ~/.config/dmenu-translate/config.sh
+  d_config.d:
+    src: config/i3/config.d
+    dst: ~/.config/i3/config.d
 profiles:
   bg-city:
     dotfiles:
@@ -102,6 +108,8 @@ profiles:
     - f_tmux.conf
     - f_config.kdl
     - d_scripts
+    - f_config.sh
+    - d_config.d
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -125,3 +133,5 @@ profiles:
     - f_tmux.conf
     - f_config.kdl
     - d_scripts
+    - f_config.sh
+    - d_config.d

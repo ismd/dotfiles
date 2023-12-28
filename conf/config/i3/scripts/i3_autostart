@@ -68,3 +68,8 @@ xset s 3600 3600
 
 # xss-lock
 exec xss-lock -- betterlockscreen --lock --show-layout &
+
+{%@@ if profile == "cz-work" @@%}
+# Thinkpad-leds
+~/.bin/thinkpad-leds.sh &
+{%@@ endif @@%}

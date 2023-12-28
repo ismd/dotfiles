@@ -8,7 +8,11 @@
 iDIR='/usr/share/archcraft/icons/dunst'
 
 # Graphics card
+{%@@ if profile == "cz-work" @@%}
+CARD="fake-card"
+{%@@ else @@%}
 CARD=`ls /sys/class/backlight | head -n 1`
+{%@@ endif @@%}
 
 # Get brightness
 get_backlight() {

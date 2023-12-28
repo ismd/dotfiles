@@ -64,7 +64,8 @@ exec nm-applet &
 ~/.bin/unclutter.sh &
 
 # X
-xset s 3600 3600
+xset s 900 900
+xset dpms 3600 0 0
 
 # xss-lock
 exec xss-lock -- betterlockscreen --lock --show-layout &

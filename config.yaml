@@ -75,6 +75,9 @@ dotfiles:
   f_config.kdl:
     src: config/zellij/config.kdl
     dst: ~/.config/zellij/config.kdl
+  d_scripts:
+    src: config/i3/scripts
+    dst: ~/.config/i3/scripts
 profiles:
   bg-city:
     dotfiles:
@@ -98,6 +101,7 @@ profiles:
     - f_gammastep.sh
     - f_tmux.conf
     - f_config.kdl
+    - d_scripts
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -120,3 +124,4 @@ profiles:
     - f_gammastep.sh
     - f_tmux.conf
     - f_config.kdl
+    - d_scripts

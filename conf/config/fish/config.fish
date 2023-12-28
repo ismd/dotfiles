@@ -6,6 +6,7 @@ end
 fish_add_path -p ~/.bin
 fish_add_path -p ~/.local/share/nvm/v20.9.0/bin
 fish_add_path -p ~/.config/emacs/bin
+fish_add_path -p ~/src/flutter/bin
 
 # nvim
 alias nv=nvim

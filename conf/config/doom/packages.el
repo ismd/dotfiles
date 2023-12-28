@@ -49,6 +49,9 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+{%@@ if profile == "bg-city" @@%}
+(package! codeium :recipe (:host github :repo "Exafunction/codeium.el"))
+{%@@ endif @@%}
 ;; (package! dired-subtree)
 (package! ibuffer-projectile)
 (package! lsp-ui)

@@ -19,10 +19,11 @@
 
 (after! company
   (setq
+    company-frontends '(company-pseudo-tooltip-frontend company-preview-frontend)
     company-idle-delay 1
-    company-minimum-prefix-length 1)
-  ;; (add-to-list 'company-frontends 'company-preview-frontend)
-  )
+    company-minimum-prefix-length 1
+    company-require-match nil ;; ?
+    ))
 
 (setq +lsp-company-backends nil)
 

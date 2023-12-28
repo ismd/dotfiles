@@ -5,10 +5,10 @@ TRANS_LANGS='ru en sr'
 DMENU='dmenu'
 
 FONT="JetBrains Mono-30"
-COLOR_NB="#FEFEFE"
-COLOR_NF="#404040"
-COLOR_SF="#404040"
-COLOR_SB="#93A1A1"
+COLOR_NB="#141c21"
+COLOR_NF="#93a1a1"
+COLOR_SF="#010101"
+COLOR_SB="#5294E2"
 
 # Commands that are run to display menus.
 DMENU_TEXT='dmenu -l 3 -fn "$FONT" -p "Translate:" -nb "$COLOR_NB" -nf "$COLOR_NF" -sf "$COLOR_SF" -sb "$COLOR_SB"'  # select text to translate

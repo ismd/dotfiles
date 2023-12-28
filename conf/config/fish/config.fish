@@ -15,3 +15,8 @@ alias dotdrop='dotdrop --cfg=~/.dotfiles/config.yaml'
 
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
+{%@@ if profile == "cz-work" @@%}
+# Skotty
+eval $(skotty ssh env)
+{%@@ endif @@%}

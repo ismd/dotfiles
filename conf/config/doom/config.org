@@ -26,6 +26,7 @@ options: toc:2
   - [[#org-agenda][Org-agenda]]
   - [[#org-directory][Org-directory]]
   - [[#org-modern][Org-modern]]
+- [[#projectile][Projectile]]
 - [[#scroll][Scroll]]
 - [[#tabs][Tabs]]
 - [[#terraform][Terraform]]
@@ -425,6 +426,12 @@ If you use `org' and don't want your org files in the default location below, ch
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'org (global-org-modern-mode))
+#+end_src
+
+* Projectile
+
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '(("~/coding" . 1)))
 #+end_src
 
 * Scroll

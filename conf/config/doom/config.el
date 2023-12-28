@@ -210,6 +210,8 @@ With argument ARG, do this that many times."
 
 (with-eval-after-load 'org (global-org-modern-mode))
 
+(setq projectile-project-search-path '(("~/coding" . 1)))
+
 (pixel-scroll-precision-mode)
 
 (after! centaur-tabs

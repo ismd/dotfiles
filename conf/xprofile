@@ -1,4 +1,5 @@
 export BROWSER=brave
+export CHROME_EXECUTABLE=google-chrome-stable
 export EDITOR=nvim
 export PAGER=less
 export TERMINAL=alacritty

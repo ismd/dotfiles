@@ -16,6 +16,7 @@ options: toc:2
 - [[#format-on-save][Format on save]]
 - [[#ibuffer][Ibuffer]]
 - [[#ivy][Ivy]]
+- [[#javascript][JavaScript]]
 - [[#json][JSON]]
 - [[#keybindings][Keybindings]]
 - [[#line-numbers][Line numbers]]
@@ -214,6 +215,13 @@ If you or Emacs can't find your font, use 'M-x describe-font' to look them up, `
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq +ivy-buffer-preview 'everything))
+#+end_src
+
+* JavaScript
+
+#+begin_src emacs-lisp
+(setq auto-mode-alist (delete '("\\.[mc]?js\\'" . rjsx-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 #+end_src
 
 * JSON

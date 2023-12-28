@@ -88,6 +88,9 @@ apps are not started from a shell."
   (setq ivy-count-format "(%d/%d) ")
   (setq +ivy-buffer-preview 'everything))
 
+(setq auto-mode-alist (delete '("\\.[mc]?js\\'" . rjsx-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 ;; (setq-hook! 'json-mode-hook +format-with-lsp nil)
 
 (global-set-key (kbd "M-s") 'avy-goto-char-timer)

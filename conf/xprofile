@@ -1,11 +1,13 @@
-export BROWSER=brave
-export CHROME_EXECUTABLE=google-chrome-stable
-export EDITOR=nvim
-export PAGER=less
-export TERMINAL=alacritty
-export VISUAL=nvim
+#!/usr/bin/env fish
+
+set -x BROWSER brave
+set -x CHROME_EXECUTABLE google-chrome-stable
+set -x EDITOR nvim
+set -x PAGER less
+set -x TERMINAL alacritty --config-file ~/.config/i3/alacritty/alacritty.toml
+set -x VISUAL nvim
 
 {%@@ if profile == "bg-city" @@%}
-export GDK_SCALE=2
-export QT_ENABLE_HIGHDPI_SCALING=1
+set -x GDK_SCALE 2
+set -x QT_ENABLE_HIGHDPI_SCALING 1
 {%@@ endif @@%}

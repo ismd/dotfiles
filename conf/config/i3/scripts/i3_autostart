@@ -65,7 +65,7 @@ exec nm-applet &
 
 # X
 xset s 900 900
-xset dpms 3600 0 0
+xset dpms 0 3600 0
 
 # xss-lock
 exec xss-lock -- betterlockscreen --lock --show-layout &

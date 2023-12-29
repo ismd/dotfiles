@@ -1,5 +1,6 @@
 [Default Applications]
 application/json=ec.desktop
+application/vnd.ms-publisher=ec.desktop
 application/x-bittorrent=transmission-qt.desktop
 application/x-extension-htm=brave-browser.desktop
 application/x-extension-html=brave-browser.desktop

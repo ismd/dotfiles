@@ -50,9 +50,10 @@
 ;(unpin! t)
 
 {%@@ if profile == "bg-city" @@%}
-(package! codeium :recipe (:host github :repo "Exafunction/codeium.el"))
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 {%@@ endif @@%}
-;; (package! dired-subtree)
+
 (package! dirvish)
 (package! ibuffer-projectile)
 (package! lsp-ui)

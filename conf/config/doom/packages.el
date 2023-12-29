@@ -53,6 +53,7 @@
 (package! codeium :recipe (:host github :repo "Exafunction/codeium.el"))
 {%@@ endif @@%}
 ;; (package! dired-subtree)
+(package! dirvish)
 (package! ibuffer-projectile)
 (package! lsp-ui)
 (package! org-modern)

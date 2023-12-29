@@ -7,7 +7,7 @@
 # i3 directory
 DIR="$HOME/.config/i3"
 
-CONFIG="$DIR/alacritty/alacritty.yml"
+CONFIG="$DIR/alacritty/alacritty.toml"
 
 alacritty --class 'Music,Music' --config-file "$CONFIG" \
 		  -o window.dimensions.columns=109 window.dimensions.lines=22 \

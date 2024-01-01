@@ -21,3 +21,6 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # Skotty
 eval $(skotty ssh env)
 {%@@ endif @@%}
+
+# alacritty
+alias alacritty="alacritty --config-file ~/.config/i3/alacritty/alacritty.toml"

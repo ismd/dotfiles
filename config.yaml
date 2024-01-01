@@ -86,6 +86,12 @@ dotfiles:
   d_config.d:
     src: config/i3/config.d
     dst: ~/.config/i3/config.d
+  f_config.ini:
+    src: config/i3/themes/landscape/polybar/config.ini
+    dst: ~/.config/i3/themes/landscape/polybar/config.ini
+  f_modules.ini:
+    src: config/i3/themes/landscape/polybar/modules.ini
+    dst: ~/.config/i3/themes/landscape/polybar/modules.ini
 profiles:
   bg-city:
     dotfiles:
@@ -112,6 +118,8 @@ profiles:
     - d_scripts
     - f_config.sh
     - d_config.d
+    - f_config.ini
+    - f_modules.ini
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -137,3 +145,5 @@ profiles:
     - d_scripts
     - f_config.sh
     - d_config.d
+    - f_config.ini
+    - f_modules.ini

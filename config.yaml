@@ -66,6 +66,7 @@ dotfiles:
   f_xprofile:
     src: xprofile
     dst: ~/.xprofile
+    chmod: '644'
   f_gammastep.sh:
     src: bin/gammastep.sh
     dst: ~/.bin/gammastep.sh

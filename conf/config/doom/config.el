@@ -19,13 +19,11 @@
 
 (after! company
   (setq
-    company-frontends '(company-pseudo-tooltip-frontend company-preview-frontend)
-    company-idle-delay 1
-    company-minimum-prefix-length 1
-    company-require-match nil ;; ?
-    ))
+    ;; company-frontends '(company-pseudo-tooltip-frontend company-preview-frontend)
+    company-idle-delay nil
+    company-minimum-prefix-length 0))
 
-(setq +lsp-company-backends nil)
+(setq +lsp-company-backends '(:separate company-capf company-files))
 
 (after! prog-mode
   (set-company-backend! 'prog-mode
@@ -43,6 +41,15 @@
 ;;     '(:separate company-dabbrev-code company-keywords)))
 
 (global-set-key (kbd "C-c C-/") #'company-other-backend)
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 ;; (setq-default cursor-type 'bar)
 (blink-cursor-mode)

@@ -330,8 +330,6 @@ With argument ARG, do this that many times."
   (interactive "p")
   (delete-region (point) (progn (backward-word arg) (point))))
 
-;; (global-set-key (kbd "M-d") 'ismd/delete-word)
-;; (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
 (global-set-key (kbd "M-d") 'ismd/delete-word)
 (global-set-key (kbd "M-<backspace>") 'ismd/backward-delete-word)
 #+end_src
@@ -347,6 +345,13 @@ With argument ARG, do this that many times."
     (dired-goto-file current-dir)))
 
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
+#+end_src
+
+*** Er
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C--") 'er/contract-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 #+end_src
 
 *** Indent rigidly

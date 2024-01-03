@@ -54,6 +54,11 @@
 ;; (setq-default cursor-type 'bar)
 (blink-cursor-mode)
 
+(add-hook! dart-mode
+  (lsp-dart-closing-labels-mode)
+  (lsp-dart-flutter-fringe-colors-mode)
+  (lsp-dart-flutter-widget-guides-mode))
+
 (use-package dirvish
   :init
   (dirvish-override-dired-mode)

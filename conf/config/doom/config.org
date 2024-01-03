@@ -11,6 +11,7 @@ options: toc:2
 - [[#company][Company]]
 - [[#copilot][Copilot]]
 - [[#cursor][Cursor]]
+- [[#dart][Dart]]
 - [[#dirvish][Dirvish]]
 - [[#doom-modeline][Doom-modeline]]
 - [[#env][Env]]
@@ -149,6 +150,15 @@ Use super-save instead of default
 #+begin_src emacs-lisp
 ;; (setq-default cursor-type 'bar)
 (blink-cursor-mode)
+#+end_src
+
+* Dart
+
+#+begin_src emacs-lisp
+(add-hook! dart-mode
+  (lsp-dart-closing-labels-mode)
+  (lsp-dart-flutter-fringe-colors-mode)
+  (lsp-dart-flutter-widget-guides-mode))
 #+end_src
 
 * Dirvish

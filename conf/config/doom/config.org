@@ -347,6 +347,12 @@ With argument ARG, do this that many times."
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
 #+end_src
 
+*** Electric
+
+#+begin_src emacs-lisp
+(electric-pair-mode)
+#+end_src
+
 *** Er
 
 #+begin_src emacs-lisp

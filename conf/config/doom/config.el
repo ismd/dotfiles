@@ -175,6 +175,8 @@ With argument ARG, do this that many times."
 
 (map! :map dired-mode-map "<backspace>" #'ismd/dired-up-dir)
 
+(electric-pair-mode)
+
 (global-set-key (kbd "C--") 'er/contract-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 

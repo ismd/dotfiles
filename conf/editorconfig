@@ -7,11 +7,14 @@ indent_size = 4
 indent_style = space
 insert_final_newline = true
 
+[*.{dart,el,json,pug,sh,yaml,yml}]
+indent_size = 2
+
 [*.md]
 trim_trailing_whitespace = false
 
-[*.dart, *.el, *.json, *.pug, *.sh, *.yaml, *.yml]
-indent_size = 2
+[Makefile]
+indent_style = tab
 
-[Makefile, *.go]
+[*.go]
 indent_style = tab

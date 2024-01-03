@@ -262,6 +262,9 @@ With argument ARG, do this that many times."
 
 (pixel-scroll-precision-mode)
 
+(add-hook! org-mode 'rainbow-mode)
+(add-hook! prog-mode 'rainbow-mode)
+
 (after! centaur-tabs
   (centaur-tabs-group-by-projectile-project)
   (centaur-tabs-headline-match)

@@ -30,6 +30,7 @@ options: toc:2
   - [[#org-modern][Org-modern]]
 - [[#projectile][Projectile]]
 - [[#scroll][Scroll]]
+- [[#rainbow][Rainbow]]
 - [[#tabs][Tabs]]
 - [[#terraform][Terraform]]
 - [[#theme][Theme]]
@@ -496,6 +497,13 @@ If you use `org' and don't want your org files in the default location below, ch
 
 #+begin_src emacs-lisp
 (pixel-scroll-precision-mode)
+#+end_src
+
+* Rainbow
+
+#+begin_src emacs-lisp
+(add-hook! org-mode 'rainbow-mode)
+(add-hook! prog-mode 'rainbow-mode)
 #+end_src
 
 * Tabs

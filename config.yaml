@@ -41,11 +41,9 @@ dotfiles:
   f_mimeapps.list:
     src: config/mimeapps.list
     dst: ~/.config/mimeapps.list
-    chmod: '600'
   f_user-dirs.dirs:
     src: config/user-dirs.dirs
     dst: ~/.config/user-dirs.dirs
-    chmod: '600'
   f_user-dirs.locale:
     src: config/user-dirs.locale
     dst: ~/.config/user-dirs.locale
@@ -67,11 +65,6 @@ dotfiles:
   f_xprofile:
     src: xprofile
     dst: ~/.xprofile
-    chmod: '644'
-  f_gammastep.sh:
-    src: bin/gammastep.sh
-    dst: ~/.bin/gammastep.sh
-    chmod: '755'
   f_tmux.conf:
     src: config/tmux/tmux.conf
     dst: ~/.config/tmux/tmux.conf
@@ -113,7 +106,6 @@ profiles:
     - f_vconsole.conf
     - f_theme.bash
     - f_xprofile
-    - f_gammastep.sh
     - f_tmux.conf
     - f_config.kdl
     - d_scripts
@@ -140,7 +132,6 @@ profiles:
     - f_vconsole.conf
     - f_theme.bash
     - f_xprofile
-    - f_gammastep.sh
     - f_tmux.conf
     - f_config.kdl
     - d_scripts

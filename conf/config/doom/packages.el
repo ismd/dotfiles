@@ -49,11 +49,8 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-{%@@ if profile == "bg-city" @@%}
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
-{%@@ endif @@%}
-
 (package! dirvish)
 (package! ibuffer-projectile)
 (package! lsp-ui)

@@ -41,7 +41,7 @@ dotfiles:
   f_mimeapps.list:
     src: config/mimeapps.list
     dst: ~/.config/mimeapps.list
-    chmod: '644'
+    chmod: '600'
   f_user-dirs.dirs:
     src: config/user-dirs.dirs
     dst: ~/.config/user-dirs.dirs

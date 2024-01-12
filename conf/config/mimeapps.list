@@ -20,3 +20,4 @@ x-scheme-handler/chrome=brave-browser.desktop
 x-scheme-handler/ftp=brave-browser.desktop
 x-scheme-handler/http=brave-browser.desktop
 x-scheme-handler/https=brave-browser.desktop
+x-scheme-handler/jetbrains=jetbrains-toolbox.desktop

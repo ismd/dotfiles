@@ -262,7 +262,7 @@ With argument ARG, do this that many times."
                  (org-agenda-overriding-header "Private tasks:")))
           (agenda "")))))
 
-(setq org-directory "~/org/")
+(setq org-directory "~/Yandex.Disk/org/")
 
 (with-eval-after-load 'org (global-org-modern-mode))
 

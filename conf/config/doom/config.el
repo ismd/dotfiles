@@ -122,6 +122,10 @@ apps are not started from a shell."
 
 (set-exec-path-from-shell-PATH)
 
+(setq shell-file-name (executable-find "bash"))
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))
+
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 15.0 :dpi 144)
       doom-variable-pitch-font (font-spec :family "UbuntuMono Nerd Font" :size 15.0 :dpi 144)
       doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 60.0 :dpi 144)

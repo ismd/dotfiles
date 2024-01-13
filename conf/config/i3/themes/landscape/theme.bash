@@ -81,17 +81,10 @@ icon_theme='neru-newyear-light'
 cursor_theme='Qogirr-Dark'
 
 # Dunst
-{%@@ if profile == "cz-work" @@%}
 dunst_width='360'
 dunst_height='240'
 dunst_offset='24x60'
 dunst_font='JetBrains Mono 12'
-{%@@ else @@%}
-dunst_width='540'
-dunst_height='360'
-dunst_offset='40x90'
-dunst_font='JetBrains Mono 22'
-{%@@ endif @@%}
 dunst_origin='top-right'
 dunst_border='0'
 dunst_separator='2'
@@ -107,11 +100,7 @@ picom_blur_method='none'
 picom_blur_strength='0'
 
 # I3WM
-{%@@ if profile == "cz-work" @@%}
 i3wm_fonts='JetBrainsMono Nerd Font 12'
-{%@@ else @@%}
-i3wm_fonts='JetBrainsMono Nerd Font 18'
-{%@@ endif @@%}
 i3wm_border_size='2'
 i3wm_border_style='pixel'
 i3wm_gaps_inner='6'

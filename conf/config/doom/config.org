@@ -359,7 +359,7 @@ With argument ARG, do this that many times."
 *** Electric
 
 #+begin_src emacs-lisp
-(electric-pair-mode)
+;; (electric-pair-mode)
 #+end_src
 
 *** Er
@@ -584,8 +584,8 @@ There are two ways to load a theme. Both assume the theme is installed and avail
 * Vertico
 
 #+begin_src emacs-lisp
-;; (after! vertico
-;;   (setq vertico-cycle nil))
+(after! vertico
+  (setq vertico-cycle nil))
 #+end_src
 
 * Ws-butler

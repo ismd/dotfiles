@@ -294,7 +294,7 @@ With argument ARG, do this that many times."
   :ensure t
   :hook ((terraform-mode . lsp-deferred)))
 
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-nord)
 
 (setq tramp-terminal-type "tramp")
 

@@ -4,7 +4,7 @@ TRANS_LANGS='ru en sr'
 # Menu program.
 DMENU='dmenu'
 
-FONT="JetBrains Mono-30"
+FONT="JetBrains Mono-20"
 COLOR_NB="#141c21"
 COLOR_NF="#93a1a1"
 COLOR_SF="#010101"

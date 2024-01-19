@@ -476,7 +476,7 @@ Doom style
 
 New emacs 29 style
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 92))
+(add-to-list 'default-frame-alist '(alpha-background . 95))
 #+end_src
 
 * Org

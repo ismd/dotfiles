@@ -86,6 +86,9 @@ dotfiles:
   f_modules.ini:
     src: config/i3/themes/landscape/polybar/modules.ini
     dst: ~/.config/i3/themes/landscape/polybar/modules.ini
+  f_gitconfig:
+    src: gitconfig
+    dst: ~/.gitconfig
 profiles:
   bg-city:
     dotfiles:
@@ -113,6 +116,7 @@ profiles:
     - d_config.d
     - f_config.ini
     - f_modules.ini
+    - f_gitconfig
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -139,3 +143,4 @@ profiles:
     - d_config.d
     - f_config.ini
     - f_modules.ini
+    - f_gitconfig

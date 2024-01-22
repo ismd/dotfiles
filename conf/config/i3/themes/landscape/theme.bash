@@ -90,7 +90,7 @@ dunst_border='0'
 dunst_separator='2'
 
 # Picom
-picom_backend='xrender'
+picom_backend='glx'
 picom_corner='0'
 picom_shadow_r='14'
 picom_shadow_o='0.30'

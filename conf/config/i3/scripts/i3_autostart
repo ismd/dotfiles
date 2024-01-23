@@ -64,7 +64,7 @@ exec nm-applet &
 ~/.bin/unclutter.sh &
 
 # X
-xset s 1800 300
+xset s 2700 300
 # xset dpms 0 3600 0
 
 # xss-lock

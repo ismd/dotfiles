@@ -68,7 +68,7 @@ xset s 2700 300
 # xset dpms 0 3600 0
 
 # xss-lock
-exec xss-lock -- betterlockscreen --lock --show-layout &
+exec xss-lock -- betterlockscreen -u ~/Pictures/wallpaper.jpg --lock --show-layout &
 
 {%@@ if profile == "cz-work" @@%}
 # Thinkpad-leds

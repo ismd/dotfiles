@@ -69,8 +69,7 @@
 - [[#tldr][TLDR]]
 - [[#transparency][TRANSPARENCY]]
 - [[#tree-sitter][TREE SITTER]]
-  - [[#tree-sitter-langs][Tree Sitter Langs]]
-  - [[#tree-sitter-auto][Tree Sitter Auto]]
+  - [[#treesit-auto][Treesit Auto]]
   - [[#ts-fold][Ts Fold]]
 - [[#treemacs][TREEMACS]]
 - [[#vertico][VERTICO]]
@@ -554,9 +553,9 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   (general-define-key
    :keymaps 'override
 
-   ;; Text scaling
-   "C-+" '(text-scale-increase :wk "Increase font size")
-   "C--" '(text-scale-decrease :wk "Decrease font size")
+   ;; Expand region
+   "C-=" '(er/expand-region :wk "Expand region")
+   "C--" '(er/contract-region :wk "Contract region")
 
    "C-s" '(consult-line :wk "Search for string")
 
@@ -606,8 +605,9 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   (cz/leader-keys
     "<" '(previous-buffer :wk "Previous buffer")
     ">" '(next-buffer :wk "Next buffer")
-    "+" '(er/expand-region :wk "Expand region")
-    "=" '(er/expand-region :wk "Expand region")
+    "=" '(text-scale-increase :wk "Increase font size")
+    "+" '(text-scale-increase :wk "Increase font size")
+    "-" '(text-scale-decrease :wk "Decrease font size")
     "C-r" '(ivy-resume :wk "Ivy resume")
     "TAB TAB" '(comment-line :wk "Comment lines"))
 
@@ -650,7 +650,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "f e" '((lambda () (interactive)
               (dired "~/.config/emacs/")) 
             :wk "Open user-emacs-directory in dired")
-    "f f" '(counsel-find-file :wk "Find file")
+    "f f" '(find-file :wk "Find file")
     "f i" '((lambda () (interactive)
               (find-file "~/.config/emacs/init.el")) 
             :wk "Open emacs init.el")
@@ -779,11 +779,12 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "w P" '(buf-move-up :wk "Buffer move up")
     "w F" '(buf-move-right :wk "Buffer move right"))
 
-  (cz/leader-keys
-    "C-f" '(:ignore t :wk "Fold")
-    "C-f C-f" '(ts-fold-toggle :wk "Toggle fold")
-    "C-f F" '(ts-fold-close-all :wk "Fold all")
-    "C-f U" '(ts-fold-open-all :wk "Unfold all"))
+  ;; (cz/leader-keys
+  ;;   "C-f" '(:ignore t :wk "Fold")
+  ;;   "C-f C-f" '(vimish-fold :wk "Fold")
+  ;;   "C-f C-u" '(vimish-fold-delete :wk "Unfold all")
+  ;;   "C-f C-a C-f" '(vimish-fold-refold :wk "Fold all")
+  ;;   "C-f C-a C-u" '(vimish-fold-unfold-all :wk "Unfold all"))
 
   (general-define-key
    :keymaps 'projectile-command-map
@@ -1103,8 +1104,9 @@ https://github.com/emacsorphanage/popwin
 #+begin_src emacs-lisp
 (use-package popwin
   :config
-  (push "*xref*" popwin:special-display-config)
+  (push "*Flycheck errors*" popwin:special-display-config)
   (push "*Warnings*" popwin:special-display-config)
+  (push "*xref*" popwin:special-display-config)
   (popwin-mode 1))
 #+end_src
 
@@ -1373,25 +1375,9 @@ With Emacs version 29, true transparency has been added.
 #+end_src
 
 * TREE SITTER
-https://emacs-tree-sitter.github.io/
+Before Emacs 29, tree-sitter was a [[https://emacs-tree-sitter.github.io/][package]] that could be installed. With Emacs 29, tree-sitter is built-in in package =treesit.el=.
 
-#+begin_src emacs-lisp
-;; (use-package tree-sitter
-;;   :config
-;;   (global-tree-sitter-mode)
-;;   :hook
-;;   ((tree-sitter-after-on . tree-sitter-hl-mode)))
-#+end_src
-
-** Tree Sitter Langs
-https://github.com/emacs-tree-sitter/tree-sitter-langs
-
-#+begin_src emacs-lisp
-;; (use-package tree-sitter-langs
-;;   :after tree-sitter)
-#+end_src
-
-** Tree Sitter Auto
+** Treesit Auto
 
 #+begin_src emacs-lisp
 (use-package treesit-auto
@@ -1403,13 +1389,15 @@ https://github.com/emacs-tree-sitter/tree-sitter-langs
 #+end_src
 
 ** Ts Fold
+The package =ts-fold= currently doesn't work with =treesit.el=.
+https://github.com/emacs-tree-sitter/ts-fold/issues/48
 
 #+begin_src emacs-lisp
-(use-package ts-fold
-  :elpaca (:host github :repo "emacs-tree-sitter/ts-fold")
-  :config
-  (global-ts-fold-mode 1)
-  (global-ts-fold-indicators-mode 1))
+;; (use-package ts-fold
+;;   :elpaca (:host github :repo "emacs-tree-sitter/ts-fold")
+;;   :config
+;;   (global-ts-fold-mode 1)
+;;   (global-ts-fold-indicators-mode 1))
 #+end_src
 
 * TREEMACS

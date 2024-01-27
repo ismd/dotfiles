@@ -813,6 +813,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 #+end_src
 
 * GIT PROGRAMS
+
 ** Git Time Machine
 [[https://github.com/emacsmirror/git-timemachine][git-timemachine]] is a program that allows you to move backwards and forwards through a file's commits.  'SPC g t' will open the time machine on a file if it is in a git repo.  Then, while in normal mode, you can use 'CTRL-j' and 'CTRL-k' to move backwards and forwards through the commits.
 
@@ -826,7 +827,10 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 [[https://magit.vc/manual/][Magit]] is a full-featured git client for Emacs.
 
 #+begin_src emacs-lisp
-(use-package magit)
+(use-package magit
+  :ensure t
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 #+end_src
 
 * HIGHLIGHT TODO

@@ -75,6 +75,7 @@
 - [[#treemacs][TREEMACS]]
 - [[#vertico][VERTICO]]
   - [[#orderless][Orderless]]
+  - [[#vertico-posframe][Vertico Posframe]]
 - [[#xref][XREF]]
 - [[#which-key][WHICH-KEY]]
 - [[#window-numbering][WINDOW NUMBERING]]
@@ -830,6 +831,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 (use-package magit
   :ensure t
   :custom
+  (transient-display-buffer-action '(display-buffer-below-selected))
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 #+end_src
 
@@ -1172,12 +1174,14 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (global-display-line-numbers-mode 1) ;; Display line numbers
 (global-visual-line-mode t)  ;; Enable truncated lines
 (menu-bar-mode -1)           ;; Disable the menu bar 
+(save-place-mode 1)         ;; Save the cursor position when a file is closed
 (scroll-bar-mode -1)         ;; Disable the scroll bar
 (tool-bar-mode -1)           ;; Disable the tool bar
 
 (setopt use-short-answers t)   ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
+(setq save-place-file (concat user-emacs-directory ".emacs-places"))
 #+end_src
 
 * SHELLS AND TERMINALS
@@ -1609,7 +1613,6 @@ vertico.el - VERTical Interactive COmpletion
 #+end_src
 
 ** Orderless
-Optionally use the `orderless' completion style.
 
 #+begin_src emacs-lisp
 (use-package orderless
@@ -1620,6 +1623,19 @@ Optionally use the `orderless' completion style.
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
+
+** Vertico Posframe
+https://github.com/tumashu/vertico-posframe
+
+#+begin_src emacs-lisp
+(use-package vertico-posframe
+  :config
+  (vertico-posframe-mode 1)
+  (setq vertico-posframe-border-width 2
+        vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))
+	vertico-posframe-poshandler 'posframe-poshandler-frame-top-center)
+  (set-face-attribute 'vertico-posframe-border nil :background "#b0bec5"))
 #+end_src
 
 * XREF

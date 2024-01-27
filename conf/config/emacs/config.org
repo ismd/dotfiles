@@ -788,7 +788,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
   (general-define-key
    :keymaps 'projectile-command-map
-   "b" '(consult-project-buffer :wk "Switch buffer in project"))
+   "b" '(consult-project-buffer :wk "Switch buffer in project")
+   "t" '(treemacs-add-and-display-current-project-exclusively :wk "Show project in treemacs"))
 
   ;;
   ;; M-g
@@ -1500,7 +1501,7 @@ https://github.com/Alexander-Miller/treemacs
   :ensure t)
 
 (use-package treemacs-nerd-icons
-  :after (treemacs nerd-icons)
+  :after (treemacs lsp-treemacs nerd-icons)
   :config
   (treemacs-load-theme "nerd-icons"))
 

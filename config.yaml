@@ -89,6 +89,18 @@ dotfiles:
   f_gitconfig:
     src: gitconfig
     dst: ~/.gitconfig
+  f_config.org:
+    src: config/emacs/config.org
+    dst: ~/.config/emacs/config.org
+  f_early-init.el:
+    src: config/emacs/early-init.el
+    dst: ~/.config/emacs/early-init.el
+  f_init.el:
+    src: config/emacs/init.el
+    dst: ~/.config/emacs/init.el
+  d_emacs_scripts:
+    src: config/emacs/scripts
+    dst: ~/.config/emacs/scripts
 profiles:
   bg-city:
     dotfiles:
@@ -117,6 +129,10 @@ profiles:
     - f_config.ini
     - f_modules.ini
     - f_gitconfig
+    - f_config.org
+    - f_early-init.el
+    - f_init.el
+    - d_emacs_scripts
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -144,3 +160,7 @@ profiles:
     - f_config.ini
     - f_modules.ini
     - f_gitconfig
+    - f_config.org
+    - f_early-init.el
+    - f_init.el
+    - d_emacs_scripts

@@ -66,6 +66,7 @@
   - [[#doom-themes][Doom Themes]]
   - [[#ef-themes][Ef-Themes]]
   - [[#modus-themes][Modus Themes]]
+  - [[#mindre-theme][Mindre Theme]]
 - [[#tldr][TLDR]]
 - [[#transparency][TRANSPARENCY]]
 - [[#tree-sitter][TREE SITTER]]
@@ -581,6 +582,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-7" '(winum-select-window-7 :wk "Select window 7")
    "M-8" '(winum-select-window-8 :wk "Select window 8")
    "M-9" '(winum-select-window-9 :wk "Select window 9")
+   "M-0" '(treemacs-add-and-display-current-project-exclusively :wk "Treemacs project")
    )
 
   ;;
@@ -1352,14 +1354,37 @@ https://github.com/mclear-tools/tabspaces
 https://github.com/protesilaos/modus-themes
 
 #+begin_src emacs-lisp
-(use-package modus-themes
-  :ensure t
-  :init
-  (setq modus-themes-italic-constructs t
-        modus-themes-bold-constructs nil
-        modus-themes-region '(bg-only no-extend))
-  :config
-  (load-theme 'modus-operandi :no-confirm))
+;; (use-package modus-themes
+;;   :ensure t
+;;   :init
+;;   (setq modus-themes-italic-constructs t
+;;         modus-themes-bold-constructs nil
+;;         modus-themes-region '(bg-only no-extend))
+;;   :config
+;;   (load-theme 'modus-operandi :no-confirm))
+#+end_src
+
+** Mindre Theme
+https://github.com/erikbackman/mindre-theme
+
+Copied package to =scripts= because of the issue https://github.com/erikbackman/mindre-theme/issues/16
+
+#+begin_src emacs-lisp
+;; (use-package mindre-theme
+;;   :ensure t
+;;   :custom
+;;   (mindre-use-more-bold nil)
+;;   (mindre-use-more-fading nil)
+;;   (mindre-use-faded-lisp-parens t)
+;;   :config
+;;   (load-theme 'mindre t))
+
+(require 'mindre-theme)
+(custom-set-variables
+ '(mindre-use-more-bold nil)
+ '(mindre-use-more-fading nil)
+ '(mindre-use-faded-lisp-parens t))
+(load-theme 'mindre t)
 #+end_src
 
 * TLDR
@@ -1408,9 +1433,9 @@ https://github.com/Alexander-Miller/treemacs
 (use-package treemacs
   :ensure t
   :defer t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  ;; :init
+  ;; (with-eval-after-load 'winum
+  ;;   (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :hook
   (treemacs-mode . (lambda () (display-line-numbers-mode -1)))
   :config
@@ -1486,15 +1511,16 @@ https://github.com/Alexander-Miller/treemacs
        (treemacs-git-mode 'simple)))
 
     (treemacs-hide-gitignored-files-mode nil))
-  :bind
-  (:map global-map
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t d"   . treemacs-select-directory)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
+  ;; :bind
+  ;; (:map global-map
+  ;;       ("M-0"       . treemacs-select-window)
+  ;;       ("C-x t 1"   . treemacs-delete-other-windows)
+  ;;       ("C-x t t"   . treemacs)
+  ;;       ("C-x t d"   . treemacs-select-directory)
+  ;;       ("C-x t B"   . treemacs-bookmark)
+  ;;       ("C-x t C-t" . treemacs-find-file)
+  ;;       ("C-x t M-t" . treemacs-find-tag))
+  )
 
 (use-package treemacs-projectile
   :after (treemacs projectile)

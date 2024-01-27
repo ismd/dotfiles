@@ -945,6 +945,8 @@ https://emacs-lsp.github.io/lsp-mode/
   (setq lsp-enable-snippet nil)
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
+  ;; (setq lsp-disabled-clients '(tfmls))
+  (setq lsp-response-timeout 60)
   :hook (
 	 (json-ts-mode . lsp)
 	 (terraform-mode . lsp)
@@ -1362,14 +1364,14 @@ https://github.com/mclear-tools/tabspaces
 https://github.com/protesilaos/modus-themes
 
 #+begin_src emacs-lisp
-;; (use-package modus-themes
-;;   :ensure t
-;;   :init
-;;   (setq modus-themes-italic-constructs t
-;;         modus-themes-bold-constructs nil
-;;         modus-themes-region '(bg-only no-extend))
-;;   :config
-;;   (load-theme 'modus-operandi :no-confirm))
+(use-package modus-themes
+  :ensure t
+  :init
+  (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs nil
+        modus-themes-region '(bg-only no-extend))
+  :config
+  (load-theme 'modus-operandi :no-confirm))
 #+end_src
 
 ** Mindre Theme
@@ -1392,7 +1394,7 @@ Copied package to =scripts= because of the issue https://github.com/erikbackman/
  '(mindre-use-more-bold nil)
  '(mindre-use-more-fading nil)
  '(mindre-use-faded-lisp-parens t))
-(load-theme 'mindre t)
+;; (load-theme 'mindre t)
 #+end_src
 
 * TLDR
@@ -1629,13 +1631,13 @@ vertico.el - VERTical Interactive COmpletion
 https://github.com/tumashu/vertico-posframe
 
 #+begin_src emacs-lisp
-(use-package vertico-posframe
-  :config
-  (vertico-posframe-mode 1)
-  (setq vertico-posframe-border-width 2
-        vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))
-	vertico-posframe-poshandler 'posframe-poshandler-frame-top-center)
-  (set-face-attribute 'vertico-posframe-border nil :background "#b0bec5"))
+;; (use-package vertico-posframe
+;;   :config
+;;   (vertico-posframe-mode 1)
+;;   (setq vertico-posframe-border-width 2
+;;         vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))
+;; 	vertico-posframe-poshandler 'posframe-poshandler-frame-top-center)
+;;   (set-face-attribute 'vertico-posframe-border nil :background "#b0bec5"))
 #+end_src
 
 * XREF

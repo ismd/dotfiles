@@ -48,8 +48,9 @@
 - [[#move-where-i-mean][MOVE WHERE I MEAN]]
 - [[#multiple-cursors][MULTIPLE CURSORS]]
 - [[#nerd-icons][NERD ICONS]]
-  - [[#nerd-icons-ibuffer][Nerd Icons Ibuffer]]
   - [[#nerd-icons-completion][Nerd Icons Completion]]
+  - [[#nerd-icons-corfu][Nerd Icons Corfu]]
+  - [[#nerd-icons-ibuffer][Nerd Icons Ibuffer]]
 - [[#org-mode][ORG MODE]]
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
@@ -1297,15 +1298,6 @@ https://github.com/rainstormstudio/nerd-icons.el
 (use-package nerd-icons)
 #+end_src
 
-** Nerd Icons Ibuffer
-https://github.com/seagle0128/nerd-icons-ibuffer
-
-#+begin_src emacs-lisp
-(use-package nerd-icons-ibuffer
-  :ensure t
-  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
-#+end_src
-
 ** Nerd Icons Completion
 https://github.com/rainstormstudio/nerd-icons-completion
 
@@ -1315,6 +1307,34 @@ https://github.com/rainstormstudio/nerd-icons-completion
   :config
   (nerd-icons-completion-mode)
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+#+end_src
+
+** Nerd Icons Corfu
+https://github.com/LuigiPiucco/nerd-icons-corfu
+
+#+begin_src emacs-lisp
+(use-package nerd-icons-corfu
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+
+  ;; Optionally:
+  (setq nerd-icons-corfu-mapping
+	'((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+          (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
+          ;; ...
+          (t :style "cod" :icon "code" :face font-lock-warning-face)))
+  ;; Remember to add an entry for `t', the library uses that as default.
+  )
+#+end_src
+
+** Nerd Icons Ibuffer
+https://github.com/seagle0128/nerd-icons-ibuffer
+
+#+begin_src emacs-lisp
+(use-package nerd-icons-ibuffer
+  :ensure t
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 #+end_src
 
 * ORG MODE

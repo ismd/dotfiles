@@ -56,6 +56,7 @@
 - [[#projectile][PROJECTILE]]
 - [[#rainbow-delimiters][RAINBOW DELIMITERS]]
 - [[#rainbow-mode][RAINBOW MODE]]
+- [[#ripgrep][RIPGREP]]
 - [[#sane-defaults][SANE DEFAULTS]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#eshell][Eshell]]
@@ -345,17 +346,17 @@ TODO Compilation https://github.com/minad/consult?tab=readme-ov-file#compilation
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
          ;; M-s bindings in `search-map'
-         ("M-s d" . consult-find)                  ;; Alternative: consult-fd
-         ("M-s c" . consult-locate)
-         ("M-s g" . consult-grep)
-         ("M-s G" . consult-git-grep)
-         ("M-s r" . consult-ripgrep)
-         ("M-s l" . consult-line)
-         ("M-s L" . consult-line-multi)
-         ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)
-         ;; Isearch integration
-         ("M-s e" . consult-isearch-history)
+         ;; ("M-s d" . consult-find)                  ;; Alternative: consult-fd
+         ;; ("M-s c" . consult-locate)
+         ;; ("M-s g" . consult-grep)
+         ;; ("M-s G" . consult-git-grep)
+         ;; ("M-s r" . consult-ripgrep)
+         ;; ("M-s l" . consult-line)
+         ;; ("M-s L" . consult-line-multi)
+         ;; ("M-s k" . consult-keep-lines)
+         ;; ("M-s u" . consult-focus-lines)
+         ;; ;; Isearch integration
+         ;; ("M-s e" . consult-isearch-history)
          :map isearch-mode-map
          ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
          ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
@@ -706,7 +707,6 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 (use-package general
   :config
   (general-define-key
-   :keymaps 'override
 
    ;; Expand region
    "C-=" '(er/expand-region :wk "Expand region")
@@ -764,7 +764,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "=" '(text-scale-increase :wk "Increase font size")
     "+" '(text-scale-increase :wk "Increase font size")
     "-" '(text-scale-decrease :wk "Decrease font size")
-    "C-r" '(ivy-resume :wk "Ivy resume")
+    ;; "C-r" '(ivy-resume :wk "Ivy resume")
     "TAB TAB" '(comment-line :wk "Comment lines"))
 
   (cz/leader-keys
@@ -913,8 +913,11 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   ;; TODO Grep and find https://github.com/minad/consult#grep-and-find
   (cz/leader-keys
     "s" '(:ignore t :wk "Search")
-    "s d" '(find-grep-dired :wk "Search for string in files in DIR")
+    "s d" '(rg :wk "Ripgrep")
     "s m" '(man :wk "Man pages")
+    "s p" '(rg-project :wk "Ripgrep in project")
+    "s s" '(consult-ripgrep :wk "Ripgrep")
+    "s r" '(rg-dwim :wk "Ripgrep DWIM")
     "s t" '(tldr :wk "Lookup TLDR docs for a command")
     "s w" '(woman :wk "Similar to man but doesn't require man"))
 
@@ -943,11 +946,6 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   ;;   "C-f C-a C-f" '(vimish-fold-refold :wk "Fold all")
   ;;   "C-f C-a C-u" '(vimish-fold-unfold-all :wk "Unfold all"))
 
-  (general-define-key
-   :keymaps 'projectile-command-map
-   "b" '(consult-project-buffer :wk "Switch buffer in project")
-   "t" '(treemacs-add-and-display-current-project-exclusively :wk "Show project in treemacs"))
-
   ;;
   ;; M-g
   ;;
@@ -960,10 +958,32 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "I" '(consult-imenu-multi :wk "Imenu multi")
     "o" '(consult-outline :wk "Outline"))
 
+  ;;
+  ;; org-mode-map
+  ;;
   (general-define-key
    :keymaps 'org-mode-map
    "M-g a" '(consult-org-agenda :wk "Org agenda")
    "M-g o" '(consult-org-heading :wk "Org heading"))
+
+  ;;
+  ;; projectile-command-map
+  ;;
+  (general-define-key
+   :keymaps 'projectile-command-map
+   "b" '(consult-project-buffer :wk "Switch buffer in project")
+   "s r" '(rg-project :wk "Ripgrep in project")
+   "t" '(treemacs-add-and-display-current-project-exclusively :wk "Show project in treemacs"))
+
+  ;;
+  ;; rg-mode-map
+  ;;
+  (general-define-key
+   :keymaps 'rg-mode-map
+   "n" '(compilation-next-error :wk "Move to next line with a match")
+   "p" '(compilation-previous-error :wk "Move to previous line with a match")
+   "M-n" '(rg-next-file :wk "Move to next file with a match")
+   "M-p" '(rg-prev-file :wk "Move to previous file with a match"))
   )
 #+end_src
 
@@ -1326,6 +1346,16 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
   :diminish
   :hook 
   ((org-mode prog-mode) . rainbow-mode))
+#+end_src
+
+* RIPGREP
+https://github.com/dajva/rg.el
+
+#+begin_src emacs-lisp
+(use-package rg
+  :ensure t
+  :config
+  (setq rg-ignore-case 'smart))
 #+end_src
 
 * SANE DEFAULTS

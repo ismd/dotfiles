@@ -12,12 +12,12 @@
   - [[#themes][Themes]]
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#backup][BACKUP]]
-- [[#cape][CAPE]]
 - [[#company][COMPANY]]
 - [[#consult][CONSULT]]
   - [[#embark-consult][Embark Consult]]
 - [[#copilot][COPILOT]]
 - [[#corfu][CORFU]]
+  - [[#cape][CAPE]]
 - [[#dashboard][DASHBOARD]]
 - [[#delete-word-and-line][DELETE WORD AND LINE]]
 - [[#diminish][DIMINISH]]
@@ -288,13 +288,6 @@ By default, Emacs creates automatic backups of files in their original directori
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 #+end_src
 
-* CAPE
-https://github.com/minad/cape
-
-TODO
-#+begin_src emacs-lisp
-#+end_src
-
 * COMPANY
 #+begin_quote
 Currently using =corfu= instead of =company=.
@@ -422,11 +415,11 @@ https://github.com/minad/corfu
 #+begin_src emacs-lisp
 (use-package corfu
   ;; Optional customizations
-  :custom
+  ;; :custom
   ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-delay 0.2)         ;; Delay (in seconds) before auto completion starts.
-  (corfu-auto-prefix 1)          ;; Number of characters before auto completion starts.
+  ;; (corfu-auto t)                 ;; Enable auto completion
+  ;; (corfu-auto-delay 0.2)         ;; Delay (in seconds) before auto completion starts.
+  ;; (corfu-auto-prefix 1)          ;; Number of characters before auto completion starts.
   ;; (corfu-separator ?\s)          ;; Orderless field separator
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
@@ -463,6 +456,11 @@ https://github.com/minad/corfu
   ;; `completion-at-point' is often bound to M-TAB.
   (setq tab-always-indent 'complete))
 #+end_src
+
+** CAPE
+https://github.com/minad/cape
+
+Seems like LSP works well and I don't need this.
 
 * DASHBOARD
 Emacs Dashboard is an extensible startup screen showing you recent files, bookmarks, agenda items and an Emacs banner.
@@ -687,7 +685,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "C--" '(er/contract-region :wk "Contract region")
 
    "C-." '(embark-act :wk "Embark act")
-   "C-;" '(embark-dwim :wk "Embark dwim")
+   "C-;" '(complete-symbol :wk "Complete symbol")
    "C-a" '(mwim-beginning-of-line-or-code :wk "Beginning of line or indentation")
    "C-e" '(mwim-end-of-line-or-code :wk "End of line or indentation")
    "C-k" '(cz/delete-line :wk "Delete line")
@@ -921,7 +919,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "o" '(consult-outline :wk "Outline"))
 
   ;;
-  ;; copilot-completion-map
+  ;; Copilot
   ;;
   (general-define-key
    :keymaps 'copilot-completion-map
@@ -933,7 +931,15 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-f" '(copilot-accept-completion-by-word :wk "Accept completion by word"))
 
   ;;
-  ;; indent-rigidly-map
+  ;; Corfu
+  ;;
+  (general-define-key
+   :keymaps 'corfu-map
+   "TAB" 'ignore
+   "<tab>" 'ignore)
+
+  ;;
+  ;; Indent Rigidly
   ;;
   (general-define-key
    :keymaps 'indent-rigidly-map
@@ -943,7 +949,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "F" '(indent-rigidly-right-to-tab-stop :wk "Indent right to tab stop"))
 
   ;;
-  ;; org-mode-map
+  ;; Org
   ;;
   (general-define-key
    :keymaps 'org-mode-map
@@ -951,7 +957,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-g o" '(consult-org-heading :wk "Org heading"))
 
   ;;
-  ;; projectile-command-map
+  ;; Projectile
   ;;
   (general-define-key
    :keymaps 'projectile-command-map
@@ -960,7 +966,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "t" '(treemacs-add-and-display-current-project-exclusively :wk "Show project in treemacs"))
 
   ;;
-  ;; rg-mode-map
+  ;; Rg
   ;;
   (general-define-key
    :keymaps 'rg-mode-map

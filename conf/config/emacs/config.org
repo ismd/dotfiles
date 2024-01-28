@@ -561,9 +561,9 @@ With argument ARG, do this that many times."
 If at end of line, delete the following newline char."
   (interactive)
   (let ((end (line-end-position)))
-    (delete-region (point) end)
     (when (eolp)
-      (delete-char 1))))
+      (delete-char 1))
+    (delete-region (point) end)))
 #+end_src
 
 * DIMINISH

@@ -12,11 +12,13 @@
   - [[#themes][Themes]]
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#backup][BACKUP]]
+- [[#cape][CAPE]]
 - [[#company][COMPANY]]
 - [[#consult][CONSULT]]
   - [[#embark-consult][Embark Consult]]
 - [[#copilot][COPILOT]]
 - [[#corfu][CORFU]]
+- [[#crux][CRUX]]
 - [[#dashboard][DASHBOARD]]
 - [[#delete-word-and-line][DELETE WORD AND LINE]]
 - [[#diminish][DIMINISH]]
@@ -289,6 +291,13 @@ By default, Emacs creates automatic backups of files in their original directori
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 #+end_src
 
+* CAPE
+https://github.com/minad/cape
+
+TODO
+#+begin_src emacs-lisp
+#+end_src
+
 * COMPANY
 #+begin_quote
 Currently using =corfu= instead of =company=.
@@ -498,19 +507,27 @@ https://github.com/minad/corfu
   (corfu-popupinfo-mode))
 
 ;; A few more useful configurations...
-;; (use-package emacs
-;;   :init
-;;   ;; TAB cycle if there are only few candidates
-;;   (setq completion-cycle-threshold 3)
+(use-package emacs
+  :elpaca nil
+  :init
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
 
-;;   ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-;;   ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-;;   ;; (setq read-extended-command-predicate
-;;   ;;       #'command-completion-default-include-p)
+  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+  ;; (setq read-extended-command-predicate
+  ;;       #'command-completion-default-include-p)
 
-;;   ;; Enable indentation+completion using the TAB key.
-;;   ;; `completion-at-point' is often bound to M-TAB.
-;;   (setq tab-always-indent 'complete))
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete))
+#+end_src
+
+* CRUX
+https://github.com/bbatsov/crux
+
+TODO
+#+begin_src emacs-lisp
 #+end_src
 
 * DASHBOARD

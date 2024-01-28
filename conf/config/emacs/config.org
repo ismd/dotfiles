@@ -18,7 +18,6 @@
   - [[#embark-consult][Embark Consult]]
 - [[#copilot][COPILOT]]
 - [[#corfu][CORFU]]
-- [[#crux][CRUX]]
 - [[#dashboard][DASHBOARD]]
 - [[#delete-word-and-line][DELETE WORD AND LINE]]
 - [[#diminish][DIMINISH]]
@@ -38,7 +37,6 @@
 - [[#highlight-todo][HIGHLIGHT TODO]]
 - [[#ibuffer][IBUFFER]]
   - [[#ibuffer-projectile][Ibuffer Projectile]]
-- [[#ivy-counsel][IVY (COUNSEL)]]
 - [[#language-support][LANGUAGE SUPPORT]]
   - [[#json-mode][JSON Mode]]
   - [[#terraform-mode][Terraform Mode]]
@@ -72,7 +70,6 @@
   - [[#vterm-toggle][Vterm Toggle]]
 - [[#sudo-edit][SUDO EDIT]]
 - [[#super-save][SUPER SAVE]]
-- [[#tabspaces][TABSPACES]]
 - [[#tldr][TLDR]]
 - [[#transparency][TRANSPARENCY]]
 - [[#tree-sitter][TREE SITTER]]
@@ -326,64 +323,8 @@ Currently using =corfu= instead of =company=.
 * CONSULT
 https://github.com/minad/consult
 
-TODO Compilation https://github.com/minad/consult?tab=readme-ov-file#compilation
-
 #+begin_src emacs-lisp
 (use-package consult
-  ;; :bind (;; C-c bindings in `mode-specific-map'
-  ;;        ("C-c M-x" . consult-mode-command)
-  ;;        ("C-c h" . consult-history)
-  ;;        ("C-c k" . consult-kmacro)
-  ;;        ("C-c m" . consult-man)
-  ;;        ("C-c i" . consult-info)
-  ;;        ([remap Info-search] . consult-info)
-  ;;        ;; C-x bindings in `ctl-x-map'
-  ;;        ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-  ;;        ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-  ;;        ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-  ;;        ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-  ;;        ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
-  ;;        ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-  ;;        ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-  ;;        ;; Custom M-# bindings for fast register access
-  ;;        ("M-#" . consult-register-load)
-  ;;        ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
-  ;;        ("C-M-#" . consult-register)
-  ;;        ;; Other custom bindings
-  ;;        ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-  ;;        ;; M-g bindings in `goto-map'
-  ;;        ("M-g e" . consult-compile-error)
-  ;;        ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-  ;;        ("M-g g" . consult-goto-line)             ;; orig. goto-line
-  ;;        ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-  ;;        ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-  ;;        ("M-g m" . consult-mark)
-  ;;        ("M-g k" . consult-global-mark)
-  ;;        ("M-g i" . consult-imenu)
-  ;;        ("M-g I" . consult-imenu-multi)
-  ;;        ;; M-s bindings in `search-map'
-  ;;        ;; ("M-s d" . consult-find)                  ;; Alternative: consult-fd
-  ;;        ;; ("M-s c" . consult-locate)
-  ;;        ;; ("M-s g" . consult-grep)
-  ;;        ;; ("M-s G" . consult-git-grep)
-  ;;        ;; ("M-s r" . consult-ripgrep)
-  ;;        ;; ("M-s l" . consult-line)
-  ;;        ;; ("M-s L" . consult-line-multi)
-  ;;        ;; ("M-s k" . consult-keep-lines)
-  ;;        ;; ("M-s u" . consult-focus-lines)
-  ;;        ;; ;; Isearch integration
-  ;;        ;; ("M-s e" . consult-isearch-history)
-  ;;        :map isearch-mode-map
-  ;;        ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-  ;;        ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-  ;;        ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-  ;;        ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-  ;;        ;; Minibuffer history
-  ;;        :map minibuffer-local-map
-  ;;        ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-  ;;        ("M-r" . consult-history))
-  ;; orig. previous-matching-history-element
-
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
@@ -523,13 +464,6 @@ https://github.com/minad/corfu
   (setq tab-always-indent 'complete))
 #+end_src
 
-* CRUX
-https://github.com/bbatsov/crux
-
-TODO
-#+begin_src emacs-lisp
-#+end_src
-
 * DASHBOARD
 Emacs Dashboard is an extensible startup screen showing you recent files, bookmarks, agenda items and an Emacs banner.
 
@@ -658,13 +592,6 @@ https://github.com/oantolin/embark
 #+begin_src emacs-lisp
 (use-package embark
   :ensure t
-
-  ;; TODO Move to general maps
-  :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-
   :init
 
   ;; Optionally replace the key help with a completing-read interface
@@ -759,6 +686,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "C-=" '(er/expand-region :wk "Expand region")
    "C--" '(er/contract-region :wk "Contract region")
 
+   "C-." '(embark-act :wk "Embark act")
+   "C-;" '(embark-dwim :wk "Embark dwim")
    "C-a" '(mwim-beginning-of-line-or-code :wk "Beginning of line or indentation")
    "C-e" '(mwim-end-of-line-or-code :wk "End of line or indentation")
    "C-k" '(cz/delete-line :wk "Delete line")
@@ -809,8 +738,9 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "=" '(text-scale-increase :wk "Increase font size")
     "+" '(text-scale-increase :wk "Increase font size")
     "-" '(text-scale-decrease :wk "Decrease font size")
-    ;; "C-r" '(ivy-resume :wk "Ivy resume")
-    "TAB" '(indent-rigidly :wk "Indent region"))
+    "C-r" '(vertico-repeat :wk "Vertico repeat")
+    "TAB" '(indent-rigidly :wk "Indent region")
+    "M-x" '(consult-mode-command :wk "Consult command"))
 
   (cz/leader-keys
     "b" '(:ignore t :wk "Bookmarks/Buffers")
@@ -842,24 +772,30 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "e s" '(eshell :which-key "Eshell")
     "e w" '(eww :which-key "EWW emacs web wowser"))
 
+  (defun cz/delete-this-file ()
+    "Delete the file associated with the current buffer and kill the buffer with confirmation."
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (if filename
+          (if (y-or-n-p (format "Are you sure you want to delete %s? " filename))
+              (progn
+                (delete-file filename)
+                (message "Deleted file %s" filename)
+                (kill-this-buffer))
+            (message "Canceled"))
+        (message "Not a file"))))
+
   (cz/leader-keys
     "f" '(:ignore t :wk "Files")
-    "f c" '((lambda () (interactive)
-              (find-file "~/.config/emacs/config.org"))
-            :wk "Open emacs config.org")
-    "f d" '(delete-file :wk "Delete this file") ;; TODO Need to delete ~this~ file
-    "f e" '((lambda () (interactive)
-              (dired "~/.config/emacs/"))
-            :wk "Open user-emacs-directory in dired")
+    "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Open emacs config.org")
+    "f D" '(cz/delete-this-file :wk "Delete this file")
+    "f e" '((lambda () (interactive) (dired "~/.config/emacs")) :wk "Open user-emacs-directory in dired")
     "f f" '(find-file :wk "Find file")
-    "f i" '((lambda () (interactive)
-              (find-file "~/.config/emacs/init.el"))
-            :wk "Open emacs init.el")
-    "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
-    "f l" '(counsel-locate :wk "Locate a file")
+    "f j" '(consult-fd :wk "Find file with fd")
+    "f l" '(consult-locate :wk "Locate a file")
     "f r" '(consult-recent-file :wk "Recent file")
     "f u" '(sudo-edit-find-file :wk "Sudo find file")
-    "f U" '(sudo-edit :wk "Sudo edit file"))
+    "f U" '(sudo-edit :wk "Sudo edit this file"))
 
   (cz/leader-keys
     "g" '(:ignore t :wk "Git")
@@ -884,27 +820,14 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "g t" '(git-timemachine :wk "Git time machine")
     "g u" '(magit-stage-file :wk "Git unstage file"))
 
-  ;; TODO Consult help https://github.com/minad/consult?tab=readme-ov-file#help
   (cz/leader-keys
     "h" '(:ignore t :wk "Help")
-    "h a" '(counsel-apropos :wk "Apropos")
     "h b" '(describe-bindings :wk "Describe bindings")
     "h c" '(describe-char :wk "Describe character under cursor")
-    "h d" '(:ignore t :wk "Emacs documentation")
-    "h d a" '(about-emacs :wk "About Emacs")
-    "h d d" '(view-emacs-debugging :wk "View Emacs debugging")
-    "h d f" '(view-emacs-FAQ :wk "View Emacs FAQ")
-    "h d m" '(info-emacs-manual :wk "The Emacs manual")
-    "h d n" '(view-emacs-news :wk "View Emacs news")
-    "h d o" '(describe-distribution :wk "How to obtain Emacs")
-    "h d p" '(view-emacs-problems :wk "View Emacs problems")
-    "h d t" '(view-emacs-todo :wk "View Emacs todo")
-    "h d w" '(describe-no-warranty :wk "Describe no warranty")
-    "h e" '(view-echo-area-messages :wk "View echo area messages")
     "h f" '(describe-function :wk "Describe function")
     "h F" '(describe-face :wk "Describe face")
     "h g" '(describe-gnu-project :wk "Describe GNU Project")
-    "h i" '(info :wk "Info")
+    "h i" '(consult-info :wk "Info")
     "h I" '(describe-input-method :wk "Describe input method")
     "h k" '(describe-key :wk "Describe key")
     "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
@@ -951,16 +874,14 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "q q" '(save-buffers-kill-emacs :wk "Quit Emacs")
     "q r" '(restart-emacs :wk "Restart Emacs"))
 
-  ;; TODO Grep and find https://github.com/minad/consult#grep-and-find
   (cz/leader-keys
     "s" '(:ignore t :wk "Search")
     "s d" '(rg :wk "Ripgrep")
-    "s m" '(man :wk "Man pages")
+    "s g" '(consult-grep :wk "Grep")
+    "s m" '(consult-man :wk "Man pages")
     "s p" '(rg-project :wk "Ripgrep in project")
-    "s s" '(consult-ripgrep :wk "Ripgrep")
-    "s r" '(rg-dwim :wk "Ripgrep DWIM")
-    "s t" '(tldr :wk "Lookup TLDR docs for a command")
-    "s w" '(woman :wk "Similar to man but doesn't require man"))
+    "s r" '(consult-ripgrep :wk "Ripgrep")
+    "s t" '(tldr :wk "Lookup TLDR docs for a command"))
 
   (cz/leader-keys
     "t" '(:ignore t :wk "Toggle")
@@ -1117,64 +1038,10 @@ https://github.com/purcell/ibuffer-projectile
   :ensure t
   :config
   (setq ibuffer-projectile-prefix "Project: ")
-  ;; TODO Remove MRL
-  (setq ibuffer-formats
-        '((mark modified read-only " "
-                (name 28 18 :left :elide)
-                " "
-                project-relative-file)))
-  (add-hook 'ibuffer-hook
-            (lambda ()
-              (visual-line-mode -1)
-              (ibuffer-projectile-set-filter-groups))))
-#+end_src
-
-* IVY (COUNSEL)
-https://github.com/abo-abo/swiper
-
-I use =consult= instead of =counsel=.
-
-+ Ivy, a generic completion mechanism for Emacs.
-+ Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
-+ Ivy-rich allows us to add descriptions alongside the commands in M-x.
-
-#+begin_src emacs-lisp
-;; (use-package counsel
-;;   :after ivy
-;;   :diminish
-;;   :config (counsel-mode))
-
-;; (use-package ivy
-;;   :bind
-;;   ;; ivy-resume resumes the last Ivy-based completion.
-;;   (("C-x B" . ivy-switch-buffer-other-window))
-;;   :diminish
-;;   :custom
-;;   (setq ivy-use-virtual-buffers t)
-;;   (setq ivy-count-format "(%d/%d) ")
-;;   (setq enable-recursive-minibuffers t)
-;;   :config
-;;   (ivy-mode))
-
-;; (use-package nerd-icons-ivy-rich
-;;   :ensure t
-;;   :init
-;;   (nerd-icons-ivy-rich-mode 1)
-;;   (ivy-rich-mode 1))
-
-;; (use-package ivy-rich
-;;   :after ivy
-;;   :ensure t
-;;   :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
-;;   :custom
-;;   (ivy-virtual-abbreviate 'full
-;;                           ivy-rich-switch-buffer-align-virtual-buffer t
-;;                           ivy-rich-path-style 'abbrev)
-;;   ;; TODO
-;;   ;; :config
-;;   ;; (ivy-set-display-transformer 'ivy-switch-buffer
-;;   ;;                              'ivy-rich-switch-buffer-transformer)
-;;   )
+  :hook
+  (ibuffer . (lambda ()
+               (visual-line-mode -1)
+               (ibuffer-projectile-set-filter-groups))))
 #+end_src
 
 * LANGUAGE SUPPORT
@@ -1352,7 +1219,17 @@ https://github.com/seagle0128/nerd-icons-ibuffer
 #+begin_src emacs-lisp
 (use-package nerd-icons-ibuffer
   :ensure t
-  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+  :config
+  (setq nerd-icons-ibuffer-formats
+	'((mark " "
+		(icon 2 2)
+		(name 30 30 :left :elide)
+		" "
+		filename-and-process)
+	  (mark " "
+	   (name 30 -1)
+	   " " filename))))
 #+end_src
 
 * ORG MODE
@@ -1493,7 +1370,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 #+begin_src emacs-lisp
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
 ;; (desktop-save-mode 1)        ;; Save the desktop on exit.
-(electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
+;; (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
 ;; Otherwise, org-tempo is broken when you try to <s TAB...
@@ -1594,26 +1471,6 @@ https://github.com/bbatsov/super-save
   (setq super-save-auto-save-when-idle t)
   (setq auto-save-default nil)
   (setq super-save-silent t))
-#+end_src
-
-* TABSPACES
-https://github.com/mclear-tools/tabspaces
-
-#+begin_src emacs-lisp
-;; (use-package tabspaces
-;;   :hook (elpaca-after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup. 
-;;   :commands (tabspaces-switch-or-create-workspace
-;;              tabspaces-open-or-create-project-and-workspace)
-;;   :custom
-;;   (tabspaces-use-filtered-buffers-as-default t)
-;;   (tabspaces-default-tab "Default")
-;;   (tabspaces-remove-to-default t)
-;;   (tabspaces-include-buffers '("*scratch*"))
-;;   (tabspaces-initialize-project-with-todo t)
-;;   (tabspaces-todo-file-name "project-todo.org")
-;;   ;; sessions
-;;   (tabspaces-session t)
-;;   (tabspaces-session-auto-restore t))
 #+end_src
 
 * TLDR

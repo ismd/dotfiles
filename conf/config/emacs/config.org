@@ -18,6 +18,7 @@
 - [[#copilot][COPILOT]]
 - [[#corfu][CORFU]]
 - [[#dashboard][DASHBOARD]]
+- [[#delete-word-and-line][DELETE WORD AND LINE]]
 - [[#diminish][DIMINISH]]
 - [[#dirvish][DIRVISH]]
 - [[#editorconfig][EDITORCONFIG]]
@@ -33,6 +34,8 @@
   - [[#git-time-machine][Git Time Machine]]
   - [[#magit][Magit]]
 - [[#highlight-todo][HIGHLIGHT TODO]]
+- [[#ibuffer][IBUFFER]]
+  - [[#ibuffer-projectile][Ibuffer Projectile]]
 - [[#ivy-counsel][IVY (COUNSEL)]]
 - [[#language-support][LANGUAGE SUPPORT]]
   - [[#json-mode][JSON Mode]]
@@ -42,6 +45,8 @@
 - [[#marginalia][MARGINALIA]]
 - [[#minibuffer-escape][MINIBUFFER ESCAPE]]
 - [[#modeline][MODELINE]]
+- [[#move-where-i-mean][MOVE WHERE I MEAN]]
+- [[#multiple-cursors][MULTIPLE CURSORS]]
 - [[#nerd-icons][NERD ICONS]]
   - [[#nerd-icons-ibuffer][Nerd Icons Ibuffer]]
   - [[#nerd-icons-completion][Nerd Icons Completion]]
@@ -71,6 +76,7 @@
   - [[#treesit-auto][Treesit Auto]]
   - [[#ts-fold][Ts Fold]]
 - [[#treemacs][TREEMACS]]
+- [[#trimming-whitespace][TRIMMING WHITESPACE]]
 - [[#vertico][VERTICO]]
   - [[#orderless][Orderless]]
   - [[#vertico-posframe][Vertico Posframe]]
@@ -149,7 +155,7 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 ;;   (setq ef-themes-to-toggle '(ef-summer ef-winter))
 
 ;;   (setq ef-themes-headings ; read the manual's entry or the doc string
-;; 	'((0 variable-pitch light 1.9)
+;;     '((0 variable-pitch light 1.9)
 ;;           (1 variable-pitch light 1.8)
 ;;           (2 variable-pitch regular 1.7)
 ;;           (3 variable-pitch regular 1.6)
@@ -161,7 +167,7 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 
 ;;   ;; They are nil by default...
 ;;   (setq ef-themes-mixed-fonts t
-;; 	ef-themes-variable-pitch-ui t)
+;;     ef-themes-variable-pitch-ui t)
 
 ;;   ;; Disable all other themes to avoid awkward blending:
 ;;   (mapc #'disable-theme custom-enabled-themes)
@@ -314,58 +320,59 @@ TODO Compilation https://github.com/minad/consult?tab=readme-ov-file#compilation
 
 #+begin_src emacs-lisp
 (use-package consult
-  :bind (;; C-c bindings in `mode-specific-map'
-         ("C-c M-x" . consult-mode-command)
-         ("C-c h" . consult-history)
-         ("C-c k" . consult-kmacro)
-         ("C-c m" . consult-man)
-         ("C-c i" . consult-info)
-         ([remap Info-search] . consult-info)
-         ;; C-x bindings in `ctl-x-map'
-         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-         ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
-         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-         ;; Custom M-# bindings for fast register access
-         ("M-#" . consult-register-load)
-         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
-         ("C-M-#" . consult-register)
-         ;; Other custom bindings
-         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-         ;; M-g bindings in `goto-map'
-         ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-         ("M-g g" . consult-goto-line)             ;; orig. goto-line
-         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-         ("M-g m" . consult-mark)
-         ("M-g k" . consult-global-mark)
-         ("M-g i" . consult-imenu)
-         ("M-g I" . consult-imenu-multi)
-         ;; M-s bindings in `search-map'
-         ;; ("M-s d" . consult-find)                  ;; Alternative: consult-fd
-         ;; ("M-s c" . consult-locate)
-         ;; ("M-s g" . consult-grep)
-         ;; ("M-s G" . consult-git-grep)
-         ;; ("M-s r" . consult-ripgrep)
-         ;; ("M-s l" . consult-line)
-         ;; ("M-s L" . consult-line-multi)
-         ;; ("M-s k" . consult-keep-lines)
-         ;; ("M-s u" . consult-focus-lines)
-         ;; ;; Isearch integration
-         ;; ("M-s e" . consult-isearch-history)
-         :map isearch-mode-map
-         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-         ;; Minibuffer history
-         :map minibuffer-local-map
-         ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-         ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+  ;; :bind (;; C-c bindings in `mode-specific-map'
+  ;;        ("C-c M-x" . consult-mode-command)
+  ;;        ("C-c h" . consult-history)
+  ;;        ("C-c k" . consult-kmacro)
+  ;;        ("C-c m" . consult-man)
+  ;;        ("C-c i" . consult-info)
+  ;;        ([remap Info-search] . consult-info)
+  ;;        ;; C-x bindings in `ctl-x-map'
+  ;;        ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+  ;;        ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+  ;;        ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+  ;;        ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+  ;;        ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
+  ;;        ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+  ;;        ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+  ;;        ;; Custom M-# bindings for fast register access
+  ;;        ("M-#" . consult-register-load)
+  ;;        ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+  ;;        ("C-M-#" . consult-register)
+  ;;        ;; Other custom bindings
+  ;;        ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+  ;;        ;; M-g bindings in `goto-map'
+  ;;        ("M-g e" . consult-compile-error)
+  ;;        ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+  ;;        ("M-g g" . consult-goto-line)             ;; orig. goto-line
+  ;;        ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+  ;;        ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+  ;;        ("M-g m" . consult-mark)
+  ;;        ("M-g k" . consult-global-mark)
+  ;;        ("M-g i" . consult-imenu)
+  ;;        ("M-g I" . consult-imenu-multi)
+  ;;        ;; M-s bindings in `search-map'
+  ;;        ;; ("M-s d" . consult-find)                  ;; Alternative: consult-fd
+  ;;        ;; ("M-s c" . consult-locate)
+  ;;        ;; ("M-s g" . consult-grep)
+  ;;        ;; ("M-s G" . consult-git-grep)
+  ;;        ;; ("M-s r" . consult-ripgrep)
+  ;;        ;; ("M-s l" . consult-line)
+  ;;        ;; ("M-s L" . consult-line-multi)
+  ;;        ;; ("M-s k" . consult-keep-lines)
+  ;;        ;; ("M-s u" . consult-focus-lines)
+  ;;        ;; ;; Isearch integration
+  ;;        ;; ("M-s e" . consult-isearch-history)
+  ;;        :map isearch-mode-map
+  ;;        ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+  ;;        ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+  ;;        ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+  ;;        ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+  ;;        ;; Minibuffer history
+  ;;        :map minibuffer-local-map
+  ;;        ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+  ;;        ("M-r" . consult-history))
+  ;; orig. previous-matching-history-element
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
@@ -455,14 +462,7 @@ TODO Compilation https://github.com/minad/consult?tab=readme-ov-file#compilation
   (prog-mode . copilot-mode)
   (text-mode . copilot-mode)
   (copilot-mode . (lambda ()
-                    (setq-local copilot--indent-warning-printed-p t)))
-  :bind (:map copilot-completion-map
-	      ("TAB" . copilot-accept-completion)
-	      ("C-c C-n" . copilot-next-completion)
-	      ("C-c C-p" . copilot-previous-completion)
-	      ("C-e" . copilot-accept-completion-by-line)
-	      ("C-g" . copilot-clear-overlay)
-	      ("M-f" . copilot-accept-completion-by-word)))
+                    (setq-local copilot--indent-warning-printed-p t))))
 #+end_src
 
 * CORFU
@@ -530,12 +530,40 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
                           (agenda . 5 )
                           (bookmarks . 3)
                           ;; (projects . 3)
-			  ))
+              ))
   :custom
   (dashboard-modify-heading-icons '((recents . "file-text")
                                     (bookmarks . "book")))
   :config
   (dashboard-setup-startup-hook))
+#+end_src
+
+* DELETE WORD AND LINE
+
+#+begin_src emacs-lisp
+;; Delete word
+(defun cz/delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument ARG, do this that many times."
+    (interactive "p")
+    (delete-region (point) (progn (forward-word arg) (point))))
+
+;; Delete word backward
+(defun cz/delete-word-backward (arg)
+  "Delete characters backward until encountering the end of a word.
+With argument ARG, do this that many times."
+    (interactive "p")
+    (cz/delete-word (- arg)))
+
+;; Delete line
+(defun cz/delete-line ()
+  "Delete text from current position to end of line char.
+If at end of line, delete the following newline char."
+  (interactive)
+  (let ((end (line-end-position)))
+    (delete-region (point) end)
+    (when (eolp)
+      (delete-char 1))))
 #+end_src
 
 * DIMINISH
@@ -572,7 +600,7 @@ https://github.com/alexluigit/dirvish
   (setq dired-listing-switches
         "-l --almost-all --human-readable --group-directories-first --no-group")
   :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
-  (("C-c f" . dirvish-fd)
+  (;; ("C-c f" . dirvish-fd)
    :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
    ("a"   . dirvish-quick-access)
    ("f"   . dirvish-file-info-menu)
@@ -613,6 +641,7 @@ https://github.com/oantolin/embark
 (use-package embark
   :ensure t
 
+  ;; TODO Move to general maps
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
    ("C-;" . embark-dwim)        ;; good alternative: M-.
@@ -712,19 +741,17 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "C-=" '(er/expand-region :wk "Expand region")
    "C--" '(er/contract-region :wk "Contract region")
 
+   "C-a" '(mwim-beginning-of-line-or-code :wk "Beginning of line or indentation")
+   "C-e" '(mwim-end-of-line-or-code :wk "End of line or indentation")
+   "C-k" '(cz/delete-line :wk "Delete line")
    "C-s" '(consult-line :wk "Search for string")
 
-   ;; Scroll up/down
-   "M-n" '((lambda () (interactive)
-	     (scroll-up-command 3))
-	   :wk "Scroll down")
-   "M-p" '((lambda () (interactive)
-	     (scroll-down-command 3))
-	   :wk "Scroll up")
-
+   "M-d" '(cz/delete-word :wk "Delete word")
+   "M-n" '((lambda () (interactive) (scroll-up-command 3)) :wk "Scroll down")
+   "M-p" '((lambda () (interactive) (scroll-down-command 3)) :wk "Scroll up")
    "M-s" '(avy-goto-char-timer :wk "Jump to character")
-   ;; "M-x" '(counsel-M-x :wk "M-x")
    "M-y" '(consult-yank-pop :wk "Yank pop")
+   "M-<backspace>" '(cz/delete-word-backward :wk "Delete word backward")
 
    ;; Winum
    "M-1" '(winum-select-window-1 :wk "Select window 1")
@@ -765,7 +792,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "+" '(text-scale-increase :wk "Increase font size")
     "-" '(text-scale-decrease :wk "Decrease font size")
     ;; "C-r" '(ivy-resume :wk "Ivy resume")
-    "TAB TAB" '(comment-line :wk "Comment lines"))
+    "TAB" '(indent-rigidly :wk "Indent region"))
 
   (cz/leader-keys
     "b" '(:ignore t :wk "Bookmarks/Buffers")
@@ -788,7 +815,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "d t" '(treemacs-select-directory :wk "Open directory in treemacs"))
 
   (cz/leader-keys
-    "e" '(:ignore t :wk "Eshell/Evaluate")    
+    "e" '(:ignore t :wk "Eshell/Evaluate")
     "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
     "e d" '(eval-defun :wk "Evaluate defun containing or after point")
     "e e" '(eval-expression :wk "Evaluate and elisp expression")
@@ -798,17 +825,17 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "e w" '(eww :which-key "EWW emacs web wowser"))
 
   (cz/leader-keys
-    "f" '(:ignore t :wk "Files")    
+    "f" '(:ignore t :wk "Files")
     "f c" '((lambda () (interactive)
-              (find-file "~/.config/emacs/config.org")) 
+              (find-file "~/.config/emacs/config.org"))
             :wk "Open emacs config.org")
     "f d" '(delete-file :wk "Delete this file") ;; TODO Need to delete ~this~ file
     "f e" '((lambda () (interactive)
-              (dired "~/.config/emacs/")) 
+              (dired "~/.config/emacs/"))
             :wk "Open user-emacs-directory in dired")
     "f f" '(find-file :wk "Find file")
     "f i" '((lambda () (interactive)
-              (find-file "~/.config/emacs/init.el")) 
+              (find-file "~/.config/emacs/init.el"))
             :wk "Open emacs init.el")
     "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
     "f l" '(counsel-locate :wk "Locate a file")
@@ -817,16 +844,16 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "f U" '(sudo-edit :wk "Sudo edit file"))
 
   (cz/leader-keys
-    "g" '(:ignore t :wk "Git")    
+    "g" '(:ignore t :wk "Git")
     "g /" '(magit-displatch :wk "Magit dispatch")
     "g ." '(magit-file-displatch :wk "Magit file dispatch")
     "g b" '(magit-branch-checkout :wk "Switch branch")
-    "g c" '(:ignore t :wk "Create") 
+    "g c" '(:ignore t :wk "Create")
     "g c b" '(magit-branch-and-checkout :wk "Create branch and checkout")
     "g c c" '(magit-commit-create :wk "Create commit")
     "g c f" '(magit-commit-fixup :wk "Create fixup commit")
     "g C" '(magit-clone :wk "Clone repo")
-    "g f" '(:ignore t :wk "Find") 
+    "g f" '(:ignore t :wk "Find")
     "g f c" '(magit-show-commit :wk "Show commit")
     "g f f" '(magit-find-file :wk "Magit find file")
     "g f g" '(magit-find-git-config-file :wk "Find gitconfig file")
@@ -875,34 +902,30 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "h w" '(where-is :wk "Prints keybinding for command if set")
     "h x" '(describe-command :wk "Display full documentation for command"))
 
-  ;; (cz/leader-keys
-  ;;   "l" '(lsp-keymap-prefix :wk "LSP"))
+  (cz/leader-keys
+    "m" '(:ignore t :wk "Multiple cursors")
+    "m a" '(mc/mark-all-like-this :wk "Mark all like this")
+    "m d" '(mc/mark-all-dwim :wk "Mark all dwim")
+    "m l" '(mc/edit-lines :wk "Edit lines"))
 
   (cz/leader-keys
-    "m" '(:ignore t :wk "Org")
-    "m a" '(org-agenda :wk "Org agenda")
-    "m e" '(org-export-dispatch :wk "Org export dispatch")
-    "m i" '(org-toggle-item :wk "Org toggle item")
-    "m t" '(org-todo :wk "Org todo")
-    "m B" '(org-babel-tangle :wk "Org babel tangle")
-    "m T" '(org-todo-list :wk "Org todo list"))
+    "o" '(:ignore t :wk "Org")
+    "o a" '(org-agenda :wk "Org agenda")
+    "o e" '(org-export-dispatch :wk "Org export dispatch")
+    "o i" '(org-toggle-item :wk "Org toggle item")
+    "o t" '(org-todo :wk "Org todo")
+    "o B" '(org-babel-tangle :wk "Org babel tangle")
+    "o T" '(org-todo-list :wk "Org todo list"))
 
   (cz/leader-keys
-    "m b" '(:ignore t :wk "Tables")
-    "m b -" '(org-table-insert-hline :wk "Insert hline in table"))
+    "o b" '(:ignore t :wk "Tables")
+    "o b -" '(org-table-insert-hline :wk "Insert hline in table"))
 
   (cz/leader-keys
-    "m d" '(:ignore t :wk "Date/deadline")
-    "m d t" '(org-time-stamp :wk "Org time stamp"))
+    "o d" '(:ignore t :wk "Date/deadline")
+    "o d t" '(org-time-stamp :wk "Org time stamp"))
 
   (cz/leader-keys
-    "o" '(:ignore t :wk "Open")
-    "o d" '(dashboard-open :wk "Dashboard")
-    "o f" '(make-frame :wk "Open buffer in new frame")
-    "o F" '(select-frame-by-name :wk "Select frame by name"))
-
-  (cz/leader-keys
-    ;; "p" '(project-prefix-map :wk "Project")
     "p" '(:keymap projectile-command-map :package projectile :wk "Projectile"))
 
   (cz/leader-keys
@@ -959,6 +982,28 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "o" '(consult-outline :wk "Outline"))
 
   ;;
+  ;; copilot-completion-map
+  ;;
+  (general-define-key
+   :keymaps 'copilot-completion-map
+   "TAB" '(copilot-accept-completion :wk "Accept completion")
+   "C-e" '(copilot-accept-completion-by-line :wk "Accept completion by line")
+   "C-g" '(copilot-clear-overlay :wk "Clear overlay")
+   "C-c C-n" '(copilot-next-completion :wk "Next completion")
+   "C-c C-p" '(copilot-previous-completion :wk "Previous completion")
+   "M-f" '(copilot-accept-completion-by-word :wk "Accept completion by word"))
+
+  ;;
+  ;; indent-rigidly-map
+  ;;
+  (general-define-key
+   :keymaps 'indent-rigidly-map
+   "b" '(indent-rigidly-left :wk "Indent left")
+   "f" '(indent-rigidly-right :wk "Indent right")
+   "B" '(indent-rigidly-left-to-tab-stop :wk "Indent left to tab stop")
+   "F" '(indent-rigidly-right-to-tab-stop :wk "Indent right to tab stop"))
+
+  ;;
   ;; org-mode-map
   ;;
   (general-define-key
@@ -996,8 +1041,8 @@ https://github.com/dgutov/diff-hl
 (use-package diff-hl
   :ensure t
   :hook (
-	 (dired-mode . diff-hl-dired-mode)
-	 (magit-pre-refresh . diff-hl-magit-pre-refresh)
+     (dired-mode . diff-hl-dired-mode)
+     (magit-pre-refresh . diff-hl-magit-pre-refresh)
          (magit-post-refresh . diff-hl-magit-post-refresh))
   :config
   (global-diff-hl-mode))
@@ -1042,6 +1087,29 @@ Adding highlights to TODO and related words.
           ("REVIEW"     font-lock-keyword-face bold)
           ("NOTE"       success bold)
           ("DEPRECATED" font-lock-doc-face bold))))
+#+end_src
+
+* IBUFFER
+
+** Ibuffer Projectile
+https://github.com/purcell/ibuffer-projectile
+
+#+begin_src emacs-lisp
+(use-package ibuffer-projectile
+  :ensure t
+  :config
+  (setq ibuffer-projectile-prefix "Project: ")
+  (setq ibuffer-formats
+        '((mark modified read-only " "
+                (name 28 18 :left :elide)
+                " "
+                project-relative-file)))
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (visual-line-mode -1)
+              (ibuffer-projectile-set-filter-groups)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
 #+end_src
 
 * IVY (COUNSEL)
@@ -1139,14 +1207,14 @@ https://emacs-lsp.github.io/lsp-mode/
   ;; (setq lsp-disabled-clients '(tfmls))
   (setq lsp-response-timeout 60)
   :hook (
-	 (json-ts-mode . lsp)
-	 (terraform-mode . lsp)
-	 (tsx-ts-mode . lsp)
-	 (typescript-ts-mode . lsp)
-	 (yaml-ts-mode . lsp)
+     (json-ts-mode . lsp)
+     (terraform-mode . lsp)
+     (tsx-ts-mode . lsp)
+     (typescript-ts-mode . lsp)
+     (yaml-ts-mode . lsp)
 
-	 ;; if you want which-key integration
-	 (lsp-mode . lsp-enable-which-key-integration))
+     ;; if you want which-key integration
+     (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
 ;; optionally
@@ -1199,10 +1267,29 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
   :ensure t
   :init (doom-modeline-mode 1)
   :config
-  (setq doom-modeline-height 35      ;; sets modeline height
-        doom-modeline-bar-width 5    ;; sets right bar width
-        doom-modeline-persp-name t   ;; adds perspective name to modeline
-        doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
+  (setq doom-modeline-buffer-file-name-style 'truncate-with-project
+          doom-modeline-height 35
+        doom-modeline-icon t
+        doom-modeline-major-mode-color-icon t
+          doom-modeline-major-mode-icon t
+        doom-modeline-persp-name nil
+        doom-modeline-persp-icon nil))
+#+end_src
+
+* MOVE WHERE I MEAN
+https://github.com/alezost/mwim.el
+
+This package allows you to move to the beginning/end of a line or code.
+
+#+begin_src emacs-lisp
+(use-package mwim)
+#+end_src
+
+* MULTIPLE CURSORS
+https://github.com/magnars/multiple-cursors.el
+
+#+begin_src emacs-lisp
+(use-package multiple-cursors)
 #+end_src
 
 * NERD ICONS
@@ -1233,6 +1320,11 @@ https://github.com/rainstormstudio/nerd-icons-completion
 #+end_src
 
 * ORG MODE
+
+#+begin_src emacs-lisp
+(setq org-directory "~/org/")
+#+end_src
+
 ** Enabling Table of Contents
 #+begin_src emacs-lisp
 (use-package toc-org
@@ -1327,7 +1419,8 @@ Currently using =projectile= instead of =project= because =project= doesn't seem
 #+begin_src emacs-lisp
 (use-package projectile
   :config
-  (projectile-mode 1))
+  (projectile-mode 1)
+  (setq projectile-project-search-path '(("~/.dotfiles" . 0) ("~/coding" . 1) ("~/src" . 1))))
 #+end_src
 
 * RAINBOW DELIMITERS
@@ -1375,13 +1468,15 @@ The following settings are simple modes that are enabled (or disabled) so that E
                   (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 (global-auto-revert-mode t)  ;; Automatically show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
-(global-visual-line-mode t)  ;; Enable truncated lines
-(menu-bar-mode -1)           ;; Disable the menu bar 
-(save-place-mode 1)         ;; Save the cursor position when a file is closed
-(scroll-bar-mode -1)         ;; Disable the scroll bar
-(tool-bar-mode -1)           ;; Disable the tool bar
+(global-visual-line-mode t)          ;; Enable truncated lines
+(menu-bar-mode -1)            ;; Disable the menu bar
+(pixel-scroll-precision-mode) ;; Smooth scrolling
+(save-place-mode 1)           ;; Save the cursor position when a file is closed
+(scroll-bar-mode -1)          ;; Disable the scroll bar
+(tool-bar-mode -1)            ;; Disable the tool bar
 
 (setopt use-short-answers t)   ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
+(setq calendar-week-start-day 1) ;; Set the calendar to start on Monday
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
 (setq save-place-file (concat user-emacs-directory ".emacs-places"))
@@ -1538,7 +1633,7 @@ https://github.com/Alexander-Miller/treemacs
   :hook
   (treemacs-mode . (lambda ()
                      (display-line-numbers-mode -1)
-		     (visual-line-mode -1)))
+             (visual-line-mode -1)))
   :config
   (progn
     (setq treemacs-collapse-dirs                   (if treemacs-python-executable 3 0)
@@ -1647,6 +1742,15 @@ https://github.com/Alexander-Miller/treemacs
 ;;   :config (treemacs-set-scope-type 'Tabs))
 #+end_src
 
+* TRIMMING WHITESPACE
+
+#+begin_src emacs-lisp
+(use-package ws-butler
+  :config
+  (ws-butler-global-mode 1)
+  (setq ws-butler-global-exempt-modes '(markdown-mode org-mode)))
+#+end_src
+
 * VERTICO
 https://github.com/minad/vertico
 
@@ -1727,7 +1831,7 @@ https://github.com/tumashu/vertico-posframe
 ;;   (vertico-posframe-mode 1)
 ;;   (setq vertico-posframe-border-width 2
 ;;         vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))
-;; 	vertico-posframe-poshandler 'posframe-poshandler-frame-top-center)
+;;     vertico-posframe-poshandler 'posframe-poshandler-frame-top-center)
 ;;   (set-face-attribute 'vertico-posframe-border nil :background "#b0bec5"))
 #+end_src
 

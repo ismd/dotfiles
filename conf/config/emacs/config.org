@@ -1117,6 +1117,7 @@ https://github.com/purcell/ibuffer-projectile
   :ensure t
   :config
   (setq ibuffer-projectile-prefix "Project: ")
+  ;; TODO Remove MRL
   (setq ibuffer-formats
         '((mark modified read-only " "
                 (name 28 18 :left :elide)

@@ -1107,9 +1107,7 @@ https://github.com/purcell/ibuffer-projectile
   (add-hook 'ibuffer-hook
             (lambda ()
               (visual-line-mode -1)
-              (ibuffer-projectile-set-filter-groups)
-              (unless (eq ibuffer-sorting-mode 'alphabetic)
-                (ibuffer-do-sort-by-alphabetic)))))
+              (ibuffer-projectile-set-filter-groups))))
 #+end_src
 
 * IVY (COUNSEL)

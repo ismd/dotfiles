@@ -88,3 +88,11 @@ end
 eval "function _tide_on_fish_exit --on-event fish_exit
     set -e $prompt_var
 end"
+
+{%@@ if profile == "cz-work" @@%}
+function fish_right_prompt
+    set_color yellow
+    echo (arc-prompt)
+    set_color normal
+end
+{%@@ endif @@%}

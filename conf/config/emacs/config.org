@@ -55,6 +55,7 @@
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
   - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
+- [[#persistent-scratch][PERSISTENT SCRATCH]]
 - [[#persp-mode][PERSP MODE]]
   - [[#persp-mode-projectile-bridge][Persp Mode Projectile Bridge]]
 - [[#popwin][POPWIN]]
@@ -1281,6 +1282,15 @@ Org-tempo is not a separate package but a module within org that can be enabled.
 (require 'org-tempo)
 #+end_src
 
+* PERSISTENT SCRATCH
+https://github.com/Fanael/persistent-scratch
+
+#+begin_src emacs-lisp
+(use-package persistent-scratch
+  :config
+  (persistent-scratch-setup-default))
+#+end_src
+
 * PERSP MODE
 =Currently not using persp-mode.=
 
@@ -1376,7 +1386,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 
 #+begin_src emacs-lisp
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
-;; (desktop-save-mode 1)        ;; Save the desktop on exit.
+(desktop-save-mode 1)        ;; Save the desktop on exit.
 ;; (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
@@ -1398,6 +1408,8 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
 (setq calendar-week-start-day 1) ;; Set the calendar to start on Monday
 (setq dired-kill-when-opening-new-dired-buffer t)
+(setq initial-major-mode 'text-mode)
+(setq initial-scratch-message nil)
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
 (setq save-place-file (concat user-emacs-directory ".emacs-places"))
 #+end_src

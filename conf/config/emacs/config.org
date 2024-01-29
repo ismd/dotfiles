@@ -70,6 +70,7 @@
   - [[#vterm-toggle][Vterm Toggle]]
 - [[#sudo-edit][SUDO EDIT]]
 - [[#super-save][SUPER SAVE]]
+- [[#tabspaces][TABSPACES]]
 - [[#tldr][TLDR]]
 - [[#transparency][TRANSPARENCY]]
 - [[#tree-sitter][TREE SITTER]]
@@ -1391,6 +1392,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (pixel-scroll-precision-mode)        ;; Smooth scrolling
 (save-place-mode 1)                  ;; Save the cursor position when a file is closed
 (scroll-bar-mode -1)                 ;; Disable the scroll bar
+(tab-bar-mode t)                     ;; Enable tab bar mode
 (tool-bar-mode -1)                   ;; Disable the tool bar
 
 (setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
@@ -1478,6 +1480,11 @@ https://github.com/bbatsov/super-save
   (setq auto-save-default nil)
   (setq super-save-silent t))
 #+end_src
+
+* TABSPACES
+https://github.com/mclear-tools/tabspaces
+
+=Tabspaces= leverages tab-bar.el and project.el. Currently, I don't use =project.el=, so I'm not using =tabspaces=.
 
 * TLDR
 

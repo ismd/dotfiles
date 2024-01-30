@@ -129,7 +129,7 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
   :ensure t
   :config
   ;; Global settings (defaults)
-  (setq doom-themes-enable-bold nil  ; if nil, bold is universally disabled
+  (setq doom-themes-enable-bold t  ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
   (load-theme 'doom-one-light t)
@@ -380,8 +380,8 @@ https://github.com/minad/consult
   ;;;; 3. locate-dominating-file
   ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
   ;;;; 4. projectile.el (projectile-project-root)
-  (autoload 'projectile-project-root "projectile")
-  (setq consult-project-function (lambda (_) (projectile-project-root)))
+  ;; (autoload 'projectile-project-root "projectile")
+  ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
   ;;;; 5. No project support
   ;; (setq consult-project-function nil)
 )
@@ -693,7 +693,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "C-a" '(mwim-beginning-of-line-or-code :wk "Beginning of line or indentation")
    "C-e" '(mwim-end-of-line-or-code :wk "End of line or indentation")
    "C-k" '(cz/delete-line :wk "Delete line")
-   "C-s" '(consult-line :wk "Search for string")
+   "C-s" '((lambda () (interactive) (consult-line nil 1)) :wk "Search for string")
 
    "M-d" '(cz/delete-word :wk "Delete word")
    "M-n" '((lambda () (interactive) (scroll-up-command 3)) :wk "Scroll down")
@@ -868,8 +868,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "o d" '(:ignore t :wk "Date/deadline")
     "o d t" '(org-time-stamp :wk "Org time stamp"))
 
-  (cz/leader-keys
-    "p" '(:keymap projectile-command-map :package projectile :wk "Projectile"))
+  ;; (cz/leader-keys
+  ;;   "p" '(:keymap projectile-command-map :package projectile :wk "Projectile"))
 
   (cz/leader-keys
     "q" '(:ignore t :wk "Quit")
@@ -963,11 +963,11 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   ;;
   ;; Projectile
   ;;
-  (general-define-key
-   :keymaps 'projectile-command-map
-   "b" '(consult-project-buffer :wk "Switch buffer in project")
-   "s r" '(rg-project :wk "Ripgrep in project")
-   "t" '(treemacs-add-and-display-current-project-exclusively :wk "Show project in treemacs"))
+  ;; (general-define-key
+  ;;  :keymaps 'projectile-command-map
+  ;;  "b" '(consult-project-buffer :wk "Switch buffer in project")
+  ;;  "s r" '(rg-project :wk "Ripgrep in project")
+  ;;  "t" '(treemacs-add-and-display-current-project-exclusively :wk "Show project in treemacs"))
 
   ;;
   ;; Rg
@@ -1055,17 +1055,19 @@ Adding highlights to TODO and related words.
 * IBUFFER
 
 ** Ibuffer Projectile
+*Currently using project.el*
+
 https://github.com/purcell/ibuffer-projectile
 
 #+begin_src emacs-lisp
-(use-package ibuffer-projectile
-  :ensure t
-  :config
-  (setq ibuffer-projectile-prefix "Project: ")
-  :hook
-  (ibuffer . (lambda ()
-               (visual-line-mode -1)
-               (ibuffer-projectile-set-filter-groups))))
+;; (use-package ibuffer-projectile
+;;   :ensure t
+;;   :config
+;;   (setq ibuffer-projectile-prefix "Project: ")
+;;   :hook
+;;   (ibuffer . (lambda ()
+;;                (visual-line-mode -1)
+;;                (ibuffer-projectile-set-filter-groups))))
 #+end_src
 
 * KUBERNETES
@@ -1350,6 +1352,7 @@ Using [[https://github.com/Bad-ptr/persp-mode.el][persp-mode]] which is a fork o
 #+end_src
 
 ** Persp Mode Projectile Bridge
+*Currently using project.el*
 
 #+begin_src emacs-lisp
 ;; (use-package persp-mode-projectile-bridge
@@ -1375,22 +1378,24 @@ https://github.com/emacsorphanage/popwin
 #+end_src
 
 * PROJECT
-Currently using =projectile= instead of =project= because =project= doesn't seem to work with my project.
 
 #+begin_src emacs-lisp
-;; (use-package project
-;;   :bind-keymap
-;;   (("C-c p" . project-prefix-map)))
+(use-package project
+  :elpaca nil
+  :config
+  (setq project-vc-extra-root-markers '(".project.el" ".projectile" "a.yaml")))
 #+end_src
 
 * PROJECTILE
+*Currently using project.el*
+
 [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.  It should be noted that many projectile commands do not work if you have set "fish" as the "shell-file-name" for Emacs. I had initially set "fish" as the "shell-file-name" in the Vterm section of this config, but oddly enough I changed it to "bin/sh" and projectile now works as expected, and Vterm still uses "fish" because my default user "sh" on my Linux system is "fish".
 
 #+begin_src emacs-lisp
-(use-package projectile
-  :config
-  (projectile-mode 1)
-  (setq projectile-project-search-path '(("~/.dotfiles" . 0) ("~/coding" . 1) ("~/src" . 1))))
+;; (use-package projectile
+;;   :config
+;;   (projectile-mode 1)
+;;   (setq projectile-project-search-path '(("~/.dotfiles" . 0) ("~/coding" . 1) ("~/src" . 1))))
 #+end_src
 
 * RAINBOW DELIMITERS
@@ -1442,7 +1447,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (pixel-scroll-precision-mode)        ;; Smooth scrolling
 (save-place-mode 1)                  ;; Save the cursor position when a file is closed
 (scroll-bar-mode -1)                 ;; Disable the scroll bar
-(tab-bar-mode t)                     ;; Enable tab bar mode
+;; (tab-bar-mode t)                     ;; Enable tab bar mode
 (tool-bar-mode -1)                   ;; Disable the tool bar
 
 (setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
@@ -1537,6 +1542,24 @@ https://github.com/bbatsov/super-save
 https://github.com/mclear-tools/tabspaces
 
 =Tabspaces= leverages tab-bar.el and project.el. Currently, I don't use =project.el=, so I'm not using =tabspaces=.
+
+#+begin_src emacs-lisp
+(use-package tabspaces
+  :hook (elpaca-after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup. 
+  :commands (tabspaces-switch-or-create-workspace
+             tabspaces-open-or-create-project-and-workspace)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "Default")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*"))
+  ;; (tabspaces-initialize-project-with-todo t)
+  ;; (tabspaces-todo-file-name "project-todo.org")
+  ;; sessions
+  ;; (tabspaces-session t)
+  ;; (tabspaces-session-auto-restore t)
+  )
+#+end_src
 
 * TLDR
 
@@ -1675,9 +1698,9 @@ https://github.com/Alexander-Miller/treemacs
   ;;       ("C-x t M-t" . treemacs-find-tag))
   )
 
-(use-package treemacs-projectile
-  :after (treemacs projectile)
-  :ensure t)
+;; (use-package treemacs-projectile
+;;   :after (treemacs projectile)
+;;   :ensure t)
 
 (use-package treemacs-nerd-icons
   :after (treemacs lsp-treemacs nerd-icons)

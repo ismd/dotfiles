@@ -34,9 +34,11 @@
   - [[#diff-hl][Diff Hl]]
   - [[#git-time-machine][Git Time Machine]]
   - [[#magit][Magit]]
+- [[#highlight-indent-guides][HIGHLIGHT INDENT GUIDES]]
 - [[#highlight-todo][HIGHLIGHT TODO]]
 - [[#ibuffer][IBUFFER]]
   - [[#ibuffer-projectile][Ibuffer Projectile]]
+- [[#kubernetes][KUBERNETES]]
 - [[#language-support][LANGUAGE SUPPORT]]
   - [[#json-mode][JSON Mode]]
   - [[#terraform-mode][Terraform Mode]]
@@ -1018,6 +1020,20 @@ https://github.com/dgutov/diff-hl
   )
 #+end_src
 
+* HIGHLIGHT INDENT GUIDES
+https://github.com/DarthFennec/highlight-indent-guides
+
+#+begin_src emacs-lisp
+(use-package highlight-indent-guides
+  :ensure t
+  :diminish
+  :hook
+  (prog-mode . highlight-indent-guides-mode)
+  (yaml-ts-mode . highlight-indent-guides-mode)
+  :custom
+  (highlight-indent-guides-method 'character))
+#+end_src
+
 * HIGHLIGHT TODO
 Adding highlights to TODO and related words.
 
@@ -1050,6 +1066,18 @@ https://github.com/purcell/ibuffer-projectile
   (ibuffer . (lambda ()
                (visual-line-mode -1)
                (ibuffer-projectile-set-filter-groups))))
+#+end_src
+
+* KUBERNETES
+https://github.com/kubernetes-el/kubernetes-el
+
+#+begin_src emacs-lisp
+(use-package kubernetes
+  :ensure t
+  :commands (kubernetes-overview)
+  :config
+  (setq kubernetes-poll-frequency 3600
+        kubernetes-redraw-frequency 3600))
 #+end_src
 
 * LANGUAGE SUPPORT
@@ -1089,6 +1117,9 @@ https://github.com/emacs-lsp/lsp-mode
 https://emacs-lsp.github.io/lsp-mode/
 
 #+begin_src emacs-lisp
+(define-derived-mode helm-mode yaml-ts-mode "helm"
+  "Major mode for editing kubernetes helm templates")
+
 (use-package lsp-mode
   :init
   (setq lsp-apply-edits-after-file-operations nil)
@@ -1099,6 +1130,8 @@ https://emacs-lsp.github.io/lsp-mode/
   ;; (setq lsp-disabled-clients '(tfmls))
   (setq lsp-response-timeout 60)
   :hook (
+     (bash-ls-mode . lsp)
+     (dockerfile-ts-mode . lsp)
      (json-ts-mode . lsp)
      (terraform-mode . lsp)
      (tsx-ts-mode . lsp)
@@ -1107,7 +1140,14 @@ https://emacs-lsp.github.io/lsp-mode/
 
      ;; if you want which-key integration
      (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+  :commands lsp
+  :config
+  (add-to-list 'lsp-language-id-configuration '(helm-mode . "helm"))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("helm_ls" "serve"))
+                    :activation-fn (lsp-activate-on "helm")
+                    :server-id 'helm-ls)))
 
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode)
@@ -1213,7 +1253,7 @@ https://github.com/LuigiPiucco/nerd-icons-corfu
 
   ;; Optionally:
   (setq nerd-icons-corfu-mapping
-	'((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+    '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
           (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
           ;; ...
           (t :style "cod" :icon "code" :face font-lock-warning-face)))
@@ -1230,14 +1270,14 @@ https://github.com/seagle0128/nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
   (setq nerd-icons-ibuffer-formats
-	'((mark " "
-		(icon 2 2)
-		(name 30 30 :left :elide)
-		" "
-		filename-and-process)
-	  (mark " "
-	   (name 30 -1)
-	   " " filename))))
+    '((mark " "
+        (icon 2 2)
+        (name 30 30 :left :elide)
+        " "
+        filename-and-process)
+      (mark " "
+       (name 30 -1)
+       " " filename))))
 #+end_src
 
 * ORG MODE
@@ -1386,15 +1426,15 @@ The following settings are simple modes that are enabled (or disabled) so that E
 
 #+begin_src emacs-lisp
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
-(desktop-save-mode 1)        ;; Save the desktop on exit.
+;; (desktop-save-mode 1)        ;; Save the desktop on exit.
 ;; (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
 ;; Otherwise, org-tempo is broken when you try to <s TAB...
 (add-hook 'org-mode-hook (lambda ()
-			   (setq-local electric-pair-inhibit-predicate
-				       `(lambda (c)
-					  (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+               (setq-local electric-pair-inhibit-predicate
+                       `(lambda (c)
+                      (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 (global-auto-revert-mode t)          ;; Automatically show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
 (global-visual-line-mode t)          ;; Enable truncated lines

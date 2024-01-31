@@ -868,6 +868,9 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "o d" '(:ignore t :wk "Date/deadline")
     "o d t" '(org-time-stamp :wk "Org time stamp"))
 
+  (cz/leader-keys
+    "p" '(:keymap project-prefix-map :wk "Project"))
+
   ;; (cz/leader-keys
   ;;   "p" '(:keymap projectile-command-map :package projectile :wk "Projectile"))
 

@@ -22,6 +22,7 @@
 - [[#delete-word-and-line][DELETE WORD AND LINE]]
 - [[#diminish][DIMINISH]]
 - [[#dirvish][DIRVISH]]
+- [[#ediff][EDIFF]]
 - [[#editorconfig][EDITORCONFIG]]
 - [[#embark][EMBARK]]
 - [[#expand-region][EXPAND REGION]]
@@ -84,6 +85,8 @@
 - [[#vertico][VERTICO]]
   - [[#orderless][Orderless]]
   - [[#vertico-posframe][Vertico Posframe]]
+- [[#vuiet][VUIET]]
+  - [[#lastfm][Last.fm]]
 - [[#xref][XREF]]
 - [[#which-key][WHICH-KEY]]
 - [[#window-numbering][WINDOW NUMBERING]]
@@ -577,6 +580,13 @@ https://github.com/alexluigit/dirvish
    ("M-j" . dirvish-fd-jump)))
 #+end_src
 
+* EDIFF
+
+#+begin_src emacs-lisp
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+end_src
+
 * EDITORCONFIG
 https://github.com/editorconfig/editorconfig-emacs
 
@@ -740,6 +750,9 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "=" '(text-scale-increase :wk "Increase font size")
     "+" '(text-scale-increase :wk "Increase font size")
     "-" '(text-scale-decrease :wk "Decrease font size")
+    "C-=" '(text-scale-increase :wk "Increase font size")
+    "C--" '(text-scale-decrease :wk "Decrease font size")
+    "C-0" '(text-scale-adjust :wk "Reset font size")
     "C-r" '(vertico-repeat :wk "Vertico repeat")
     "TAB" '(indent-rigidly :wk "Indent region")
     "M-x" '(consult-mode-command :wk "Consult command"))
@@ -844,6 +857,29 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "h v" '(describe-variable :wk "Describe variable")
     "h w" '(where-is :wk "Prints keybinding for command if set")
     "h x" '(describe-command :wk "Display full documentation for command"))
+
+  (cz/leader-keys
+    "M" '(:ignore t :wk "Music")
+    "M a" '(vuiet-play-artist :wk "Play artist")
+    "M A" '(vuiet-play-album :wk "Play album")
+    ;; "M c" '(vuiet-info-playing-track-album :wk "Currently playing track album")
+    "M g" '(vuiet-play-tag-similar :wk "Play tag")
+    "M i" '(:ignore t :wk "Info")
+    "M i a" '(vuiet-artist-info :wk "Artist info")
+    "M i A" '(vuiet-album-info :wk "Album info")
+    "M i t" '(vuiet-tag-info :wk "Tag info")
+    "M l" '(vuiet-playing-track-lyrics :wk "Playing track lyrics")
+    "M p" '(:ignore t :wk "Player")
+    "M p l" '(vuiet-love-track :wk "Love track")
+    "M p L" '(vuiet-love-unlove-track :wk "Unlove track")
+    "M p n" '(vuiet-next :wk "Next")
+    "M p s" '(vuiet-stop :wk "Stop")
+    "M p p" '(vuiet-play-pause :wk "Play/pause")
+    "M r" '(vuiet-play-loved-tracks-similar :wk "Play similar loved tracks")
+    "M s" '(vuiet-play-artist-similar :wk "Play similar artist")
+    ;; "M S" '(vuiet-play-playing-artist-similar :wk "Play similar currently playing artist")
+    "M t" '(vuiet-play-track :wk "Play track")
+    "M T" '(vuiet-play-track-search :wk "Play track search"))
 
   (cz/leader-keys
     "m" '(:ignore t :wk "Multiple cursors")
@@ -1204,11 +1240,13 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
   :ensure t
   :init (doom-modeline-mode 1)
   :config
-  (setq doom-modeline-buffer-file-name-style 'truncate-with-project
-          doom-modeline-height 35
+  (line-number-mode -1)
+  (setq doom-modeline-buffer-encoding nil
+        doom-modeline-buffer-file-name-style 'truncate-with-project
+        doom-modeline-height 35
         doom-modeline-icon t
         doom-modeline-major-mode-color-icon t
-          doom-modeline-major-mode-icon t
+        doom-modeline-major-mode-icon t
         doom-modeline-persp-name nil
         doom-modeline-persp-icon nil))
 #+end_src
@@ -1383,10 +1421,7 @@ https://github.com/emacsorphanage/popwin
 * PROJECT
 
 #+begin_src emacs-lisp
-(use-package project
-  :elpaca nil
-  :config
-  (setq project-vc-extra-root-markers '(".project.el" ".projectile" "a.yaml")))
+(setq project-vc-extra-root-markers '(".project.el" ".projectile" "a.yaml"))
 #+end_src
 
 * PROJECTILE
@@ -1574,7 +1609,7 @@ https://github.com/mclear-tools/tabspaces
 With Emacs version 29, true transparency has been added.  
 
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 93)) ; For all new frames henceforth
+(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 #+end_src
 
 * TREE SITTER
@@ -1816,6 +1851,23 @@ https://github.com/tumashu/vertico-posframe
 ;;         vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))
 ;;     vertico-posframe-poshandler 'posframe-poshandler-frame-top-center)
 ;;   (set-face-attribute 'vertico-posframe-border nil :background "#b0bec5"))
+#+end_src
+
+* VUIET
+https://github.com/mihaiolteanu/vuiet
+
+#+begin_src emacs-lisp
+(use-package vuiet
+  :after lastfm
+  :custom
+  (vuiet-update-mode-line-interval 1))
+#+end_src
+
+** Last.fm
+https://github.com/mihaiolteanu/lastfm.el
+
+#+begin_src emacs-lisp
+(use-package lastfm)
 #+end_src
 
 * XREF

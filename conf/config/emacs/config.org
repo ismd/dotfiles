@@ -993,6 +993,13 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "F" '(indent-rigidly-right-to-tab-stop :wk "Indent right to tab stop"))
 
   ;;
+  ;; Magit
+  ;;
+  (general-define-key
+   :keymaps 'magit-mode-map
+   "C-<tab>" nil)
+
+  ;;
   ;; Org
   ;;
   (general-define-key

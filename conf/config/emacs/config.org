@@ -144,7 +144,7 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
   ;; (doom-themes-treemacs-config)
   ;; ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
-)
+  )
 #+end_src
 
 *** Ef Themes
@@ -388,7 +388,7 @@ https://github.com/minad/consult
   ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
   ;;;; 5. No project support
   ;; (setq consult-project-function nil)
-)
+  )
 #+end_src
 
 ** Embark Consult
@@ -484,15 +484,18 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
   ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-startup-banner "/home/cz/Yandex.Disk/Pictures/avatar.png")  ;; use custom image as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
+  (setq dashboard-projects-backend 'project-el)
   (setq dashboard-items '((recents . 5)
-                          (agenda . 5 )
-                          (bookmarks . 3)
-                          ;; (projects . 3)
-              ))
+                          ;; (agenda . 5 )
+                          ;; (bookmarks . 5)
+                          (projects . 5)
+                          ))
   :custom
   (dashboard-modify-heading-icons '((recents . "file-text")
                                     (bookmarks . "book")))
   :config
+  (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
+  (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
   (dashboard-setup-startup-hook))
 #+end_src
 
@@ -503,15 +506,15 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
 (defun cz/delete-word (arg)
   "Delete characters forward until encountering the end of a word.
 With argument ARG, do this that many times."
-    (interactive "p")
-    (delete-region (point) (progn (forward-word arg) (point))))
+  (interactive "p")
+  (delete-region (point) (progn (forward-word arg) (point))))
 
 ;; Delete word backward
 (defun cz/delete-word-backward (arg)
   "Delete characters backward until encountering the end of a word.
 With argument ARG, do this that many times."
-    (interactive "p")
-    (cz/delete-word (- arg)))
+  (interactive "p")
+  (cz/delete-word (- arg)))
 
 ;; Delete line
 (defun cz/delete-line ()
@@ -1044,9 +1047,8 @@ https://github.com/dgutov/diff-hl
 #+begin_src emacs-lisp
 (use-package diff-hl
   :ensure t
-  :hook (
-     (dired-mode . diff-hl-dired-mode)
-     (magit-pre-refresh . diff-hl-magit-pre-refresh)
+  :hook ((dired-mode . diff-hl-dired-mode)
+         (magit-pre-refresh . diff-hl-magit-pre-refresh)
          (magit-post-refresh . diff-hl-magit-post-refresh))
   :config
   (global-diff-hl-mode))
@@ -1130,7 +1132,9 @@ Adding highlights to TODO and related words.
 #+end_src
 
 ** Ibuffer Projectile
-*Currently using project.el*
+#+begin_quote
+Currently using =project.el= instead of =projectile=.
+#+end_quote
 
 https://github.com/purcell/ibuffer-projectile
 
@@ -1206,17 +1210,16 @@ https://emacs-lsp.github.io/lsp-mode/
   (setq lsp-keymap-prefix "C-c l")
   ;; (setq lsp-disabled-clients '(tfmls))
   (setq lsp-response-timeout 60)
-  :hook (
-     (bash-ls-mode . lsp)
-     (dockerfile-ts-mode . lsp)
-     (json-ts-mode . lsp)
-     (terraform-mode . lsp)
-     (tsx-ts-mode . lsp)
-     (typescript-ts-mode . lsp)
-     (yaml-ts-mode . lsp)
+  :hook ((bash-ls-mode . lsp)
+         (dockerfile-ts-mode . lsp)
+         (json-ts-mode . lsp)
+         (terraform-mode . lsp)
+         (tsx-ts-mode . lsp)
+         (typescript-ts-mode . lsp)
+         (yaml-ts-mode . lsp)
 
-     ;; if you want which-key integration
-     (lsp-mode . lsp-enable-which-key-integration))
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
   (add-to-list 'lsp-language-id-configuration '(helm-mode . "helm"))
@@ -1243,14 +1246,15 @@ https://emacs-lsp.github.io/lsp-mode/
 marginalia.el - Marginalia in the minibuffer
 https://github.com/minad/marginalia
 
+Enable rich annotations using the Marginalia package.
+
 #+begin_src emacs-lisp
-;; Enable rich annotations using the Marginalia package
 (use-package marginalia
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
   :bind (:map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
+              ("M-A" . marginalia-cycle))
 
   ;; The :init section is always executed.
   :init
@@ -1332,7 +1336,7 @@ https://github.com/LuigiPiucco/nerd-icons-corfu
 
   ;; Optionally:
   (setq nerd-icons-corfu-mapping
-    '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+        '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
           (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
           ;; ...
           (t :style "cod" :icon "code" :face font-lock-warning-face)))
@@ -1411,7 +1415,9 @@ https://github.com/Fanael/persistent-scratch
 #+end_src
 
 * PERSP MODE
-=Currently not using persp-mode.=
+#+begin_quote
+Currently using =tabspaces= instead of =persp-mode=.
+#+end_quote
 
 Using [[https://github.com/Bad-ptr/persp-mode.el][persp-mode]] which is a fork of [[https://github.com/nex3/perspective-el][perspective-el]].
 
@@ -1429,7 +1435,9 @@ Using [[https://github.com/Bad-ptr/persp-mode.el][persp-mode]] which is a fork o
 #+end_src
 
 ** Persp Mode Projectile Bridge
-*Currently using project.el*
+#+begin_quote
+Currently using =project.el= instead of =projectile=.
+#+end_quote
 
 #+begin_src emacs-lisp
 ;; (use-package persp-mode-projectile-bridge
@@ -1461,7 +1469,9 @@ https://github.com/emacsorphanage/popwin
 #+end_src
 
 * PROJECTILE
-*Currently using project.el*
+#+begin_quote
+Currently using =project.el= instead of =projectile=.
+#+end_quote
 
 [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.  It should be noted that many projectile commands do not work if you have set "fish" as the "shell-file-name" for Emacs. I had initially set "fish" as the "shell-file-name" in the Vterm section of this config, but oddly enough I changed it to "bin/sh" and projectile now works as expected, and Vterm still uses "fish" because my default user "sh" on my Linux system is "fish".
 
@@ -1511,9 +1521,9 @@ The following settings are simple modes that are enabled (or disabled) so that E
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
 ;; Otherwise, org-tempo is broken when you try to <s TAB...
 (add-hook 'org-mode-hook (lambda ()
-               (setq-local electric-pair-inhibit-predicate
-                       `(lambda (c)
-                      (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+                           (setq-local electric-pair-inhibit-predicate
+                                       `(lambda (c)
+                                          (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 (global-auto-revert-mode t)          ;; Automatically show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
 (global-visual-line-mode t)          ;; Enable truncated lines
@@ -1549,7 +1559,7 @@ Eshell is an Emacs 'shell' that is written in Elisp.
 ;; eshell-syntax-highlighting -- adds fish/zsh-like syntax highlighting.
 ;; eshell-rc-script -- your profile for eshell; like a bashrc for eshell.
 ;; eshell-aliases-file -- sets an aliases file for the eshell.
-  
+
 (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
       eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
       eshell-history-size 5000
@@ -1581,17 +1591,17 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
   (setq vterm-toggle-scope 'project)
   (add-to-list 'display-buffer-alist
                '((lambda (buffer-or-name _)
-                     (let ((buffer (get-buffer buffer-or-name)))
-                       (with-current-buffer buffer
-                         (or (equal major-mode 'vterm-mode)
-                             (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
-                  (display-buffer-reuse-window display-buffer-at-bottom)
-                  ;;(display-buffer-reuse-window display-buffer-in-direction)
-                  ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-                  ;;(direction . bottom)
-                  ;;(dedicated . t) ;dedicated is supported in emacs27
-                  (reusable-frames . visible)
-                  (window-height . 0.3))))
+                   (let ((buffer (get-buffer buffer-or-name)))
+                     (with-current-buffer buffer
+                       (or (equal major-mode 'vterm-mode)
+                           (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+                 (display-buffer-reuse-window display-buffer-at-bottom)
+                 ;;(display-buffer-reuse-window display-buffer-in-direction)
+                 ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                 ;;(direction . bottom)
+                 ;;(dedicated . t) ;dedicated is supported in emacs27
+                 (reusable-frames . visible)
+                 (window-height . 0.3))))
 #+end_src
 
 * SUDO EDIT

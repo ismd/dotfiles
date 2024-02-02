@@ -38,6 +38,7 @@
 - [[#highlight-indent-guides][HIGHLIGHT INDENT GUIDES]]
 - [[#highlight-todo][HIGHLIGHT TODO]]
 - [[#ibuffer][IBUFFER]]
+  - [[#ibuffer-project][Ibuffer Project]]
   - [[#ibuffer-projectile][Ibuffer Projectile]]
 - [[#kubernetes][KUBERNETES]]
 - [[#language-support][LANGUAGE SUPPORT]]
@@ -983,6 +984,13 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "<tab>" 'ignore)
 
   ;;
+  ;; Ibuffer
+  ;;
+  (general-define-key
+   :keymaps 'ibuffer-mode-map
+   "TAB" '(ibuffer-toggle-filter-group :wk "Toggle filter group"))
+
+  ;;
   ;; Indent Rigidly
   ;;
   (general-define-key
@@ -1100,6 +1108,26 @@ Adding highlights to TODO and related words.
 #+end_src
 
 * IBUFFER
+
+#+begin_src emacs-lisp
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (display-line-numbers-mode -1)
+            (visual-line-mode -1)))
+#+end_src
+
+** Ibuffer Project
+
+#+begin_src emacs-lisp
+(use-package ibuffer-project
+  :ensure t
+  :hook
+  (ibuffer . (lambda ()
+               (visual-line-mode -1)
+               (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+               (unless (eq ibuffer-sorting-mode 'project-file-relative)
+                 (ibuffer-do-sort-by-project-file-relative)))))
+#+end_src
 
 ** Ibuffer Projectile
 *Currently using project.el*
@@ -1321,14 +1349,14 @@ https://github.com/seagle0128/nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
   (setq nerd-icons-ibuffer-formats
-    '((mark " "
-        (icon 2 2)
-        (name 30 30 :left :elide)
-        " "
-        filename-and-process)
-      (mark " "
-       (name 30 -1)
-       " " filename))))
+        '((mark " "
+                (icon 2 2)
+                (name 50 50 :left :elide)
+                " "
+                project-file-relative)
+          (mark " "
+                (name 50 -1)
+                " " filename))))
 #+end_src
 
 * ORG MODE
@@ -1499,6 +1527,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
 (setq calendar-week-start-day 1) ;; Set the calendar to start on Monday
 (setq dired-kill-when-opening-new-dired-buffer t)
+(setq-default indent-tabs-mode nil)
 (setq initial-major-mode 'text-mode)
 (setq initial-scratch-message nil)
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
@@ -1658,7 +1687,7 @@ https://github.com/Alexander-Miller/treemacs
   :hook
   (treemacs-mode . (lambda ()
                      (display-line-numbers-mode -1)
-             (visual-line-mode -1)))
+                     (visual-line-mode -1)))
   :config
   (progn
     (setq treemacs-collapse-dirs                   (if treemacs-python-executable 3 0)

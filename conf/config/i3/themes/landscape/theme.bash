@@ -76,8 +76,7 @@ gtk_font='Noto Sans 12'
 gtk_font='Noto Sans 16'
 {%@@ endif @@%}
 gtk_theme='Arc-Lighter'
-#icon_theme='Qogir'
-icon_theme='neru-newyear-light'
+icon_theme='Qogir'
 cursor_theme='Qogirr-Dark'
 
 # Dunst

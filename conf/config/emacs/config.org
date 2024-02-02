@@ -936,6 +936,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "w" '(:ignore t :wk "Perspective/Windows")
     "w c" '(persp-add-new :wk "Create new perspective")
     "w k" '(persp-save-and-kill :wk "Kill perspective")
+    "w o" '(tabspace-open-or-create-project-and-workspace :wk "Open or create project and workspace")
     ;; Move Windows
     "w B" '(buf-move-left :wk "Buffer move left")
     "w N" '(buf-move-down :wk "Buffer move down")
@@ -1591,8 +1592,7 @@ https://github.com/mclear-tools/tabspaces
   (tabspaces-default-tab "Default")
   (tabspaces-remove-to-default t)
   (tabspaces-include-buffers '("*scratch*"))
-  ;; (tabspaces-initialize-project-with-todo t)
-  ;; (tabspaces-todo-file-name "project-todo.org")
+  (tabspaces-initialize-project-with-todo nil)
   ;; sessions
   ;; (tabspaces-session t)
   ;; (tabspaces-session-auto-restore t)

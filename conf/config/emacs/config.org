@@ -814,7 +814,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "f l" '(consult-locate :wk "Locate a file")
     "f r" '(consult-recent-file :wk "Recent file")
     "f u" '(sudo-edit-find-file :wk "Sudo find file")
-    "f U" '(sudo-edit :wk "Sudo edit this file"))
+    "f U" '(sudo-edit :wk "Sudo edit this file")
+    "f x" '(scratch :wk "Scratch buffer"))
 
   (cz/leader-keys
     "g" '(:ignore t :wk "Git")
@@ -937,10 +938,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "t w" '(visual-line-mode :wk "Toggle word wrap"))
 
   (cz/leader-keys
-    "w" '(:ignore t :wk "Perspective/Windows")
-    "w c" '(persp-add-new :wk "Create new perspective")
-    "w k" '(persp-save-and-kill :wk "Kill perspective")
-    "w o" '(tabspaces-open-or-create-project-and-workspace :wk "Open or create project and workspace")
+    "w" '(:ignore t :wk "Workspaces/Windows")
+    "w c" '(tabspaces-open-or-create-project-and-workspace :wk "Open or create project and workspace")
     ;; Move Windows
     "w B" '(buf-move-left :wk "Buffer move left")
     "w N" '(buf-move-down :wk "Buffer move down")

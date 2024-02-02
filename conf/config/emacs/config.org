@@ -704,7 +704,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
    "C-." '(embark-act :wk "Embark act")
    "C-;" '(complete-symbol :wk "Complete symbol")
-   "C-a" '(mwim-beginning-of-line-or-code :wk "Beginning of line or indentation")
+   "C-a" '(mwim-beginning-of-code-or-line :wk "Beginning of line or indentation")
    "C-e" '(mwim-end-of-line-or-code :wk "End of line or indentation")
    "C-k" '(cz/delete-line :wk "Delete line")
    "C-s" '((lambda () (interactive) (consult-line nil 1)) :wk "Search for string")
@@ -1202,14 +1202,29 @@ https://emacs-lsp.github.io/lsp-mode/
 
 (use-package lsp-mode
   :init
-  (setq lsp-apply-edits-after-file-operations nil)
-  (setq lsp-before-save-edits nil)
-  (setq lsp-completion-provider :capf)
-  (setq lsp-enable-snippet nil)
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  ;; (setq lsp-disabled-clients '(tfmls))
-  (setq lsp-response-timeout 60)
+  (setq lsp-apply-edits-after-file-operations nil
+        lsp-before-save-edits nil
+        lsp-completion-provider :capf
+        lsp-completion-show-detail t
+        lsp-completion-show-kind t
+        lsp-diagnostics-provider :auto
+        lsp-eldoc-enable-hover nil
+        lsp-enable-snippet nil
+        lsp-enable-symbol-highlighting t
+        lsp-headerline-breadcrumb-enable t
+        lsp-keymap-prefix "C-c l"
+        lsp-modeline-code-actions-enable t
+        lsp-modeline-diagnostics-enable t
+        lsp-response-timeout 60
+        lsp-signature-auto-activate t
+        lsp-signature-render-documentation t
+        lsp-ui-doc-enable t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-show-with-mouse t
+        lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-show-diagnostics t
+        lsp-ui-sideline-show-hover nil)
   :hook ((bash-ls-mode . lsp)
          (dockerfile-ts-mode . lsp)
          (json-ts-mode . lsp)

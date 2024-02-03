@@ -126,13 +126,12 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 *** Color Theme Sanityinc Tomorrow
 
 #+begin_src emacs-lisp
-(use-package color-theme-sanityinc-tomorrow :ensure t)
+(use-package color-theme-sanityinc-tomorrow)
 #+end_src
 
 *** Doom Themes
 #+begin_src emacs-lisp
 (use-package doom-themes
-  :ensure t
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t  ; if nil, bold is universally disabled
@@ -152,7 +151,6 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 *** Ef Themes
 #+begin_src emacs-lisp
 ;; (use-package ef-themes
-;;   :ensure t
 ;;   :config
 ;;   ;; Make customisations that affect Emacs faces BEFORE loading a theme
 ;;   ;; (any change needs a theme re-load to take effect).
@@ -206,14 +204,14 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 *** IntelliJ Theme
 
 #+begin_src emacs-lisp
-(use-package intellij-theme :ensure t)
+(use-package intellij-theme)
 #+end_src
 
 *** Leuven Theme
 https://github.com/fniessen/emacs-leuven-theme
 
 #+begin_src emacs-lisp
-(use-package leuven-theme :ensure t)
+(use-package leuven-theme)
 #+end_src
 
 *** Mindre Theme
@@ -223,13 +221,10 @@ Copied package to =scripts= because of the issue https://github.com/erikbackman/
 
 #+begin_src emacs-lisp
 ;; (use-package mindre-theme
-;;   :ensure t
 ;;   :custom
 ;;   (mindre-use-more-bold nil)
 ;;   (mindre-use-more-fading nil)
-;;   (mindre-use-faded-lisp-parens t)
-;;   :config
-;;   (load-theme 'mindre t))
+;;   (mindre-use-faded-lisp-parens t))
 
 (require 'mindre-theme)
 (custom-set-variables
@@ -243,7 +238,6 @@ https://github.com/protesilaos/modus-themes
 
 #+begin_src emacs-lisp
 (use-package modus-themes
-  :ensure t
   :init
   (setq modus-themes-italic-constructs t
         modus-themes-bold-constructs nil
@@ -253,11 +247,7 @@ https://github.com/protesilaos/modus-themes
 *** Nord Theme
 
 #+begin_src emacs-lisp
-(use-package nord-theme
-  :ensure t
-  ;; :config
-  ;; (load-theme 'nord t)
-  )
+(use-package nord-theme)
 #+end_src
 
 *** Load Theme
@@ -284,7 +274,6 @@ This is an icon set that can be used with dashboard, dired, ibuffer and other Em
   
 #+begin_src emacs-lisp
 ;; (use-package all-the-icons
-;;   :ensure t
 ;;   :if (display-graphic-p))
 
 ;; (use-package all-the-icons-dired
@@ -397,7 +386,6 @@ https://github.com/minad/consult
 
 #+begin_src emacs-lisp
 (use-package embark-consult
-  :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
@@ -405,12 +393,10 @@ https://github.com/minad/consult
 * COPILOT
 
 #+begin_src emacs-lisp
-(use-package jsonrpc
-  :ensure t)
+(use-package jsonrpc)
 
 (use-package copilot
   :after editorconfig jsonrpc
-  :ensure t
   :elpaca (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
   :hook
   (prog-mode . copilot-mode)
@@ -477,7 +463,6 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
 
 #+begin_src emacs-lisp
 (use-package dashboard
-  :ensure t 
   :init
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
@@ -598,7 +583,6 @@ https://github.com/editorconfig/editorconfig-emacs
 
 #+begin_src emacs-lisp
 (use-package editorconfig
-  :ensure t
   :diminish
   :config
   (editorconfig-mode 1))
@@ -609,7 +593,6 @@ https://github.com/oantolin/embark
 
 #+begin_src emacs-lisp
 (use-package embark
-  :ensure t
   :init
 
   ;; Optionally replace the key help with a completing-read interface
@@ -657,7 +640,6 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
 
 #+begin_src emacs-lisp
 (use-package flycheck
-  :ensure t
   :defer t
   :diminish
   :init (global-flycheck-mode))
@@ -1059,7 +1041,6 @@ https://github.com/dgutov/diff-hl
 
 #+begin_src emacs-lisp
 (use-package diff-hl
-  :ensure t
   :hook ((dired-mode . diff-hl-dired-mode)
          (magit-pre-refresh . diff-hl-magit-pre-refresh)
          (magit-post-refresh . diff-hl-magit-post-refresh))
@@ -1081,7 +1062,6 @@ https://github.com/dgutov/diff-hl
 
 #+begin_src emacs-lisp
 (use-package magit
-  :ensure t
   :custom
   (transient-display-buffer-action '(display-buffer-below-selected))
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
@@ -1095,7 +1075,6 @@ https://github.com/DarthFennec/highlight-indent-guides
 
 #+begin_src emacs-lisp
 (use-package highlight-indent-guides
-  :ensure t
   :diminish
   :hook
   (prog-mode . highlight-indent-guides-mode)
@@ -1135,7 +1114,6 @@ Adding highlights to TODO and related words.
 
 #+begin_src emacs-lisp
 (use-package ibuffer-project
-  :ensure t
   :hook
   (ibuffer . (lambda ()
                (visual-line-mode -1)
@@ -1153,7 +1131,6 @@ https://github.com/purcell/ibuffer-projectile
 
 #+begin_src emacs-lisp
 ;; (use-package ibuffer-projectile
-;;   :ensure t
 ;;   :config
 ;;   (setq ibuffer-projectile-prefix "Project: ")
 ;;   :hook
@@ -1167,7 +1144,6 @@ https://github.com/kubernetes-el/kubernetes-el
 
 #+begin_src emacs-lisp
 (use-package kubernetes
-  :ensure t
   :commands (kubernetes-overview)
   :config
   (setq kubernetes-poll-frequency 3600
@@ -1315,7 +1291,6 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
 
 #+begin_src emacs-lisp
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1)
   :config
   (line-number-mode -1)
@@ -1387,7 +1362,6 @@ https://github.com/seagle0128/nerd-icons-ibuffer
 
 #+begin_src emacs-lisp
 (use-package nerd-icons-ibuffer
-  :ensure t
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
   (setq nerd-icons-ibuffer-formats
@@ -1544,7 +1518,6 @@ https://github.com/dajva/rg.el
 
 #+begin_src emacs-lisp
 (use-package rg
-  :ensure t
   :config
   (setq rg-ignore-case 'smart))
 #+end_src
@@ -1728,7 +1701,6 @@ https://github.com/Alexander-Miller/treemacs
 
 #+begin_src emacs-lisp
 (use-package treemacs
-  :ensure t
   :defer t
   ;; :init
   ;; (with-eval-after-load 'winum
@@ -1822,8 +1794,7 @@ https://github.com/Alexander-Miller/treemacs
   )
 
 ;; (use-package treemacs-projectile
-;;   :after (treemacs projectile)
-;;   :ensure t)
+;;   :after (treemacs projectile))
 
 (use-package treemacs-nerd-icons
   :after (treemacs lsp-treemacs nerd-icons)
@@ -1831,17 +1802,14 @@ https://github.com/Alexander-Miller/treemacs
   (treemacs-load-theme "nerd-icons"))
 
 (use-package treemacs-magit
-  :after (treemacs magit)
-  :ensure t)
+  :after (treemacs magit))
 
 ;; (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
 ;;   :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-;;   :ensure t
 ;;   :config (treemacs-set-scope-type 'Perspectives))
 
 ;; (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
 ;;   :after (treemacs)
-;;   :ensure t
 ;;   :config (treemacs-set-scope-type 'Tabs))
 #+end_src
 
@@ -1998,7 +1966,6 @@ https://github.com/pashinin/workgroups2
 
 #+begin_src emacs-lisp
 ;; (use-package workgroups2
-;;   :ensure t
 ;;   :config
 ;;   (setq wg-prefix-key (kbd "C-c w"))
 ;;   (setq wg-session-file "~/.config/emacs/workgroups")

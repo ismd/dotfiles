@@ -11,6 +11,7 @@ application/x-partial-download=vlc.desktop
 application/xhtml+xml=brave-browser.desktop
 image/jpeg=viewnior.desktop;gpicview.desktop;
 image/png=viewnior.desktop;gpicview.desktop;
+image/svg+xml=ec.desktop;
 text/html=brave-browser.desktop
 text/plain=ec.desktop
 text/x-emacs-lisp=ec.desktop

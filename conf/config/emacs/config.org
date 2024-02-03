@@ -26,6 +26,7 @@
 - [[#editorconfig][EDITORCONFIG]]
 - [[#embark][EMBARK]]
 - [[#expand-region][EXPAND REGION]]
+- [[#flutter][FLUTTER]]
 - [[#flycheck][FLYCHECK]]
 - [[#fonts][FONTS]]
   - [[#setting-the-font-face][Setting the Font Face]]
@@ -42,9 +43,10 @@
   - [[#ibuffer-projectile][Ibuffer Projectile]]
 - [[#kubernetes][KUBERNETES]]
 - [[#language-support][LANGUAGE SUPPORT]]
-  - [[#json-mode][JSON Mode]]
-  - [[#terraform-mode][Terraform Mode]]
-  - [[#yaml-mode][YAML Mode]]
+  - [[#dart][Dart]]
+  - [[#json][JSON]]
+  - [[#terraform][Terraform]]
+  - [[#yaml][YAML]]
 - [[#lsp][LSP]]
 - [[#marginalia][MARGINALIA]]
 - [[#minibuffer-escape][MINIBUFFER ESCAPE]]
@@ -489,7 +491,7 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
                           ;; (agenda . 5 )
                           ;; (bookmarks . 5)
                           (projects . 5)
-                          ))
+                          (registers . 5)))
   :custom
   (dashboard-modify-heading-icons '((recents . "file-text")
                                     (bookmarks . "book")))
@@ -638,6 +640,18 @@ https://github.com/magnars/expand-region.el
 (use-package expand-region)
 #+end_src
 
+* FLUTTER
+https://github.com/amake/flutter.el
+
+#+begin_src emacs-lisp
+(use-package flutter
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-or-hot-reload))
+  :custom
+  (flutter-sdk-path "~/src/flutter"))
+#+end_src
+
 * FLYCHECK
 Install =luacheck= from your Linux distro's repositories for flycheck to work correctly with lua files.  Install =python-pylint= for flycheck to work with python files.  Haskell works with flycheck as long as =haskell-ghc= or =haskell-stack-ghc= is installed.  For more information on language support for flycheck, [[https://www.flycheck.org/en/latest/languages.html][read this]].
 
@@ -660,7 +674,7 @@ Defining the various fonts that Emacs will use.
                     :weight 'regular)
 (set-face-attribute 'variable-pitch nil
                     :font "Ubuntu Nerd Font"
-                    :height 150
+                    :height 130
                     :weight 'regular)
 (set-face-attribute 'fixed-pitch nil
                     :font "JetBrainsMono Nerd Font"
@@ -815,7 +829,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "f r" '(consult-recent-file :wk "Recent file")
     "f u" '(sudo-edit-find-file :wk "Sudo find file")
     "f U" '(sudo-edit :wk "Sudo edit this file")
-    "f x" '(scratch :wk "Scratch buffer"))
+    "f x" '(scratch-buffer :wk "Scratch buffer"))
 
   (cz/leader-keys
     "g" '(:ignore t :wk "Git")
@@ -1163,14 +1177,22 @@ https://github.com/kubernetes-el/kubernetes-el
 * LANGUAGE SUPPORT
 Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM, AWK, C, C++, Fortran, Icon, IDL (CORBA), IDLWAVE, Java, Javascript, M4, Makefiles, Metafont, Modula2, Object Pascal, Objective-C, Octave, Pascal, Perl, Pike, PostScript, Prolog, Python, Ruby, Simula, SQL, Tcl, Verilog, and VHDL.  Other languages will require you to install additional modes.
 
-** JSON Mode
+** Dart
+https://github.com/emacsorphanage/dart-mode
+
+#+begin_src emacs-lisp
+(use-package dart-mode)
+(use-package lsp-dart)
+#+end_src
+
+** JSON
 Using =json-ts-mode= instead of =json-mode=.
 
 #+begin_src emacs-lisp
 ;; (use-package json-mode)
 #+end_src
 
-** Terraform Mode
+** Terraform
 #+begin_src emacs-lisp
 (use-package terraform-mode
   :custom
@@ -1185,7 +1207,7 @@ Using =json-ts-mode= instead of =json-mode=.
 ;;   (terraform-ts-format-on-save t))
 #+end_src
 
-** YAML Mode
+** YAML
 Using =yaml-ts-mode= instead of =yaml-mode=.
 
 #+begin_src emacs-lisp
@@ -1226,6 +1248,7 @@ https://emacs-lsp.github.io/lsp-mode/
         lsp-ui-sideline-show-diagnostics t
         lsp-ui-sideline-show-hover nil)
   :hook ((bash-ls-mode . lsp)
+         (dart-mode . lsp)
          (dockerfile-ts-mode . lsp)
          (json-ts-mode . lsp)
          (terraform-mode . lsp)
@@ -1760,11 +1783,11 @@ https://github.com/Alexander-Miller/treemacs
           treemacs-space-between-root-nodes        t
           treemacs-tag-follow-cleanup              t
           treemacs-tag-follow-delay                1.5
-          treemacs-text-scale                      -0.1
+          treemacs-text-scale                      0
           treemacs-user-mode-line-format           nil
           treemacs-user-header-line-format         nil
           treemacs-wide-toggle-width               70
-          treemacs-width                           35
+          treemacs-width                           30
           treemacs-width-increment                 1
           treemacs-width-is-initially-locked       t
           treemacs-workspace-switch-cleanup        nil)

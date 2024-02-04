@@ -57,6 +57,7 @@
   - [[#nerd-icons-completion][Nerd Icons Completion]]
   - [[#nerd-icons-corfu][Nerd Icons Corfu]]
   - [[#nerd-icons-ibuffer][Nerd Icons Ibuffer]]
+- [[#orderless][ORDERLESS]]
 - [[#org-mode][ORG MODE]]
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
@@ -86,7 +87,6 @@
 - [[#treemacs][TREEMACS]]
 - [[#trimming-whitespace][TRIMMING WHITESPACE]]
 - [[#vertico][VERTICO]]
-  - [[#orderless][Orderless]]
   - [[#vertico-posframe][Vertico Posframe]]
 - [[#vuiet][VUIET]]
   - [[#lastfm][Last.fm]]
@@ -1216,7 +1216,7 @@ https://emacs-lsp.github.io/lsp-mode/
   :init
   (setq lsp-apply-edits-after-file-operations nil
         lsp-before-save-edits nil
-        lsp-completion-provider :capf
+        lsp-completion-provider :none
         lsp-completion-show-detail t
         lsp-completion-show-kind t
         lsp-diagnostics-provider :auto
@@ -1387,6 +1387,20 @@ https://github.com/seagle0128/nerd-icons-ibuffer
           (mark " "
                 (name 50 -1)
                 " " filename))))
+#+end_src
+
+* ORDERLESS
+https://github.com/oantolin/orderless
+
+#+begin_src emacs-lisp
+(use-package orderless
+  :init
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
+  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 
 * ORG MODE
@@ -1892,19 +1906,6 @@ vertico.el - VERTical Interactive COmpletion
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
-#+end_src
-
-** Orderless
-
-#+begin_src emacs-lisp
-(use-package orderless
-  :init
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 
 ** Vertico Posframe

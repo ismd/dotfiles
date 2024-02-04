@@ -155,19 +155,18 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
   (setq ef-themes-headings
         '((0 variable-pitch light 1.9)
           (1 variable-pitch light 1.8)
-          (2 variable-pitch regular 1.7)
-          (3 variable-pitch regular 1.6)
-          (4 variable-pitch regular 1.5)
+          (2 variable-pitch light 1.7)
+          (3 variable-pitch light 1.6)
+          (4 variable-pitch light 1.5)
           (5 variable-pitch 1.4)
           (6 variable-pitch 1.3)
           (7 variable-pitch 1.2)
-          (t variable-pitch 1.1)))
+          (t variable-pitch 1.1)
+          (agenda-date 1.3)
+          (agenda-structure variable-pitch light 1.8)))
 
-  ;; (setq ef-themes-mixed-fonts t
-  ;;   ef-themes-variable-pitch-ui t)
-
-  ;; Disable all other themes to avoid awkward blending:
-  (mapc #'disable-theme custom-enabled-themes))
+  (setq ef-themes-mixed-fonts t)
+  (setq ef-themes-variable-pitch-ui t))
 #+end_src
 
 *** IntelliJ Theme
@@ -630,13 +629,17 @@ Defining the various fonts that Emacs will use.
                     :height 130
                     :weight 'regular)
 (set-face-attribute 'variable-pitch nil
-                    :font "Ubuntu Nerd Font"
-                    :height 130
-                    :weight 'regular)
+                   :font "Hurmit Nerd Font"
+                   :height 140
+                   :weight 'light)
 (set-face-attribute 'fixed-pitch nil
                     :font "JetBrainsMono Nerd Font"
                     :height 130
                     :weight 'regular)
+
+(set-face-attribute 'bold nil :weight 'regular)
+(set-face-attribute 'bold-italic nil :weight 'regular)
+
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
 ;; Your font must have an italic face available.
@@ -650,7 +653,6 @@ Defining the various fonts that Emacs will use.
 ;; are not right unless I also add this method of setting the default font.
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-13"))
 
-;; Uncomment the following line if line spacing needs adjusting.
 (setq-default line-spacing 0.12)
 #+end_src
 
@@ -669,9 +671,9 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   :config
   (general-define-key
 
-   ;; Expand region
-   "C-=" '(er/expand-region :wk "Expand region")
-   "C--" '(er/contract-region :wk "Contract region")
+   "C-=" '(text-scale-increase :wk "Increase font size")
+   "C--" '(text-scale-decrease :wk "Decrease font size")
+   "C-0" '(text-scale-adjust :wk "Adjust font size")
 
    "C-." '(embark-act :wk "Embark act")
    "C-;" '(complete-symbol :wk "Complete symbol")
@@ -722,12 +724,11 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   (cz/leader-keys
     "<" '(previous-buffer :wk "Previous buffer")
     ">" '(next-buffer :wk "Next buffer")
-    "=" '(text-scale-increase :wk "Increase font size")
-    "+" '(text-scale-increase :wk "Increase font size")
-    "-" '(text-scale-decrease :wk "Decrease font size")
-    "C-=" '(text-scale-increase :wk "Increase font size")
-    "C--" '(text-scale-decrease :wk "Decrease font size")
-    "C-0" '(text-scale-adjust :wk "Reset font size")
+    "=" '(er/expand-region :wk "Expand region")
+    "+" '(er/expand-region :wk "Expand region")
+    "-" '(er/contract-region :wk "Contract region")
+    "C-=" '(er/expand-region :wk "Expand region")
+    "C--" '(er/contract-region :wk "Contract region")
     "C-r" '(vertico-repeat :wk "Vertico repeat")
     "TAB" '(indent-rigidly :wk "Indent region")
     "M-x" '(consult-mode-command :wk "Consult command"))
@@ -1290,7 +1291,7 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
   :config
   (line-number-mode -1)
   (setq doom-modeline-buffer-encoding nil
-        doom-modeline-buffer-file-name-style 'truncate-with-project
+        doom-modeline-buffer-file-name-style 'relative-to-project
         doom-modeline-height 35
         doom-modeline-icon t
         doom-modeline-major-mode-color-icon t
@@ -1555,8 +1556,9 @@ The following settings are simple modes that are enabled (or disabled) so that E
 ;; (tab-bar-mode t)                     ;; Enable tab bar mode
 (tool-bar-mode -1)                   ;; Disable the tool bar
 
-(setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
-(setq calendar-week-start-day 1) ;; Set the calendar to start on Monday
+(setopt use-short-answers t)         ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
+(setq calendar-week-start-day 1)     ;; Set the calendar to start on Monday
+(setq-default cursor-type 'bar)      ;; Set the cursor to a bar
 (setq dired-kill-when-opening-new-dired-buffer t)
 (setq-default indent-tabs-mode nil)
 (setq initial-major-mode 'text-mode)

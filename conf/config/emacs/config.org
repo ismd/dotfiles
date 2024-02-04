@@ -1071,7 +1071,8 @@ https://github.com/karthink/gptel
                                 ;; mistral - seems bad and slow
                                 ;; wizardcoder - good enough for coding
                                 :models '("codebooga:latest" "llama2:latest" "magicoder:latest" "mistral:latest" "wizardcoder:latest")))
-  (add-to-list 'gptel-directives '(commit . "I want you to act as a commit message generator. I will provide you with a git diff, and I would like you to generate an appropriate commit message using the conventional commit format. Do not write any explanations or other words, just reply with the commit message.")))
+  ;; (add-to-list 'gptel-directives '(commit . "I want you to act as a commit message generator. I will provide you with a git diff, and I would like you to generate an appropriate commit message using the conventional commit format. Do not write any explanations or other words, just reply with the commit message."))
+  )
 #+end_src
 
 * HIGHLIGHT INDENT GUIDES

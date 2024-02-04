@@ -962,6 +962,13 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "o" '(consult-outline :wk "Outline"))
 
   ;;
+  ;; Arcit
+  ;;
+  (general-define-key
+   :keymaps 'arcit-mode-map
+   "C-<tab>" nil)
+  
+  ;;
   ;; Copilot
   ;;
   (general-define-key

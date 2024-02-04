@@ -637,9 +637,6 @@ Defining the various fonts that Emacs will use.
                     :height 130
                     :weight 'regular)
 
-(set-face-attribute 'bold nil :weight 'regular)
-(set-face-attribute 'bold-italic nil :weight 'regular)
-
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
 ;; Your font must have an italic face available.

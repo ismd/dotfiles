@@ -1593,6 +1593,11 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (setq initial-scratch-message nil)
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
 (setq save-place-file (concat user-emacs-directory ".emacs-places"))
+(setq tab-bar-auto-width nil)
+(setq tab-bar-close-button-show nil)
+(setq tab-bar-new-button-show nil)
+(setq tab-bar-new-tab-choice "*dashboard*")
+(setq tab-bar-tab-hints nil)
 #+end_src
 
 * SHELLS AND TERMINALS
@@ -1691,9 +1696,10 @@ https://github.com/mclear-tools/tabspaces
   (tabspaces-include-buffers '("*scratch*"))
   (tabspaces-initialize-project-with-todo nil)
   ;; sessions
-  ;; (tabspaces-session t)
+  (tabspaces-session t)
   ;; (tabspaces-session-auto-restore t)
-  )
+  :config
+  (add-to-list 'tabspaces-project-switch-commands '(magit-project-status "Magit" "m")))
 #+end_src
 
 * TLDR

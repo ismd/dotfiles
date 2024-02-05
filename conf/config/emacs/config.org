@@ -1489,7 +1489,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (setq tab-bar-auto-width nil)
 (setq tab-bar-close-button-show nil)
 (setq tab-bar-new-button-show nil)
-(setq tab-bar-new-tab-choice "*dashboard*")
+(setq tab-bar-new-tab-choice "*scratch*")
 (setq tab-bar-tab-hints nil)
 #+end_src
 

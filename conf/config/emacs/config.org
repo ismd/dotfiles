@@ -896,11 +896,11 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
   (cz/leader-keys
     "s" '(:ignore t :wk "Search")
-    "s d" '(rg :wk "Ripgrep")
+    "s d" '(rg :wk "Ripgrep in directory")
     "s g" '(consult-grep :wk "Grep")
     "s m" '(consult-man :wk "Man pages")
     "s p" '(rg-project :wk "Ripgrep in project")
-    "s r" '(consult-ripgrep :wk "Ripgrep")
+    "s r" '(consult-ripgrep :wk "Consult ripgrep")
     "s t" '(tldr :wk "Lookup TLDR docs for a command"))
 
   (cz/leader-keys
@@ -914,11 +914,12 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   (cz/leader-keys
     "w" '(:ignore t :wk "Workspaces/Windows")
     "w c" '(tabspaces-open-or-create-project-and-workspace :wk "Open or create project and workspace")
-    ;; Move Windows
-    "w B" '(buf-move-left :wk "Buffer move left")
-    "w N" '(buf-move-down :wk "Buffer move down")
-    "w P" '(buf-move-up :wk "Buffer move up")
-    "w F" '(buf-move-right :wk "Buffer move right"))
+    "w k" '(tabspaces-kill-buffers-close-workspace :wk "Kill buffers and close workspace")
+    "w m" '(:ignore t :wk "Move")
+    "w m b" '(buf-move-left :wk "Buffer move left")
+    "w m n" '(buf-move-down :wk "Buffer move down")
+    "w m p" '(buf-move-up :wk "Buffer move up")
+    "w m f" '(buf-move-right :wk "Buffer move right"))
 
   ;; (cz/leader-keys
   ;;   "C-f" '(:ignore t :wk "Fold")
@@ -944,7 +945,17 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   ;;
   (general-define-key
    :keymaps 'arcit-mode-map
-   "C-<tab>" nil)
+   "C-<tab>" nil
+   "M-1" nil
+   "M-2" nil
+   "M-3" nil
+   "M-4" nil
+   "M-5" nil
+   "M-6" nil
+   "M-7" nil
+   "M-8" nil
+   "M-9" nil
+   "M-0" nil)
   
   ;;
   ;; Copilot
@@ -988,7 +999,17 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   ;;
   (general-define-key
    :keymaps 'magit-mode-map
-   "C-<tab>" nil)
+   "C-<tab>" nil
+   "M-1" nil
+   "M-2" nil
+   "M-3" nil
+   "M-4" nil
+   "M-5" nil
+   "M-6" nil
+   "M-7" nil
+   "M-8" nil
+   "M-9" nil
+   "M-0" nil)
 
   ;;
   ;; Org

@@ -1035,9 +1035,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    :keymaps 'rg-mode-map
    "n" '(compilation-next-error :wk "Move to next line with a match")
    "p" '(compilation-previous-error :wk "Move to previous line with a match")
-   "M-n" '(rg-next-file :wk "Move to next file with a match")
-   "M-p" '(rg-prev-file :wk "Move to previous file with a match"))
-  )
+   "C-c n" '(rg-next-file :wk "Move to next file with a match")
+   "C-c p" '(rg-prev-file :wk "Move to previous file with a match")))
 #+end_src
 
 * GIT PROGRAMS

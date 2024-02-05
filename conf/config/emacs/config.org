@@ -1061,7 +1061,7 @@ https://github.com/karthink/gptel
 #+begin_src emacs-lisp
 (use-package gptel
   :config
-  (setq-default gptel-model "wizardcoder:latest"
+  (setq-default gptel-model "llama2:latest"
                 gptel-backend (gptel-make-ollama "Ollama"
                                 :host "localhost:11434"
                                 :stream t
@@ -1071,8 +1071,7 @@ https://github.com/karthink/gptel
                                 ;; mistral - seems bad and slow
                                 ;; wizardcoder - good enough for coding
                                 :models '("codebooga:latest" "llama2:latest" "magicoder:latest" "mistral:latest" "wizardcoder:latest")))
-  ;; (add-to-list 'gptel-directives '(commit . "I want you to act as a commit message generator. I will provide you with a git diff, and I would like you to generate an appropriate commit message using the conventional commit format. Do not write any explanations or other words, just reply with the commit message."))
-  )
+  (add-to-list 'gptel-directives '(message-commit . "I want you to act as a commit message generator. Generate a commit message for me using the diff which I provide. Generate only for lines which are added or removed. Sign '+' at the start of the line means that the line was added and '-' means that the line was removed. Do not write any explanations or other words, just reply with the commit message.")))
 #+end_src
 
 * HIGHLIGHT INDENT GUIDES

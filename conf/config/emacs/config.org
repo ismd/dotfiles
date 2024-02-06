@@ -568,7 +568,6 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "C--" '(text-scale-decrease :wk "Decrease font size")
    "C-0" '(text-scale-adjust :wk "Adjust font size")
 
-   "C-." '(embark-act :wk "Embark act")
    "C-;" '(complete-symbol :wk "Complete symbol")
    "C-a" '(mwim-beginning-of-code-or-line :wk "Beginning of line or indentation")
    "C-e" '(mwim-end-of-line-or-code :wk "End of line or indentation")
@@ -614,6 +613,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     :keymaps 'override)
 
   (cz/leader-keys
+    "." '(embark-act :wk "Embark act")
     "<" '(previous-buffer :wk "Previous buffer")
     ">" '(next-buffer :wk "Next buffer")
     "=" '(er/expand-region :wk "Expand region")
@@ -648,14 +648,12 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "d t" '(treemacs-select-directory :wk "Open directory in treemacs"))
 
   (cz/leader-keys
-    "e" '(:ignore t :wk "Eshell/Evaluate")
-    "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
-    "e d" '(eval-defun :wk "Evaluate defun containing or after point")
-    "e e" '(eval-expression :wk "Evaluate and elisp expression")
-    "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
+    "e" '(:ignore t :wk "Embark/Evaluate")
+    "e c" '(embark-collect :wk "Embark collect")
+    "e e" '(embark-export :wk "Embark export")
+    "e l" '(embark-live :wk "Embark live")
     "e r" '(eval-region :wk "Evaluate elisp in region")
-    "e s" '(eshell :which-key "Eshell")
-    "e w" '(eww :which-key "EWW emacs web wowser"))
+    "e s" '(eshell :which-key "Eshell"))
 
   (defun cz/delete-this-file ()
     "Delete the file associated with the current buffer and kill the buffer with confirmation."
@@ -818,23 +816,6 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "i" '(consult-imenu :wk "Imenu")
     "I" '(consult-imenu-multi :wk "Imenu multi")
     "o" '(consult-outline :wk "Outline"))
-
-  ;;
-  ;; Arcit
-  ;;
-  (general-define-key
-   :keymaps 'arcit-mode-map
-   "C-<tab>" nil
-   "M-1" nil
-   "M-2" nil
-   "M-3" nil
-   "M-4" nil
-   "M-5" nil
-   "M-6" nil
-   "M-7" nil
-   "M-8" nil
-   "M-9" nil
-   "M-0" nil)
   
   ;;
   ;; Copilot
@@ -1581,7 +1562,7 @@ https://github.com/mclear-tools/tabspaces
   (tabspaces-include-buffers '("*scratch*"))
   (tabspaces-initialize-project-with-todo nil)
   ;; sessions
-  (tabspaces-session t)
+  ;; (tabspaces-session t)
   ;; (tabspaces-session-auto-restore t)
   :config
   (setq tabspaces-project-switch-commands

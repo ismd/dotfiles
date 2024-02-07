@@ -39,6 +39,7 @@
 - [[#gptel][GPTEL]]
 - [[#highlight-indent-guides][HIGHLIGHT INDENT GUIDES]]
 - [[#highlight-todo][HIGHLIGHT TODO]]
+- [[#hippie-expand][HIPPIE EXPAND]]
 - [[#ibuffer][IBUFFER]]
   - [[#ibuffer-project][Ibuffer Project]]
   - [[#ibuffer-projectile][Ibuffer Projectile]]
@@ -574,12 +575,13 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "C-k" '(cz/delete-line :wk "Delete line")
    "C-s" '((lambda () (interactive) (consult-line nil 1)) :wk "Search for string")
 
+   "M-/" '(hippie-expand :wk "Hippie expand")
+   "M-<backspace>" '(cz/delete-word-backward :wk "Delete word backward")
    "M-d" '(cz/delete-word :wk "Delete word")
    "M-n" '((lambda () (interactive) (scroll-up-command 3)) :wk "Scroll down")
    "M-p" '((lambda () (interactive) (scroll-down-command 3)) :wk "Scroll up")
    "M-s" '(avy-goto-char-timer :wk "Jump to character")
    "M-y" '(consult-yank-pop :wk "Yank pop")
-   "M-<backspace>" '(cz/delete-word-backward :wk "Delete word backward")
 
    ;; Winum
    "M-1" '(winum-select-window-1 :wk "Select window 1")
@@ -984,6 +986,18 @@ Adding highlights to TODO and related words.
           ("REVIEW"     font-lock-keyword-face bold)
           ("NOTE"       success bold)
           ("DEPRECATED" font-lock-doc-face bold))))
+#+end_src
+
+* HIPPIE EXPAND
+
+#+begin_src emacs-lisp
+(setq hippie-expand-try-functions-list
+      '(try-complete-file-name-partially
+        try-complete-file-name
+        try-expand-dabbrev
+        try-expand-dabbrev-all-buffers
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol))
 #+end_src
 
 * IBUFFER

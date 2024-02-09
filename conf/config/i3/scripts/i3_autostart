@@ -74,3 +74,6 @@ exec xss-lock -- betterlockscreen --lock --show-layout &
 # Thinkpad-leds
 ~/.bin/thinkpad-leds.sh &
 {%@@ endif @@%}
+
+# Bluetooth
+exec blueman-applet &

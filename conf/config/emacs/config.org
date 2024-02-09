@@ -521,7 +521,7 @@ Defining the various fonts that Emacs will use.
 (set-face-attribute 'default nil
                     :font "JetBrainsMono Nerd Font"
                     :height 130
-                    :weight 'regular)
+                    :weight 'light)
 (set-face-attribute 'variable-pitch nil
                    :font "Hurmit Nerd Font"
                    :height 140
@@ -529,7 +529,7 @@ Defining the various fonts that Emacs will use.
 (set-face-attribute 'fixed-pitch nil
                     :font "JetBrainsMono Nerd Font"
                     :height 130
-                    :weight 'regular)
+                    :weight 'light)
 
 (set-face-attribute 'font-lock-comment-face nil
                     :slant 'italic)
@@ -840,6 +840,13 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "<tab>" 'ignore)
 
   ;;
+  ;; Git
+  ;;
+  (general-define-key
+   :keymaps 'git-commit-mode-map
+   "C-c v c" '(magit-generate-changelog :wk "Generate changelog"))
+
+  ;;
   ;; Ibuffer
   ;;
   (general-define-key
@@ -857,6 +864,13 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "F" '(indent-rigidly-right-to-tab-stop :wk "Indent right to tab stop"))
 
   ;;
+  ;; JavaScript
+  ;;
+  (general-define-key
+   :keymaps 'js-ts-mode-map
+   "M-." '(xref-find-definitions :wk "Find definitions"))
+
+  ;;
   ;; Magit
   ;;
   (general-define-key
@@ -871,11 +885,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-7" nil
    "M-8" nil
    "M-9" nil
-   "M-0" nil)
-
-  (general-define-key
-   :keymaps 'git-commit-mode-map
-   "C-c v c" '(magit-generate-changelog :wk "Generate changelog"))
+   "M-0" nil)  
 
   ;;
   ;; Org
@@ -1125,6 +1135,7 @@ https://emacs-lsp.github.io/lsp-mode/
   :hook ((bash-ls-mode . lsp)
          (dart-mode . lsp)
          (dockerfile-ts-mode . lsp)
+         (js-ts-mode . lsp)
          (json-ts-mode . lsp)
          (terraform-mode . lsp)
          (tsx-ts-mode . lsp)

@@ -25,12 +25,16 @@
 
 [color]
     ui = true
+
 [push]
     default = current
+
 [pull]
     rebase = true
+
 [credential]
     helper = cache --timeout=604800
+
 [alias]
     co = checkout
     br = branch

@@ -78,6 +78,7 @@
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
   - [[#vterm-toggle][Vterm Toggle]]
+- [[#starting-the-daemon][STARTING THE DAEMON]]
 - [[#sudo-edit][SUDO EDIT]]
 - [[#super-save][SUPER SAVE]]
 - [[#tabspaces][TABSPACES]]
@@ -770,6 +771,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
   (cz/leader-keys
     "q" '(:ignore t :wk "Quit")
+    "q f" '(delete-frame :wk "Delete frame")
     "q q" '(save-buffers-kill-emacs :wk "Quit Emacs")
     "q r" '(restart-emacs :wk "Restart Emacs"))
 
@@ -1548,6 +1550,12 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
                  (window-height . 0.3))))
 #+end_src
 
+* STARTING THE DAEMON
+
+#+begin_src emacs-lisp
+(server-start)
+#+end_src
+
 * SUDO EDIT
 [[https://github.com/nflath/sudo-edit][sudo-edit]] gives us the ability to open files with sudo privileges or switch over to editing with sudo privileges if we initially opened the file without such privileges.
 
@@ -1604,7 +1612,7 @@ https://github.com/mclear-tools/tabspaces
 With Emacs version 29, true transparency has been added.  
 
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 93)) ; For all new frames henceforth
+(add-to-list 'default-frame-alist '(alpha-background . 92)) ; For all new frames henceforth
 #+end_src
 
 * TREE SITTER

@@ -43,9 +43,6 @@ dotfiles:
   f_ec.desktop:
     src: local/share/applications/ec.desktop
     dst: ~/.local/share/applications/ec.desktop
-  d_bin:
-    src: bin
-    dst: ~/.bin
   f_00-keyboard.conf:
     src: etc/X11/xorg.conf.d/00-keyboard.conf
     dst: /etc/X11/xorg.conf.d/00-keyboard.conf
@@ -100,6 +97,26 @@ dotfiles:
   f_fish_plugins:
     src: config/fish/fish_plugins
     dst: ~/.config/fish/fish_plugins
+  f_ec:
+    src: bin/ec
+    dst: ~/.bin/ec
+    chmod: '755'
+  f_gammastep.sh:
+    src: bin/gammastep.sh
+    dst: ~/.bin/gammastep.sh
+    chmod: '755'
+  f_keyboard.sh:
+    src: bin/keyboard.sh
+    dst: ~/.bin/keyboard.sh
+    chmod: '755'
+  f_thinkpad-leds.sh:
+    src: bin/thinkpad-leds.sh
+    dst: ~/.bin/thinkpad-leds.sh
+    chmod: '755'
+  f_unclutter.sh:
+    src: bin/unclutter.sh
+    dst: ~/.bin/unclutter.sh
+    chmod: '755'
 profiles:
   bg-city:
     dotfiles:
@@ -114,37 +131,6 @@ profiles:
     - f_user-dirs.dirs
     - f_user-dirs.locale
     - f_ec.desktop
-    - d_bin
-    - f_00-keyboard.conf
-    - f_vconsole.conf
-    - f_theme.bash
-    - f_xprofile
-    - f_tmux.conf
-    - f_config.kdl
-    - d_scripts
-    - f_config.sh
-    - d_config.d
-    - f_config.ini
-    - f_modules.ini
-    - f_gitconfig
-    - f_config.org
-    - f_early-init.el
-    - f_init.el
-    - d_emacs_scripts
-  cz-work:
-    dotfiles:
-    - f_editorconfig
-    - f_fdignore
-    - f_rgignore
-    - f_ripgreprc
-    - d_gammastep
-    - f_ini
-    - d_doom
-    - f_mimeapps.list
-    - f_user-dirs.dirs
-    - f_user-dirs.locale
-    - f_ec.desktop
-    - d_bin
     - f_00-keyboard.conf
     - f_vconsole.conf
     - f_theme.bash
@@ -163,3 +149,44 @@ profiles:
     - d_emacs_scripts
     - f_config.fish
     - f_fish_plugins
+    - f_ec
+    - f_gammastep.sh
+    - f_keyboard.sh
+    - f_thinkpad-leds.sh
+    - f_unclutter.sh
+  cz-work:
+    dotfiles:
+    - f_editorconfig
+    - f_fdignore
+    - f_rgignore
+    - f_ripgreprc
+    - d_gammastep
+    - f_ini
+    - d_doom
+    - f_mimeapps.list
+    - f_user-dirs.dirs
+    - f_user-dirs.locale
+    - f_ec.desktop
+    - f_00-keyboard.conf
+    - f_vconsole.conf
+    - f_theme.bash
+    - f_xprofile
+    - f_tmux.conf
+    - f_config.kdl
+    - d_scripts
+    - f_config.sh
+    - d_config.d
+    - f_config.ini
+    - f_modules.ini
+    - f_gitconfig
+    - f_config.org
+    - f_early-init.el
+    - f_init.el
+    - d_emacs_scripts
+    - f_config.fish
+    - f_fish_plugins
+    - f_ec
+    - f_gammastep.sh
+    - f_keyboard.sh
+    - f_thinkpad-leds.sh
+    - f_unclutter.sh

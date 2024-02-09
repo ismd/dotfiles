@@ -88,9 +88,6 @@ dotfiles:
   f_init.el:
     src: config/emacs/init.el
     dst: ~/.config/emacs/init.el
-  d_emacs_scripts:
-    src: config/emacs/scripts
-    dst: ~/.config/emacs/scripts
   f_config.fish:
     src: config/fish/config.fish
     dst: ~/.config/fish/config.fish
@@ -117,6 +114,18 @@ dotfiles:
     src: bin/unclutter.sh
     dst: ~/.bin/unclutter.sh
     chmod: '755'
+  f_buffer-move.el:
+    src: config/emacs/scripts/buffer-move.el
+    dst: ~/.config/emacs/scripts/buffer-move.el
+  f_elpaca-setup.el:
+    src: config/emacs/scripts/elpaca-setup.el
+    dst: ~/.config/emacs/scripts/elpaca-setup.el
+  f_mindre-theme.el:
+    src: config/emacs/scripts/mindre-theme.el
+    dst: ~/.config/emacs/scripts/mindre-theme.el
+  f_themes.org:
+    src: config/emacs/scripts/themes.org
+    dst: ~/.config/emacs/scripts/themes.org
 profiles:
   bg-city:
     dotfiles:
@@ -146,7 +155,6 @@ profiles:
     - f_config.org
     - f_early-init.el
     - f_init.el
-    - d_emacs_scripts
     - f_config.fish
     - f_fish_plugins
     - f_ec
@@ -154,6 +162,10 @@ profiles:
     - f_keyboard.sh
     - f_thinkpad-leds.sh
     - f_unclutter.sh
+    - f_buffer-move.el
+    - f_elpaca-setup.el
+    - f_mindre-theme.el
+    - f_themes.org
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -182,7 +194,6 @@ profiles:
     - f_config.org
     - f_early-init.el
     - f_init.el
-    - d_emacs_scripts
     - f_config.fish
     - f_fish_plugins
     - f_ec
@@ -190,3 +201,7 @@ profiles:
     - f_keyboard.sh
     - f_thinkpad-leds.sh
     - f_unclutter.sh
+    - f_buffer-move.el
+    - f_elpaca-setup.el
+    - f_mindre-theme.el
+    - f_themes.org

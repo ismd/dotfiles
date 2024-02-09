@@ -31,13 +31,6 @@ dotfiles:
     upignore:
     - '*/custom.el'
     - '*/env.el'
-  d_fish:
-    src: config/fish
-    dst: ~/.config/fish
-    cmpignore:
-    - '*/fish_variables'
-    upignore:
-    - '*/fish_variables'
   f_mimeapps.list:
     src: config/mimeapps.list
     dst: ~/.config/mimeapps.list
@@ -101,6 +94,12 @@ dotfiles:
   d_emacs_scripts:
     src: config/emacs/scripts
     dst: ~/.config/emacs/scripts
+  f_config.fish:
+    src: config/fish/config.fish
+    dst: ~/.config/fish/config.fish
+  f_fish_plugins:
+    src: config/fish/fish_plugins
+    dst: ~/.config/fish/fish_plugins
 profiles:
   bg-city:
     dotfiles:
@@ -111,7 +110,6 @@ profiles:
     - d_gammastep
     - f_ini
     - d_doom
-    - d_fish
     - f_mimeapps.list
     - f_user-dirs.dirs
     - f_user-dirs.locale
@@ -142,7 +140,6 @@ profiles:
     - d_gammastep
     - f_ini
     - d_doom
-    - d_fish
     - f_mimeapps.list
     - f_user-dirs.dirs
     - f_user-dirs.locale
@@ -164,3 +161,5 @@ profiles:
     - f_early-init.el
     - f_init.el
     - d_emacs_scripts
+    - f_config.fish
+    - f_fish_plugins

@@ -1080,9 +1080,17 @@ https://emacs-lsp.github.io/lsp-mode/
   :init
   (setq lsp-apply-edits-after-file-operations nil
         lsp-before-save-edits nil
+        lsp-completion-enable t
+        lsp-completion-enable-additional-text-edit t
+        lsp-completion-filter-on-incomplete t
+        lsp-completion-no-cache nil
         lsp-completion-provider :none
         lsp-completion-show-detail t
         lsp-completion-show-kind t
+        lsp-completion-show-label-description t
+        lsp-completion-sort-initial-results t
+        lsp-completion-use-last-result t
+        lsp-enable-snippet t
         lsp-diagnostics-provider :auto
         lsp-eldoc-enable-hover nil
         lsp-enable-snippet nil
@@ -1261,6 +1269,7 @@ https://github.com/oantolin/orderless
 (use-package orderless
   :init
   (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
         completion-category-overrides '((file (styles basic partial-completion)))))
 #+end_src
 

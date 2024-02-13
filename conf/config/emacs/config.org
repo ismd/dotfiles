@@ -71,6 +71,7 @@
 - [[#popwin][POPWIN]]
 - [[#project][PROJECT]]
 - [[#projectile][PROJECTILE]]
+- [[#protobuf][PROTOBUF]]
 - [[#rainbow-delimiters][RAINBOW DELIMITERS]]
 - [[#rainbow-mode][RAINBOW MODE]]
 - [[#ripgrep][RIPGREP]]
@@ -1119,7 +1120,6 @@ https://emacs-lsp.github.io/lsp-mode/
          (typescript-ts-mode . lsp)
          (yaml-ts-mode . lsp)
 
-         ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
@@ -1398,6 +1398,12 @@ Currently using =project.el= instead of =projectile=.
 ;;   (setq projectile-project-search-path '(("~/.dotfiles" . 0) ("~/coding" . 1) ("~/src" . 1))))
 #+end_src
 
+* PROTOBUF
+
+#+begin_src emacs-lisp
+(use-package protobuf-mode)
+#+end_src
+
 * RAINBOW DELIMITERS
 Adding rainbow coloring to parentheses.
 
@@ -1558,11 +1564,9 @@ https://github.com/bbatsov/super-save
 * TABSPACES
 https://github.com/mclear-tools/tabspaces
 
-=Tabspaces= leverages tab-bar.el and project.el. Currently, I don't use =project.el=, so I'm not using =tabspaces=.
-
 #+begin_src emacs-lisp
 (use-package tabspaces
-  :hook (elpaca-after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup. 
+  :hook (elpaca-after-init . tabspaces-mode)
   :commands (tabspaces-switch-or-create-workspace
              tabspaces-open-or-create-project-and-workspace)
   :custom
@@ -1670,8 +1674,8 @@ https://github.com/Alexander-Miller/treemacs
 #+begin_src emacs-lisp
 (use-package ws-butler
   :config
-  (ws-butler-global-mode 1)
-  (setq ws-butler-global-exempt-modes '(markdown-mode org-mode)))
+  (ws-butler-global-mode 1) 
+ (setq ws-butler-global-exempt-modes '(markdown-mode)))
 #+end_src
 
 * VERTICO

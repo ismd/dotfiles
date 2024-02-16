@@ -65,6 +65,7 @@
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
   - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
+  - [[#org-todo][Org TODO]]
 - [[#persistent-scratch][PERSISTENT SCRATCH]]
 - [[#persp-mode][PERSP MODE]]
   - [[#persp-mode-projectile-bridge][Persp Mode Projectile Bridge]]
@@ -574,7 +575,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   (cz/leader-keys-C-x
     "b" '(consult-buffer :wk "Switch buffer")
     "B" '(consult-buffer-other-window :wk "Switch buffer other window")
-    "k" '(kill-buffer-and-window :wk "Kill buffer"))
+    "k" '(kill-this-buffer :wk "Kill this buffer")
+    "K" '(kill-buffer-and-window :wk "Kill buffer"))
 
   ;;
   ;; C-c
@@ -600,6 +602,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
   (cz/leader-keys
     "b" '(:ignore t :wk "Bookmarks/Buffers")
+    "b b" '(consult-buffer :wk "Switch buffer")
     "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
     "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
     "b d" '(bookmark-delete :wk "Delete bookmark")
@@ -651,7 +654,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "f r" '(consult-recent-file :wk "Recent file")
     "f u" '(sudo-edit-find-file :wk "Sudo find file")
     "f U" '(sudo-edit :wk "Sudo edit this file")
-    "f x" '(scratch-buffer :wk "Scratch buffer"))  
+    "f x" '(scratch-buffer :wk "Scratch buffer"))
 
   (cz/leader-keys
     "h" '(:ignore t :wk "Help")
@@ -788,7 +791,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "i" '(consult-imenu :wk "Imenu")
     "I" '(consult-imenu-multi :wk "Imenu multi")
     "o" '(consult-outline :wk "Outline"))
-  
+
   ;;
   ;; Copilot
   ;;
@@ -855,7 +858,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-7" nil
    "M-8" nil
    "M-9" nil
-   "M-0" nil)  
+   "M-0" nil)
 
   ;;
   ;; Org
@@ -1315,6 +1318,13 @@ Org-tempo is not a separate package but a module within org that can be enabled.
 (require 'org-tempo)
 #+end_src
 
+** Org TODO
+
+#+begin_src emacs-lisp
+(setq org-todo-keywords
+      '((sequence "TODO" "IN-PROGRESS" "WAIT" "HOLD" "DONE")))
+#+end_src
+
 * PERSISTENT SCRATCH
 https://github.com/Fanael/persistent-scratch
 
@@ -1447,7 +1457,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
                                           (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 (global-auto-revert-mode t)          ;; Automatically show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
-(global-visual-line-mode t)          ;; Enable truncated lines
+;; (global-visual-line-mode t)          ;; Enable truncated lines
 (menu-bar-mode -1)                   ;; Disable the menu bar
 (pixel-scroll-precision-mode)        ;; Smooth scrolling
 (save-place-mode 1)                  ;; Save the cursor position when a file is closed

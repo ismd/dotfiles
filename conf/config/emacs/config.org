@@ -79,6 +79,7 @@
 - [[#rainbow-mode][RAINBOW MODE]]
 - [[#ripgrep][RIPGREP]]
 - [[#sane-defaults][SANE DEFAULTS]]
+  - [[#tab-bar][Tab Bar]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
@@ -1497,12 +1498,18 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (setq initial-scratch-message nil)
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
 (setq save-place-file (concat user-emacs-directory ".emacs-places"))
-(setq tab-always-indent t)
-(setq tab-bar-auto-width nil)
-(setq tab-bar-close-button-show nil)
-(setq tab-bar-new-button-show nil)
-(setq tab-bar-new-tab-choice "*scratch*")
-(setq tab-bar-tab-hints t)
+#+end_src
+
+** Tab Bar
+
+#+begin_src emacs-lisp
+(setq tab-always-indent t
+      tab-bar-auto-width nil
+      tab-bar-close-button-show nil
+      tab-bar-new-button-show nil
+      tab-bar-new-tab-choice "*scratch*"
+      tab-bar-new-tab-to 'rightmost
+      tab-bar-tab-hints t)
 #+end_src
 
 * SHELLS AND TERMINALS

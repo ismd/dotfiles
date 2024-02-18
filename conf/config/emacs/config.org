@@ -1099,6 +1099,7 @@ https://emacs-lsp.github.io/lsp-mode/
   "Major mode for editing kubernetes helm templates")
 
 (use-package lsp-mode
+  :bind-keymap ("C-c l" . lsp-command-map)
   :init
   (setq lsp-apply-edits-after-file-operations nil
         lsp-before-save-edits nil
@@ -1118,31 +1119,32 @@ https://emacs-lsp.github.io/lsp-mode/
         lsp-enable-snippet nil
         lsp-enable-symbol-highlighting t
         lsp-headerline-breadcrumb-enable t
+        lsp-headerline-breadcrumb-segments '(symbols)
         lsp-keymap-prefix "C-c l"
-        lsp-modeline-code-actions-enable t
+        lsp-modeline-code-actions-enable nil
         lsp-modeline-diagnostics-enable t
         lsp-response-timeout 60
         lsp-signature-auto-activate t
         lsp-signature-render-documentation t
         lsp-ui-doc-enable t
-        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-show-with-cursor nil
         lsp-ui-doc-show-with-mouse t
         lsp-ui-sideline-enable t
         lsp-ui-sideline-show-code-actions t
         lsp-ui-sideline-show-diagnostics t
         lsp-ui-sideline-show-hover nil)
-  :hook ((bash-ls-mode . lsp)
-         (dart-mode . lsp)
-         (dockerfile-ts-mode . lsp)
-         (js-ts-mode . lsp)
-         (json-ts-mode . lsp)
-         (terraform-mode . lsp)
-         (tsx-ts-mode . lsp)
-         (typescript-ts-mode . lsp)
-         (yaml-ts-mode . lsp)
+  :hook ((bash-ls-mode . lsp-deferred)
+         (dart-mode . lsp-deferred)
+         (dockerfile-ts-mode . lsp-deferred)
+         (js-ts-mode . lsp-deferred)
+         (json-ts-mode . lsp-deferred)
+         (terraform-mode . lsp-deferred)
+         (tsx-ts-mode . lsp-deferred)
+         (typescript-ts-mode . lsp-deferred)
+         (yaml-ts-mode . lsp-deferred)
 
          (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp
+  :commands (lsp lsp-deferred)
   :config
   (add-to-list 'lsp-language-id-configuration '(helm-mode . "helm"))
 
@@ -1159,8 +1161,7 @@ https://emacs-lsp.github.io/lsp-mode/
 ;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
-;; optionally if you want to use debugger
-;; (use-package dap-mode)
+(use-package dap-mode)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 #+end_src
 

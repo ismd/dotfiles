@@ -11,6 +11,9 @@
   - [[#custom-file][Custom File]]
   - [[#fullscreen][Fullscreen]]
   - [[#themes][Themes]]
+- [[#ai][AI]]
+  - [[#ellama][Ellama]]
+  - [[#gptel][GPTEL]]
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#backup][BACKUP]]
 - [[#company][COMPANY]]
@@ -37,7 +40,6 @@
   - [[#diff-hl][Diff Hl]]
   - [[#git-time-machine][Git Time Machine]]
   - [[#magit][Magit]]
-- [[#gptel][GPTEL]]
 - [[#highlight-indent-guides][HIGHLIGHT INDENT GUIDES]]
 - [[#highlight-todo][HIGHLIGHT TODO]]
 - [[#hippie-expand][HIPPIE EXPAND]]
@@ -140,6 +142,41 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
   (expand-file-name
     "scripts/themes.org"
     user-emacs-directory))
+#+end_src
+
+* AI
+
+** Ellama
+https://github.com/s-kostyaev/ellama
+
+#+begin_src emacs-lisp
+(use-package ellama
+  :init
+  (setopt ellama-language "English")
+  (require 'llm-ollama)
+  (setopt ellama-provider
+          (make-llm-ollama
+           :chat-model "codellama:34b-code"
+           :embedding-model "codellama")))
+#+end_src
+
+** GPTEL
+https://github.com/karthink/gptel
+
+#+begin_src emacs-lisp
+(use-package gptel
+  :config
+  (setq-default gptel-model "llama2:latest"
+                gptel-backend (gptel-make-ollama "Ollama"
+                                :host "localhost:11434"
+                                :stream t
+                                ;; codebooga - seems like it is very slow but may be good for coding
+                                ;; llama2 - good enough
+                                ;; magicoder - commit messages are bad
+                                ;; mistral - seems bad and slow
+                                ;; wizardcoder - good enough for coding
+                                :models '("codebooga:latest" "llama2:latest" "magicoder:latest" "mistral:latest" "wizardcoder:latest")))
+  (add-to-list 'gptel-directives '(message-commit . "I want you to act as a commit message generator. Generate a commit message for me using the diff which I provide. Generate only for lines which are added or removed. Sign '+' at the start of the line means that the line was added and '-' means that the line was removed. Do not write any explanations or other words, just reply with the commit message.")))
 #+end_src
 
 * ALL THE ICONS
@@ -919,25 +956,6 @@ https://github.com/dgutov/diff-hl
   :custom
   (transient-display-buffer-action '(display-buffer-below-selected))
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
-#+end_src
-
-* GPTEL
-https://github.com/karthink/gptel
-
-#+begin_src emacs-lisp
-(use-package gptel
-  :config
-  (setq-default gptel-model "llama2:latest"
-                gptel-backend (gptel-make-ollama "Ollama"
-                                :host "localhost:11434"
-                                :stream t
-                                ;; codebooga - seems like it is very slow but may be good for coding
-                                ;; llama2 - good enough
-                                ;; magicoder - commit messages are bad
-                                ;; mistral - seems bad and slow
-                                ;; wizardcoder - good enough for coding
-                                :models '("codebooga:latest" "llama2:latest" "magicoder:latest" "mistral:latest" "wizardcoder:latest")))
-  (add-to-list 'gptel-directives '(message-commit . "I want you to act as a commit message generator. Generate a commit message for me using the diff which I provide. Generate only for lines which are added or removed. Sign '+' at the start of the line means that the line was added and '-' means that the line was removed. Do not write any explanations or other words, just reply with the commit message.")))
 #+end_src
 
 * HIGHLIGHT INDENT GUIDES

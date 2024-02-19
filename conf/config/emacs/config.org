@@ -754,7 +754,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "o i" '(org-toggle-item :wk "Org toggle item")
     "o t" '(org-todo :wk "Org todo")
     "o B" '(org-babel-tangle :wk "Org babel tangle")
-    "o T" '(org-todo-list :wk "Org todo list"))
+    "o T" '(org-todo-list :wk "Org todo list")
+    "o x" '(org-toggle-checkbox :wk "Org toggle checkbox"))
 
   (cz/leader-keys
     "o b" '(:ignore t :wk "Tables")

@@ -77,3 +77,6 @@ exec xss-lock -- betterlockscreen --lock --show-layout &
 
 # Bluetooth
 exec blueman-applet &
+
+# Easy Effects
+exec flatpak run com.github.wwmm.easyeffects --gapplication-service -l rock &

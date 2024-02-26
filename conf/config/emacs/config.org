@@ -50,6 +50,7 @@
 - [[#language-support][LANGUAGE SUPPORT]]
   - [[#dart][Dart]]
   - [[#json][JSON]]
+  - [[#markdown][Markdown]]
   - [[#terraform][Terraform]]
   - [[#yaml][YAML]]
 - [[#lsp][LSP]]
@@ -768,9 +769,6 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   (cz/leader-keys
     "p" '(:keymap project-prefix-map :wk "Project"))
 
-  ;; (cz/leader-keys
-  ;;   "p" '(:keymap projectile-command-map :package projectile :wk "Projectile"))
-
   (cz/leader-keys
     "q" '(:ignore t :wk "Quit")
     "q f" '(delete-frame :wk "Delete frame")
@@ -1068,6 +1066,17 @@ Using =json-ts-mode= instead of =json-mode=.
 
 #+begin_src emacs-lisp
 ;; (use-package json-mode)
+#+end_src
+
+** Markdown
+
+*** Grip
+https://github.com/seagle0128/grip-mode
+
+#+begin_src emacs-lisp
+(use-package grip-mode
+  :bind (:map markdown-mode-command-map
+              ("g" . grip-mode)))
 #+end_src
 
 ** Terraform

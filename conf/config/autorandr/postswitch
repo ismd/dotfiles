@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+notify-send -i display "Display profile" "$AUTORANDR_CURRENT_PROFILE"
+
+sleep 1s
+"$HOME"/.config/i3/themes/landscape/random.sh
+
+notify-send -i display "Display profile activated"

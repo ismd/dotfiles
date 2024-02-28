@@ -126,6 +126,10 @@ dotfiles:
   f_themes.org:
     src: config/emacs/scripts/themes.org
     dst: ~/.config/emacs/scripts/themes.org
+  f_postswitch:
+    src: config/autorandr/postswitch
+    dst: ~/.config/autorandr/postswitch
+    chmod: '755'
 profiles:
   bg-city:
     dotfiles:
@@ -166,6 +170,7 @@ profiles:
     - f_elpaca-setup.el
     - f_mindre-theme.el
     - f_themes.org
+    - f_postswitch
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -205,3 +210,4 @@ profiles:
     - f_elpaca-setup.el
     - f_mindre-theme.el
     - f_themes.org
+    - f_postswitch

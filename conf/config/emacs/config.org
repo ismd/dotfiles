@@ -1497,7 +1497,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 
 (setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
 
-(setq-default cursor-type '(bar . 3)) ;; Set the cursor to a bar
+(setq-default cursor-type '(bar . 2)) ;; Set the cursor to a bar
 (setq-default indent-tabs-mode nil)
 (setq-default line-spacing 0.12)
 

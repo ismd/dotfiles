@@ -68,7 +68,7 @@ xset s 1800 1800
 xset dpms 3600 10800 0
 
 # xss-lock
-exec xss-lock -- betterlockscreen --lock --show-layout &
+exec xss-lock -l -- ~/.bin/lock-screen.sh &
 
 {%@@ if profile == "cz-work" @@%}
 # Thinkpad-leds

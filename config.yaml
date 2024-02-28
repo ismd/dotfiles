@@ -130,6 +130,10 @@ dotfiles:
     src: config/autorandr/postswitch
     dst: ~/.config/autorandr/postswitch
     chmod: '755'
+  f_lock-screen.sh:
+    src: bin/lock-screen.sh
+    dst: ~/.bin/lock-screen.sh
+    chmod: '755'
 profiles:
   bg-city:
     dotfiles:
@@ -171,6 +175,7 @@ profiles:
     - f_mindre-theme.el
     - f_themes.org
     - f_postswitch
+    - f_lock-screen.sh
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -211,3 +216,4 @@ profiles:
     - f_mindre-theme.el
     - f_themes.org
     - f_postswitch
+    - f_lock-screen.sh

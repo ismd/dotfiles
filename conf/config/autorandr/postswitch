@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Check if screen is locked
+if ps aux | grep -v grep | grep -v xss-lock | grep "lock-screen.sh" > /dev/null
+then
+    exit 0
+fi
+
 notify-send -i display "Display profile" "$AUTORANDR_CURRENT_PROFILE"
 
 sleep 1s

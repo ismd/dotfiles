@@ -1,10 +1,3 @@
-export BROWSER=brave
-export CHROME_EXECUTABLE=google-chrome-stable
-export EDITOR=nvim
-export PAGER=less
-export TERMINAL=alacritty
-export VISUAL=nvim
-
 {%@@ if profile == "bg-city" @@%}
 export GDK_DPI_SCALE=0.5
 export GDK_SCALE=2

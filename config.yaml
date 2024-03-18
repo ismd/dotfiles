@@ -134,6 +134,9 @@ dotfiles:
     src: bin/lock-screen.sh
     dst: ~/.bin/lock-screen.sh
     chmod: '755'
+  f_profile:
+    src: profile
+    dst: ~/.profile
 profiles:
   bg-city:
     dotfiles:
@@ -176,6 +179,7 @@ profiles:
     - f_themes.org
     - f_postswitch
     - f_lock-screen.sh
+    - f_profile
   cz-work:
     dotfiles:
     - f_editorconfig
@@ -217,3 +221,4 @@ profiles:
     - f_themes.org
     - f_postswitch
     - f_lock-screen.sh
+    - f_profile

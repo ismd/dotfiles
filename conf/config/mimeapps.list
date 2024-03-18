@@ -7,6 +7,7 @@ application/x-extension-html=brave-browser.desktop
 application/x-extension-shtml=brave-browser.desktop
 application/x-extension-xht=brave-browser.desktop
 application/x-extension-xhtml=brave-browser.desktop
+application/x-fictionbook+xml=FBReader.desktop;
 application/x-partial-download=vlc.desktop
 application/xhtml+xml=brave-browser.desktop
 image/jpeg=viewnior.desktop;gpicview.desktop;

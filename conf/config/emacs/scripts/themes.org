@@ -21,12 +21,14 @@
 ** Color Theme Sanityinc Tomorrow
 
 #+begin_src emacs-lisp
-(use-package color-theme-sanityinc-tomorrow)
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t)
 #+end_src
 
 ** Doom Themes
 #+begin_src emacs-lisp
 (use-package doom-themes
+  :ensure t
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t  ; if nil, bold is universally disabled
@@ -45,6 +47,7 @@
 ** Ef Themes
 #+begin_src emacs-lisp
 (use-package ef-themes
+  :ensure t
   :config
   (setq ef-themes-headings
         '((0 variable-pitch light 1.9)
@@ -66,14 +69,16 @@
 ** IntelliJ Theme
 
 #+begin_src emacs-lisp
-(use-package intellij-theme)
+(use-package intellij-theme
+  :ensure t)
 #+end_src
 
 ** Leuven Theme
 https://github.com/fniessen/emacs-leuven-theme
 
 #+begin_src emacs-lisp
-(use-package leuven-theme)
+(use-package leuven-theme
+  :ensure t)
 #+end_src
 
 ** Mindre Theme
@@ -100,6 +105,7 @@ https://github.com/protesilaos/modus-themes
 
 #+begin_src emacs-lisp
 (use-package modus-themes
+  :ensure t
   :init
   (setq modus-themes-italic-constructs t
         modus-themes-bold-constructs nil
@@ -109,7 +115,8 @@ https://github.com/protesilaos/modus-themes
 ** Nord Theme
 
 #+begin_src emacs-lisp
-(use-package nord-theme)
+(use-package nord-theme
+  :ensure t)
 #+end_src
 
 * Load Theme

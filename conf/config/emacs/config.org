@@ -153,6 +153,7 @@ https://github.com/s-kostyaev/ellama
 
 #+begin_src emacs-lisp
 (use-package ellama
+  :ensure t
   :init
   (setopt ellama-language "English")
   (require 'llm-ollama)
@@ -167,6 +168,7 @@ https://github.com/karthink/gptel
 
 #+begin_src emacs-lisp
 (use-package gptel
+  :ensure t
   :config
   (setq-default gptel-model "llama2:latest"
                 gptel-backend (gptel-make-ollama "Ollama"
@@ -190,9 +192,11 @@ This is an icon set that can be used with dashboard, dired, ibuffer and other Em
   
 #+begin_src emacs-lisp
 ;; (use-package all-the-icons
+;;   :ensure t
 ;;   :if (display-graphic-p))
 
 ;; (use-package all-the-icons-dired
+;;   :ensure t
 ;;   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 #+end_src
 
@@ -212,6 +216,7 @@ Currently using =corfu= instead of =company=.
 
 #+begin_src emacs-lisp
 ;; (use-package company
+;;   :ensure t
 ;;   :defer 2
 ;;   :diminish
 ;;   :custom
@@ -233,6 +238,8 @@ https://github.com/minad/consult
 
 #+begin_src emacs-lisp
 (use-package consult
+  :ensure t
+
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
@@ -302,6 +309,7 @@ https://github.com/minad/consult
 
 #+begin_src emacs-lisp
 (use-package embark-consult
+  :ensure t
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
@@ -309,11 +317,12 @@ https://github.com/minad/consult
 * COPILOT
 
 #+begin_src emacs-lisp
-(use-package jsonrpc)
+(use-package jsonrpc
+  :ensure t)
 
 (use-package copilot
   :after editorconfig jsonrpc
-  :elpaca (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
+  :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
   :hook
   (prog-mode . copilot-mode)
   (text-mode . copilot-mode)
@@ -326,6 +335,7 @@ https://github.com/minad/corfu
 
 #+begin_src emacs-lisp
 (use-package corfu
+  :ensure t
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode))
@@ -341,6 +351,7 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
 
 #+begin_src emacs-lisp
 (use-package dashboard
+  :ensure t
   :init
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
@@ -396,7 +407,8 @@ If at end of line, delete the following newline char."
 This package implements hiding or abbreviation of the modeline displays (lighters) of minor-modes.  With this package installed, you can add ':diminish' to any use-package block to hide that particular mode in the modeline.
 
 #+begin_src emacs-lisp
-(use-package diminish)
+(use-package diminish
+  :ensure t)
 #+end_src
 
 * DIRVISH
@@ -404,6 +416,7 @@ https://github.com/alexluigit/dirvish
 
 #+begin_src emacs-lisp
 (use-package dirvish
+  :ensure t
   :init
   (dirvish-override-dired-mode)
   :custom
@@ -461,6 +474,7 @@ https://github.com/editorconfig/editorconfig-emacs
 
 #+begin_src emacs-lisp
 (use-package editorconfig
+  :ensure t
   :diminish
   :config
   (editorconfig-mode 1))
@@ -471,6 +485,7 @@ https://github.com/oantolin/embark
 
 #+begin_src emacs-lisp
 (use-package embark
+  :ensure t
   :init
 
   ;; Optionally replace the key help with a completing-read interface
@@ -498,7 +513,8 @@ https://github.com/oantolin/embark
 https://github.com/magnars/expand-region.el
 
 #+begin_src emacs-lisp
-(use-package expand-region)
+(use-package expand-region
+  :ensure t)
 #+end_src
 
 * FLUTTER
@@ -506,6 +522,7 @@ https://github.com/amake/flutter.el
 
 #+begin_src emacs-lisp
 (use-package flutter
+  :ensure t
   :after dart-mode
   :bind (:map dart-mode-map
               ("C-M-x" . #'flutter-run-or-hot-reload))
@@ -518,6 +535,7 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
 
 #+begin_src emacs-lisp
 (use-package flycheck
+  :ensure t
   :defer t
   :diminish
   :init (global-flycheck-mode))
@@ -563,6 +581,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
 #+begin_src emacs-lisp
 (use-package general
+  :ensure t
   :config
   (general-define-key
 
@@ -932,6 +951,7 @@ https://github.com/dgutov/diff-hl
 
 #+begin_src emacs-lisp
 (use-package diff-hl
+  :ensure t
   :hook ((dired-mode . diff-hl-dired-mode)
          (magit-pre-refresh . diff-hl-magit-pre-refresh)
          (magit-post-refresh . diff-hl-magit-post-refresh))
@@ -944,6 +964,7 @@ https://github.com/dgutov/diff-hl
 
 #+begin_src emacs-lisp
 (use-package git-timemachine
+  :ensure t
   :after git-timemachine
   :hook (evil-normalize-keymaps . git-timemachine-hook))
 #+end_src
@@ -953,6 +974,7 @@ https://github.com/dgutov/diff-hl
 
 #+begin_src emacs-lisp
 (use-package magit
+  :ensure t
   :custom
   (transient-display-buffer-action '(display-buffer-below-selected))
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
@@ -963,6 +985,7 @@ https://github.com/DarthFennec/highlight-indent-guides
 
 #+begin_src emacs-lisp
 (use-package highlight-indent-guides
+  :ensure t
   :diminish
   :hook
   (prog-mode . highlight-indent-guides-mode)
@@ -976,6 +999,7 @@ Adding highlights to TODO and related words.
 
 #+begin_src emacs-lisp
 (use-package hl-todo
+  :ensure t
   :hook ((org-mode . hl-todo-mode)
          (prog-mode . hl-todo-mode))
   :config
@@ -1014,6 +1038,7 @@ Adding highlights to TODO and related words.
 
 #+begin_src emacs-lisp
 (use-package ibuffer-project
+  :ensure t
   :hook
   (ibuffer . (lambda ()
                (visual-line-mode -1)
@@ -1031,6 +1056,7 @@ https://github.com/purcell/ibuffer-projectile
 
 #+begin_src emacs-lisp
 ;; (use-package ibuffer-projectile
+;;   :ensure t
 ;;   :config
 ;;   (setq ibuffer-projectile-prefix "Project: ")
 ;;   :hook
@@ -1044,6 +1070,7 @@ https://github.com/kubernetes-el/kubernetes-el
 
 #+begin_src emacs-lisp
 (use-package kubernetes
+  :ensure t
   :commands (kubernetes-overview)
   :config
   (setq kubernetes-poll-frequency 3600
@@ -1057,15 +1084,18 @@ Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM,
 https://github.com/emacsorphanage/dart-mode
 
 #+begin_src emacs-lisp
-(use-package dart-mode)
-(use-package lsp-dart)
+(use-package dart-mode
+  :ensure t)
+(use-package lsp-dart
+  :ensure t)
 #+end_src
 
 ** JSON
 Using =json-ts-mode= instead of =json-mode=.
 
 #+begin_src emacs-lisp
-;; (use-package json-mode)
+;; (use-package json-mode
+;;   :ensure t)
 #+end_src
 
 ** Markdown
@@ -1075,6 +1105,7 @@ https://github.com/seagle0128/grip-mode
 
 #+begin_src emacs-lisp
 (use-package grip-mode
+  :ensure t
   :bind (:map markdown-mode-command-map
               ("g" . grip-mode)))
 #+end_src
@@ -1082,13 +1113,14 @@ https://github.com/seagle0128/grip-mode
 ** Terraform
 #+begin_src emacs-lisp
 (use-package terraform-mode
+  :ensure t
   :custom
   (terraform-indent-level 2)
   (terraform-format-on-save t))
 
 ;; Doesn't work right now
 ;; (use-package terraform-ts-mode
-;;   :elpaca (:host github :repo "kgrotel/terraform-ts-mode")
+;;   :ensure (:host github :repo "kgrotel/terraform-ts-mode")
 ;;   :custom
 ;;   (terraform-ts-indent-level 2)
 ;;   (terraform-ts-format-on-save t))
@@ -1098,7 +1130,8 @@ https://github.com/seagle0128/grip-mode
 Using =yaml-ts-mode= instead of =yaml-mode=.
 
 #+begin_src emacs-lisp
-;; (use-package yaml-mode)
+;; (use-package yaml-mode
+;;   :ensure t)
 #+end_src
 
 * LSP
@@ -1110,6 +1143,7 @@ https://emacs-lsp.github.io/lsp-mode/
   "Major mode for editing kubernetes helm templates")
 
 (use-package lsp-mode
+  :ensure t
   :bind-keymap ("C-c l" . lsp-command-map)
   :init
   (setq lsp-apply-edits-after-file-operations nil
@@ -1165,14 +1199,19 @@ https://emacs-lsp.github.io/lsp-mode/
                     :server-id 'helm-ls)))
 
 ;; optionally
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
 ;; if you are helm user
 ;; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
 ;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+(use-package lsp-treemacs
+  :ensure t
+  :commands lsp-treemacs-errors-list)
 
-(use-package dap-mode)
+(use-package dap-mode
+  :ensure t)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 #+end_src
 
@@ -1184,6 +1223,7 @@ Enable rich annotations using the Marginalia package.
 
 #+begin_src emacs-lisp
 (use-package marginalia
+  :ensure t
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
@@ -1211,6 +1251,7 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
 
 #+begin_src emacs-lisp
 (use-package doom-modeline
+  :ensure t
   :init (doom-modeline-mode 1)
   :config
   (line-number-mode -1)
@@ -1230,21 +1271,24 @@ https://github.com/alezost/mwim.el
 This package allows you to move to the beginning/end of a line or code.
 
 #+begin_src emacs-lisp
-(use-package mwim)
+(use-package mwim
+  :ensure t)
 #+end_src
 
 * MULTIPLE CURSORS
 https://github.com/magnars/multiple-cursors.el
 
 #+begin_src emacs-lisp
-(use-package multiple-cursors)
+(use-package multiple-cursors
+  :ensure t)
 #+end_src
 
 * NERD ICONS
 https://github.com/rainstormstudio/nerd-icons.el
 
 #+begin_src emacs-lisp
-(use-package nerd-icons)
+(use-package nerd-icons
+  :ensure t)
 #+end_src
 
 ** Nerd Icons Completion
@@ -1252,6 +1296,7 @@ https://github.com/rainstormstudio/nerd-icons-completion
 
 #+begin_src emacs-lisp
 (use-package nerd-icons-completion
+  :ensure t
   :after marginalia
   :config
   (nerd-icons-completion-mode)
@@ -1263,6 +1308,7 @@ https://github.com/LuigiPiucco/nerd-icons-corfu
 
 #+begin_src emacs-lisp
 (use-package nerd-icons-corfu
+  :ensure t
   :after corfu
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
@@ -1282,6 +1328,7 @@ https://github.com/seagle0128/nerd-icons-ibuffer
 
 #+begin_src emacs-lisp
 (use-package nerd-icons-ibuffer
+  :ensure t
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
   (setq nerd-icons-ibuffer-formats
@@ -1300,6 +1347,7 @@ https://github.com/oantolin/orderless
 
 #+begin_src emacs-lisp
 (use-package orderless
+  :ensure t
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
@@ -1315,6 +1363,7 @@ https://github.com/oantolin/orderless
 ** Enabling Table of Contents
 #+begin_src emacs-lisp
 (use-package toc-org
+  :ensure t
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
 #+end_src
@@ -1324,7 +1373,8 @@ Org-bullets gives us attractive bullets rather than asterisks.
 
 #+begin_src emacs-lisp
 (add-hook 'org-mode-hook 'org-indent-mode)
-(use-package org-bullets)
+(use-package org-bullets
+  :ensure t)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+end_src
 
@@ -1360,6 +1410,7 @@ https://github.com/Fanael/persistent-scratch
 
 #+begin_src emacs-lisp
 (use-package persistent-scratch
+  :ensure t
   :config
   (persistent-scratch-setup-default))
 #+end_src
@@ -1373,6 +1424,7 @@ Using [[https://github.com/Bad-ptr/persp-mode.el][persp-mode]] which is a fork o
 
 #+begin_src emacs-lisp
 ;; (use-package persp-mode
+;;   :ensure t
 ;;   :custom
 ;;   (persp-keymap-prefix (kbd "C-c w"))
 ;;   :init
@@ -1391,6 +1443,7 @@ Currently using =project.el= instead of =projectile=.
 
 #+begin_src emacs-lisp
 ;; (use-package persp-mode-projectile-bridge
+;;   :ensure t
 ;;   ;; :after (persp-mode projectile)
 ;;   :hook
 ;;   ((persp-mode projectile) . (lambda () (persp-mode-projectile-bridge-mode 1)))
@@ -1405,6 +1458,7 @@ https://github.com/emacsorphanage/popwin
 
 #+begin_src emacs-lisp
 (use-package popwin
+  :ensure t
   :config
   (push "*Flycheck errors*" popwin:special-display-config)
   (push "*lsp-help*" popwin:special-display-config)
@@ -1433,6 +1487,7 @@ Currently using =project.el= instead of =projectile=.
 
 #+begin_src emacs-lisp
 ;; (use-package projectile
+;;   :ensure t
 ;;   :config
 ;;   (projectile-mode 1)
 ;;   (setq projectile-project-search-path '(("~/.dotfiles" . 0) ("~/coding" . 1) ("~/src" . 1))))
@@ -1441,7 +1496,8 @@ Currently using =project.el= instead of =projectile=.
 * PROTOBUF
 
 #+begin_src emacs-lisp
-(use-package protobuf-mode)
+(use-package protobuf-mode
+  :ensure t)
 #+end_src
 
 * RAINBOW DELIMITERS
@@ -1449,6 +1505,7 @@ Adding rainbow coloring to parentheses.
 
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
+  :ensure t
   :hook ((prog-mode . rainbow-delimiters-mode)))
 #+end_src
 
@@ -1457,8 +1514,9 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
 
 #+begin_src emacs-lisp
 (use-package rainbow-mode
+  :ensure t
   :diminish
-  :hook 
+  :hook
   ((org-mode prog-mode) . rainbow-mode))
 #+end_src
 
@@ -1467,6 +1525,7 @@ https://github.com/dajva/rg.el
 
 #+begin_src emacs-lisp
 (use-package rg
+  :ensure t
   :config
   (setq rg-ignore-case 'smart))
 #+end_src
@@ -1530,6 +1589,7 @@ Eshell is an Emacs 'shell' that is written in Elisp.
 
 #+begin_src emacs-lisp
 (use-package eshell-syntax-highlighting
+  :ensure t
   :after esh-mode
   :config
   (eshell-syntax-highlighting-global-mode +1))
@@ -1553,9 +1613,10 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 
 #+begin_src emacs-lisp
 (use-package vterm
-:config
-(setq shell-file-name "/bin/fish"
-      vterm-max-scrollback 5000))
+  :ensure t
+  :config
+  (setq shell-file-name "/bin/fish"
+        vterm-max-scrollback 5000))
 #+end_src
 
 ** Vterm Toggle 
@@ -1563,6 +1624,7 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 
 #+begin_src emacs-lisp
 (use-package vterm-toggle
+  :ensure t
   :after vterm
   :config
   (setq vterm-toggle-fullscreen-p nil)
@@ -1592,7 +1654,8 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 [[https://github.com/nflath/sudo-edit][sudo-edit]] gives us the ability to open files with sudo privileges or switch over to editing with sudo privileges if we initially opened the file without such privileges.
 
 #+begin_src emacs-lisp
-(use-package sudo-edit)
+(use-package sudo-edit
+  :ensure t)
 #+end_src
 
 * SUPER SAVE
@@ -1600,6 +1663,7 @@ https://github.com/bbatsov/super-save
 
 #+begin_src emacs-lisp
 (use-package super-save
+  :ensure t
   :config
   (super-save-mode +1)
   (setq super-save-auto-save-when-idle t)
@@ -1612,6 +1676,7 @@ https://github.com/mclear-tools/tabspaces
 
 #+begin_src emacs-lisp
 (use-package tabspaces
+  :ensure t
   :hook (elpaca-after-init . tabspaces-mode)
   :commands (tabspaces-switch-or-create-workspace
              tabspaces-open-or-create-project-and-workspace)
@@ -1626,7 +1691,7 @@ https://github.com/mclear-tools/tabspaces
   ;; (tabspaces-session-auto-restore t)
   :config
   (setq tabspaces-project-switch-commands
-        '((project-find-file "File" "f")          
+        '((project-find-file "File" "f")
           (project-dired "Directory" "d")
           (magit-project-status "Magit" "m")
           (consult-ripgrep "ripgrep" "r"))))
@@ -1635,7 +1700,8 @@ https://github.com/mclear-tools/tabspaces
 * TLDR
 
 #+begin_src emacs-lisp
-(use-package tldr)
+(use-package tldr
+  :ensure t)
 #+end_src
 
 * TRANSPARENCY
@@ -1652,6 +1718,7 @@ Before Emacs 29, tree-sitter was a [[https://emacs-tree-sitter.github.io/][packa
 
 #+begin_src emacs-lisp
 (use-package treesit-auto
+  :ensure t
   :custom
   (treesit-auto-install 'prompt)
   :config
@@ -1665,7 +1732,7 @@ https://github.com/emacs-tree-sitter/ts-fold/issues/48
 
 #+begin_src emacs-lisp
 ;; (use-package ts-fold
-;;   :elpaca (:host github :repo "emacs-tree-sitter/ts-fold")
+;;   :ensure (:host github :repo "emacs-tree-sitter/ts-fold")
 ;;   :config
 ;;   (global-ts-fold-mode 1)
 ;;   (global-ts-fold-indicators-mode 1))
@@ -1676,6 +1743,7 @@ https://github.com/Alexander-Miller/treemacs
 
 #+begin_src emacs-lisp
 (use-package treemacs
+  :ensure t
   :defer t
   :hook
   (treemacs-mode . (lambda ()
@@ -1703,14 +1771,17 @@ https://github.com/Alexander-Miller/treemacs
     (treemacs-hide-gitignored-files-mode nil)))
 
 (use-package treemacs-nerd-icons
+  :ensure t
   :after (treemacs lsp-treemacs nerd-icons)
   :config
   (treemacs-load-theme "nerd-icons"))
 
 (use-package treemacs-magit
+  :ensure t
   :after (treemacs magit))
 
 (use-package treemacs-tab-bar
+  :ensure t
   :after (treemacs)
   :config (treemacs-set-scope-type 'Tabs))
 #+end_src
@@ -1719,9 +1790,10 @@ https://github.com/Alexander-Miller/treemacs
 
 #+begin_src emacs-lisp
 (use-package ws-butler
+  :ensure t
   :config
   (ws-butler-global-mode 1) 
- (setq ws-butler-global-exempt-modes '(markdown-mode)))
+  (setq ws-butler-global-exempt-modes '(markdown-mode)))
 #+end_src
 
 * VERTICO
@@ -1731,6 +1803,7 @@ vertico.el - VERTical Interactive COmpletion
 
 #+begin_src emacs-lisp
 (use-package vertico
+  :ensure t
   :init
   (vertico-mode)
 
@@ -1749,13 +1822,13 @@ vertico.el - VERTical Interactive COmpletion
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :elpaca nil
+  :ensure nil
   :init
   (savehist-mode))
 
 ;; A few more useful configurations...
 (use-package emacs
-  :elpaca nil
+  :ensure nil
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -1787,6 +1860,7 @@ https://github.com/tumashu/vertico-posframe
 
 #+begin_src emacs-lisp
 ;; (use-package vertico-posframe
+;;   :ensure t
 ;;   :config
 ;;   (vertico-posframe-mode 1)
 ;;   (setq vertico-posframe-border-width 2
@@ -1800,6 +1874,7 @@ https://github.com/mihaiolteanu/vuiet
 
 #+begin_src emacs-lisp
 (use-package vuiet
+  :ensure t
   :after lastfm
   :custom
   (vuiet-update-mode-line-interval 1))
@@ -1809,13 +1884,15 @@ https://github.com/mihaiolteanu/vuiet
 https://github.com/mihaiolteanu/lastfm.el
 
 #+begin_src emacs-lisp
-(use-package lastfm)
+(use-package lastfm
+  :ensure t)
 #+end_src
 
 * XREF
 
 #+begin_src emacs-lisp
 (use-package xref
+  :ensure t
   :hook
   (xref--xref-buffer-mode . (lambda () (display-line-numbers-mode -1))))
 #+end_src
@@ -1823,6 +1900,7 @@ https://github.com/mihaiolteanu/lastfm.el
 * WHICH-KEY
 #+begin_src emacs-lisp
 (use-package which-key
+  :ensure t
   :diminish
   :init
   (which-key-mode 1)
@@ -1846,6 +1924,7 @@ https://github.com/deb0ch/emacs-winum
 
 #+begin_src emacs-lisp
 (use-package winum
+  :ensure t
   :config
   (winum-mode))
 #+end_src
@@ -1855,6 +1934,7 @@ https://github.com/pashinin/workgroups2
 
 #+begin_src emacs-lisp
 ;; (use-package workgroups2
+;;   :ensure t
 ;;   :config
 ;;   (setq wg-prefix-key (kbd "C-c w"))
 ;;   (setq wg-session-file "~/.config/emacs/workgroups")

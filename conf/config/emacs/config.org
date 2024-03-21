@@ -80,6 +80,7 @@
 - [[#rainbow-mode][RAINBOW MODE]]
 - [[#ripgrep][RIPGREP]]
 - [[#sane-defaults][SANE DEFAULTS]]
+  - [[#scroll][Scroll]]
   - [[#tab-bar][Tab Bar]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#eshell][Eshell]]
@@ -1548,7 +1549,6 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (global-display-line-numbers-mode 1) ;; Display line numbers
 ;; (global-visual-line-mode t)          ;; Enable truncated lines
 (menu-bar-mode -1)                   ;; Disable the menu bar
-(pixel-scroll-precision-mode)        ;; Smooth scrolling
 (save-place-mode 1)                  ;; Save the cursor position when a file is closed
 (scroll-bar-mode -1)                 ;; Disable the scroll bar
 ;; (tab-bar-mode t)                     ;; Enable tab bar mode
@@ -1567,6 +1567,17 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (setq initial-scratch-message nil)
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
 (setq save-place-file (concat user-emacs-directory ".emacs-places"))
+#+end_src
+
+** Scroll
+
+#+begin_src emacs-lisp
+(pixel-scroll-precision-mode)
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
 #+end_src
 
 ** Tab Bar

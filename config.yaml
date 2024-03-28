@@ -233,3 +233,5 @@ profiles:
     - f_postswitch
     - f_lock-screen.sh
     - f_profile
+    - f_ec-editor
+    - f_ec-visual

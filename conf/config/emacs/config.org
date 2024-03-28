@@ -8,6 +8,7 @@
 - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
   - [[#sourcing-the-scripts][Sourcing the scripts]]
+  - [[#transient][Transient]]
   - [[#custom-file][Custom File]]
   - [[#fullscreen][Fullscreen]]
   - [[#themes][Themes]]
@@ -120,6 +121,12 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 #+begin_src emacs-lisp
 (require 'elpaca-setup) ;; The Elpaca Package Manager
 (require 'buffer-move)  ;; Buffer-move for better window management
+#+end_src
+
+** Transient
+
+#+begin_src emacs-lisp
+(use-package transient :ensure t)
 #+end_src
 
 ** Custom File

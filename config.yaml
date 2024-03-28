@@ -138,6 +138,14 @@ dotfiles:
   f_profile:
     src: profile
     dst: ~/.profile
+  f_ec-editor:
+    src: bin/ec-editor
+    dst: ~/.bin/ec-editor
+    chmod: '755'
+  f_ec-visual:
+    src: bin/ec-visual
+    dst: ~/.bin/ec-visual
+    chmod: '755'
 profiles:
   bg-city:
     dotfiles:
@@ -181,6 +189,8 @@ profiles:
     - f_postswitch
     - f_lock-screen.sh
     - f_profile
+    - f_ec-editor
+    - f_ec-visual
   cz-work:
     dotfiles:
     - f_editorconfig

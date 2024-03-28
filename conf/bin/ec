@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-
 emacsclient -c -n -a emacs "${@:1}"

@@ -335,7 +335,9 @@ https://github.com/minad/consult
   (prog-mode . copilot-mode)
   (text-mode . copilot-mode)
   (copilot-mode . (lambda ()
-                    (setq-local copilot--indent-warning-printed-p t))))
+                    (setq-local copilot--indent-warning-printed-p t)))
+  :custom
+  (copilot-indent-offset-warning-disable t))
 #+end_src
 
 * CORFU

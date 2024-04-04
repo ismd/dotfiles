@@ -175,7 +175,7 @@ profiles:
     - f_profile
     - f_ec-editor
     - f_ec-visual
-  cz-work:
+  ismd-work:
     dotfiles:
     - f_editorconfig
     - f_fdignore
@@ -214,7 +214,6 @@ profiles:
     - f_elpaca-setup.el
     - f_mindre-theme.el
     - f_themes.org
-    - f_postswitch
     - f_lock-screen.sh
     - f_profile
     - f_ec-editor

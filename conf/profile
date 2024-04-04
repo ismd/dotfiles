@@ -16,4 +16,4 @@ export YA_USER=ismd
 {%@@ endif @@%}
 
 # Added by Toolbox App
-export PATH="$PATH:/home/cz/.local/share/JetBrains/Toolbox/scripts"
+export PATH="$PATH:/home/ismd/.local/share/JetBrains/Toolbox/scripts"

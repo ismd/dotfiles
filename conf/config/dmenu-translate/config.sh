@@ -1,4 +1,4 @@
-{%@@ if profile == "cz-work" @@%}
+{%@@ if profile == "ismd-work" @@%}
 # Languages that appear in the menu
 TRANS_LANGS='ru en sr'
 

@@ -10,7 +10,7 @@ export TERM="xterm-256color"
 export TERMINAL=alacritty
 export VISUAL=ec-visual
 
-{%@@ if profile == "cz-work" @@%}
+{%@@ if profile == "ismd-work" @@%}
 export CUPS_USER="ld\ismd"
 export YA_USER=ismd
 {%@@ endif @@%}

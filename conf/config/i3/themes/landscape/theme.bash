@@ -39,14 +39,14 @@ wallpaper="$wdir/wallpaper"
 
 # Polybar
 #polybar_font='Iosevka Nerd Font:size=10;3'
-{%@@ if profile == "cz-work" @@%}
+{%@@ if profile == "ismd-work" @@%}
 polybar_font='JetBrains Mono:size=10;3'
 {%@@ else @@%}
 polybar_font='JetBrains Mono:size=15;3'
 {%@@ endif @@%}
 
 # Rofi
-{%@@ if profile == "cz-work" @@%}
+{%@@ if profile == "ismd-work" @@%}
 rofi_font='Iosevka 10'
 {%@@ else @@%}
 rofi_font='Iosevka 22'
@@ -55,7 +55,7 @@ rofi_icon='Qogir'
 
 # Terminal
 terminal_font_name='JetBrainsMono Nerd Font'
-{%@@ if profile == "cz-work" @@%}
+{%@@ if profile == "ismd-work" @@%}
 terminal_font_size='15'
 {%@@ else @@%}
 terminal_font_size='22'
@@ -63,14 +63,14 @@ terminal_font_size='22'
 
 # Geany
 geany_colors='beach.conf'
-{%@@ if profile == "cz-work" @@%}
+{%@@ if profile == "ismd-work" @@%}
 geany_font='JetBrains Mono 15'
 {%@@ else @@%}
 geany_font='JetBrains Mono 22'
 {%@@ endif @@%}
 
 # Appearance
-{%@@ if profile == "cz-work" @@%}
+{%@@ if profile == "ismd-work" @@%}
 gtk_font='Noto Sans 12'
 {%@@ else @@%}
 gtk_font='Noto Sans 16'

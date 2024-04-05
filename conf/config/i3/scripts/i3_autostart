@@ -70,7 +70,7 @@ xset dpms 3600 10800 0
 # xss-lock
 exec xss-lock -l -- ~/.bin/lock-screen.sh &
 
-{%@@ if profile == "cz-work" @@%}
+{%@@ if profile == "ismd-work" @@%}
 # Thinkpad-leds
 ~/.bin/thinkpad-leds.sh &
 {%@@ endif @@%}

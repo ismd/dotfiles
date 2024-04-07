@@ -2,6 +2,8 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+set fish_greeting
+
 # PATH
 fish_add_path -p ~/.bin
 fish_add_path -p ~/.local/share/nvm/v20.11.1/bin

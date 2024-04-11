@@ -34,7 +34,6 @@ dotfiles:
   f_mimeapps.list:
     src: config/mimeapps.list
     dst: ~/.config/mimeapps.list
-    chmod: '600'
   f_user-dirs.dirs:
     src: config/user-dirs.dirs
     dst: ~/.config/user-dirs.dirs
@@ -188,16 +187,12 @@ profiles:
     - f_user-dirs.dirs
     - f_user-dirs.locale
     - f_ec.desktop
-    - f_00-keyboard.conf
     - f_vconsole.conf
-    - f_theme.bash
     - f_xprofile
     - f_tmux.conf
     - f_config.kdl
-    - d_scripts
     - f_config.sh
     - d_config.d
-    - f_config.ini
     - f_modules.ini
     - f_gitconfig
     - f_config.org

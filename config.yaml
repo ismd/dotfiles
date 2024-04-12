@@ -145,6 +145,9 @@ dotfiles:
     src: bin/ec-visual
     dst: ~/.bin/ec-visual
     chmod: '755'
+  f_alacritty.toml:
+    src: config/alacritty/alacritty.toml
+    dst: ~/.config/alacritty/alacritty.toml
 profiles:
   hyper-city:
     dotfiles:
@@ -174,6 +177,7 @@ profiles:
     - f_profile
     - f_ec-editor
     - f_ec-visual
+    - f_alacritty.toml
   ismd-work:
     dotfiles:
     - f_editorconfig
@@ -213,3 +217,4 @@ profiles:
     - f_profile
     - f_ec-editor
     - f_ec-visual
+    - f_alacritty.toml

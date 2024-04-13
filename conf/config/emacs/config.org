@@ -10,7 +10,6 @@
   - [[#sourcing-the-scripts][Sourcing the scripts]]
   - [[#transient][Transient]]
   - [[#custom-file][Custom File]]
-  - [[#fullscreen][Fullscreen]]
   - [[#themes][Themes]]
 - [[#ai][AI]]
   - [[#ellama][Ellama]]
@@ -137,12 +136,6 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 
 (setq cz/custom-file (expand-file-name "custom.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load cz/custom-file 'noerror)))
-#+end_src
-
-** Fullscreen
-
-#+begin_src emacs-lisp
-(toggle-frame-fullscreen)
 #+end_src
 
 ** Themes

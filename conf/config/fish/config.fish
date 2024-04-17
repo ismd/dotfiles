@@ -12,5 +12,5 @@ fish_add_path -p ~/src/flutter/bin
 
 # Aliases
 alias alacritty="alacritty --config-file ~/.config/i3/alacritty/alacritty.toml"
-alias dotdrop='dotdrop --cfg=~/.dotfiles/config.yaml'
+alias dotdrop='~/.dotfiles/dotdrop.sh --cfg=~/.dotfiles/config.yaml'
 alias nv=nvim

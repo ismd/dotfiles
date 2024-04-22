@@ -60,7 +60,7 @@ video/x-theora+ogg=org.videolan.VLC.desktop;
 x-scheme-handler/http=com.brave.Browser.desktop;
 x-scheme-handler/https=com.brave.Browser.desktop;
 x-scheme-handler/jetbrains=jetbrains-toolbox.desktop;
-x-scheme-handler/lens=OpenLens.desktop;
+x-scheme-handler/lens=OpenLens.desktop
 
 [Default Applications]
 application/json=ec.desktop;
@@ -140,5 +140,5 @@ x-scheme-handler/chrome=brave-browser.desktop
 x-scheme-handler/ftp=brave-browser.desktop
 x-scheme-handler/http=com.brave.Browser.desktop;
 x-scheme-handler/https=com.brave.Browser.desktop;
-x-scheme-handler/jetbrains=jetbrains-toolbox.desktop;
-x-scheme-handler/lens=OpenLens.desktop;
+x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
+x-scheme-handler/lens=OpenLens.desktop

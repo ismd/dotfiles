@@ -6,7 +6,7 @@ set fish_greeting
 
 # PATH
 fish_add_path -p ~/.bin
-fish_add_path -p ~/.local/share/nvm/v20.12.1/bin
+fish_add_path -p ~/.local/share/nvm/v20.12.2/bin
 fish_add_path -p ~/.config/emacs/bin
 fish_add_path -p ~/src/flutter/bin
 

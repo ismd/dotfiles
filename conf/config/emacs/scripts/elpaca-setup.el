@@ -56,9 +56,6 @@
 ;;Useful for configuring built-in emacs features.
 (use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
 
-;; Don't install anything. Defer execution of BODY
-(elpaca nil (message "deferred"))
-
 (provide 'elpaca-setup)
 
 ;;; elpaca-setup.el ends here

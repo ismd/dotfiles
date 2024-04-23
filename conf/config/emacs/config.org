@@ -551,15 +551,15 @@ Defining the various fonts that Emacs will use.
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
                     :font "JetBrainsMono Nerd Font"
-                    :height 120
+                    :height 130
                     :weight 'light)
 (set-face-attribute 'variable-pitch nil
                    :font "Hurmit Nerd Font"
-                   :height 130
+                   :height 140
                    :weight 'light)
 (set-face-attribute 'fixed-pitch nil
                     :font "JetBrainsMono Nerd Font"
-                    :height 120
+                    :height 130
                     :weight 'light)
 
 (set-face-attribute 'font-lock-comment-face nil
@@ -570,7 +570,7 @@ Defining the various fonts that Emacs will use.
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12"))
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-13"))
 
 ;; tab-bar
 (set-face-attribute 'tab-bar-tab nil

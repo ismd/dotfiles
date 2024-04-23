@@ -1483,7 +1483,7 @@ https://github.com/emacsorphanage/popwin
         (project-dired "Directory" "d")
         (magit-project-status "Magit" "m")
         (consult-ripgrep "ripgrep" "r")))
-(setq project-vc-extra-root-markers '(".project.el" ".projectile" "a.yaml"))
+(setq project-vc-extra-root-markers '(".idea" ".project.el" ".projectile" "a.yaml" "package.json"))
 #+end_src
 
 * PROJECTILE

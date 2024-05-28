@@ -835,7 +835,9 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "w m b" '(buf-move-left :wk "Buffer move left")
     "w m n" '(buf-move-down :wk "Buffer move down")
     "w m p" '(buf-move-up :wk "Buffer move up")
-    "w m f" '(buf-move-right :wk "Buffer move right"))
+    "w m f" '(buf-move-right :wk "Buffer move right")
+    "w w" '(:ignore t :wk "Tabspaces")
+    "w w C" '(tabspaces-clear-buffers :wk "Tabspaces clear buffers"))
 
   ;; (cz/leader-keys
   ;;   "C-f" '(:ignore t :wk "Fold")
@@ -923,6 +925,14 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-8" nil
    "M-9" nil
    "M-0" nil)
+
+  ;;
+  ;; Markdown
+  ;;
+  (general-define-key
+   :keymaps 'markdown-mode-map
+   "M-n" nil
+   "M-p" nil)
 
   ;;
   ;; Org
@@ -1696,6 +1706,7 @@ https://github.com/mclear-tools/tabspaces
 #+begin_src emacs-lisp
 (use-package tabspaces
   :ensure t
+  :after consult
   :hook (elpaca-after-init . tabspaces-mode)
   :commands (tabspaces-switch-or-create-workspace
              tabspaces-open-or-create-project-and-workspace)
@@ -1713,7 +1724,28 @@ https://github.com/mclear-tools/tabspaces
         '((project-find-file "File" "f")
           (project-dired "Directory" "d")
           (magit-project-status "Magit" "m")
-          (consult-ripgrep "ripgrep" "r"))))
+          (consult-ripgrep "ripgrep" "r")))
+
+  ;; Filter Buffers for Consult-Buffer
+
+  (with-eval-after-load 'consult
+  ;; hide full buffer list (still available with "b" prefix)
+  (consult-customize consult--source-buffer :hidden t :default nil)
+  ;; set consult-workspace buffer list
+  (defvar consult--source-workspace
+    (list :name     "Workspace Buffers"
+          :narrow   ?w
+          :history  'buffer-name-history
+          :category 'buffer
+          :state    #'consult--buffer-state
+          :default  t
+          :items    (lambda () (consult--buffer-query
+                           :predicate #'tabspaces--local-buffer-p
+                           :sort 'visibility
+                           :as #'buffer-name)))
+
+    "Set workspace buffer list for consult-buffer.")
+  (add-to-list 'consult-buffer-sources 'consult--source-workspace)))
 #+end_src
 
 * TLDR

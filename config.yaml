@@ -156,6 +156,9 @@ profiles:
     - f_rgignore
     - f_ripgreprc
     - f_ini
+    - f_mimeapps.list
+    - f_user-dirs.dirs
+    - f_user-dirs.locale
     - f_ec.desktop
     - f_config.kdl
     - f_config.sh

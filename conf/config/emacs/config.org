@@ -74,6 +74,7 @@
   - [[#persp-mode-projectile-bridge][Persp Mode Projectile Bridge]]
 - [[#popwin][POPWIN]]
 - [[#project][PROJECT]]
+  - [[#project-tab-groups][Project Tab Groups]]
 - [[#projectile][PROJECTILE]]
 - [[#protobuf][PROTOBUF]]
 - [[#rainbow-delimiters][RAINBOW DELIMITERS]]
@@ -552,15 +553,15 @@ Defining the various fonts that Emacs will use.
 (set-face-attribute 'default nil
                     :font "JetBrainsMono Nerd Font"
                     :height 130
-                    :weight 'light)
+                    :weight 'regular)
 (set-face-attribute 'variable-pitch nil
                    :font "Hurmit Nerd Font"
                    :height 140
-                   :weight 'light)
+                   :weight 'regular)
 (set-face-attribute 'fixed-pitch nil
                     :font "JetBrainsMono Nerd Font"
                     :height 130
-                    :weight 'light)
+                    :weight 'regular)
 
 (set-face-attribute 'font-lock-comment-face nil
                     :slant 'italic)
@@ -639,7 +640,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     :keymaps 'override)
 
   (cz/leader-keys-C-x
-    "b" '(consult-buffer :wk "Switch buffer")
+    "b" '(switch-to-buffer :wk "Switch buffer")
     "B" '(consult-buffer-other-window :wk "Switch buffer other window")
     "k" '(kill-this-buffer :wk "Kill this buffer")
     "K" '(kill-buffer-and-window :wk "Kill buffer"))
@@ -668,7 +669,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
   (cz/leader-keys
     "b" '(:ignore t :wk "Bookmarks/Buffers")
-    "b b" '(consult-buffer :wk "Switch buffer")
+    "b b" '(switch-to-buffer :wk "Switch buffer")
     "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
     "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
     "b d" '(bookmark-delete :wk "Delete bookmark")
@@ -1496,6 +1497,16 @@ https://github.com/emacsorphanage/popwin
 (setq project-vc-extra-root-markers '(".idea" ".project.el" ".projectile" "a.yaml" "package.json"))
 #+end_src
 
+** Project Tab Groups
+https://github.com/fritzgrabo/project-tab-groups
+
+#+begin_src emacs-lisp
+(use-package project-tab-groups
+  :ensure t
+  :config
+  (project-tab-groups-mode 1))
+#+end_src
+
 * PROJECTILE
 #+begin_quote
 Currently using =project.el= instead of =projectile=.
@@ -1604,6 +1615,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (setq tab-always-indent t
       tab-bar-auto-width nil
       tab-bar-close-button-show nil
+      tab-bar-format '(tab-bar-format-history tab-bar-format-tabs-groups tab-bar-separator tab-bar-format-add-tab)
       tab-bar-new-button-show nil
       tab-bar-new-tab-choice "*scratch*"
       tab-bar-new-tab-to 'rightmost
@@ -1704,48 +1716,48 @@ https://github.com/bbatsov/super-save
 https://github.com/mclear-tools/tabspaces
 
 #+begin_src emacs-lisp
-(use-package tabspaces
-  :ensure t
-  :after consult
-  :hook (elpaca-after-init . tabspaces-mode)
-  :commands (tabspaces-switch-or-create-workspace
-             tabspaces-open-or-create-project-and-workspace)
-  :custom
-  (tabspaces-use-filtered-buffers-as-default t)
-  (tabspaces-default-tab "Default")
-  (tabspaces-remove-to-default t)
-  (tabspaces-include-buffers '("*scratch*"))
-  (tabspaces-initialize-project-with-todo nil)
-  ;; sessions
-  ;; (tabspaces-session t)
-  ;; (tabspaces-session-auto-restore t)
-  :config
-  (setq tabspaces-project-switch-commands
-        '((project-find-file "File" "f")
-          (project-dired "Directory" "d")
-          (magit-project-status "Magit" "m")
-          (consult-ripgrep "ripgrep" "r")))
+;; (use-package tabspaces
+;;   :ensure t
+;;   :after consult
+;;   :hook (elpaca-after-init . tabspaces-mode)
+;;   :commands (tabspaces-switch-or-create-workspace
+;;              tabspaces-open-or-create-project-and-workspace)
+;;   :custom
+;;   (tabspaces-use-filtered-buffers-as-default t)
+;;   (tabspaces-default-tab "Default")
+;;   (tabspaces-remove-to-default t)
+;;   (tabspaces-include-buffers '("*scratch*"))
+;;   (tabspaces-initialize-project-with-todo nil)
+;;   ;; sessions
+;;   ;; (tabspaces-session t)
+;;   ;; (tabspaces-session-auto-restore t)
+;;   :config
+;;   (setq tabspaces-project-switch-commands
+;;         '((project-find-file "File" "f")
+;;           (project-dired "Directory" "d")
+;;           (magit-project-status "Magit" "m")
+;;           (consult-ripgrep "ripgrep" "r")))
 
-  ;; Filter Buffers for Consult-Buffer
+;;   ;; Filter Buffers for Consult-Buffer
 
-  (with-eval-after-load 'consult
-  ;; hide full buffer list (still available with "b" prefix)
-  (consult-customize consult--source-buffer :hidden t :default nil)
-  ;; set consult-workspace buffer list
-  (defvar consult--source-workspace
-    (list :name     "Workspace Buffers"
-          :narrow   ?w
-          :history  'buffer-name-history
-          :category 'buffer
-          :state    #'consult--buffer-state
-          :default  t
-          :items    (lambda () (consult--buffer-query
-                           :predicate #'tabspaces--local-buffer-p
-                           :sort 'visibility
-                           :as #'buffer-name)))
+;;   (with-eval-after-load 'consult
+;;   ;; hide full buffer list (still available with "b" prefix)
+;;   (consult-customize consult--source-buffer :hidden t :default nil)
+;;   ;; set consult-workspace buffer list
+;;   (defvar consult--source-workspace
+;;     (list :name     "Workspace Buffers"
+;;           :narrow   ?w
+;;           :history  'buffer-name-history
+;;           :category 'buffer
+;;           :state    #'consult--buffer-state
+;;           :default  t
+;;           :items    (lambda () (consult--buffer-query
+;;                            :predicate #'tabspaces--local-buffer-p
+;;                            :sort 'visibility
+;;                            :as #'buffer-name)))
 
-    "Set workspace buffer list for consult-buffer.")
-  (add-to-list 'consult-buffer-sources 'consult--source-workspace)))
+;;     "Set workspace buffer list for consult-buffer.")
+;;   (add-to-list 'consult-buffer-sources 'consult--source-workspace)))
 #+end_src
 
 * TLDR

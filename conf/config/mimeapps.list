@@ -63,6 +63,7 @@ x-scheme-handler/jetbrains=jetbrains-toolbox.desktop;
 x-scheme-handler/lens=OpenLens.desktop;
 x-scheme-handler/yandexmusic=yandex-music.desktop;YandexMusic.desktop;
 text/html=brave-browser.desktop
+x-scheme-handler/figma=figma-linux.desktop
 
 [Default Applications]
 application/json=ec.desktop;
@@ -145,3 +146,4 @@ x-scheme-handler/https=brave-browser.desktop
 x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
 x-scheme-handler/lens=OpenLens.desktop
 x-scheme-handler/yandexmusic=yandex-music.desktop
+x-scheme-handler/figma=figma-linux.desktop

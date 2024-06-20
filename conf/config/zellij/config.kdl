@@ -5,7 +5,7 @@ keybinds clear-defaults=true {
         // bind "Alt c" { Copy; }
     }
     locked {
-        bind "Alt x" { SwitchToMode "Normal"; }
+        bind "Alt g" { SwitchToMode "Normal"; }
     }
     resize {
         bind "Alt r" { SwitchToMode "Normal"; }
@@ -75,8 +75,8 @@ keybinds clear-defaults=true {
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
         bind "j" "Down" { ScrollDown; }
         bind "k" "Up" { ScrollUp; }
-        bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
-        bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
+        // bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
+        // bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
         bind "d" { HalfPageScrollDown; }
         bind "u" { HalfPageScrollUp; }
         // uncomment this and adjust key if using copy_on_select=false
@@ -87,8 +87,8 @@ keybinds clear-defaults=true {
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
         bind "j" "Down" { ScrollDown; }
         bind "k" "Up" { ScrollUp; }
-        bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
-        bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
+        // bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
+        // bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
         bind "d" { HalfPageScrollDown; }
         bind "u" { HalfPageScrollUp; }
         bind "n" { Search "down"; }
@@ -114,7 +114,7 @@ keybinds clear-defaults=true {
         bind "Alt s" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
         bind "w" {
-            LaunchOrFocusPlugin "zellij:session-manager" {
+            LaunchOrFocusPlugin "session-manager" {
                 floating true
                 move_to_focused_tab true
             };
@@ -145,9 +145,11 @@ keybinds clear-defaults=true {
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
     }
     shared_except "locked" {
-        bind "Alt x" { SwitchToMode "Locked"; }
+        bind "Alt g" { SwitchToMode "Locked"; }
         bind "Ctrl q" { Quit; }
         bind "Alt n" { NewPane; }
+        bind "Alt i" { MoveTab "Left"; }
+        bind "Alt o" { MoveTab "Right"; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
         bind "Alt j" "Alt Down" { MoveFocus "Down"; }
@@ -179,16 +181,22 @@ keybinds clear-defaults=true {
         bind "Alt m" { SwitchToMode "Move"; }
     }
     // shared_except "tmux" "locked" {
-    //    bind "Ctrl b" { SwitchToMode "Tmux"; }
+    //     bind "Ctrl b" { SwitchToMode "Tmux"; }
     // }
 }
 
 plugins {
-    tab-bar { path "tab-bar"; }
-    status-bar { path "status-bar"; }
-    strider { path "strider"; }
-    compact-bar { path "compact-bar"; }
-    session-manager { path "session-manager"; }
+    tab-bar location="zellij:tab-bar"
+    status-bar location="zellij:status-bar"
+    strider location="zellij:strider"
+    compact-bar location="zellij:compact-bar"
+    session-manager location="zellij:session-manager"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen true
+    }
+    filepicker location="zellij:strider" {
+        cwd "/"
+    }
 }
 
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
@@ -220,7 +228,7 @@ plugins {
 //   - true (default)
 //   - false
 //
-// pane_frames true
+pane_frames false
 
 // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
 // Options:
@@ -271,7 +279,7 @@ plugins {
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "nightfox"
+theme "nord"
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -349,3 +357,9 @@ theme "nightfox"
 // Default: true
 //
 // styled_underlines false
+
+// Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
+// metadata info on this session)
+// Default: false
+//
+// disable_session_metadata true

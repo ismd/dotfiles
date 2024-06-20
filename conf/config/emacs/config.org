@@ -928,6 +928,14 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-0" nil)
 
   ;;
+  ;; Makefile
+  ;;
+  (general-define-key
+   :keymaps 'makefile-mode-map
+   "M-n" nil
+   "M-p" nil)
+
+  ;;
   ;; Markdown
   ;;
   (general-define-key

@@ -11,10 +11,12 @@ layout {
     tab name="main" focus=true {
         pane
     }
+    {%@@ if profile == "ismd-work" @@%}
     tab name="a" {
         pane cwd="~/a"
     }
     tab name="cloud-console" {
         pane cwd="~/a/data-ui/cloud-console"
     }
+    {%@@ endif @@%}
 }

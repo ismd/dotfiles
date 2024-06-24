@@ -187,6 +187,7 @@ profiles:
     - f_ec-editor
     - f_ec-visual
     - f_alacritty.toml
+    - f_default.kdl
   ismd-work:
     dotfiles:
     - f_editorconfig

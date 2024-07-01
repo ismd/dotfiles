@@ -151,6 +151,9 @@ dotfiles:
   f_default.kdl:
     src: config/zellij/layouts/default.kdl
     dst: ~/.config/zellij/layouts/default.kdl
+  f_hyprland.conf:
+    src: config/hypr/hyprland.conf
+    dst: ~/.config/hypr/hyprland.conf
 profiles:
   hyper-city:
     dotfiles:
@@ -225,3 +228,4 @@ profiles:
     - f_ec-visual
     - f_alacritty.toml
     - f_default.kdl
+    - f_hyprland.conf

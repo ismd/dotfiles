@@ -65,6 +65,7 @@ x-scheme-handler/https=brave-browser.desktop;com.brave.Browser.desktop;
 x-scheme-handler/jetbrains=jetbrains-toolbox.desktop;
 x-scheme-handler/lens=OpenLens.desktop;
 x-scheme-handler/yandexmusic=yandex-music.desktop;YandexMusic.desktop;
+image/jpeg=org.kde.gwenview.desktop;
 
 [Default Applications]
 application/json=ec.desktop;
@@ -101,7 +102,7 @@ audio/x-speex=org.videolan.VLC.desktop;
 audio/x-vorbis=org.videolan.VLC.desktop;
 audio/x-vorbis+ogg=org.videolan.VLC.desktop;
 audio/x-wav=org.videolan.VLC.desktop;
-image/jpeg=viewnior.desktop;gpicview.desktop;
+image/jpeg=org.kde.gwenview.desktop
 image/png=viewnior.desktop;gpicview.desktop;
 image/svg+xml=ec.desktop;
 text/html=brave-browser.desktop
@@ -149,3 +150,4 @@ x-scheme-handler/https=brave-browser.desktop
 x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
 x-scheme-handler/lens=OpenLens.desktop
 x-scheme-handler/yandexmusic=yandex-music.desktop
+inode/directory=org.kde.dolphin.desktop

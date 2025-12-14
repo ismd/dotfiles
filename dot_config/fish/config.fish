@@ -23,10 +23,7 @@ abbr -a ap arc pull
 abbr -a apush arc push
 abbr -a as arc status
 
-abbr -a dc dotdrop compare
-abbr -a di dotdrop install
-
-abbr -a ga git add 
+abbr -a ga git add
 abbr -a gci git commit
 abbr -a gco git checkout
 abbr -a gcob git checkout -b
@@ -40,7 +37,6 @@ alias b bluetoothctl
 alias c 'set dir (command ls -lah | fzf | awk "{print \$9}"); and cd $dir'
 alias cat bat
 alias claude="~/.claude/local/claude"
-alias dotdrop '~/.dotfiles/dotdrop.sh --cfg=~/.dotfiles/config.yaml'
 alias guitar-pro 'wine ~/.wine/drive_c/Program\ Files/Arobas\ Music/Guitar\ Pro\ 8/GuitarPro.exe'
 alias k kubectl
 alias nv nvim

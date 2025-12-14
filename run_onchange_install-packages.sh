@@ -7,6 +7,7 @@ yay -Sy --noconfirm --needed \
     emacs-wayland \
     ffmpeg \
     git \
+    hypridle \
     neovim \
     ripgrep \
     socat

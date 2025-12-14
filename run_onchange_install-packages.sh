@@ -6,6 +6,7 @@ yay -Sy --noconfirm --needed \
     elephant \
     emacs-wayland \
     ffmpeg \
+    gimp \
     git \
     hypridle \
     neovim \

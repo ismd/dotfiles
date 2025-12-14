@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+INTERNAL_MONITOR="eDP-1"
+
+check_external_monitors() {
+  local MONITOR_LIST=$(hyprctl monitors -j)
+  local EXTERNAL_MONITORS=$(echo "$MONITOR_LIST" | jq -r '.[] | .name' | grep -v "$INTERNAL_MONITOR")
+
+  if [ -n "$EXTERNAL_MONITORS" ]; then
+    # External monitor(s) connected - disable internal and ensure external monitors have correct scale
+    hyprctl keyword monitor $INTERNAL_MONITOR,disable
+
+    # Apply scale to each external monitor
+    echo "$EXTERNAL_MONITORS" | while read -r monitor; do
+      hyprctl keyword monitor $monitor,preferred,auto,1.6
+    done
+  else
+    # No external monitors - enable internal with correct scale
+    hyprctl keyword monitor $INTERNAL_MONITOR,1920x1200@60.03,auto,1.2
+  fi
+}
+
+check_external_monitors
+
+handle() {
+  case $1 in
+    monitoradded*) check_external_monitors ;;
+    monitorremoved*) check_external_monitors ;;
+  esac
+}
+
+socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do handle "$line"; done

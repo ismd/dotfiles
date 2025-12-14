@@ -1,0 +1,42 @@
+# Take a look at the mako manpage with the command:
+#   man 5 mako
+# To view all configuration options.
+
+font=Ubuntu Nerd Font 12
+background-color=#2d2d3a
+text-color=#b8bcc8
+width=300
+height=110
+margin=15
+padding=5,10,15
+border-size=2
+border-color=#6c7086
+border-radius=5
+icons=1
+format=<b>%a ⏵</b> %s\n%b
+sort=-time
+# output=DP-2
+layer=overlay
+anchor=top-right
+max-icon-size=64
+default-timeout=5000
+ignore-timeout=1
+
+[urgency=normal]
+border-color=#6c7086
+
+[urgency=high]
+border-color=#c79399
+default-timeout=0
+
+[app-name=lightcord]
+border-color=#7c8fa3
+
+[summary~="log-.*"]
+border-color=#8fa89f
+
+[app-name=lightcord summary~="(.*(^| )orz|ORZ|sto|STO|otl|OTL( |$).*)"]
+invisible=1
+
+[mode=do-not-disturb]
+invisible=1

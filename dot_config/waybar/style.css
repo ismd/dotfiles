@@ -1,0 +1,64 @@
+* {
+  /* border-radius: 20px; */
+}
+
+window#waybar,
+#workspaces button {
+  font-size: 20px;
+  font-family: "RobotoMono Nerd Font";
+  color: #ffffff;
+}
+
+window#waybar {
+  background-color: rgba(0, 43, 51, .7);
+}
+
+.modules-left {
+  /* padding: 3px; */
+}
+
+.modules-center {
+  padding: 0 12px;
+}
+
+.modules-right {
+  padding: 3px 0 5px;
+}
+
+#workspaces button {
+  padding: 2px 8px 3px;
+  background-color: transparent;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  background-color: rgba(0, 153, 153, 1);
+}
+
+#workspaces button.focused {
+  background-color: rgba(0, 43, 51, .85);
+}
+
+#workspaces button.active {
+  background: rgba(192, 192, 192, .5);
+}
+
+#workspaces button.urgent {
+  background: rgba(255, 0, 0, .2);
+}
+
+#battery,
+#bluetooth,
+#clock,
+#language,
+#tray,
+#wireplumber {
+  padding: 1px 13px 0;
+}
+
+#battery,
+#bluetooth,
+#tray,
+#wireplumber {
+  padding-top: 2px;
+}

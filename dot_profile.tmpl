@@ -23,6 +23,12 @@ export QT_QPA_PLATFORM=wayland;xcb
 export QT_STYLE_OVERRIDE=kvantum
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
+{{- if eq .chezmoi.hostname "ismd-work" }}
+export CUPS_USER="ld\ismd"
+export YA_USER=ismd
+
+~/.bin/skotty.sh
+{{- end }}
 
 # Added by Toolbox App
 export PATH="$PATH:/home/ismd/.local/share/JetBrains/Toolbox/scripts"

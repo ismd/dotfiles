@@ -1,0 +1,28 @@
+export ALTERNATE_EDITOR=""
+export BROWSER=brave
+export CHROME_EXECUTABLE=google-chrome-stable
+export DOTDROP_VIRTUALENV="$HOME/.dotfiles/.venv"
+export EDITOR=ec-editor
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
+export GTK_THEME=Nordic
+export GTK_USE_PORTAL=1
+export HISTCONTROL=ignoredups:erasedups
+export KUBE_EDITOR=nvim
+export MANPAGER="nvim +Man!"
+export PAGER=less
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+export TERM="xterm-256color"
+export TERMINAL=kitty
+export VISUAL=ec-visual
+
+# Qt
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_ENABLE_HIGHDPI_SCALING=1
+export QT_QPA_PLATFORM=wayland;xcb
+# env = QT_QPA_PLATFORMTHEME,gtk3 # Currently using kvantum instead of gtk3
+export QT_STYLE_OVERRIDE=kvantum
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+
+# Added by Toolbox App
+export PATH="$PATH:/home/ismd/.local/share/JetBrains/Toolbox/scripts"

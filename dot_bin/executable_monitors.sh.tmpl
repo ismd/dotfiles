@@ -8,15 +8,19 @@ check_external_monitors() {
 
   if [ -n "$EXTERNAL_MONITORS" ]; then
     # External monitor(s) connected - disable internal and ensure external monitors have correct scale
-    hyprctl keyword monitor $INTERNAL_MONITOR,disable
+    hyprctl keyword monitor $INTERNAL_MONITOR, disable
 
     # Apply scale to each external monitor
     echo "$EXTERNAL_MONITORS" | while read -r monitor; do
-      hyprctl keyword monitor $monitor,preferred,auto,1.6
+      hyprctl keyword monitor $monitor, preferred, auto, 1.6
     done
   else
     # No external monitors - enable internal with correct scale
-    hyprctl keyword monitor $INTERNAL_MONITOR,1920x1200@60.03,auto,1.2
+    {{- if eq .chezmoi.hostname "mighty" }}
+    hyprctl keyword monitor $INTERNAL_MONITOR, preferred, auto, 1.6
+    {{- else }}
+    hyprctl keyword monitor $INTERNAL_MONITOR, preferred, auto, 1.2
+    {{- end }}
   fi
 }
 

@@ -44,8 +44,10 @@ exec-once = blueman-applet
 # exec-once = dconf load /org/gnome/desktop/interface/ < ~/.config/dconf/gnome-interface.conf
 # exec-once = flameshot
 
+{{- if eq .chezmoi.hostname "mighty" "ismd-work" "ismd-black" }}
+exec-once = ~/.bin/monitors.sh
 exec = ~/.bin/thinkpad-leds.sh
-
+{{- end }}
 
 
 #############################

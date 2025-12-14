@@ -9,5 +9,7 @@ yay -Sy --noconfirm --needed \
     git \
     hypridle \
     neovim \
+    plymouth \
+    plymouth-theme-arch-logo \
     ripgrep \
     socat

@@ -10,6 +10,5 @@ yay -Sy --noconfirm --needed \
     hypridle \
     neovim \
     plymouth \
-    plymouth-theme-arch-logo \
     ripgrep \
     socat

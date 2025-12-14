@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 yay -Sy --noconfirm --needed \
-    arc \
+    ark \
     dolphin \
     elephant \
     emacs-wayland \

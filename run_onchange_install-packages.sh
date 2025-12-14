@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
 yay -Sy --noconfirm --needed \
-  git \
-  ripgrep
+    arc \
+    dolphin \
+    elephant \
+    emacs-wayland \
+    ffmpeg \
+    git \
+    neovim \
+    ripgrep

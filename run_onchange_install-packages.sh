@@ -8,4 +8,5 @@ yay -Sy --noconfirm --needed \
     ffmpeg \
     git \
     neovim \
-    ripgrep
+    ripgrep \
+    socat

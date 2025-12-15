@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 gotroot = sh -c sudo -vn 2>&1 || true | regexMatch "password"
 
 if [ -n "$gotroot" ]; then

@@ -336,8 +336,8 @@ bindel = $mainMod, F12, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
 bindel = $mainMod, F11, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 bindl = $mainMod, F10, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
-bindel = ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+
-bindel = ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-
+bindel = ,XF86MonBrightnessUp, exec, ~/.bin/brightness.sh up
+bindel = ,XF86MonBrightnessDown, exec, ~/.bin/brightness.sh down
 
 # Requires playerctl
 bindl = , XF86AudioNext, exec, playerctl next

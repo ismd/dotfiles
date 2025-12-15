@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# hash: {{ include "etc/plymouth/plymouthd.conf" | sha256sum }}
+
+set -euo pipefail
+
+CHEZMOI_SOURCE="${HOME}/.local/share/chezmoi"
+PLYMOUTH_CONF="${CHEZMOI_SOURCE}/etc/plymouth/plymouthd.conf"
+
+if [[ -f "$PLYMOUTH_CONF" ]]; then
+    echo "Installing plymouthd.conf to /etc/plymouth/..."
+    sudo cp "$PLYMOUTH_CONF" /etc/plymouth/plymouthd.conf
+fi

@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
 # dconf.ini hash: {{ include "dconf.ini" | sha256sum }}
+
+set -euo pipefail
+
 dconf load / < {{ joinPath .chezmoi.sourceDir "dconf.ini" | quote }}

@@ -721,8 +721,13 @@ Defining the various fonts that Emacs will use.
 
 ** Setting the Font Face
 #+begin_src emacs-lisp
+{{- if eq .chezmoi.hostname "mighty" }}
 (setq ismd/font-family "CodeNewRoman Nerd Font Mono-15"
       ismd/font-size 150)
+{{- else }}
+(setq ismd/font-family "CodeNewRoman Nerd Font Mono-14"
+      ismd/font-size 140)
+{{- end }}
 
 (defun ismd/set-fonts ()
   "Set the fonts for Emacs."
@@ -1985,7 +1990,11 @@ The following settings are simple modes that are enabled (or disabled) so that E
 
 ** SSH Agent
 #+begin_src emacs-lisp
+{{- if eq .chezmoi.hostname "ismd-work" }}
+(setenv "SSH_AUTH_SOCK" "/home/ismd/.skotty/sock/default.sock")
+{{- else }}
 (setenv "SSH_AUTH_SOCK" "/run/user/1000/ssh-agent.socket")
+{{- end }}
 #+end_src
 
 ** Tab Bar

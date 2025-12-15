@@ -19,5 +19,5 @@ indent_style = tab
 [*.go]
 indent_style = tab
 
-[*.org]
+[*.{org,org.tmpl}]
 indent_size = 8

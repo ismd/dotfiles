@@ -211,18 +211,18 @@ These packages override built-in Emacs packages and must be loaded early to ensu
                    (window-width . ,width)
                    (window-parameters . ((no-delete-other-windows . t)))))))
 
-(defun ismd/yadm-strip-template-suffix (name)
-  "Strip yadm template suffix (##...) from NAME."
-  (if (and name (string-match "\\(.+\\)##[^/]*$" name))
+(defun ismd/chezmoi-strip-template-suffix (name)
+  "Strip chezmoi template suffix (.tmpl) from NAME."
+  (if (and name (string-match "\\(.+\\)\\.tmpl$" name))
       (match-string 1 name)
     name))
 
-(defun ismd/yadm-set-auto-mode-advice (orig-fun &rest args)
-  "Advice for `set-auto-mode' to handle yadm template files."
-  (let ((buffer-file-name (ismd/yadm-strip-template-suffix buffer-file-name)))
+(defun ismd/chezmoi-set-auto-mode-advice (orig-fun &rest args)
+  "Advice for `set-auto-mode' to handle chezmoi template files."
+  (let ((buffer-file-name (ismd/chezmoi-strip-template-suffix buffer-file-name)))
     (apply orig-fun args)))
 
-(advice-add 'set-auto-mode :around #'ismd/yadm-set-auto-mode-advice)
+(advice-add 'set-auto-mode :around #'ismd/chezmoi-set-auto-mode-advice)
 #+end_src
 
 * AI
@@ -1719,8 +1719,7 @@ https://github.com/oantolin/orderless
   :config
   (setq org-directory (expand-file-name "~/Notes/"))
   (setq org-agenda-files (list (expand-file-name "~/Notes/")))
-  (setq org-complete-tags-always-offer-all-agenda-tags t)
-  (add-hook 'org-mode-hook (lambda () (setq tab-width 8))))
+  (setq org-complete-tags-always-offer-all-agenda-tags t))
 #+end_src
 
 ** Enabling Table of Contents

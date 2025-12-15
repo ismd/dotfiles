@@ -366,6 +366,9 @@ bind = $mainMod, L, exec, hyprlock
 # Lid toggle
 # bindl = , switch:on:Lid Switch, exec, hyprlock
 
+{{- if eq .chezmoi.hostname "mighty" "ismd-work" "ismd-black" }}
+bindl = , switch:off:Lid Switch, exec, ~/.bin/thinkpad-leds.sh
+{{- end }}
 
 # Notifications
 bind = $mainMod, comma, exec, makoctl mode -t do-not-disturb

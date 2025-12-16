@@ -21,6 +21,7 @@ yay -Sy --noconfirm --needed \
     github-cli \
     hypridle \
     hyprpolkitagent \
+    imagemagick \
     neovim \
     noto-fonts-emoji \
     plymouth \

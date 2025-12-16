@@ -753,7 +753,12 @@ Defining the various fonts that Emacs will use.
 
   ;; tab-bar
   (set-face-attribute 'tab-bar-tab nil
-                      :inherit 'unspecified))
+                      :inherit 'unspecified)
+
+  (setq use-default-font-for-symbols nil)
+  (set-fontset-font t 'emoji
+                    (font-spec :family "Noto Color Emoji")
+                    nil 'prepend))
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions

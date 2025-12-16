@@ -22,6 +22,7 @@ yay -Sy --noconfirm --needed \
     hypridle \
     hyprpolkitagent \
     neovim \
+    noto-fonts-emoji \
     plymouth \
     ripgrep \
     socat

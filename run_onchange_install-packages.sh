@@ -19,6 +19,7 @@ yay -Sy --noconfirm --needed \
     git \
     github-cli \
     hypridle \
+    hyprpolkitagent \
     neovim \
     plymouth \
     ripgrep \

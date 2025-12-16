@@ -15,6 +15,7 @@ yay -Sy --noconfirm --needed \
     elephant \
     emacs-wayland \
     ffmpeg \
+    fwupd \
     gimp \
     git \
     github-cli \

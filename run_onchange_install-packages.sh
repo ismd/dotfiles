@@ -11,6 +11,7 @@ fi
 
 yay -Sy --noconfirm --needed \
     ark \
+    dms-shell-bin \
     dolphin \
     elephant \
     emacs-wayland \

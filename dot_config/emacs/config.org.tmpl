@@ -1606,15 +1606,18 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
   :ensure t
   :init (doom-modeline-mode 1)
   :config
-  (line-number-mode -1)
   (setq doom-modeline-buffer-encoding nil
-        doom-modeline-buffer-file-name-style 'relative-to-project
+        doom-modeline-buffer-file-name-style 'relative-from-project
+        doom-modeline-buffer-modification-icon t
+        doom-modeline-enable-buffer-position nil
         doom-modeline-height 35
         doom-modeline-icon t
         doom-modeline-major-mode-color-icon t
         doom-modeline-major-mode-icon t
-        doom-modeline-persp-name nil
-        doom-modeline-persp-icon nil))
+        doom-modeline-persp-name t
+        doom-modeline-persp-icon t
+        doom-modeline-project-name t
+        doom-modeline-workspace-name t))
 #+end_src
 
 * MOVE WHERE I MEAN

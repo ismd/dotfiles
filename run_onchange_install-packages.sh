@@ -11,6 +11,7 @@ fi
 
 yay -Sy --noconfirm --needed \
     ark \
+    bitwarden-desktop \
     dms-shell-bin \
     dolphin \
     elephant \

@@ -12,7 +12,7 @@ check_external_monitors() {
 
     # Apply scale to each external monitor
     echo "$EXTERNAL_MONITORS" | while read -r monitor; do
-      hyprctl keyword monitor $monitor, preferred, auto, 1.6
+      hyprctl keyword monitor $monitor, preferred, auto, 1.5
     done
   else
     # No external monitors - enable internal with correct scale

@@ -722,34 +722,32 @@ Defining the various fonts that Emacs will use.
 ** Setting the Font Face
 #+begin_src emacs-lisp
 {{- if eq .chezmoi.hostname "mighty" }}
-(setq ismd/font-family "CodeNewRoman Nerd Font Mono-15"
-      ismd/font-size 150)
+(setq ismd/mono-font "FiraCode Nerd Font"
+      ismd/variable-font "Noto Sans"
+      ismd/font-size 140
+      ismd/variable-font-size 130)
 {{- else }}
-(setq ismd/font-family "CodeNewRoman Nerd Font Mono-14"
-      ismd/font-size 140)
+(setq ismd/mono-font "FiraCode Nerd Font"
+      ismd/variable-font "Noto Sans"
+      ismd/font-size 140
+      ismd/variable-font-size 130)
 {{- end }}
 
 (defun ismd/set-fonts ()
   "Set the fonts for Emacs."
   (set-face-attribute 'default nil
-                      :font "CodeNewRoman Nerd Font Mono"
-                      :height ismd/font-size
-                      :weight 'regular)
+                      :font ismd/mono-font
+                      :height ismd/font-size)
   (set-face-attribute 'variable-pitch nil
-                      :font "RobotoMono Nerd Font"
-                      :height ismd/font-size
-                      :weight 'regular)
+                      :font ismd/variable-font
+                      :height ismd/variable-font-size)
   (set-face-attribute 'fixed-pitch nil
-                      :font "CodeNewRoman Nerd Font Mono"
-                      :height ismd/font-size
-                      :weight 'regular)
+                      :inherit 'default)
 
   (set-face-attribute 'font-lock-comment-face nil
                       :slant 'italic)
   (set-face-attribute 'font-lock-keyword-face nil
                       :slant 'italic)
-
-  (set-frame-font ismd/font-family nil t)
 
   ;; tab-bar
   (set-face-attribute 'tab-bar-tab nil
@@ -767,7 +765,8 @@ Defining the various fonts that Emacs will use.
                   (ismd/set-fonts))))
   (ismd/set-fonts))
 
-(add-to-list 'default-frame-alist `(font . ,ismd/font-family))
+(add-to-list 'default-frame-alist
+             `(font . ,(format "%s-%d" ismd/mono-font (/ ismd/font-size 10))))
 #+end_src
 
 ** Zooming In/Out

@@ -30,16 +30,16 @@ $menu = walker -t hypr
 
 exec-once = elephant
 exec-once = walker --gapplication-service
-exec-once = hyprpaper
-exec-once = waybar
-exec-once = mako
+# exec-once = hyprpaper
+# exec-once = waybar
+# exec-once = mako
 exec-once = nm-applet
 exec-once = com.github.wwmm.easyeffects -w
 exec-once = nextcloud
-exec-once = hypridle
+# exec-once = hypridle
 exec-once = polychromatic-tray-applet
 exec-once = kdeconnect-indicator
-exec-once = blueman-applet
+# exec-once = blueman-applet
 # exec-once = dconf load /org/gnome/desktop/interface/ < ~/.config/dconf/gnome-interface.conf
 # exec-once = flameshot
 
@@ -72,6 +72,10 @@ env = XCURSOR_THEME,BreezeX-Dark
 env = GDK_BACKEND,wayland,x11,*
 env = SDL_VIDEODRIVER,wayland
 env = CLUTTER_BACKEND,wayland
+
+# Required for DankMaterialShell. See more here https://danklinux.com/docs/dankmaterialshell/installation#hyprland
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user start hyprland-session.target
 
 
 ###################
@@ -119,7 +123,7 @@ general {
 
 # https://wiki.hypr.land/Configuring/Variables/#decoration
 decoration {
-    rounding = 10
+    rounding = 12
     rounding_power = 2.0
 
     # Change transparency of focused and unfocused windows

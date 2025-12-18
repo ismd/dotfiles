@@ -1487,9 +1487,7 @@ https://github.com/amake/flutter.el
   :ensure t
   :after dart-mode
   :bind (:map dart-mode-map
-              ("C-M-x" . #'flutter-run-or-hot-reload))
-  :custom
-  (flutter-sdk-path "~/src/flutter"))
+              ("C-M-x" . #'flutter-run-or-hot-reload)))
 #+end_src
 
 ** Fish
@@ -1936,11 +1934,14 @@ https://github.com/emacsorphanage/popwin
 (use-package popwin
   :ensure t
   :config
-  (dolist (buffer '("*Flycheck errors*"
+  (dolist (buffer '(
+                    "*Flutter*"
+                    "*Flycheck errors*"
                     "*Org Links*"
                     "*Warnings*"
                     "*lsp-help*"
-                    "*xref*"))
+                    "*xref*"
+                    ))
     (push buffer popwin:special-display-config))
   (popwin-mode 1))
 #+end_src

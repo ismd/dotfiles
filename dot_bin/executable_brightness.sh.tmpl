@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 if ! command -v brightnessctl &> /dev/null; then
   echo "Error: brightnessctl not found"

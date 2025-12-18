@@ -334,14 +334,14 @@ bind = $mainMod SHIFT, bracketleft, movecurrentworkspacetomonitor, l
 bind = $mainMod SHIFT, bracketright, movecurrentworkspacetomonitor, r
 
 # Laptop multimedia keys for volume and LCD brightness
-bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
-bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindel = ,XF86AudioRaiseVolume, exec, ~/.bin/volume.sh up
+bindel = ,XF86AudioLowerVolume, exec, ~/.bin/volume.sh down
+bindel = ,XF86AudioMute, exec, ~/.bin/volume.sh toggle
+bindel = ,XF86AudioMicMute, exec, ~/.bin/mic-mute.sh toggle-mic
 
-bindel = $mainMod, F12, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
-bindel = $mainMod, F11, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-bindl = $mainMod, F10, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindl = $mainMod, F10, exec, ~/.bin/volume.sh toggle
+bindel = $mainMod, F11, exec, ~/.bin/volume.sh down
+bindel = $mainMod, F12, exec, ~/.bin/volume.sh up
 
 bindel = ,XF86MonBrightnessUp, exec, ~/.bin/brightness.sh up
 bindel = ,XF86MonBrightnessDown, exec, ~/.bin/brightness.sh down

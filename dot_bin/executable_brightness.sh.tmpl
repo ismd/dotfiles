@@ -9,10 +9,18 @@ fi
 
 case $1 in
   "up")
+    {{- if eq .chezmoi.hostname "mighty" }}
+    dms ipc call brightness increment 5 "intel_backlight"
+    {{- else }}
     brightnessctl -e4 set 5%+ > /dev/null 2>&1
+    {{- end }}
     ;;
   "down")
+    {{- if eq .chezmoi.hostname "mighty" }}
+    dms ipc call brightness decrement 5 "intel_backlight"
+    {{- else }}
     brightnessctl -e4 set 5%- > /dev/null 2>&1
+    {{- end }}
     ;;
   *)
     echo "Usage: $0 {up|down}"
@@ -20,8 +28,10 @@ case $1 in
     ;;
 esac
 
+{{- if ne .chezmoi.hostname "mighty" }}
 percentage=$(brightnessctl -m | cut -d, -f4 | tr -d %)
 
 notify-send -t 1000 -h string:x-canonical-private-synchronous:brightness \
   -i display-brightness-symbolic \
   "Brightness" "${percentage}%"
+{{- end }}

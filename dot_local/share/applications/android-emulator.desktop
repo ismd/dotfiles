@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Android Emulator
+GenericName=Android Emulator
+Comment=Run Android Emulator
+Exec=emulator -avd pixel_emulator -no-metrics
+Icon=android-studio
+Type=Application
+Terminal=false
+Categories=Development;Emulator;
+StartupNotify=true
+StartupWMClass=Emulator

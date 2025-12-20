@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-gotroot=$(sh -c "sudo -vn" 2>&1 || true | regexMatch "password")
+gotroot=$(sh -c "sudo -vn" 2>&1 || true)
 
-if [ -n "$gotroot" ]; then
+if [[ "$gotroot" =~ "password" ]]; then
     echo "Sudo access is required to run this script. Authorize sudo and try again."
     exit 1
 fi

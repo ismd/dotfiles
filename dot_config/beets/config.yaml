@@ -1,0 +1,11 @@
+library: /mnt/qnap/Music/beets.db
+directory: /mnt/qnap/Music/Music
+
+plugins: fetchart embedart
+
+fetchart:
+  auto: yes
+  sources: coverart itunes amazon albumart filesystem
+
+embedart:
+  auto: yes

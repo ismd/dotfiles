@@ -1,7 +1,7 @@
 library: /mnt/qnap/Music/beets.db
 directory: /mnt/qnap/Music/Music
 
-plugins: fetchart embedart
+plugins: embedart fetchart musicbrainz
 
 fetchart:
   auto: yes

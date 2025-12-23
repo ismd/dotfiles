@@ -423,6 +423,9 @@ https://github.com/minad/consult
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
 
+  :custom
+  (consult-line-start-from-top t)
+
   :init
 
   ;; Tweak the register preview for `consult-register-load',

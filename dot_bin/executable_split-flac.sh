@@ -75,20 +75,20 @@ fd . -e cue "$DIR" --print0 | while IFS= read -r -d '' FILE; do
     exit 1
   fi
 
-  for f in "$CUE_DIR/.split"/*.flac; do
-    FILENAME=$(basename "$f")
-    DIRNAME=$(dirname "$f")
-    NEW_FILENAME=$(echo "$FILENAME" | tr -d '?' | tr -d ':')
+  # for f in "$CUE_DIR/.split"/*.flac; do
+  #   FILENAME=$(basename "$f")
+  #   DIRNAME=$(dirname "$f")
+  #   NEW_FILENAME=$(echo "$FILENAME" | tr -d '?' | tr -d ':')
 
-    if [ "$FILENAME" != "$NEW_FILENAME" ]; then
-      mv "$f" "$DIRNAME/$NEW_FILENAME"
-    fi
-  done
+  #   if [ "$FILENAME" != "$NEW_FILENAME" ]; then
+  #     mv "$f" "$DIRNAME/$NEW_FILENAME"
+  #   fi
+  # done
 
-  # Clean
-  rm "$FILE"
-  rm "$CUE_DIR"/*.flac
-  mv "$CUE_DIR/.split"/* "$CUE_DIR"
-  rm -r "$CUE_DIR/.split"
+  # # Clean
+  # rm "$FILE"
+  # rm "$CUE_DIR"/*.flac
+  # mv "$CUE_DIR/.split"/* "$CUE_DIR"
+  # rm -r "$CUE_DIR/.split"
   printf "\n"
 done

@@ -25,6 +25,7 @@ yay -Sy --noconfirm --needed \
     hypridle \
     hyprpolkitagent \
     imagemagick \
+    inetutils \
     neovim \
     noto-fonts-emoji \
     plymouth \

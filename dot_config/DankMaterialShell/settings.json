@@ -229,7 +229,9 @@
   "updaterCustomCommand": "yay -Syu --noconfirm",
   "updaterTerminalAdditionalParams": "",
   "displayNameMode": "system",
-  "screenPreferences": {},
+  "screenPreferences": {
+    "wallpaper": []
+  },
   "showOnLastDisplay": {},
   "barConfigs": [
     {

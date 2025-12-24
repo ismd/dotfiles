@@ -29,5 +29,7 @@ yay -Sy --noconfirm --needed \
     neovim \
     noto-fonts-emoji \
     plymouth \
+    python-pywal \
     ripgrep \
-    socat
+    socat \
+    swww

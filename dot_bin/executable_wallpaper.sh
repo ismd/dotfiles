@@ -9,6 +9,6 @@ wal -n -i "$WALLPAPER"
 kitty @ set-colors --all ~/.cache/wal/colors-kitty.conf
 
 swww img "$WALLPAPER" \
-  --transition-type grow \
+  --transition-type fade \
   --transition-fps 60 \
   --transition-duration 1

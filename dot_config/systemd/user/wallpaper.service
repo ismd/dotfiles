@@ -1,0 +1,6 @@
+[Unit]
+Description=Change wallpaper and theme
+
+[Service]
+Type=oneshot
+ExecStart=%h/.bin/wallpaper.sh

@@ -170,11 +170,11 @@
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
   "terminalsAlwaysDark": false,
-  "showDock": true,
+  "showDock": false,
   "dockAutoHide": true,
   "dockGroupByApp": false,
   "dockOpenOnOverview": false,
-  "dockPosition": 3,
+  "dockPosition": 0,
   "dockSpacing": 15,
   "dockBottomGap": 0,
   "dockMargin": 5,
@@ -247,18 +247,45 @@
         "focusedWindow"
       ],
       "centerWidgets": [
-        "music",
-        "clock",
-        "weather"
+        "music"
       ],
       "rightWidgets": [
-        "systemTray",
-        "clipboard",
-        "cpuUsage",
-        "memUsage",
-        "notificationButton",
-        "battery",
-        "controlCenterButton"
+        {
+          "id": "weather",
+          "enabled": true
+        },
+        {
+          "id": "systemTray",
+          "enabled": true
+        },
+        {
+          "id": "clipboard",
+          "enabled": true
+        },
+        {
+          "id": "cpuUsage",
+          "enabled": true
+        },
+        {
+          "id": "memUsage",
+          "enabled": true
+        },
+        {
+          "id": "notificationButton",
+          "enabled": true
+        },
+        {
+          "id": "battery",
+          "enabled": true
+        },
+        {
+          "id": "controlCenterButton",
+          "enabled": true
+        },
+        {
+          "id": "clock",
+          "enabled": true
+        }
       ],
       "spacing": 4,
       "innerPadding": 4,

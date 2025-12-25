@@ -32,4 +32,5 @@ yay -Sy --noconfirm --needed \
     python-pywal \
     ripgrep \
     socat \
-    swww
+    swww \
+    viewnior

@@ -23,6 +23,7 @@
 - [[#atomic-chrome][ATOMIC CHROME]]
 - [[#backup][BACKUP]]
 - [[#buffer-management][BUFFER MANAGEMENT]]
+- [[#chezmoi][CHEZMOI]]
 - [[#consult][CONSULT]]
   - [[#embark][Embark]]
   - [[#embark-consult][Embark Consult]]
@@ -211,29 +212,6 @@ These packages override built-in Emacs packages and must be loaded early to ensu
                    (side . right)
                    (window-width . ,width)
                    (window-parameters . ((no-delete-other-windows . t)))))))
-
-(defun ismd/chezmoi-normalize-filename (name)
-  "Normalize chezmoi filename for mode detection.
-Strip .tmpl suffix and replace dot_ prefix with . in filename."
-  (when name
-    (let* ((dir (file-name-directory name))
-           (file (file-name-nondirectory name))
-           ;; Strip .tmpl suffix
-           (file (if (string-match "\\(.+\\)\\.tmpl$" file)
-                     (match-string 1 file)
-                   file))
-           ;; Replace dot_ prefix with .
-           (file (if (string-match "^dot_\\(.+\\)$" file)
-                     (concat "." (match-string 1 file))
-                   file)))
-      (concat dir file))))
-
-(defun ismd/chezmoi-set-auto-mode-advice (orig-fun &rest args)
-  "Advice for `set-auto-mode' to handle chezmoi template files."
-  (let ((buffer-file-name (ismd/chezmoi-normalize-filename buffer-file-name)))
-    (apply orig-fun args)))
-
-(advice-add 'set-auto-mode :around #'ismd/chezmoi-set-auto-mode-advice)
 #+end_src
 
 * AI
@@ -409,6 +387,18 @@ By default, Emacs creates automatic backups of files in their original directori
         (kill-buffer prev-buffer)))))
 
 (add-hook 'buffer-list-update-hook #'temporary-buffer-cleanup)
+#+end_src
+
+* CHEZMOI
+https://github.com/tuh8888/chezmoi.el
+
+#+begin_src emacs-lisp
+(use-package chezmoi
+  :ensure t
+  :config
+  ;; Turn off ligatures because they show up poorly.
+  (add-hook 'chezmoi-mode-hook #'(lambda () (when (require 'ligature)
+                                              (ligature-mode (if chezmoi-mode 0 1))))))
 #+end_src
 
 * CONSULT
@@ -913,6 +903,11 @@ You can use CTRL plus the mouse wheel for zooming in/out.
     "b p" '(previous-buffer :wk "Previous buffer")
     "b r" '((lambda () (interactive) (revert-buffer nil t)) :wk "Reload buffer")
     "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file"))
+
+  (ismd/leader-keys
+    "C" '(:ignore t :wk "Chezmoi")
+    "C f" '(chezmoi-find :wk "Find chezmoi managed file")
+    "C s" '(chezmoi-write :wk "Write changes to chezmoi managed file"))
 
   (ismd/leader-keys
     "d" '(:ignore t :wk "Dired")

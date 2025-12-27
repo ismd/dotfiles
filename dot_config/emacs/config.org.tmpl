@@ -1806,10 +1806,11 @@ https://github.com/oantolin/orderless
 (use-package org
   :ensure nil
   :hook (org-mode . org-indent-mode)
-  :config
-  (setq org-directory (expand-file-name "~/Notes/"))
+  :config  
   (setq org-agenda-files (list (expand-file-name "~/Notes/")))
-  (setq org-complete-tags-always-offer-all-agenda-tags t))
+  (setq org-complete-tags-always-offer-all-agenda-tags t)
+    (setq org-directory (expand-file-name "~/Notes/"))
+    (setq org-use-sub-superscripts '{}))
 #+end_src
 
 ** Enabling Table of Contents

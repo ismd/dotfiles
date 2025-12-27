@@ -7,6 +7,9 @@
       "WebSearch"
     ]
   },
+  "model": "opus",
   "alwaysThinkingEnabled": true,
-  "model": "opus"
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
+  }
 }

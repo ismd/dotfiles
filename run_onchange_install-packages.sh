@@ -34,4 +34,5 @@ yay -Sy --noconfirm --needed \
     ripgrep \
     socat \
     swww \
-    viewnior
+    viewnior \
+    quickshell-git

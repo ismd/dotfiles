@@ -29,6 +29,7 @@ yay -Sy --noconfirm --needed \
     libreoffice-still \
     neovim \
     noto-fonts-emoji \
+    pavucontrol \
     plymouth \
     python-pywal \
     ripgrep \

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# hash: {{ include "etc/systemd/sleep.conf" | sha256sum }}
+
+set -euo pipefail
+
+CHEZMOI_SOURCE="${HOME}/.local/share/chezmoi"
+SLEEP_CONF="${CHEZMOI_SOURCE}/etc/systemd/sleep.conf"
+
+if [[ -f "$SLEEP_CONF" ]]; then
+    echo "Installing sleep.conf to /etc/systemd/..."
+    sudo cp "$SLEEP_CONF" /etc/systemd/sleep.conf
+fi

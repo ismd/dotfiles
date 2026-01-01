@@ -400,30 +400,28 @@ bind = $mainMod SHIFT, V, pin
 # windowrule = float,class:^(kitty)$,title:^(kitty)$
 
 # Ignore maximize requests from apps. You'll probably like this.
-windowrule = suppressevent maximize, class:.*
+windowrule = suppress_event maximize, match:class .*
 
 # Fix some dragging issues with XWayland
-windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
+windowrule = no_focus on, match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0
 
 # Bitwarden
-windowrulev2 = float, class:^(brave-[a-z]+-Default)$
+windowrule = float on, match:class ^(brave-[a-z]+-Default)$
 
 # Engrampa
-windowrulev2 = float, class:^(engrampa)$
+windowrule = float on, match:class ^(engrampa)$
 
 # Magic
-windowrulev2 = float, workspace:special:magic
+windowrule = float on, match:workspace special:magic
 
 # Plexamp
-windowrulev2 = float, class:^(Plexamp)$
-windowrulev2 = move 100%-w-40 40, class:^(Plexamp)$
-windowrulev2 = size 500 91%, class:^(Plexamp)$
+windowrule = float on, move ((monitor_w*1)-window_w-40) (40), size 500 (monitor_h*0.91), match:class ^(Plexamp)$
 
 # Thunar
-windowrulev2 = float, initialTitle: File Operation Progress
+windowrule = float on, match:initial_title File Operation Progress
 
 # Zoom
-windowrulev2 = float, class:^(Zoom Workplace)$
+windowrule = float on, match:class ^(Zoom Workplace)$
 
 # Unscale XWayland
 xwayland {

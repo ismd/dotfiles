@@ -76,8 +76,9 @@ env = SDL_VIDEODRIVER,wayland
 env = CLUTTER_BACKEND,wayland
 
 # Required for DankMaterialShell. See more here https://danklinux.com/docs/dankmaterialshell/installation#hyprland
-exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec-once = systemctl --user start hyprland-session.target
+# exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+# exec-once = systemctl --user start hyprland-session.target
+exec-once = dms run
 
 
 ###################

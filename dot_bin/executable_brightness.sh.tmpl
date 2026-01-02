@@ -10,14 +10,14 @@ fi
 case $1 in
   "up")
     {{- if eq .chezmoi.hostname "mighty" }}
-    dms ipc call brightness increment 5 "intel_backlight"
+    dms ipc call brightness increment 5 "backlight:intel_backlight"
     {{- else }}
     brightnessctl -e4 set 5%+ > /dev/null 2>&1
     {{- end }}
     ;;
   "down")
     {{- if eq .chezmoi.hostname "mighty" }}
-    dms ipc call brightness decrement 5 "intel_backlight"
+    dms ipc call brightness decrement 5 "backlight:intel_backlight"
     {{- else }}
     brightnessctl -e4 set 5%- > /dev/null 2>&1
     {{- end }}

@@ -132,7 +132,7 @@
   "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "wifi",
-  "vpnLastConnected": "",
+  "vpnLastConnected": "08afe785-f4e6-455c-ad5a-3b875f470f8d",
   "iconTheme": "System Default",
   "launcherLogoMode": "os",
   "launcherLogoCustomPath": "",

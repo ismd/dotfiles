@@ -158,12 +158,12 @@
   "soundPluggedIn": true,
   "acMonitorTimeout": 1200,
   "acLockTimeout": 600,
-  "acSuspendTimeout": 3600,
+  "acSuspendTimeout": 0,
   "acSuspendBehavior": 2,
   "acProfileName": "2",
-  "batteryMonitorTimeout": 0,
-  "batteryLockTimeout": 0,
-  "batterySuspendTimeout": 0,
+  "batteryMonitorTimeout": 1200,
+  "batteryLockTimeout": 600,
+  "batterySuspendTimeout": 1800,
   "batterySuspendBehavior": 2,
   "batteryProfileName": "1",
   "batteryChargeLimit": 100,
@@ -294,13 +294,13 @@
         "focusedWindow"
       ],
       "centerWidgets": [
-        "music"
-      ],
-      "rightWidgets": [
+        "music",
         {
           "id": "weather",
           "enabled": true
-        },
+        }
+      ],
+      "rightWidgets": [
         {
           "id": "systemTray",
           "enabled": true

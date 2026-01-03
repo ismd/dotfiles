@@ -31,7 +31,7 @@ $menu = walker -t hypr
 # Export XDG_SESSION_ID to systemd for DMS loginctl integration
 exec-once = systemctl --user import-environment XDG_SESSION_ID
 
-exec-once = swww-daemon
+# exec-once = swww-daemon
 exec-once = walker --gapplication-service
 # exec-once = hyprpaper
 # exec-once = waybar

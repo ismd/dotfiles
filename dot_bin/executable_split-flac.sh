@@ -55,7 +55,7 @@ fd . -e cue "$DIR" --print0 | while IFS= read -r -d '' FILE; do
 
   # Convert CUE file encoding if enabled
   if [ "$USE_ENCA" = true ]; then
-    if ! enca -L ru -x UTF-8 "$FILE"; then
+    if ! enca -L russian -x UTF-8 "$FILE"; then
       echo "Error: Failed to convert encoding for $FILE" >&2
       exit 1
     fi

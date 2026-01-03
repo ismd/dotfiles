@@ -28,6 +28,9 @@ $menu = walker -t hypr
 # Autostart necessary processes (like notifications daemons, status bars, etc.)
 # Or execute your favorite apps at launch like this:
 
+# Export XDG_SESSION_ID to systemd for DMS loginctl integration
+exec-once = systemctl --user import-environment XDG_SESSION_ID
+
 exec-once = swww-daemon
 exec-once = elephant
 exec-once = walker --gapplication-service

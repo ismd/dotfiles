@@ -57,28 +57,24 @@ exec = ~/.bin/thinkpad-leds.sh
 # See https://wiki.hypr.land/Configuring/Environment-variables/
 
 # XDG Specifications
-env = XDG_CURRENT_DESKTOP,Hyprland
-env = XDG_MENU_PREFIX,arch-
-env = XDG_SESSION_DESKTOP,Hyprland
-env = XDG_SESSION_TYPE,wayland
+# env = XDG_CURRENT_DESKTOP,Hyprland
+# env = XDG_MENU_PREFIX,arch-
+# env = XDG_SESSION_DESKTOP,Hyprland
+# env = XDG_SESSION_TYPE,wayland
 
-env = SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/ssh-agent.socket
+# env = SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/ssh-agent.socket
 
-# Theme
-env = HYPRCURSOR_SIZE,32
-env = HYPRCURSOR_THEME,BreezeX-Dark-hyprcursor
-env = XCURSOR_SIZE,32
-env = XCURSOR_THEME,BreezeX-Dark
+# # Theme
+# env = HYPRCURSOR_SIZE,32
+# env = HYPRCURSOR_THEME,BreezeX-Dark-hyprcursor
+# env = XCURSOR_SIZE,32
+# env = XCURSOR_THEME,BreezeX-Dark
 
-# https://wiki.hypr.land/Configuring/Environment-variables/
-env = GDK_BACKEND,wayland,x11,*
-env = SDL_VIDEODRIVER,wayland
-env = CLUTTER_BACKEND,wayland
+# # https://wiki.hypr.land/Configuring/Environment-variables/
+# env = GDK_BACKEND,wayland,x11,*
+# env = SDL_VIDEODRIVER,wayland
+# env = CLUTTER_BACKEND,wayland
 
-# Required for DankMaterialShell. See more here https://danklinux.com/docs/dankmaterialshell/installation#hyprland
-# exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-# exec-once = systemctl --user start hyprland-session.target
-exec-once = dms run
 
 
 ###################
@@ -407,22 +403,22 @@ windowrule = suppress_event maximize, match:class .*
 windowrule = no_focus on, match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0
 
 # Bitwarden
-windowrule = float on, match:class ^(brave-[a-z]+-Default)$
+# windowrule = float on, match:class ^(brave-[a-z]+-Default)$
 
 # Engrampa
-windowrule = float on, match:class ^(engrampa)$
+# windowrule = float on, match:class ^(engrampa)$
 
 # Magic
-windowrule = float on, match:workspace special:magic
+# windowrule = float on, match:workspace special:magic
 
 # Plexamp
-windowrule = float on, move ((monitor_w*1)-window_w-40) (40), size 500 (monitor_h*0.91), match:class ^(Plexamp)$
+# windowrule = float on, move ((monitor_w*1)-window_w-40) (40), size 500 (monitor_h*0.91), match:class ^(Plexamp)$
 
 # Thunar
-windowrule = float on, match:initial_title File Operation Progress
+# windowrule = float on, match:initial_title File Operation Progress
 
 # Zoom
-windowrule = float on, match:class ^(Zoom Workplace)$
+# windowrule = float on, match:class ^(Zoom Workplace)$
 
 # Unscale XWayland
 xwayland {

@@ -20,6 +20,8 @@
   - [[#github-copilot][GitHub Copilot]]
   - [[#github-copilot-chat][GitHub Copilot Chat]]
   - [[#gptel][Gptel]]
+  - [[#magit-gptcommit][magit-gptcommit]]
+  - [[#minuet][Minuet]]
 - [[#atomic-chrome][ATOMIC CHROME]]
 - [[#backup][BACKUP]]
 - [[#buffer-management][BUFFER MANAGEMENT]]
@@ -178,8 +180,9 @@ These packages override built-in Emacs packages and must be loaded early to ensu
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 
+;; Load custom.el early (before packages) for environment variables like API keys
 (setq ismd/custom-file (expand-file-name "custom.el" user-emacs-directory))
-(add-hook 'elpaca-after-init-hook (lambda () (load ismd/custom-file 'noerror)))
+(load ismd/custom-file 'noerror)
 #+end_src
 
 ** Themes
@@ -227,6 +230,7 @@ https://github.com/xenodium/chatgpt-shell
 #+end_src
 
 ** Claude Code
+*** claude-code.el
 https://github.com/stevemolitor/claude-code.el
 
 #+begin_src emacs-lisp
@@ -261,6 +265,9 @@ https://github.com/stevemolitor/claude-code.el
 
   (claude-code-mode))
 #+end_src
+
+*** claude-code-ide
+https://github.com/manzaltu/claude-code-ide.el
 
 #+begin_src emacs-lisp
 (use-package claude-code-ide
@@ -304,9 +311,9 @@ https://github.com/copilot-emacs/copilot.el
   :after (editorconfig)
   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
   :hook
-  (conf-mode . copilot-mode)
-  (prog-mode . copilot-mode)
-  (text-mode . copilot-mode)
+  ;; (conf-mode . copilot-mode)
+  ;; (prog-mode . copilot-mode)
+  ;; (text-mode . copilot-mode)
   (copilot-mode . (lambda ()
                     (setq-local copilot--indent-warning-printed-p t)))
   :custom
@@ -319,7 +326,7 @@ https://github.com/chep/copilot-chat.el
 #+begin_src emacs-lisp
 (use-package copilot-chat
   :ensure t
-  :hook (git-commit-setup . copilot-chat-insert-commit-message)
+  ;; :hook (git-commit-setup . copilot-chat-insert-commit-message)
   :custom
   ;; (copilot-chat-backend 'request)
   (copilot-chat-commit-model "claude-sonnet-4.5")
@@ -341,6 +348,42 @@ https://github.com/karthink/gptel
                 gptel-backend (gptel-make-anthropic "Claude"
                                 :stream t
                                 :key #'anthropic-api-key)))
+#+end_src
+
+** magit-gptcommit
+https://github.com/douo/magit-gptcommit
+
+Generate commit messages using Claude.
+
+#+begin_src emacs-lisp
+(use-package llm
+  :ensure t
+  :init
+  (require 'llm-claude))
+
+(use-package magit-gptcommit
+  :ensure t
+  :after (llm magit)
+  :init
+  (setq magit-gptcommit-llm-provider
+        (make-llm-claude
+         :key (anthropic-api-key)
+         :chat-model "claude-haiku-4-5-20251001"))
+  :config
+  (magit-gptcommit-mode 1)
+      (magit-gptcommit-status-buffer-setup))
+#+end_src
+
+** Minuet
+https://github.com/milanglacier/minuet-ai.el?tab=readme-ov-file
+
+#+begin_src emacs-lisp
+(use-package minuet
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
+  :config
+  (setq minuet-provider 'claude))
 #+end_src
 
 * ATOMIC CHROME
@@ -1169,6 +1212,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   ;;
   (general-define-key
    :keymaps 'git-commit-mode-map
+   "C-c C-g" '(magit-gptcommit-generate :wk "Generate commit message")
    "C-c v c" '(magit-generate-changelog :wk "Generate changelog"))
 
   ;;
@@ -1249,6 +1293,17 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    :keymaps 'minibuffer-local-map
    "C-v" 'scroll-up-command
    "M-v" 'scroll-down-command)
+
+  ;;
+  ;; Minuet
+  ;;
+  (general-define-key
+   :keymaps 'minuet-active-mode-map
+   "TAB" '(minuet-accept-suggestion :wk "Accept suggestion")
+   "M-n" '(minuet-next-suggestion :wk "Next suggestion")
+   "M-p" '(minuet-previous-suggestion :wk"Previous suggestion")
+   "C-e" '(minuet-accept-suggestion-line :wk "Accept suggestion line")
+   "C-g" '(minuet-dismiss-suggestion :wk "Dismiss suggestion"))
 
   ;;
   ;; Org

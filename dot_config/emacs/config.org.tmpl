@@ -1268,6 +1268,10 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-n" nil
    "M-p" nil)
 
+  (general-define-key
+     :keymaps 'magit-status-mode-map
+     "C" '(magit-gptcommit-commit-quick :wk "Quick GPTel commit"))
+
   ;;
   ;; Makefile
   ;;

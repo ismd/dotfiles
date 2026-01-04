@@ -39,4 +39,5 @@ yay -Sy --noconfirm --needed \
     socat \
     swww \
     viewnior \
-    quickshell-git
+    quickshell-git \
+    zoom

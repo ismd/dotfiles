@@ -423,9 +423,9 @@ https://github.com/copilot-emacs/copilot.el
   :after (editorconfig track-changes)
   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
   :hook
-  ;; (conf-mode . copilot-mode)
-  ;; (prog-mode . copilot-mode)
-  ;; (text-mode . copilot-mode)
+  (conf-mode . copilot-mode)
+  (prog-mode . copilot-mode)
+  (text-mode . copilot-mode)
   (copilot-mode . (lambda ()
                     (setq-local copilot--indent-warning-printed-p t)))
   :custom
@@ -438,10 +438,10 @@ https://github.com/chep/copilot-chat.el
 #+begin_src emacs-lisp
 (use-package copilot-chat
   :ensure t
-  ;; :hook (git-commit-setup . copilot-chat-insert-commit-message)
+  :hook (git-commit-setup . copilot-chat-insert-commit-message)
   :custom
   ;; (copilot-chat-backend 'request)
-  (copilot-chat-commit-model "claude-sonnet-4.5")
+  (copilot-chat-commit-model "claude-haiku-4.5")
   ;; (copilot-chat-follow nil)
   (copilot-chat-frontend 'shell-maker)
   :config
@@ -481,9 +481,10 @@ Generate commit messages using Claude.
         (make-llm-claude
          :key (anthropic-api-key)
          :chat-model "claude-haiku-4-5-20251001"))
-  :config
-  (magit-gptcommit-mode 1)
-      (magit-gptcommit-status-buffer-setup))
+  ;; :config
+  ;; (magit-gptcommit-mode 1)
+  ;; (magit-gptcommit-status-buffer-setup)
+  )
 #+end_src
 
 ** Minuet

@@ -688,9 +688,10 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
   :custom
   (dashboard-modify-heading-icons '((recents . "file-text")
                                     (bookmarks . "book")))
+  :hook
+  (elpaca-after-init . dashboard-insert-startupify-lists)
+  (elpaca-after-init . dashboard-initialize)
   :config
-  (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
-  (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
   (dashboard-setup-startup-hook))
 #+end_src
 

@@ -43,6 +43,9 @@ alias nv nvim
 alias pk 'set pid (ps -aux | fzf | awk "{print \$2}"); and kill -9 $pid'
 alias s 'yay -Ss'
 
+# eza
+set EZA_STANDARD_OPTIONS --group --header --group-directories-first --icons
+
 # fzf
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --margin 1,2'
 fzf --fish | source

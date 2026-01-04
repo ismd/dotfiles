@@ -19,6 +19,7 @@ yay -Sy --noconfirm --needed \
     easyeffects \
     elephant \
     emacs-wayland \
+    eza \
     ffmpeg \
     fwupd \
     gimp \

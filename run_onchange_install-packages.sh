@@ -13,8 +13,10 @@ yay -Sy --noconfirm --needed \
     ark \
     bind \
     bitwarden-desktop \
-    dms-shell-bin \
+    calf \
+    dms-shell-git \
     dolphin \
+    easyeffects \
     elephant \
     emacs-wayland \
     ffmpeg \
@@ -27,6 +29,7 @@ yay -Sy --noconfirm --needed \
     imagemagick \
     inetutils \
     libreoffice-still \
+    lsp-plugins-lv2 \
     neovim \
     noto-fonts-emoji \
     pavucontrol \

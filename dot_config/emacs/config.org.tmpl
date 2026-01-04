@@ -8,9 +8,11 @@
 - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#adding-the-scripts-directory-to-path][Adding the Scripts Directory to Path]]
   - [[#sourcing-the-scripts][Sourcing the Scripts]]
+  - [[#sane-defaults][Sane Defaults]]
   - [[#transient][Transient]]
   - [[#built-in-package-overrides][Built-in Package Overrides]]
   - [[#custom-file][Custom File]]
+  - [[#direnv][Direnv]]
   - [[#themes][Themes]]
   - [[#utilities][Utilities]]
 - [[#ai][AI]]
@@ -38,7 +40,6 @@
 - [[#ediff][EDIFF]]
 - [[#editorconfig][EDITORCONFIG]]
 - [[#eglot][EGLOT]]
-- [[#direnv][DIRENV]]
 - [[#expand-region][EXPAND REGION]]
 - [[#flycheck][FLYCHECK]]
 - [[#fonts][FONTS]]
@@ -50,6 +51,7 @@
   - [[#git-gutter][Git Gutter]]
   - [[#git-time-machine][Git Time Machine]]
   - [[#magit][Magit]]
+  - [[#smerge-mode][Smerge Mode]]
 - [[#highlight-todo][HIGHLIGHT TODO]]
 - [[#hippie-expand][HIPPIE EXPAND]]
 - [[#ibuffer][IBUFFER]]
@@ -96,12 +98,6 @@
 - [[#rainbow-delimiters][RAINBOW DELIMITERS]]
 - [[#rainbow-mode][RAINBOW MODE]]
 - [[#ripgrep][RIPGREP]]
-- [[#sane-defaults][SANE DEFAULTS]]
-  - [[#line-numbers][Line Numbers]]
-  - [[#scroll][Scroll]]
-  - [[#ssh-agent][SSH Agent]]
-  - [[#tab-bar][Tab Bar]]
-  - [[#tab-line][Tab Line]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
@@ -152,6 +148,91 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 (require 'buffer-move)  ;; Buffer-move for better window management
 #+end_src
 
+** Sane Defaults
+The following settings are simple modes that are enabled (or disabled) so that Emacs functions more like you would expect a proper editor/IDE to function.
+
+#+begin_src emacs-lisp
+(delete-selection-mode 1)    ;; You can select text and delete it by typing.
+;; (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
+(electric-pair-mode 1)       ;; Turns on automatic parens pairing
+;; The following prevents <> from auto-pairing when electric-pair-mode is on.
+;; Otherwise, org-tempo is broken when you try to <s TAB...
+(add-hook 'org-mode-hook (lambda ()
+                           (setq-local electric-pair-inhibit-predicate
+                                       `(lambda (c)
+                                          (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+(global-auto-revert-mode t)           ;; Automatically show changes if the file has changed
+(global-visual-line-mode 1)           ;; Enable truncated lines
+(global-visual-wrap-prefix-mode 1)    ;; Enable visual line wrapping
+(menu-bar-mode -1)                    ;; Disable the menu bar
+(save-place-mode 1)                   ;; Save the cursor position when a file is closed
+(scroll-bar-mode -1)                  ;; Disable the scroll bar
+;; (tab-bar-mode t)                      ;; Enable tab bar mode
+(tool-bar-mode -1)                    ;; Disable the tool bar
+
+(setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
+
+(setq-default cursor-type '(bar . 2)) ;; Set the cursor to a bar
+(setq-default indent-tabs-mode nil)
+(setq-default line-spacing 0.12)
+
+(setq calendar-week-start-day 1) ;; Set the calendar to start on Monday
+(setq completion-cycle-threshold nil)
+(setq dired-kill-when-opening-new-dired-buffer t)
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024))
+(setq initial-major-mode 'text-mode)
+(setq initial-scratch-message nil)
+(setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
+(setq save-place-file (concat user-emacs-directory ".emacs-places"))
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+(setq warning-minimum-level :error)
+
+(setq tab-always-indent t)
+(setq text-mode-ispell-word-completion nil)
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+#+end_src
+
+*** Line Numbers
+#+begin_src emacs-lisp
+(use-package display-line-numbers
+  :ensure nil
+  :hook (prog-mode . display-line-numbers-mode))
+#+end_src
+
+*** Scroll
+#+begin_src emacs-lisp
+(pixel-scroll-precision-mode 1)
+
+(setq auto-window-vscroll nil
+      pixel-scroll-precision-interpolate-page t
+      pixel-scroll-precision-large-scroll-height 40.0
+      scroll-conservatively 0
+      scroll-margin 0
+      scroll-preserve-screen-position t
+      scroll-step 0)
+#+end_src
+
+*** SSH Agent
+#+begin_src emacs-lisp
+{{- if eq .chezmoi.hostname "ismd-work" }}
+(setenv "SSH_AUTH_SOCK" "/home/ismd/.skotty/sock/default.sock")
+{{- else }}
+(setenv "SSH_AUTH_SOCK" "/run/user/1000/ssh-agent.socket")
+{{- end }}
+#+end_src
+
+*** Tab Bar
+#+begin_src emacs-lisp
+(setq tab-bar-auto-width nil
+      tab-bar-close-button-show nil
+      tab-bar-format '(tab-bar-format-history tab-bar-format-tabs-groups tab-bar-separator tab-bar-format-add-tab)
+      tab-bar-new-button-show nil
+      tab-bar-new-tab-choice "*scratch*"
+      tab-bar-new-tab-to 'rightmost
+      tab-bar-tab-hints t)
+#+end_src
+
 ** Transient
 #+begin_src emacs-lisp
 (use-package transient
@@ -183,6 +264,16 @@ These packages override built-in Emacs packages and must be loaded early to ensu
 ;; Load custom.el early (before packages) for environment variables like API keys
 (setq ismd/custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load ismd/custom-file 'noerror)
+#+end_src
+
+** Direnv
+https://github.com/purcell/envrc
+
+#+begin_src emacs-lisp
+(use-package envrc
+  :ensure t
+  :init
+  (envrc-global-mode))
 #+end_src
 
 ** Themes
@@ -312,13 +403,6 @@ This package integrates with gptel and provides capability to insert AI results 
   :ensure t)
 #+end_src
 
-#+begin_src emacs-lisp
-(use-package smerge-mode
-  :ensure nil
-  :hook
-  (prog-mode . smerge-mode))
-#+end_src
-
 ** GitHub Copilot
 https://github.com/copilot-emacs/copilot.el
 
@@ -331,7 +415,7 @@ https://github.com/copilot-emacs/copilot.el
 
 #+begin_src emacs-lisp
 (use-package copilot
-  :after (editorconfig)
+  :after (editorconfig track-changes)
   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
   :hook
   ;; (conf-mode . copilot-mode)
@@ -744,16 +828,6 @@ https://github.com/joaotavora/eglot
   :ensure (:wait t)
   :after (flymake jsonrpc)
   :hook ((prog-mode . eglot-ensure)))
-#+end_src
-
-* DIRENV
-https://github.com/purcell/envrc
-
-#+begin_src emacs-lisp
-(use-package envrc
-  :ensure t
-  :init
-  (envrc-global-mode))
 #+end_src
 
 * EXPAND REGION
@@ -1427,7 +1501,7 @@ I use =git-gutter-fringe= because it works better with Doom Themes.
 #+begin_src emacs-lisp
 (use-package git-timemachine
   :ensure t
-  :after git-timemachine
+  :after magit
   :hook (evil-normalize-keymaps . git-timemachine-hook))
 #+end_src
 
@@ -1443,6 +1517,14 @@ I use =git-gutter-fringe= because it works better with Doom Themes.
   (magit-ediff-dwim-show-on-hunks t)
   ;; (transient-display-buffer-action '(display-buffer-below-selected))
   )
+#+end_src
+
+** Smerge Mode
+#+begin_src emacs-lisp
+(use-package smerge-mode
+  :ensure nil
+  :hook
+  (prog-mode . smerge-mode))
 #+end_src
 
 * HIGHLIGHT TODO
@@ -2080,199 +2162,6 @@ https://github.com/dajva/rg.el
   :ensure t
   :config
   (setq rg-ignore-case 'smart))
-#+end_src
-
-* SANE DEFAULTS
-The following settings are simple modes that are enabled (or disabled) so that Emacs functions more like you would expect a proper editor/IDE to function.
-
-#+begin_src emacs-lisp
-(delete-selection-mode 1)    ;; You can select text and delete it by typing.
-;; (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
-(electric-pair-mode 1)       ;; Turns on automatic parens pairing
-;; The following prevents <> from auto-pairing when electric-pair-mode is on.
-;; Otherwise, org-tempo is broken when you try to <s TAB...
-(add-hook 'org-mode-hook (lambda ()
-                           (setq-local electric-pair-inhibit-predicate
-                                       `(lambda (c)
-                                          (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
-(global-auto-revert-mode t)           ;; Automatically show changes if the file has changed
-(global-visual-line-mode 1)           ;; Enable truncated lines
-(global-visual-wrap-prefix-mode 1)    ;; Enable visual line wrapping
-(menu-bar-mode -1)                    ;; Disable the menu bar
-(save-place-mode 1)                   ;; Save the cursor position when a file is closed
-(scroll-bar-mode -1)                  ;; Disable the scroll bar
-;; (tab-bar-mode t)                      ;; Enable tab bar mode
-(tool-bar-mode -1)                    ;; Disable the tool bar
-
-(setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
-
-(setq-default cursor-type '(bar . 2)) ;; Set the cursor to a bar
-(setq-default indent-tabs-mode nil)
-(setq-default line-spacing 0.12)
-
-(setq calendar-week-start-day 1) ;; Set the calendar to start on Monday
-(setq completion-cycle-threshold nil)
-(setq dired-kill-when-opening-new-dired-buffer t)
-(setq gc-cons-threshold (* 100 1024 1024)
-      read-process-output-max (* 1024 1024))
-(setq initial-major-mode 'text-mode)
-(setq initial-scratch-message nil)
-(setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
-(setq save-place-file (concat user-emacs-directory ".emacs-places"))
-(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
-(setq warning-minimum-level :error)
-
-(setq tab-always-indent t)
-(setq text-mode-ispell-word-completion nil)
-(setq read-extended-command-predicate #'command-completion-default-include-p)
-#+end_src
-
-** Line Numbers
-#+begin_src emacs-lisp
-(use-package display-line-numbers
-  :ensure nil
-  :hook (prog-mode . display-line-numbers-mode))
-#+end_src
-
-** Scroll
-#+begin_src emacs-lisp
-(pixel-scroll-precision-mode 1)
-
-(setq auto-window-vscroll nil
-      pixel-scroll-precision-interpolate-page t
-      pixel-scroll-precision-large-scroll-height 40.0
-      scroll-conservatively 0
-      scroll-margin 0
-      scroll-preserve-screen-position t
-      scroll-step 0)
-#+end_src
-
-** SSH Agent
-#+begin_src emacs-lisp
-{{- if eq .chezmoi.hostname "ismd-work" }}
-(setenv "SSH_AUTH_SOCK" "/home/ismd/.skotty/sock/default.sock")
-{{- else }}
-(setenv "SSH_AUTH_SOCK" "/run/user/1000/ssh-agent.socket")
-{{- end }}
-#+end_src
-
-** Tab Bar
-#+begin_src emacs-lisp
-(setq tab-bar-auto-width nil
-      tab-bar-close-button-show nil
-      tab-bar-format '(tab-bar-format-history tab-bar-format-tabs-groups tab-bar-separator tab-bar-format-add-tab)
-      tab-bar-new-button-show nil
-      tab-bar-new-tab-choice "*scratch*"
-      tab-bar-new-tab-to 'rightmost
-      tab-bar-tab-hints t)
-#+end_src
-
-** Tab Line
-#+begin_src emacs-lisp
-(defun ismd/get-project-file-buffers ()
-  (project-buffers (project-current)))
-
-;; (use-package tab-line
-;;   :ensure nil
-;;   :hook (elpaca-after-init-hook . global-tab-line-mode)
-;;   :custom-face
-;;   (tab-line-tab ((t (:inherit tab-line :box nil))))
-;;   (tab-line-tab-current ((t (:inherit doom-modeline-highlight))))
-;;   (tab-line-tab-group ((t (:inherit doom-modeline-info))))
-;;   (tab-line-tab-inactive ((t (:inherit doom-modeline-buffer-minor-mode :foreground "gray50"))))
-;;   :config
-;;   (setq tab-line-close-button-show nil
-;;         tab-line-new-button-show nil
-;;         ;; tab-line-separator ""
-;;         tab-line-switch-cycling t
-;;         ;; tab-line-tab-name-function #'ismd/tab-line-name-buffer
-;;         tab-line-tabs-buffer-group-function #'ismd/tab-line-tabs-buffer-group-by-project
-;;         tab-line-tabs-buffer-group-sort-function #'ismd/tab-line-tabs-buffer-group-sort-by-creation-time
-;;         tab-line-tabs-buffer-list-function #'ismd/tab-line-tabs-buffer-list
-;;         tab-line-tabs-function #'tab-line-tabs-buffer-groups)
-
-;;   (add-to-list 'tab-line-tab-face-functions #'tab-line-tab-face-group))
-
-(defun ismd/tab-line-tabs-buffer-group-by-project (buffer)
-  "Group buffers by project, excluding non-file buffers."
-  (when (buffer-file-name buffer)
-    (let ((group-name (tab-line-tabs-buffer-group-by-project buffer)))
-      (when group-name
-        (concat " " group-name " ")))))
-
-(defun ismd/tab-line-tabs-buffer-list ()
-  "Return buffer list without putting current buffer first."
-  (seq-filter (lambda (b) (and (buffer-live-p b)
-                               (/= (aref (buffer-name b) 0) ?\s)))
-              (seq-uniq (append (mapcar #'car (window-prev-buffers))
-                                (buffer-list)))))
-
-(defvar buffer-creation-times (make-hash-table :test 'equal)
-  "Hash table storing buffer creation times by buffer name.")
-
-(defvar-local buffer-creation-time nil
-  "Time when buffer was created.")
-
-(defun track-buffer-creation ()
-  "Set creation time for new buffers."
-  (let ((buffer-key (buffer-file-name)))
-    (when buffer-key
-      (unless (gethash buffer-key buffer-creation-times)
-        (puthash buffer-key (current-time) buffer-creation-times))
-      (setq buffer-creation-time (gethash buffer-key buffer-creation-times)))))
-
-(defun cleanup-buffer-creation-time ()
-  "Remove creation time when buffer is killed."
-  (let ((buffer-key (buffer-file-name)))
-    (when buffer-key
-      (remhash buffer-key buffer-creation-times))))
-
-(add-hook 'find-file-hook #'track-buffer-creation)
-(add-hook 'buffer-list-update-hook #'track-buffer-creation)
-(add-hook 'kill-buffer-hook #'cleanup-buffer-creation-time)
-
-(defun ismd/tab-line-tabs-buffer-group-sort-by-creation-time (a b)
-  "Sort buffers by creation time (oldest first)."
-  (let ((time-a (buffer-local-value 'buffer-creation-time a))
-        (time-b (buffer-local-value 'buffer-creation-time b)))
-    (and time-a time-b (time-less-p time-a time-b))))
-
-(defcustom tab-line-tab-min-width 10
-  "Minimum width of a tab in characters."
-  :type 'integer
-  :group 'tab-line)
-
-(defcustom tab-line-tab-max-width 30
-  "Maximum width of a tab in characters."
-  :type 'integer
-  :group 'tab-line)
-
-(defun ismd/tab-line-name-buffer (buffer &rest _buffers)
-  "Create name for tab with padding and truncation.
-If buffer name is shorter than `tab-line-tab-max-width' it gets
-centered with spaces, otherwise it is truncated, to preserve
-equal width for all tabs.  This function also tries to fit as
-many tabs in window as possible, so if there are no room for tabs
-with maximum width, it calculates new width for each tab and
-truncates text if needed.  Minimal width can be set with
-`tab-line-tab-min-width' variable."
-  (with-current-buffer buffer
-    (let* ((window-width (window-width (get-buffer-window)))
-           (tab-amount (length (tab-line-tabs-window-buffers)))
-           (window-max-tab-width (if (>= (* (+ tab-line-tab-max-width 3) tab-amount) window-width)
-                                     (/ window-width tab-amount)
-                                   tab-line-tab-max-width))
-           (tab-width (- (cond ((> window-max-tab-width tab-line-tab-max-width)
-                                tab-line-tab-max-width)
-                               ((< window-max-tab-width tab-line-tab-min-width)
-                                tab-line-tab-min-width)
-                               (t window-max-tab-width))
-                         3)) ;; compensation for ' x ' button
-           (buffer-name (string-trim (buffer-name)))
-           (name-width (length buffer-name)))
-      (if (>= name-width tab-width)
-          (concat  " " (truncate-string-to-width buffer-name (- tab-width 2)) "…")
-        (concat " " buffer-name " ")))))
 #+end_src
 
 * SHELLS AND TERMINALS
@@ -3054,8 +2943,93 @@ Complex tab-line configuration, not currently used. Using tab-bar or perspective
 
 ;;   (add-to-list 'tab-line-tab-face-functions #'tab-line-tab-face-group))
 
-;; Supporting functions for tab-line (preserved for reference)
-;; See original configuration for full implementation
+*** Tab Line Functions
+These functions were used to support custom tab-line behavior.
+
+#+begin_src emacs-lisp
+;; (defun ismd/get-project-file-buffers ()
+;;   (project-buffers (project-current)))
+
+;; (defun ismd/tab-line-tabs-buffer-group-by-project (buffer)
+;;   "Group buffers by project, excluding non-file buffers."
+;;   (when (buffer-file-name buffer)
+;;     (let ((group-name (tab-line-tabs-buffer-group-by-project buffer)))
+;;       (when group-name
+;;         (concat " " group-name " ")))))
+
+;; (defun ismd/tab-line-tabs-buffer-list ()
+;;   "Return buffer list without putting current buffer first."
+;;   (seq-filter (lambda (b) (and (buffer-live-p b)
+;;                                (/= (aref (buffer-name b) 0) ?\s)))
+;;               (seq-uniq (append (mapcar #'car (window-prev-buffers))
+;;                                 (buffer-list)))))
+
+;; (defvar buffer-creation-times (make-hash-table :test 'equal)
+;;   "Hash table storing buffer creation times by buffer name.")
+
+;; (defvar-local buffer-creation-time nil
+;;   "Time when buffer was created.")
+
+;; (defun track-buffer-creation ()
+;;   "Set creation time for new buffers."
+;;   (let ((buffer-key (buffer-file-name)))
+;;     (when buffer-key
+;;       (unless (gethash buffer-key buffer-creation-times)
+;;         (puthash buffer-key (current-time) buffer-creation-times))
+;;       (setq buffer-creation-time (gethash buffer-key buffer-creation-times)))))
+
+;; (defun cleanup-buffer-creation-time ()
+;;   "Remove creation time when buffer is killed."
+;;   (let ((buffer-key (buffer-file-name)))
+;;     (when buffer-key
+;;       (remhash buffer-key buffer-creation-times))))
+
+;; (add-hook 'find-file-hook #'track-buffer-creation)
+;; (add-hook 'buffer-list-update-hook #'track-buffer-creation)
+;; (add-hook 'kill-buffer-hook #'cleanup-buffer-creation-time)
+
+;; (defun ismd/tab-line-tabs-buffer-group-sort-by-creation-time (a b)
+;;   "Sort buffers by creation time (oldest first)."
+;;   (let ((time-a (buffer-local-value 'buffer-creation-time a))
+;;         (time-b (buffer-local-value 'buffer-creation-time b)))
+;;     (and time-a time-b (time-less-p time-a time-b))))
+
+;; (defcustom tab-line-tab-min-width 10
+;;   "Minimum width of a tab in characters."
+;;   :type 'integer
+;;   :group 'tab-line)
+
+;; (defcustom tab-line-tab-max-width 30
+;;   "Maximum width of a tab in characters."
+;;   :type 'integer
+;;   :group 'tab-line)
+
+;; (defun ismd/tab-line-name-buffer (buffer &rest _buffers)
+;;   "Create name for tab with padding and truncation.
+;; If buffer name is shorter than `tab-line-tab-max-width' it gets
+;; centered with spaces, otherwise it is truncated, to preserve
+;; equal width for all tabs.  This function also tries to fit as
+;; many tabs in window as possible, so if there are no room for tabs
+;; with maximum width, it calculates new width for each tab and
+;; truncates text if needed.  Minimal width can be set with
+;; `tab-line-tab-min-width' variable."
+;;   (with-current-buffer buffer
+;;     (let* ((window-width (window-width (get-buffer-window)))
+;;            (tab-amount (length (tab-line-tabs-window-buffers)))
+;;            (window-max-tab-width (if (>= (* (+ tab-line-tab-max-width 3) tab-amount) window-width)
+;;                                      (/ window-width tab-amount)
+;;                                    tab-line-tab-max-width))
+;;            (tab-width (- (cond ((> window-max-tab-width tab-line-tab-max-width)
+;;                                 tab-line-tab-max-width)
+;;                                ((< window-max-tab-width tab-line-tab-min-width)
+;;                                 tab-line-tab-min-width)
+;;                                (t window-max-tab-width))
+;;                          3)) ;; compensation for ' x ' button
+;;            (buffer-name (string-trim (buffer-name)))
+;;            (name-width (length buffer-name)))
+;;       (if (>= name-width tab-width)
+;;           (concat  " " (truncate-string-to-width buffer-name (- tab-width 2)) "…")
+;;         (concat " " buffer-name " ")))))
 #+end_src
 
 ** Xref (Archived)

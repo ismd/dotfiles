@@ -31,6 +31,7 @@ yay -Sy --noconfirm --needed \
     inetutils \
     libreoffice-still \
     lsp-plugins-lv2 \
+    mc \
     neovim \
     noto-fonts-emoji \
     pavucontrol \

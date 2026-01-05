@@ -1486,13 +1486,15 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 * GIT
 ** Git Gutter
 https://github.com/emacsorphanage/git-gutter
-https://github.com/emacsorphanage/git-gutter-fringe
-
-I use =git-gutter-fringe= because it works better with Doom Themes.
 
 #+begin_src emacs-lisp
-(use-package git-gutter-fringe
+(use-package git-gutter
   :ensure t
+  :custom
+  (git-gutter:added-sign " ")
+  (git-gutter:deleted-sign " ")
+  (git-gutter:modified-sign " ")
+  (git-gutter:update-interval 2)
   :config
   (global-git-gutter-mode t))
 #+end_src

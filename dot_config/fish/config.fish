@@ -45,7 +45,7 @@ alias s 'yay -Ss'
 
 # eza
 set EZA_STANDARD_OPTIONS --group --header --group-directories-first --icons
-alias lt 'eza $EZA_STANDARD_OPTIONS --tree'
+alias llt 'eza $EZA_STANDARD_OPTIONS --tree'
 
 # fzf
 set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --margin 1,2'

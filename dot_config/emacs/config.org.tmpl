@@ -190,6 +190,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 (setq initial-scratch-message nil)
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
 (setq save-place-file (concat user-emacs-directory ".emacs-places"))
+(setq vc-display-status nil)
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 (setq warning-minimum-level :error)
 
@@ -1837,20 +1838,44 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
 #+begin_src emacs-lisp
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1)
+  :init
+  (doom-modeline-mode 1)
   :config
-  (setq doom-modeline-buffer-encoding nil
+  (setq doom-modeline-battery nil
+        doom-modeline-buffer-encoding nil
         doom-modeline-buffer-file-name-style 'relative-to-project
         doom-modeline-buffer-modification-icon t
-        doom-modeline-enable-buffer-position nil
-        doom-modeline-height 35
+        doom-modeline-buffer-name t
+        doom-modeline-buffer-state-icon t
+        doom-modeline-check 'simple
+        doom-modeline-check-icon t
+        doom-modeline-display-default-persp-name nil
+        doom-modeline-enable-buffer-position t
+        doom-modeline-env-version t
+        doom-modeline-github nil
+        ;; doom-modeline-height 35
+        doom-modeline-highlight-modified-buffer-name t
         doom-modeline-icon t
+        doom-modeline-indent-info nil
+        doom-modeline-lsp t
+        doom-modeline-lsp-icon t
         doom-modeline-major-mode-color-icon t
         doom-modeline-major-mode-icon t
-        doom-modeline-persp-name t
-        doom-modeline-persp-icon t
-        doom-modeline-project-name t
-        doom-modeline-workspace-name t))
+        doom-modeline-minor-modes nil
+        doom-modeline-percent-position nil
+        doom-modeline-persp-name nil
+        doom-modeline-persp-icon nil
+        doom-modeline-project-detection 'project
+        doom-modeline-project-name nil
+        doom-modeline-remote-host t
+        doom-modeline-selection-info t
+        doom-modeline-time nil
+        doom-modeline-time-analogue-clock nil
+        doom-modeline-time-icon nil
+        doom-modeline-time-live-icon nil
+        doom-modeline-total-line-number t
+        doom-modeline-vcs-icon t
+        doom-modeline-workspace-name nil))
 #+end_src
 
 * MOVE WHERE I MEAN

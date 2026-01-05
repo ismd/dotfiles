@@ -835,7 +835,12 @@ https://github.com/joaotavora/eglot
 (use-package eglot
   :ensure (:wait t)
   :after (flymake jsonrpc)
-  :hook ((prog-mode . eglot-ensure)))
+  :hook ((prog-mode . eglot-ensure))
+  :config
+  (advice-add 'eglot--message :around
+              (lambda (orig format &rest args)
+                (unless (string-prefix-p "Connected!" format)
+                  (apply orig format args)))))
 #+end_src
 
 * EXPAND REGION

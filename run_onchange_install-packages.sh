@@ -39,6 +39,7 @@ yay -S --noconfirm --needed \
     neovim \
     nftables \
     noto-fonts-emoji \
+    openbsd-netcat \
     pavucontrol \
     plymouth \
     python-pywal \

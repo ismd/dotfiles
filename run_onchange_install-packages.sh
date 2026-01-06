@@ -26,6 +26,7 @@ yay -S --noconfirm --needed \
     gimp \
     git \
     github-cli \
+    gobuster \
     hypridle \
     hyprpolkitagent \
     imagemagick \

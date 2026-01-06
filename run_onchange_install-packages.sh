@@ -33,6 +33,7 @@ yay -Sy --noconfirm --needed \
     lsp-plugins-lv2 \
     mc \
     neovim \
+    nftables \
     noto-fonts-emoji \
     pavucontrol \
     plymouth \

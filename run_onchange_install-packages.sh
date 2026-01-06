@@ -30,6 +30,7 @@ yay -S --noconfirm --needed \
     imagemagick \
     inetutils \
     libreoffice-still \
+    libvterm \
     lsp-plugins-lv2 \
     mc \
     neovim \

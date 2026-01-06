@@ -14,6 +14,7 @@ yay -S --noconfirm --needed \
     bind \
     bitwarden-desktop \
     calf \
+    cmake \
     dms-shell-git \
     dolphin \
     easyeffects \

@@ -9,7 +9,7 @@ if [[ "$gotroot" =~ "password" ]]; then
     exit 1
 fi
 
-yay -Sy --noconfirm --needed \
+yay -S --noconfirm --needed \
     ark \
     bind \
     bitwarden-desktop \

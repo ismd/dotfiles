@@ -306,10 +306,6 @@
           "enabled": true
         },
         {
-          "id": "clipboard",
-          "enabled": true
-        },
-        {
           "id": "cpuUsage",
           "enabled": true
         },

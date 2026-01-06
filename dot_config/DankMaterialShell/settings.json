@@ -132,7 +132,7 @@
   "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "wifi",
-  "vpnLastConnected": "08afe785-f4e6-455c-ad5a-3b875f470f8d",
+  "vpnLastConnected": "5392923d-4b25-4c2a-8c18-80286fe25186",
   "iconTheme": "System Default",
   "launcherLogoMode": "os",
   "launcherLogoCustomPath": "",
@@ -319,6 +319,10 @@
         },
         {
           "id": "battery",
+          "enabled": true
+        },
+        {
+          "id": "vpn",
           "enabled": true
         },
         {

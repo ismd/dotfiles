@@ -32,6 +32,7 @@ yay -S --noconfirm --needed \
     inetutils \
     libreoffice-still \
     libvterm \
+    libtool \
     lsp-plugins-lv2 \
     mc \
     neovim \

@@ -376,7 +376,7 @@ bindl = , switch:off:Lid Switch, exec, ~/.bin/thinkpad-leds.sh
 {{- end }}
 
 # Notifications
-bind = $mainMod, comma, exec, makoctl mode -t do-not-disturb
+bind = $mainMod SHIFT, N, exec, dms ipc call notifications open
 
 # Translate
 bind = $mainMod SHIFT, T, exec, dmenu-translate

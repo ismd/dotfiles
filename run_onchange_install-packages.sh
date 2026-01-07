@@ -16,6 +16,9 @@ yay -S --noconfirm --needed \
     calf \
     cmake \
     dms-shell-git \
+    docker \
+    docker-buildx \
+    docker-compose \
     dolphin \
     easyeffects \
     elephant \

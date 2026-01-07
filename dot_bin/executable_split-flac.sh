@@ -4,10 +4,14 @@ set -e  # Exit immediately if any command fails
 
 # Parse options
 USE_ENCA=false
-while getopts "e" opt; do
+OUTPUT_FORMAT=flac
+while getopts "ew" opt; do
   case $opt in
     e)
       USE_ENCA=true
+      ;;
+    w)
+      OUTPUT_FORMAT=wav
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -31,8 +35,9 @@ fi
 DIR=$1
 
 if [ -z "$DIR" ]; then
-    echo "Usage: $0 [-e] <directory>"
+    echo "Usage: $0 [-e] [-w] <directory>"
     echo "  -e  Enable encoding conversion with enca"
+    echo "  -w  Output to wav instead of flac"
     exit 1
 fi
 
@@ -62,15 +67,20 @@ fd . -e cue "$DIR" --print0 | while IFS= read -r -d '' FILE; do
   fi
 
   # Split the FLAC file with explicit error checking
-  if ! shnsplit -d "$CUE_DIR/.split" -f "$FILE" -t "%n. %t" -o "flac flac -V --best -o %f -" "$CUE_DIR"/*.flac; then
+  if [ "$OUTPUT_FORMAT" = "flac" ]; then
+    SHNSPLIT_OUTPUT="flac flac -V --best -o %f -"
+  else
+    SHNSPLIT_OUTPUT="$OUTPUT_FORMAT"
+  fi
+  if ! shnsplit -D -d "$CUE_DIR/.split" -f "$FILE" -t "%n. %t" -o "$SHNSPLIT_OUTPUT" "$CUE_DIR"/*.flac; then
     echo "Error: Failed to split $FILE" >&2
     exit 1
   fi
 
   rm -f "$CUE_DIR/.split"/00*pregap*
-  
+
   # Add tags to the split files
-  if ! cuetag.sh "$FILE" "$CUE_DIR/.split"/*.flac; then
+  if ! cuetag.sh "$FILE" "$CUE_DIR/.split"/*."$OUTPUT_FORMAT"; then
     echo "Error: Failed to add tags for $FILE" >&2
     exit 1
   fi

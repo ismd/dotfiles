@@ -332,6 +332,10 @@
         {
           "id": "clock",
           "enabled": true
+        },
+        {
+          "id": "powerMenuButton",
+          "enabled": true
         }
       ],
       "spacing": 4,

@@ -38,6 +38,7 @@ yay -S --noconfirm --needed \
     mc \
     neovim \
     nftables \
+    nmap \
     noto-fonts-emoji \
     openbsd-netcat \
     pavucontrol \

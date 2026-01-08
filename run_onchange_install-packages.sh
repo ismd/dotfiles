@@ -22,6 +22,7 @@ yay -S --noconfirm --needed \
     docker-compose \
     dolphin \
     easyeffects \
+    easytag \
     elephant \
     emacs-wayland \
     eza \

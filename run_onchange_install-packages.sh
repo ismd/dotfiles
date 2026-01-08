@@ -32,6 +32,7 @@ yay -S --noconfirm --needed \
     git \
     github-cli \
     gobuster \
+    hydra \
     hypridle \
     hyprpolkitagent \
     imagemagick \

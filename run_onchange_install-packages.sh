@@ -11,6 +11,7 @@ fi
 
 yay -S --noconfirm --needed \
     ark \
+    avahi \
     bind \
     bitwarden-desktop \
     calf \
@@ -43,6 +44,7 @@ yay -S --noconfirm --needed \
     nftables \
     nmap \
     noto-fonts-emoji \
+    nss-mdns \
     openbsd-netcat \
     pavucontrol \
     plymouth \

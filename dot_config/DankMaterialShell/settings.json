@@ -101,10 +101,10 @@
   "showWorkspaceName": false,
   "showWorkspacePadding": false,
   "workspaceScrolling": false,
-  "showWorkspaceApps": false,
+  "showWorkspaceApps": true,
   "maxWorkspaceIcons": 3,
   "groupWorkspaceApps": true,
-  "workspacesPerMonitor": true,
+  "workspacesPerMonitor": false,
   "showOccupiedWorkspacesOnly": false,
   "reverseScrolling": false,
   "dwlShowAllTags": false,
@@ -335,7 +335,7 @@
           "showBluetoothIcon": true,
           "showAudioIcon": true,
           "showAudioPercent": false,
-          "showVpnIcon": true,
+          "showVpnIcon": false,
           "showBrightnessIcon": false,
           "showBrightnessPercent": false,
           "showMicIcon": false,
@@ -378,7 +378,8 @@
       "visible": true,
       "popupGapsAuto": true,
       "popupGapsManual": 4,
-      "maximizeDetection": true
+      "maximizeDetection": true,
+      "scrollEnabled": false
     }
   ],
   "desktopClockEnabled": false,

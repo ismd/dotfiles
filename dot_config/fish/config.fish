@@ -44,7 +44,7 @@ alias pk 'set pid (ps -aux | fzf | awk "{print \$2}"); and kill -9 $pid'
 alias s 'yay -Ss'
 
 # eza
-set EZA_STANDARD_OPTIONS --group --header --group-directories-first --icons
+set EZA_STANDARD_OPTIONS --group --header --group-directories-first --icons --hyperlink
 alias llt 'eza $EZA_STANDARD_OPTIONS --tree'
 
 # fzf

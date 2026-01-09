@@ -2,7 +2,7 @@
 Name=TryHackMe Terminal
 GenericName=TryHackMe Terminal
 Comment=Run TryHackMe Terminal
-Exec=kitty --session ~/Nextcloud/Documents/IT/TryHackMe/thm.kitty-session
+Exec=kitty --session ~/Nextcloud/Documents/IT/TryHackMe/TryHackMe.kitty-session
 Icon=/home/ismd/.local/share/icons/tryhackme.svg
 Type=Application
 Terminal=false

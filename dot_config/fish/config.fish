@@ -66,3 +66,6 @@ direnv hook fish | source
 # Kill word
 bind alt-d 'commandline -f kill-word'
 bind alt-backspace 'commandline -f backward-kill-word'
+
+# Kitten aliases
+alias d="kitten diff"

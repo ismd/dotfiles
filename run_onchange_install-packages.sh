@@ -25,6 +25,7 @@ yay -S --noconfirm --needed \
     easytag \
     elephant \
     emacs-wayland \
+    evince \
     eza \
     ffmpeg \
     fwupd \

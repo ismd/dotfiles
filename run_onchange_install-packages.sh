@@ -14,6 +14,7 @@ yay -S --noconfirm --needed \
     avahi \
     bind \
     bitwarden-desktop \
+    caido-desktop \
     calf \
     cmake \
     dms-shell-git \

@@ -32,16 +32,17 @@ abbr -a gp git pull
 abbr -a gpush git push
 abbr -a gs git status
 
+abbr -a k kubectl
+abbr -a s yay -Ss
+
 # Aliases
 alias b bluetoothctl
 alias c 'set dir (command ls -lah | fzf | awk "{print \$9}"); and cd $dir'
 alias cat bat
 alias claude="~/.claude/local/claude"
 alias guitar-pro 'wine ~/.wine/drive_c/Program\ Files/Arobas\ Music/Guitar\ Pro\ 8/GuitarPro.exe'
-alias k kubectl
 alias nv nvim
 alias pk 'set pid (ps -aux | fzf | awk "{print \$2}"); and kill -9 $pid'
-alias s 'yay -Ss'
 
 # eza
 set EZA_STANDARD_OPTIONS --group --header --group-directories-first --icons --hyperlink

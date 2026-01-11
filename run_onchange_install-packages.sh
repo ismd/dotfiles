@@ -38,6 +38,7 @@ yay -S --noconfirm --needed \
     hyprpolkitagent \
     imagemagick \
     inetutils \
+    kubectl \
     libreoffice-still \
     libvterm \
     libtool \

@@ -1,0 +1,19 @@
+{
+  "telemetry.enabled": false,
+  "releaseNotesBanner.show": "1.23.1",
+  "compose.binary.installComposeSystemWide": true,
+  "welcome.version": "initial",
+  "window.bounds": {
+    "x": 0,
+    "y": 0,
+    "width": 2037,
+    "height": 1386
+  },
+  "telemetry.check": true,
+  "terminal.integrated.fontSize": 14,
+  "editor.integrated.fontSize": 14,
+  "window.restorePosition": false,
+  "preferences.zoomLevel": 1,
+  "kubectl.binary.installKubectlSystemWide": true,
+  "preferences.ExitOnClose": false
+}

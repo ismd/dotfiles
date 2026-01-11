@@ -51,6 +51,7 @@ yay -S --noconfirm --needed \
     openbsd-netcat \
     pavucontrol \
     plymouth \
+    podman-desktop \
     python-pywal \
     ripgrep \
     socat \

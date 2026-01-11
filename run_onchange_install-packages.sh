@@ -20,6 +20,7 @@ yay -S --noconfirm --needed \
     docker \
     docker-buildx \
     docker-compose \
+    docker-credential-secretservice \
     dolphin \
     easyeffects \
     easytag \

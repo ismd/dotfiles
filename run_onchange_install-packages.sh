@@ -30,6 +30,7 @@ yay -S --noconfirm --needed \
     evince \
     eza \
     ffmpeg \
+    ffuf \
     fwupd \
     gimp \
     git \

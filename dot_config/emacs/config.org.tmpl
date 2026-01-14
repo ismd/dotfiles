@@ -1194,7 +1194,6 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   "o e" '(org-export-dispatch :wk "Org export dispatch")
   "o i" '(org-toggle-item :wk "Org toggle item")
   "o o" '(org-emphasize :wk "Org emphasize")
-  "o t" '(org-todo :wk "Org todo")
   "o T" '(org-todo-list :wk "Org todo list")
   "o x" '(org-toggle-checkbox :wk "Org toggle checkbox"))
 
@@ -2065,7 +2064,7 @@ Org-tempo is not a separate package but a module within org that can be enabled.
 ** Org TODO
 #+begin_src emacs-lisp
 (setq org-todo-keywords
-      '((sequence "TODO" "IN-PROGRESS" "WAIT" "HOLD" "DONE")))
+      '((sequence "TODO(t)" "IN-PROGRESS(i)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
 #+end_src
 
 ** Org Appear

@@ -57,6 +57,7 @@ yay -S --noconfirm --needed \
     plymouth \
     podman-desktop \
     python-pywal \
+    remmina \
     ripgrep \
     socat \
     swww \

@@ -469,23 +469,23 @@ https://github.com/douo/magit-gptcommit
 Generate commit messages using Claude.
 
 #+begin_src emacs-lisp
-(use-package llm
-  :ensure t
-  :init
-  (require 'llm-claude))
+;; (use-package llm
+;;   :ensure t
+;;   :init
+;;   (require 'llm-claude))
 
-(use-package magit-gptcommit
-  :ensure t
-  :after (llm magit)
-  :init
-  (setq magit-gptcommit-llm-provider
-        (make-llm-claude
-         :key (anthropic-api-key)
-         :chat-model "claude-haiku-4-5-20251001"))
-  ;; :config
-  ;; (magit-gptcommit-mode 1)
-  ;; (magit-gptcommit-status-buffer-setup)
-  )
+;; (use-package magit-gptcommit
+;;   :ensure t
+;;   :after (llm magit)
+;;   :init
+;;   (setq magit-gptcommit-llm-provider
+;;         (make-llm-claude
+;;          :key (anthropic-api-key)
+;;          :chat-model "claude-haiku-4-5-20251001"))
+;;   ;; :config
+;;   ;; (magit-gptcommit-mode 1)
+;;   ;; (magit-gptcommit-status-buffer-setup)
+;;   )
 #+end_src
 
 ** Minuet

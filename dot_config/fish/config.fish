@@ -32,6 +32,7 @@ abbr -a gp git pull
 abbr -a gpush git push
 abbr -a gs git status
 
+abbr -a i yay -S
 abbr -a k kubectl
 abbr -a s yay -Ss
 

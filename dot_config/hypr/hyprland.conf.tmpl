@@ -248,15 +248,12 @@ input {
 gesture = 3, horizontal, workspace
 
 # See https://wiki.hypr.land/Configuring/Keywords/#per-device-input-configs for more
-device {
-    name = syna8016:00-06cb:ceb3-touchpad
-    sensitivity = 0.5
-}
-
+{{- if eq .chezmoi.hostname "mighty" }}
 device {
     name = elan0676:00-04f3:3195-touchpad
     sensitivity = 0.2
 }
+{{- end }}
 
 cursor {
     inactive_timeout = 2

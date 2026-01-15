@@ -250,6 +250,11 @@ The following settings are simple modes that are enabled (or disabled) so that E
 These packages override built-in Emacs packages and must be loaded early to ensure the newer versions take precedence.
 
 #+begin_src emacs-lisp
+;; Load newer project (required by eglot)
+(use-package project
+  :ensure (:wait t)
+  :demand t)
+
 ;; Load newer jsonrpc (required by eglot)
 (use-package jsonrpc
   :ensure (:wait t)

@@ -41,6 +41,7 @@ yay -S --noconfirm --needed \
     hyprpolkitagent \
     imagemagick \
     inetutils \
+    k9s \
     kubectl \
     libreoffice-still \
     libvterm \
@@ -53,6 +54,7 @@ yay -S --noconfirm --needed \
     noto-fonts-emoji \
     nss-mdns \
     openbsd-netcat \
+    openlens-bin \
     pavucontrol \
     plymouth \
     podman-desktop \

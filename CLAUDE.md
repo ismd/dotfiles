@@ -39,7 +39,7 @@ chezmoi add --template ~/.config/app   # Add as template
 **Important:** Files in this repository use chezmoi naming, but represent actual dotfiles. For example, `dot_profile.tmpl` is a template for `~/.profile`, and `dot_config/fish/config.fish` becomes `~/.config/fish/config.fish`. When discussing or editing files, understand that the source file name differs from the target path.
 
 ### Multi-Host Templating
-Templates use `{{ .chezmoi.hostname }}` for host-specific configurations. Current hosts: `mighty`, `ismd-work`, `ismd-black`.
+Templates use `{{ .chezmoi.hostname }}` for host-specific configurations. Current host: `mighty` (laptop).
 
 Example pattern:
 ```go

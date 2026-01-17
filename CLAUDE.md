@@ -60,14 +60,13 @@ Example pattern:
 
 ### Directory Structure
 - `dot_bin/` - Custom shell scripts
-- `dot_config/` - Application configs (hypr, fish, kitty, emacs, waybar, mako, etc.)
+- `dot_config/` - Application configs (hypr, fish, kitty, emacs, etc.)
 - `dot_local/` - User-local data (desktop files, icons)
 - `dot_var/` - Application data (EasyEffects profiles)
 
 ### Core Stack
 - **WM**: Hyprland (Wayland)
-- **Bar**: Waybar
+- **Bar/Notifications**: [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell)
 - **Terminal**: Kitty
 - **Shell**: Fish
 - **Editor**: Emacs (wayland-native)
-- **Notifications**: Mako

@@ -10,6 +10,7 @@ if [[ "$gotroot" =~ "password" ]]; then
 fi
 
 yay -S --noconfirm --needed \
+    7zip \
     ark \
     avahi \
     bind \
@@ -29,7 +30,9 @@ yay -S --noconfirm --needed \
     emacs-wayland \
     evince \
     eza \
+    fd \
     ffmpeg \
+    ffmpegthumbnailer \
     ffuf \
     fwupd \
     gimp \
@@ -43,11 +46,13 @@ yay -S --noconfirm --needed \
     inetutils \
     k9s \
     kubectl \
+    libvips \
     libreoffice-still \
     libvterm \
     libtool \
     lsp-plugins-lv2 \
     mc \
+    mediainfo \
     neovim \
     nftables \
     nmap \

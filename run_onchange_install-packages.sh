@@ -18,6 +18,7 @@ yay -S --noconfirm --needed \
     caido-desktop \
     calf \
     cmake \
+    discord \
     dms-shell-git \
     docker \
     docker-buildx \

@@ -28,10 +28,14 @@ case $1 in
     ;;
 esac
 
-{{- if ne .chezmoi.hostname "mighty" }}
+{{- if eq .chezmoi.hostname "mighty" }}
+notify-send -a "Brightness" -r 9999 -t 1000 \
+  -i display-brightness-symbolic \
+  "$(dms ipc call brightness status | grep -oP 'Brightness: \d+%')"
+{{- else }}
 percentage=$(brightnessctl -m | cut -d, -f4 | tr -d %)
 
-notify-send -t 1000 -h string:x-canonical-private-synchronous:brightness \
+notify-send -a "Brightness" -r 9999 -t 1000 \
   -i display-brightness-symbolic \
   "Brightness" "${percentage}%"
 {{- end }}

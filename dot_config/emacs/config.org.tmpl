@@ -827,6 +827,13 @@ https://github.com/alexluigit/dirvish
 
   (push 'eza dirvish-preview-dispatchers))
 
+;; Use project.el instead of vc-root-dir for project detection
+;; This allows dirvish to recognize projects marked with .project.el
+(define-advice dirvish--vc-root-dir (:override () use-project-root)
+  "Use project.el instead of vc-root-dir."
+  (when-let* ((proj (project-current)))
+    (expand-file-name (project-root proj))))
+
 (defun ismd/dirvish-dual-pane ()
   "Open two dired/dirvish panes side by side.
 Left pane shows current directory, right pane shows home directory."

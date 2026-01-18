@@ -36,7 +36,9 @@
 - [[#delete-word-and-line][DELETE WORD AND LINE]]
 - [[#denote][DENOTE]]
 - [[#diminish][DIMINISH]]
-- [[#dirvish][DIRVISH]]
+- [[#dired][DIRED]]
+  - [[#dired-fl][Dired FL]]
+  - [[#dirvish][Dirvish]]
 - [[#ediff][EDIFF]]
 - [[#editorconfig][EDITORCONFIG]]
 - [[#eglot][EGLOT]]
@@ -183,7 +185,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 
 (setq calendar-week-start-day 1) ;; Set the calendar to start on Monday
 (setq completion-cycle-threshold nil)
-(setq dired-kill-when-opening-new-dired-buffer t)
+(setq delete-by-moving-to-trash t)
 (setq gc-cons-threshold (* 100 1024 1024)
       read-process-output-max (* 1024 1024))
 (setq initial-major-mode 'text-mode)
@@ -752,7 +754,35 @@ This package implements hiding or abbreviation of the modeline displays (lighter
   :ensure t)
 #+end_src
 
-* DIRVISH
+* DIRED
+#+begin_src emacs-lisp
+(use-package dired
+  :config
+  (setq dired-dwim-target t)
+  (setq dired-listing-switches
+        "-l --almost-all --human-readable --group-directories-first --no-group")
+  (setq dired-kill-when-opening-new-dired-buffer nil)
+  (setq dired-mouse-drag-files nil)
+  (setq mouse-drag-and-drop-region-cross-program t)
+  ;; this command is useful when you want to close the window of `dirvish-side'
+  ;; automatically when opening a file
+  (put 'dired-find-alternate-file 'disabled nil))
+#+end_src
+
+** Dired FL
+https://github.com/purcell/diredfl
+
+#+begin_src emacs-lisp
+(use-package diredfl
+  :ensure t
+  :hook
+  ((dired-mode . diredfl-mode)
+   (dirvish-directory-view-mode . diredfl-mode))
+  :config
+  (set-face-attribute 'diredfl-dir-name nil :bold t))
+#+end_src
+
+** Dirvish
 https://github.com/alexluigit/dirvish
 
 #+begin_src emacs-lisp
@@ -761,59 +791,53 @@ https://github.com/alexluigit/dirvish
   :after nerd-icons
   :hook
   (dirvish-directory-view-mode . (lambda ()
-                                   (tab-line-mode -1)
-                                   (visual-line-mode -1)
-                                   (set-face-attribute 'dirvish-subtree-guide nil
-                                                       :foreground (face-background 'default))))
-  (dired-mode-hook . (lambda ()
-                       (tab-line-mode -1)
-                       (visual-line-mode -1)
-                       (set-face-attribute 'dirvish-subtree-guide nil
-                                           :foreground (face-background 'default))))
+                                   (visual-line-mode -1)))
   :init
   (dirvish-override-dired-mode)
-  ;; :custom
-  ;; (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
-  ;;  '(("h" "~/"                          "Home")
-  ;;    ("d" "~/Downloads/"                "Downloads")))
+  :custom
+  (dirvish-quick-access-entries
+   '(("c" "~/coding/" "Coding")
+     ("d" "~/Downloads/" "Downloads")
+     ("E" "/sudo:root@localhost:/etc" "Etc")
+     ("h" "~/" "Home")
+     ("n" "~/Nextcloud/" "Nextcloud")
+     ("p" "~/Pictures/" "Pictures")
+     ("s" "~/src/" "Src")
+     ("t" "~/tmp/" "Tmp")
+     ("T" "~/.local/share/Trash/files/" "Trash")))
   :config
-  ;; (dirvish-peek-mode) ; Preview files in minibuffer
-  (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
+  (dirvish-peek-mode)
+  (dirvish-side-follow-mode)
   (setq dirvish-mode-line-format
         '(:left (sort symlink) :right (omit yank index)))
-  (setq dirvish-attributes
-        '(nerd-icons file-time file-size collapse subtree-state vc-state))
-  (setq dirvish-subtree-state-style 'nerd)
-  (setq delete-by-moving-to-trash t)
-  (setq dirvish-path-separators (list
-                                 (format "  %s " (nerd-icons-codicon "nf-cod-home"))
-                                 (format "  %s " (nerd-icons-codicon "nf-cod-root_folder"))
-                                 (format " %s " (nerd-icons-faicon "nf-fa-angle_right"))))
-  (setq dired-listing-switches
-        "-l --almost-all --human-readable --group-directories-first --no-group")
-  (setq dirvish-side-width 25)
-  :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
-  (;; ("C-c f" . dirvish-fd)
-   :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
-   ("a"   . dirvish-quick-access)
-   ("f"   . dirvish-file-info-menu)
-   ("y"   . dirvish-yank-menu)
-   ("N"   . dirvish-narrow)
-   ("^"   . dirvish-history-last)
-   ("h"   . dirvish-history-jump) ; remapped `describe-mode'
-   ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
-   ("v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
-   ("RET" . dired-find-alternate-file)
-   ("TAB" . dirvish-subtree-toggle)
-   ("DEL" . dired-up-directory)
-   ("M-f" . dirvish-history-go-forward)
-   ("M-b" . dirvish-history-go-backward)
-   ("M-l" . dirvish-ls-switches-menu)
-   ("M-m" . dirvish-mark-menu)
-   ("M-t" . dirvish-layout-toggle)
-   ("M-s" . dirvish-setup-menu)
-   ("M-e" . dirvish-emerge-menu)
-   ("M-j" . dirvish-fd-jump)))
+  (setq dirvish-attributes           ; The order *MATTERS* for some attributes
+        ;; '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size)
+        '(vc-state subtree-state nerd-icons collapse git-msg file-size)
+        dirvish-side-attributes
+        '(vc-state nerd-icons collapse file-size))
+  ;; open large directory (over 20000 files) asynchronously with `fd' command
+  (setq dirvish-large-directory-threshold 20000)
+
+  (dirvish-define-preview eza (file)
+    "Use `eza' to generate directory preview."
+    :require ("eza") ; tell Dirvish to check if we have the executable
+    (when (file-directory-p file) ; we only interest in directories here
+      `(shell . ("eza" "-al" "--color=always" "--icons=always"
+                 "--group-directories-first" ,file))))
+
+  (push 'eza dirvish-preview-dispatchers))
+
+(defun ismd/dirvish-dual-pane ()
+  "Open two dired/dirvish panes side by side.
+Left pane shows current directory, right pane shows home directory."
+  (interactive)
+  (let ((dir default-directory))
+    (delete-other-windows)
+    (dired dir)
+    (split-window-right)
+    (other-window 1)
+    (dired "~")
+    (other-window 1)))
 #+end_src
 
 * EDIFF
@@ -979,8 +1003,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-v" '(pixel-scroll-interpolate-up :wk "Scroll up")
    "M-y" '(consult-yank-pop :wk "Yank pop")
 
-   "M-0" '(treemacs-select-window :wk "Treemacs")
-   ;; "M-0" '(winum-select-window-0-or-10 :wk "Select window 0 or 10")
+   ;; "M-0" '(dirvish-side :wk "Dirvish side window")
+   "M-0" '(winum-select-window-0-or-10 :wk "Select window 0 or 10")
    "M-1" '(winum-select-window-1 :wk "Select window 1")
    "M-2" '(winum-select-window-2 :wk "Select window 2")
    "M-3" '(winum-select-window-3 :wk "Select window 3")
@@ -1069,8 +1093,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
 (ismd/leader-keys
   "d" '(:ignore t :wk "Dired")
-  "d d" '(dired :wk "Open dired")
-  "d j" '(dired-jump :wk "Dired jump to current")
+  "d d" '(dirvish-dwim :wk "Open dirvish dwim")
+  "d D" '(ismd/dirvish-dual-pane :wk "Open dual pane dirvish")
   "d t" '(treemacs-select-directory :wk "Open directory in treemacs"))
 
 (ismd/leader-keys
@@ -1232,8 +1256,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   "t c" '(claude-code-toggle :wk "Toggle Claude Code")
   "t f" '(flycheck-mode :wk "Toggle flycheck")
   "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-  "t t" '(treemacs-add-and-display-current-project-exclusively :wk "Treemacs project")
-  ;; "t t" '(dirvish-side :wk "Dirvish side")
+  "t t" '(dirvish-side :wk "Toggle dirvish side window")
+  "t T" '(treemacs-add-and-display-current-project-exclusively :wk "Treemacs project")
   "t v" '(vterm-toggle :wk "Toggle vterm")
   "t w" '(visual-line-mode :wk "Toggle word wrap"))
 
@@ -1305,6 +1329,26 @@ You can use CTRL plus the mouse wheel for zooming in/out.
  :keymaps 'corfu-map
  "TAB" nil
  "<tab>" nil)
+#+end_src
+
+*** Dirvish
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'dirvish-mode-map
+ "DEL" '(dired-up-directory :wk "Go up directory")
+ "TAB" '(dirvish-subtree-toggle :wk "Toggle subtree")
+ "."   '(dirvish-mark-menu :wk "Mark menu")
+ ","   '(dirvish-setup-menu :wk "Setup menu")
+ "?"   '(dirvish-dispatch :wk "Dispatch menu")
+ "e"   '(dirvish-emerge-menu :wk "Emerge menu")
+ "f"   '(dirvish-file-info-menu :wk "File info menu")
+ "h"   '(dirvish-history-menu :wk "History menu")
+ "j"   '(dirvish-quick-access :wk "Quick access jump")
+ "l"   '(dirvish-layout-toggle :wk "Toggle layout")
+ "N"   '(dirvish-narrow :wk "Narrow")
+ "r"   '(dirvish-history-jump :wk "Jump to history")
+ "s"   '(dirvish-quicksort :wk "Quicksort menu")
+ "y"   '(dirvish-yank-menu :wk "Yank menu"))
 #+end_src
 
 *** Eat
@@ -2523,16 +2567,12 @@ https://github.com/mihaiolteanu/lastfm.el
 https://github.com/deb0ch/emacs-winum
 
 #+begin_src emacs-lisp
-(defun ismd/winum-assign-0-to-dirvish-side ()
-  (when (string-match-p "Dired by name" (format-mode-line mode-name)) 0))
-
 (use-package winum
   :ensure t
   :config
-  (add-to-list 'winum-assign-functions #'ismd/winum-assign-0-to-dirvish-side)
-
   (setq winum-auto-assign-0-to-minibuffer t
-        winum-scope 'frame-local)
+        winum-scope 'frame-local
+        winum-ignored-buffers-regexp '("^\\*SIDE"))
   (winum-mode))
 #+end_src
 

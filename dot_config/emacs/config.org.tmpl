@@ -740,7 +740,7 @@ https://github.com/protesilaos/denote
   :hook (dired-mode . denote-dired-mode)
   :config
   (setq denote-date-prompt-use-org-read-date t)
-  (setq denote-directory (expand-file-name "~/Notes/"))
+  (setq denote-directory (expand-file-name "~/Nextcloud/Notes/"))
   (setq denote-infer-keywords t)
   (setq denote-known-keywords '("it" "people" "private"))
   (denote-rename-buffer-mode 1))
@@ -2055,9 +2055,9 @@ https://github.com/oantolin/orderless
   :ensure nil
   :hook (org-mode . org-indent-mode)
   :config  
-  (setq org-agenda-files (list (expand-file-name "~/Notes/")))
+  (setq org-agenda-files (list (expand-file-name "~/Nextcloud/Notes/")))
   (setq org-complete-tags-always-offer-all-agenda-tags t)
-    (setq org-directory (expand-file-name "~/Notes/"))
+    (setq org-directory (expand-file-name "~/Nextcloud/Notes/"))
     (setq org-use-sub-superscripts '{}))
 #+end_src
 
@@ -2885,7 +2885,7 @@ Using Denote instead for note-taking.
 ;;   :ensure t
 ;;   :custom
 ;;   (org-roam-completion-everywhere t)
-;;   (org-roam-directory (expand-file-name "~/Notes/"))
+;;   (org-roam-directory (expand-file-name "~/Nextcloud/Notes/"))
 ;;   :bind (("C-c n l" . org-roam-buffer-toggle)
 ;;          ("C-c n f" . org-roam-node-find)
 ;;          ("C-c n g" . org-roam-graph)

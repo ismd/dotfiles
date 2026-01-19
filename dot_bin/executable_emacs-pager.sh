@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
 t=$(mktemp "/tmp/.emacs-pager.XXXXXXX") || exit 1
 cat - > $t

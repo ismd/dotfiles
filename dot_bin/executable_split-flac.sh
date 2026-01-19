@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-set -e  # Exit immediately if any command fails
+set -euo pipefail
 
 # Parse options
 USE_ENCA=false

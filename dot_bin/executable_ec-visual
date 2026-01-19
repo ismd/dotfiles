@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 emacsclient -c -a emacs "${@:1}"

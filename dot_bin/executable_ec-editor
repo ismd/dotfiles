@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 emacsclient -c -n -a nvim "${@:1}"

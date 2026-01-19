@@ -62,6 +62,7 @@ yay -S --noconfirm --needed \
     openbsd-netcat \
     openlens-bin \
     pavucontrol \
+    perl-image-exiftool \
     plymouth \
     podman-desktop \
     python-pywal \

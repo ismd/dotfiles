@@ -371,6 +371,16 @@ Strip .tmpl suffix and replace dot_ prefix with . in filename."
   "Scroll up 3 lines."
   (interactive)
   (scroll-down-command 3))
+
+(defun ismd/open-emacs-config ()
+  "Open Emacs config.org file."
+  (interactive)
+  (find-file "~/.config/emacs/config.org"))
+
+(defun ismd/open-emacs-directory ()
+  "Open Emacs configuration directory in dired."
+  (interactive)
+  (dired "~/.config/emacs"))
 #+end_src
 
 * AI
@@ -1139,9 +1149,9 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
 (ismd/leader-keys
   "f" '(:ignore t :wk "Files")
-  "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Open emacs config.org")
+  "f c" '(ismd/open-emacs-config :wk "Open emacs config.org")
   "f D" '(ismd/delete-this-file :wk "Delete this file")
-  "f e" '((lambda () (interactive) (dired "~/.config/emacs")) :wk "Open user-emacs-directory in dired")
+  "f e" '(ismd/open-emacs-directory :wk "Open user-emacs-directory in dired")
   "f f" '(find-file :wk "Find file")
   "f F" '(find-file-temporarily :wk "Find file temporarily")
   "f j" '(consult-fd :wk "Find file with fd")

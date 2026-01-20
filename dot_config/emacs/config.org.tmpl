@@ -762,8 +762,8 @@ This package implements hiding or abbreviation of the modeline displays (lighter
   (setq dired-listing-switches
         "-l --almost-all --human-readable --group-directories-first --no-group")
   (setq dired-kill-when-opening-new-dired-buffer nil)
-  (setq dired-mouse-drag-files nil)
-  (setq mouse-drag-and-drop-region-cross-program t)
+  (setq dired-mouse-drag-files t) ;; Not working in Wayland
+  (setq mouse-drag-and-drop-region-cross-program nil)
   ;; this command is useful when you want to close the window of `dirvish-side'
   ;; automatically when opening a file
   (put 'dired-find-alternate-file 'disabled nil))

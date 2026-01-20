@@ -43,7 +43,6 @@
 - [[#editorconfig][EDITORCONFIG]]
 - [[#eglot][EGLOT]]
 - [[#expand-region][EXPAND REGION]]
-- [[#flycheck][FLYCHECK]]
 - [[#fonts][FONTS]]
   - [[#setting-the-font-face][Setting the Font Face]]
   - [[#zooming-inout][Zooming In/Out]]
@@ -75,6 +74,7 @@
   - [[#go][Go]]
   - [[#markdown][Markdown]]
   - [[#python][Python]]
+  - [[#qml][QML]]
   - [[#terraform][Terraform]]
 - [[#ligatures][LIGATURES]]
 - [[#marginalia][MARGINALIA]]
@@ -126,6 +126,7 @@
 - [[#window-management][WINDOW MANAGEMENT]]
 - [[#window-numbering][WINDOW NUMBERING]]
 - [[#archived-configurations][ARCHIVED CONFIGURATIONS]]
+  - [[#flycheck-archived][Flycheck (Archived)]]
   - [[#ai-tools-archived][AI Tools (Archived)]]
   - [[#completion-frameworks-archived][Completion Frameworks (Archived)]]
   - [[#lsp-mode-archived][LSP Mode (Archived)]]
@@ -887,16 +888,6 @@ https://github.com/magnars/expand-region.el
   :ensure t)
 #+end_src
 
-* FLYCHECK
-Install =luacheck= from your Linux distro's repositories for flycheck to work correctly with lua files.  Install =python-pylint= for flycheck to work with python files.  Haskell works with flycheck as long as =haskell-ghc= or =haskell-stack-ghc= is installed.  For more information on language support for flycheck, [[https://www.flycheck.org/en/latest/languages.html][read this]].
-
-#+begin_src emacs-lisp
-(use-package flycheck
-  :ensure t
-  :diminish
-  :init (global-flycheck-mode))
-#+end_src
-
 * FONTS
 Defining the various fonts that Emacs will use.
 
@@ -1262,7 +1253,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 (ismd/leader-keys
   "t" '(:ignore t :wk "Toggle")
   "t c" '(claude-code-toggle :wk "Toggle Claude Code")
-  "t f" '(flycheck-mode :wk "Toggle flycheck")
+  "t f" '(flymake-mode :wk "Toggle flymake")
   "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
   "t t" '(dirvish-side :wk "Toggle dirvish side window")
   "t T" '(treemacs-add-and-display-current-project-exclusively :wk "Treemacs project")
@@ -1780,6 +1771,14 @@ https://github.com/wyuenho/emacs-pet
   (add-hook 'python-base-mode-hook 'pet-mode -10))
 #+end_src
 
+** QML
+https://github.com/coldnew/qml-mode
+
+#+begin_src emacs-lisp
+(use-package qml-mode
+  :ensure t)
+#+end_src
+
 ** Terraform
 #+begin_src emacs-lisp
 (use-package terraform-mode
@@ -2202,6 +2201,7 @@ https://github.com/emacsorphanage/popwin
   (dolist (buffer '(
                     "*Flutter*"
                     "*Flycheck errors*"
+                    "*Flymake diagnostics*"
                     "*Org Links*"
                     "*Warnings*"
                     "*eldoc*"
@@ -2596,6 +2596,16 @@ https://github.com/deb0ch/emacs-winum
 * ARCHIVED CONFIGURATIONS :ARCHIVE:
 This section contains previously used configurations that have been replaced or are no longer needed.
 They are kept here for reference and potential future use.
+
+** Flycheck (Archived)
+Replaced by Flymake (built-in) which integrates natively with Eglot.
+
+#+begin_src emacs-lisp
+;; (use-package flycheck
+;;   :ensure t
+;;   :diminish
+;;   :init (global-flycheck-mode))
+#+end_src
 
 ** AI Tools (Archived)
 *** Aider

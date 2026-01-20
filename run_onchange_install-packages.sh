@@ -65,6 +65,8 @@ yay -S --noconfirm --needed \
     perl-image-exiftool \
     plymouth \
     podman-desktop \
+    python-pip \
+    python-pylint \
     python-pywal \
     remmina \
     ripgrep \

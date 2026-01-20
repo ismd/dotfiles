@@ -361,6 +361,16 @@ Strip .tmpl suffix and replace dot_ prefix with . in filename."
   "Reload the current buffer from disk without confirmation."
   (interactive)
   (revert-buffer nil t))
+
+(defun ismd/scroll-down-lines ()
+  "Scroll down 3 lines."
+  (interactive)
+  (scroll-up-command 3))
+
+(defun ismd/scroll-up-lines ()
+  "Scroll up 3 lines."
+  (interactive)
+  (scroll-down-command 3))
 #+end_src
 
 * AI
@@ -1012,8 +1022,8 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    "M-/" '(hippie-expand :wk "Hippie expand")
    "M-<backspace>" '(ismd/delete-word-backward :wk "Delete word backward")
    "M-d" '(ismd/delete-word :wk "Delete word")
-   "M-n" '((lambda () (interactive) (scroll-up-command 3)) :wk "Scroll down")
-   "M-p" '((lambda () (interactive) (scroll-down-command 3)) :wk "Scroll up")
+   "M-n" '(ismd/scroll-down-lines :wk "Scroll down")
+   "M-p" '(ismd/scroll-up-lines :wk "Scroll up")
    "M-s" '(avy-goto-char-timer :wk "Jump to character")
    "M-v" '(pixel-scroll-interpolate-up :wk "Scroll up")
    "M-y" '(consult-yank-pop :wk "Yank pop")

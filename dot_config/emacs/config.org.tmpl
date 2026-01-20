@@ -1062,15 +1062,15 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   :keymaps 'override)
 
 (ismd/leader-keys
+  "RET" '(claude-code-ide-menu :wk "Claude Code IDE")
+  "TAB" '(indent-rigidly :wk "Indent region")
   "." '(embark-act :wk "Embark act")
   "=" '(er/expand-region :wk "Expand region")
   "+" '(er/expand-region :wk "Expand region")
   "-" '(er/contract-region :wk "Contract region")
   "C-=" '(er/expand-region :wk "Expand region")
   "C--" '(er/contract-region :wk "Contract region")
-  "C-r" '(vertico-repeat :wk "Vertico repeat")
-  "RET" '(claude-code-ide-menu :wk "Claude Code IDE")
-  "TAB" '(indent-rigidly :wk "Indent region"))
+  "C-r" '(vertico-repeat :wk "Vertico repeat"))
 
 (ismd/leader-keys
   "C-f" '(:ignore t :wk "Fold")

@@ -356,6 +356,11 @@ Strip .tmpl suffix and replace dot_ prefix with . in filename."
               (kill-current-buffer))
           (message "Canceled"))
       (message "Not a file"))))
+
+(defun ismd/reload-buffer ()
+  "Reload the current buffer from disk without confirmation."
+  (interactive)
+  (revert-buffer nil t))
 #+end_src
 
 * AI
@@ -993,7 +998,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
    ;; "C-<tab>" '(tab-line-switch-to-next-tab :wk "Switch to next tab")
    ;; "C-<iso-lefttab>" '(tab-line-switch-to-prev-tab :wk "Switch to previous tab")
 
-   "C-S-r" '((lambda () (interactive) (revert-buffer nil t)) :wk "Reload buffer")
+   "C-S-r" '(ismd/reload-buffer :wk "Reload buffer")
    "C-{" '(previous-buffer :wk "Previous buffer")
    "C-}" '(next-buffer :wk "Next buffer")
 
@@ -1094,7 +1099,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   "b m" '(bookmark-set :wk "Set bookmark")
   "b n" '(next-buffer :wk "Next buffer")
   "b p" '(previous-buffer :wk "Previous buffer")
-  "b r" '((lambda () (interactive) (revert-buffer nil t)) :wk "Reload buffer")
+  "b r" '(ismd/reload-buffer :wk "Reload buffer")
   "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file"))
 
 (ismd/leader-keys

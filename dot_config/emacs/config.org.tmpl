@@ -343,6 +343,19 @@ Strip .tmpl suffix and replace dot_ prefix with . in filename."
     (apply orig-fun args)))
 
 (advice-add 'set-auto-mode :around #'ismd/chezmoi-set-auto-mode-advice)
+
+(defun ismd/delete-this-file ()
+  "Delete the file associated with the current buffer and kill the buffer with confirmation."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if filename
+        (if (y-or-n-p (format "Are you sure you want to delete %s? " filename))
+            (progn
+              (delete-file filename)
+              (message "Deleted file %s" filename)
+              (kill-current-buffer))
+          (message "Canceled"))
+      (message "Not a file"))))
 #+end_src
 
 * AI
@@ -1096,25 +1109,20 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   "d t" '(treemacs-select-directory :wk "Open directory in treemacs"))
 
 (ismd/leader-keys
-  "e" '(:ignore t :wk "Embark/Evaluate")
-  "e c" '(embark-collect :wk "Embark collect")
-  "e e" '(embark-export :wk "Embark export")
-  "e l" '(embark-live :wk "Embark live")
-  "e r" '(eval-region :wk "Evaluate elisp in region")
-  "e s" '(eshell :which-key "Eshell"))
+  "E" '(:ignore t :wk "Embark/Evaluate")
+  "E b" '(eval-buffer :wk "Evaluate elisp in buffer")
+  "E c" '(embark-collect :wk "Embark collect")
+  "E e" '(embark-export :wk "Embark export")
+  "E l" '(embark-live :wk "Embark live")
+  "E r" '(eval-region :wk "Evaluate elisp in region")
+  "E v" '(eval-expression :wk "Evaluate elisp expression"))
 
-(defun ismd/delete-this-file ()
-  "Delete the file associated with the current buffer and kill the buffer with confirmation."
-  (interactive)
-  (let ((filename (buffer-file-name)))
-    (if filename
-        (if (y-or-n-p (format "Are you sure you want to delete %s? " filename))
-            (progn
-              (delete-file filename)
-              (message "Deleted file %s" filename)
-              (kill-current-buffer))
-          (message "Canceled"))
-      (message "Not a file"))))
+(ismd/leader-keys
+  "e" '(:ignore t :wk "Errors (Flymake)")
+  "e l" '(flymake-show-buffer-diagnostics :wk "List buffer errors")
+  "e n" '(flymake-goto-next-error :wk "Next error")
+  "e P" '(flymake-show-project-diagnostics :wk "List project errors")
+  "e p" '(flymake-goto-prev-error :wk "Previous error"))
 
 (ismd/leader-keys
   "f" '(:ignore t :wk "Files")

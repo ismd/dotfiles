@@ -68,10 +68,11 @@ yay -S --noconfirm --needed \
     python-pip \
     python-pylint \
     python-pywal \
+    quickshell-git \
     remmina \
     ripgrep \
     socat \
     swww \
     viewnior \
-    quickshell-git \
+    whois \
     zoom

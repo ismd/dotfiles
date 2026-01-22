@@ -1,7 +1,7 @@
 [user]
     name = Vladimir Kosteley
     email = github@ismd.dev
-	signingkey = 211552B61746DD5F629EDC7361DEFD5434C80F0F
+    signingkey = 211552B61746DD5F629EDC7361DEFD5434C80F0F
 
 [github]
     user = ismd

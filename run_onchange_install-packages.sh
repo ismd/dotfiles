@@ -73,6 +73,7 @@ yay -S --noconfirm --needed \
     ripgrep \
     socat \
     swww \
+    tigervnc \
     viewnior \
     whois \
     zoom

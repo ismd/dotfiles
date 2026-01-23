@@ -44,6 +44,7 @@ yay -S --noconfirm --needed \
     hypridle \
     hyprpolkitagent \
     imagemagick \
+    imhex-bin \
     inetutils \
     k9s \
     kubectl \

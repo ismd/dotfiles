@@ -76,4 +76,5 @@ yay -S --noconfirm --needed \
     tigervnc \
     viewnior \
     whois \
+    xournalpp \
     zoom

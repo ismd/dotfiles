@@ -1164,6 +1164,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
 
 (ismd/leader-keys
   "h" '(:ignore t :wk "Help")
+  "h ." '(display-local-help :wk "Display local help")
   "h b" '(describe-bindings :wk "Describe bindings")
   "h c" '(describe-char :wk "Describe character under cursor")
   "h f" '(describe-function :wk "Describe function")
@@ -1176,6 +1177,7 @@ You can use CTRL plus the mouse wheel for zooming in/out.
   "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
   "h L" '(describe-language-environment :wk "Describe language environment")
   "h m" '(describe-mode :wk "Describe mode")
+  "h o" '(describe-symbol :wk "Describe symbol at point")
   "h r" '(:ignore t :wk "Reload")
   "h r r" '((lambda () (interactive)
               (load-file "~/.config/emacs/init.el")

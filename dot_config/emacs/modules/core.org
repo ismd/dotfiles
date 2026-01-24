@@ -1,0 +1,315 @@
+#+title: Core Settings
+#+author: Vladimir Kosteley
+#+description: Sane defaults, utilities, and core functionality
+
+* SANE DEFAULTS
+The following settings are simple modes that are enabled (or disabled) so that Emacs functions more like you would expect a proper editor/IDE to function.
+
+#+begin_src emacs-lisp
+(delete-selection-mode 1)    ;; You can select text and delete it by typing.
+;; (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
+(electric-pair-mode 1)       ;; Turns on automatic parens pairing
+;; The following prevents <> from auto-pairing when electric-pair-mode is on.
+;; Otherwise, org-tempo is broken when you try to <s TAB...
+(add-hook 'org-mode-hook (lambda ()
+                           (setq-local electric-pair-inhibit-predicate
+                                       `(lambda (c)
+                                          (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+(global-auto-revert-mode t)           ;; Automatically show changes if the file has changed
+(global-visual-line-mode 1)           ;; Enable truncated lines
+(global-visual-wrap-prefix-mode 1)    ;; Enable visual line wrapping
+(menu-bar-mode -1)                    ;; Disable the menu bar
+(save-place-mode 1)                   ;; Save the cursor position when a file is closed
+(scroll-bar-mode -1)                  ;; Disable the scroll bar
+;; (tab-bar-mode t)                      ;; Enable tab bar mode
+(tool-bar-mode -1)                    ;; Disable the tool bar
+
+(setopt use-short-answers t) ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
+
+(setq-default cursor-type '(bar . 2)) ;; Set the cursor to a bar
+(setq-default indent-tabs-mode nil)
+(setq-default line-spacing 0.12)
+
+(setq calendar-week-start-day 1) ;; Set the calendar to start on Monday
+(setq completion-cycle-threshold nil)
+(setq delete-by-moving-to-trash t)
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024))
+(setq initial-major-mode 'text-mode)
+(setq initial-scratch-message nil)
+(setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
+(setq save-place-file (concat user-emacs-directory ".emacs-places"))
+(setq vc-display-status nil)
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+(setq warning-minimum-level :error)
+
+(setq tab-always-indent t)
+(setq text-mode-ispell-word-completion nil)
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+#+end_src
+
+** Line Numbers
+#+begin_src emacs-lisp
+(use-package display-line-numbers
+  :ensure nil
+  :hook (prog-mode . display-line-numbers-mode))
+#+end_src
+
+** Scroll
+#+begin_src emacs-lisp
+(pixel-scroll-precision-mode 1)
+
+(setq auto-window-vscroll nil
+      pixel-scroll-precision-interpolate-page t
+      pixel-scroll-precision-large-scroll-height 40.0
+      scroll-conservatively 0
+      scroll-margin 0
+      scroll-preserve-screen-position t
+      scroll-step 0)
+#+end_src
+
+** SSH Agent
+#+begin_src emacs-lisp
+(setenv "SSH_AUTH_SOCK" "/run/user/1000/ssh-agent.socket")
+#+end_src
+
+** Tab Bar
+#+begin_src emacs-lisp
+(setq tab-bar-auto-width nil
+      tab-bar-close-button-show nil
+      tab-bar-format '(tab-bar-format-history tab-bar-format-tabs-groups tab-bar-separator tab-bar-format-add-tab)
+      tab-bar-new-button-show nil
+      tab-bar-new-tab-choice "*scratch*"
+      tab-bar-new-tab-to 'rightmost
+      tab-bar-tab-hints t)
+#+end_src
+
+* UTILITIES
+#+begin_src emacs-lisp
+(defun ismd/add-display-buffer-rule (buffer-name &optional window-width)
+  "Add a display-buffer rule for BUFFER-NAME with optional WINDOW-WIDTH (default 0.35)."
+  (let ((width (or window-width 0.35)))
+    (add-to-list 'display-buffer-alist
+                 `(,buffer-name
+                   (display-buffer-in-side-window)
+                   (side . right)
+                   (window-width . ,width)
+                   (window-parameters . ((no-delete-other-windows . t)))))))
+
+(defun ismd/chezmoi-normalize-filename (name)
+  "Normalize chezmoi filename for mode detection.
+Strip .tmpl suffix and replace dot_ prefix with . in filename."
+  (when name
+    (let* ((dir (file-name-directory name))
+           (file (file-name-nondirectory name))
+           ;; Strip .tmpl suffix
+           (file (if (string-match "\\(.+\\)\\.tmpl$" file)
+                     (match-string 1 file)
+                   file))
+           ;; Replace dot_ prefix with .
+           (file (if (string-match "^dot_\\(.+\\)$" file)
+                     (concat "." (match-string 1 file))
+                   file)))
+      (concat dir file))))
+
+(defun ismd/chezmoi-set-auto-mode-advice (orig-fun &rest args)
+  "Advice for `set-auto-mode' to handle chezmoi template files."
+  (let ((buffer-file-name (ismd/chezmoi-normalize-filename buffer-file-name)))
+    (apply orig-fun args)))
+
+(advice-add 'set-auto-mode :around #'ismd/chezmoi-set-auto-mode-advice)
+
+(defun ismd/delete-this-file ()
+  "Delete the file associated with the current buffer and kill the buffer with confirmation."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if filename
+        (if (y-or-n-p (format "Are you sure you want to delete %s? " filename))
+            (progn
+              (delete-file filename)
+              (message "Deleted file %s" filename)
+              (kill-current-buffer))
+          (message "Canceled"))
+      (message "Not a file"))))
+
+(defun ismd/reload-buffer ()
+  "Reload the current buffer from disk without confirmation."
+  (interactive)
+  (revert-buffer nil t))
+
+(defun ismd/scroll-down-lines ()
+  "Scroll down 3 lines."
+  (interactive)
+  (scroll-up-command 3))
+
+(defun ismd/scroll-up-lines ()
+  "Scroll up 3 lines."
+  (interactive)
+  (scroll-down-command 3))
+
+(defun ismd/open-emacs-config ()
+  "Open Emacs config.org file."
+  (interactive)
+  (find-file "~/.config/emacs/config.org"))
+
+(defun ismd/open-emacs-directory ()
+  "Open Emacs configuration directory in dired."
+  (interactive)
+  (dired "~/.config/emacs"))
+#+end_src
+
+* BACKUP
+By default, Emacs creates automatic backups of files in their original directories, such "file.el" and the backup "file.el~".  This leads to a lot of clutter, so let's tell Emacs to put all backups that it creates in the =TRASH= directory.
+
+#+begin_src emacs-lisp
+(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+#+end_src
+
+* BUFFER MANAGEMENT
+#+begin_src emacs-lisp
+(defvar-local temporary-buffer-p nil
+  "Non-nil if this buffer is a temporary buffer that should be closed when switching away.")
+
+(defun find-file-temporarily (filename)
+  "Open a file temporarily. The buffer will be automatically closed when switching to another buffer."
+  (interactive "FFind file temporarily: ")
+  (let ((buffer (find-file-noselect filename)))
+    (with-current-buffer buffer
+      (setq-local temporary-buffer-p t)
+      (setq-local buffer-read-only t)) ; Make it read-only to prevent accidental edits
+    (switch-to-buffer buffer)))
+
+(defvar temporary-buffer-cleanup-in-progress nil
+  "Guard variable to prevent infinite recursion during cleanup.")
+
+(defun temporary-buffer-cleanup ()
+  "Clean up temporary buffers when switching away from them."
+  (unless temporary-buffer-cleanup-in-progress
+    (let ((temporary-buffer-cleanup-in-progress t)
+          (prev-buffer (other-buffer (current-buffer) t)))
+      (when (and prev-buffer
+                 (buffer-live-p prev-buffer)
+                 (buffer-local-value 'temporary-buffer-p prev-buffer))
+        (kill-buffer prev-buffer)))))
+
+(add-hook 'buffer-list-update-hook #'temporary-buffer-cleanup)
+#+end_src
+
+* MINIBUFFER
+By default, Emacs requires you to hit ESC three times to escape quit the minibuffer.
+#+begin_src emacs-lisp
+(global-set-key [escape] 'keyboard-escape-quit)
+#+end_src
+
+Do not allow the cursor in the minibuffer prompt.
+#+begin_src emacs-lisp
+;; (setq minibuffer-prompt-properties
+;;       '(read-only t cursor-intangible t face minibuffer-prompt))
+;; (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+#+end_src
+
+Enable recursive minibuffers.
+#+begin_src emacs-lisp
+(setq enable-recursive-minibuffers t)
+#+end_src
+
+Disable scroll bar in minibuffer.
+#+begin_src emacs-lisp
+(add-hook 'minibuffer-setup-hook
+          #'(lambda () (set-window-scroll-bars (selected-window) 0 nil)))
+#+end_src
+
+* DELETE WORD AND LINE
+#+begin_src emacs-lisp
+;; Delete word
+(defun ismd/delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (forward-word arg) (point))))
+
+;; Delete word backward
+(defun ismd/delete-word-backward (arg)
+  "Delete characters backward until encountering the end of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (ismd/delete-word (- arg)))
+
+;; Delete line
+(defun ismd/delete-line ()
+  "Delete text from current position to end of line char.
+If at end of line, delete the following newline char."
+  (interactive)
+  (let ((end (line-end-position)))
+    (when (eolp)
+      (delete-char 1))
+    (delete-region (point) end)))
+#+end_src
+
+* HIPPIE EXPAND
+#+begin_src emacs-lisp
+(setq hippie-expand-try-functions-list
+      '(try-complete-file-name-partially
+        try-complete-file-name
+        try-expand-dabbrev
+        try-expand-dabbrev-all-buffers
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol))
+#+end_src
+
+* EDIFF
+#+begin_src emacs-lisp
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+end_src
+
+* EDITORCONFIG
+https://github.com/editorconfig/editorconfig-emacs
+
+#+begin_src emacs-lisp
+(use-package editorconfig
+  :ensure t
+  :diminish
+  :config
+  (editorconfig-mode 1))
+#+end_src
+
+* SUPER SAVE
+https://github.com/bbatsov/super-save
+
+#+begin_src emacs-lisp
+(use-package super-save
+  :ensure t
+  :config
+  (super-save-mode +1)
+  (setq super-save-auto-save-when-idle t)
+  (setq auto-save-default nil)
+  (setq super-save-silent t))
+#+end_src
+
+* TRANSIENT
+https://github.com/magit/transient
+
+Transient is the library used to implement the keyboard-driven "menus" in Magit and other packages.
+
+#+begin_src emacs-lisp
+(use-package transient
+  :ensure t)
+#+end_src
+
+* TRIMMING WHITESPACE
+#+begin_src emacs-lisp
+(use-package ws-butler
+  :ensure t
+  :config
+  (ws-butler-global-mode 1)
+  (setq ws-butler-global-exempt-modes '(dockerfile-ts-mode markdown-mode terraform-mode)))
+#+end_src
+
+* SUDO EDIT
+[[https://github.com/nflath/sudo-edit][sudo-edit]] gives us the ability to open files with sudo privileges or switch over to editing with sudo privileges if we initially opened the file without such privileges.
+
+#+begin_src emacs-lisp
+(use-package sudo-edit
+  :ensure t)
+#+end_src

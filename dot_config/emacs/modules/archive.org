@@ -1,0 +1,568 @@
+#+title: Archived Configurations
+#+author: Vladimir Kosteley
+#+description: Previously used configurations kept for reference
+
+This file contains previously used configurations that have been replaced or are no longer needed.
+They are kept here for reference and potential future use.
+
+NOTE: This file is NOT loaded by config.org. It's only for reference.
+
+* FLYCHECK (ARCHIVED)
+Replaced by Flymake (built-in) which integrates natively with Eglot.
+
+#+begin_src emacs-lisp
+;; (use-package flycheck
+;;   :ensure t
+;;   :diminish
+;;   :init (global-flycheck-mode))
+#+end_src
+
+* AI TOOLS (ARCHIVED)
+** Aider
+https://github.com/tninja/aider.el
+
+Replaced by Claude Code for AI-assisted coding.
+
+#+begin_src emacs-lisp
+;; (use-package aider
+;;   :after (magit transient)
+;;   :ensure (:host github :repo "tninja/aider.el" :files ("aider.el" "aider-core.el" "aider-file.el" "aider-code-change.el" "aider-discussion.el" "aider-prompt-mode.el")))
+#+end_src
+
+* COMPLETION FRAMEWORKS (ARCHIVED)
+** Company Mode
+Replaced by Corfu for completion.
+
+#+begin_src emacs-lisp
+;; (use-package company
+;;   :ensure t
+;;   :defer 2
+;;   :diminish
+;;   :custom
+;;   (company-begin-commands '(self-insert-command))
+;;   (company-idle-delay .1)
+;;   (company-minimum-prefix-length 2)
+;;   (company-show-numbers t)
+;;   (company-tooltip-align-annotations 't)
+;;   (global-company-mode t))
+
+;; (use-package company-box
+;;   :after company
+;;   :diminish
+;;   :hook (company-mode . company-box-mode))
+#+end_src
+
+** All The Icons
+Replaced by Nerd Icons.
+
+#+begin_src emacs-lisp
+;; (use-package all-the-icons
+;;   :ensure t
+;;   :if (display-graphic-p))
+
+;; (use-package all-the-icons-dired
+;;   :ensure t
+;;   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+#+end_src
+
+* LSP MODE (ARCHIVED)
+** LSP Mode Core
+Replaced by Eglot for language server support.
+
+#+begin_src emacs-lisp
+;; (define-derived-mode helm-mode yaml-ts-mode "helm"
+;;   "Major mode for editing kubernetes helm templates")
+
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :init
+;;   (setq lsp-apply-edits-after-file-operations nil
+;;         lsp-before-save-edits nil
+;;         lsp-completion-enable t
+;;         lsp-completion-enable-additional-text-edit t
+;;         lsp-completion-filter-on-incomplete t
+;;         lsp-completion-no-cache nil
+;;         lsp-completion-provider :none
+;;         lsp-completion-show-detail t
+;;         lsp-completion-show-kind t
+;;         lsp-completion-show-label-description t
+;;         lsp-completion-sort-initial-results t
+;;         lsp-completion-use-last-result t
+;;         lsp-enable-snippet t
+;;         lsp-diagnostics-provider :auto
+;;         lsp-eldoc-enable-hover nil
+;;         lsp-enable-snippet nil
+;;         lsp-enable-symbol-highlighting t
+;;         lsp-headerline-breadcrumb-enable t
+;;         lsp-headerline-breadcrumb-segments '(symbols)
+;;         lsp-keymap-prefix "C-c l"
+;;         lsp-modeline-code-actions-enable t
+;;         lsp-modeline-diagnostics-enable t
+;;         lsp-response-timeout 60
+;;         lsp-signature-auto-activate t
+;;         lsp-signature-render-documentation t
+;;         lsp-ui-doc-enable t
+;;         lsp-ui-doc-show-with-cursor nil
+;;         lsp-ui-doc-show-with-mouse nil
+;;         lsp-ui-sideline-enable nil
+;;         lsp-ui-sideline-show-code-actions nil
+;;         lsp-ui-sideline-show-diagnostics t
+;;         lsp-ui-sideline-show-hover nil)
+;;   (setq lsp-disabled-clients '(tfls))
+;;   :hook ((bash-ts-mode . lsp-deferred)
+;;          (css-ts-mode . lsp-deferred)
+;;          (dart-mode . lsp-deferred)
+;;          (dockerfile-ts-mode . lsp-deferred)
+;;          (go-ts-mode . lsp-deferred)
+;;          (js-ts-mode . lsp-deferred)
+;;          (json-ts-mode . lsp-deferred)
+;;          (python-ts-mode . lsp-deferred)
+;;          (terraform-mode . lsp-deferred)
+;;          (tsx-ts-mode . lsp-deferred)
+;;          (typescript-ts-mode . lsp-deferred)
+;;          (yaml-ts-mode . lsp-deferred)
+
+;;          (lsp-mode . lsp-enable-which-key-integration))
+;;   :commands (lsp lsp-deferred)
+;;   :config
+;;   (add-to-list 'lsp-language-id-configuration '(helm-mode . "helm"))
+
+;;   (lsp-register-client
+;;    (make-lsp-client :new-connection (lsp-stdio-connection '("helm_ls" "serve"))
+;;                     :activation-fn (lsp-activate-on "helm")
+;;                     :server-id 'helm-ls)))
+#+end_src
+
+** LSP UI
+#+begin_src emacs-lisp
+;; (use-package lsp-ui
+;;   :ensure t
+;;   :commands lsp-ui-mode)
+#+end_src
+
+** LSP Treemacs
+#+begin_src emacs-lisp
+;; (use-package lsp-treemacs
+;;   :ensure t
+;;   :commands lsp-treemacs-errors-list)
+#+end_src
+
+** LSP Dap Mode
+#+begin_src emacs-lisp
+;; (use-package dap-mode
+;;   :ensure t)
+#+end_src
+
+** LSP Dart
+#+begin_src emacs-lisp
+;; (use-package lsp-dart
+;;   :ensure t
+;;   :custom
+;;   (lsp-dart-dap-flutter-hot-reload-on-save t)
+;;   (lsp-dart-sdk-dir "~/src/flutter/bin/cache/dart-sdk"))
+#+end_src
+
+* GIT TOOLS (ARCHIVED)
+** Diff Hl
+Replaced by git-gutter-fringe.
+
+#+begin_src emacs-lisp
+;; (use-package diff-hl
+;;   :ensure t
+;;   :hook ((dired-mode . diff-hl-dired-mode)
+;;          (magit-pre-refresh . diff-hl-magit-pre-refresh)
+;;          (magit-post-refresh . diff-hl-magit-post-refresh))
+;;   :config
+;;   (global-diff-hl-mode))
+#+end_src
+
+** Git Gutter (plain)
+Using git-gutter-fringe instead as it works better with Doom Themes.
+
+#+begin_src emacs-lisp
+;; (use-package git-gutter
+;;   :ensure t
+;;   :custom
+;;   (git-gutter:modified-sign " ")
+;;   (git-gutter:added-sign " ")
+;;   (git-gutter:deleted-sign " ")
+;;   :config
+;;   (global-git-gutter-mode t))
+#+end_src
+
+* LANGUAGE MODES (ARCHIVED)
+** JSON Mode
+Using built-in json-ts-mode instead.
+
+#+begin_src emacs-lisp
+;; (use-package json-mode
+;;   :ensure t)
+#+end_src
+
+** YAML Mode
+Using built-in yaml-ts-mode instead.
+
+#+begin_src emacs-lisp
+;; (use-package yaml-mode
+;;   :ensure t)
+#+end_src
+
+** Terraform TS Mode
+Doesn't work correctly yet, using terraform-mode instead.
+
+#+begin_src emacs-lisp
+;; (use-package terraform-ts-mode
+;;   :ensure (:host github :repo "kgrotel/terraform-ts-mode")
+;;   :custom
+;;   (terraform-ts-indent-level 2)
+;;   (terraform-ts-format-on-save t))
+#+end_src
+
+** Markdown Unhighlight
+Complex markdown concealing implementation, not currently used.
+
+#+begin_src emacs-lisp
+;; (defvar nb/current-line '(0 . 0)
+;;   "(start . end) of current line in current buffer")
+;; (make-variable-buffer-local 'nb/current-line)
+
+;; (defun nb/unhide-current-line (limit)
+;;   "Font-lock function"
+;;   (let ((start (max (point) (car nb/current-line)))
+;;         (end (min limit (cdr nb/current-line))))
+;;     (when (< start end)
+;;       (remove-text-properties start end
+;;                       '(invisible t display "" composition ""))
+;;       (goto-char limit)
+;;       t)))
+
+;; (defun nb/refontify-on-linemove ()
+;;   "Post-command-hook"
+;;   (let* ((start (line-beginning-position))
+;;          (end (line-beginning-position 2))
+;;          (needs-update (not (equal start (car nb/current-line)))))
+;;     (setq nb/current-line (cons start end))
+;;     (when needs-update
+;;       (font-lock-fontify-block 3))))
+
+;; (defun nb/markdown-unhighlight ()
+;;   "Enable markdown concealling"
+;;   (interactive)
+;;   (markdown-toggle-markup-hiding 'toggle)
+;;   (font-lock-add-keywords nil '((nb/unhide-current-line)) t)
+;;   (add-hook 'post-command-hook #'nb/refontify-on-linemove nil t))
+
+;; (add-hook 'markdown-mode-hook #'nb/markdown-unhighlight)
+#+end_src
+
+* PYTHON TOOLS (ARCHIVED)
+** Jedi
+Not currently in use.
+
+#+begin_src emacs-lisp
+;; Python Jedi configuration would go here
+#+end_src
+
+** Pyvenv
+Using pet mode for Python virtual environment management instead.
+
+#+begin_src emacs-lisp
+;; (use-package pyvenv
+;;   :ensure t
+;;   :config
+;;   (pyvenv-mode t))
+#+end_src
+
+* FLUTTER TOOLS (ARCHIVED)
+** Hover
+Desktop-only tool, not used on mobile devices.
+
+#+begin_src emacs-lisp
+;; (use-package hover
+;;   :ensure t
+;;   :after (dart-mode flutter)
+;;   :bind (:map flutter-mode-map
+;;               ("C-c C-h" . hover))
+;;   :custom
+;;   (hover-hot-reload-on-save nil))
+#+end_src
+
+* PROJECT MANAGEMENT (ARCHIVED)
+** Projectile
+Using built-in project.el instead.
+
+#+begin_src emacs-lisp
+;; (use-package projectile
+;;   :ensure t
+;;   :config
+;;   (projectile-mode 1)
+;;   (setq projectile-project-search-path '(("~/.dotfiles" . 0) ("~/coding" . 1) ("~/src" . 1))))
+#+end_src
+
+** Ibuffer Projectile
+Using ibuffer-project instead.
+
+#+begin_src emacs-lisp
+;; (use-package ibuffer-projectile
+;;   :ensure t
+;;   :config
+;;   (setq ibuffer-projectile-prefix "Project: ")
+;;   :hook
+;;   (ibuffer . (lambda ()
+;;                (visual-line-mode -1)
+;;                (ibuffer-projectile-set-filter-groups))))
+#+end_src
+
+* ORG MODE EXTENSIONS (ARCHIVED)
+** Org Roam
+Using Denote instead for note-taking.
+
+#+begin_src emacs-lisp
+;; (use-package org-roam
+;;   :ensure t
+;;   :custom
+;;   (org-roam-completion-everywhere t)
+;;   (org-roam-directory (expand-file-name "~/Nextcloud/Notes/"))
+;;   :bind (("C-c n l" . org-roam-buffer-toggle)
+;;          ("C-c n f" . org-roam-node-find)
+;;          ("C-c n g" . org-roam-graph)
+;;          ("C-c n i" . org-roam-node-insert)
+;;          ("C-c n c" . org-roam-capture)
+;;          ;; Dailies
+;;          ("C-c n j" . org-roam-dailies-capture-today))
+;;   :config
+;;   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+;;   (org-roam-db-autosync-mode))
+#+end_src
+
+* SESSION MANAGEMENT (ARCHIVED)
+** Desktop Save Mode
+Using perspective instead for session management.
+
+#+begin_src emacs-lisp
+;; (setq desktop-restore-eager 5) ; Restore first 5 buffers immediately, rest lazily
+;; (add-hook 'elpaca-after-init-hook
+;;           (lambda ()
+;;             (desktop-save-mode 1)
+;;             (desktop-read)))
+#+end_src
+
+** Workgroups2
+Using perspective instead.
+
+#+begin_src emacs-lisp
+;; (use-package workgroups2
+;;   :ensure t
+;;   :config
+;;   (setq wg-prefix-key (kbd "C-c w"))
+;;   (setq wg-session-file "~/.config/emacs/workgroups")
+;;   (setq wg-emacs-exit-save-behavior           'save)      ; Options: 'save 'ask nil
+;;   (setq wg-workgroups-mode-exit-save-behavior 'save)      ; Options: 'save 'ask nil
+;;   (setq wg-morph-on nil)
+;;   (workgroups-mode 1))
+#+end_src
+
+* SCROLLING (ARCHIVED)
+** Good Scroll & Ultra Scroll
+Using built-in pixel-scroll-precision-mode instead.
+
+#+begin_src emacs-lisp
+;; (pixel-scroll-precision-mode 1)
+;; (setq pixel-scroll-precision-interpolate-page t)
+
+;; (use-package ultra-scroll
+;;   :ensure t
+;;   :init
+;;   (setq scroll-conservatively 3
+;;         scroll-margin 0)
+;;   :config
+;;   (ultra-scroll-mode 1))
+
+;; (use-package good-scroll
+;;   :ensure t
+;;   :config
+;;   (good-scroll-mode 1))
+#+end_src
+
+* UI ENHANCEMENTS (ARCHIVED)
+** Vertico Posframe
+Minibuffer in center of screen, not currently preferred.
+
+#+begin_src emacs-lisp
+;; (use-package vertico-posframe
+;;   :ensure t
+;;   :config
+;;   (vertico-posframe-mode 1)
+;;   (setq vertico-posframe-border-width 2
+;;         vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))
+;;     vertico-posframe-poshandler 'posframe-poshandler-frame-top-center)
+;;   (set-face-attribute 'vertico-posframe-border nil :background "#b0bec5"))
+#+end_src
+
+** Highlight Indent Guides
+Not currently in use.
+
+#+begin_src emacs-lisp
+;; (use-package highlight-indent-guides
+;;   :ensure t
+;;   :diminish
+;;   :hook
+;;   (prog-mode . highlight-indent-guides-mode)
+;;   (yaml-ts-mode . highlight-indent-guides-mode)
+;;   :custom
+;;   (highlight-indent-guides-method 'character))
+#+end_src
+
+** Treemacs Nerd Icons
+Causes misaligned icons in treemacs.
+
+#+begin_src emacs-lisp
+;; (use-package treemacs-nerd-icons
+;;   :ensure t
+;;   :after (treemacs lsp-treemacs nerd-icons)
+;;   :config
+;;   (treemacs-load-theme "nerd-icons"))
+#+end_src
+
+** Treemacs Tab Bar
+Breaks window selection after file changes.
+
+#+begin_src emacs-lisp
+;; (use-package treemacs-tab-bar
+;;   :ensure t
+;;   :after (treemacs)
+;;   :config (treemacs-set-scope-type 'Tabs))
+#+end_src
+
+** Transparency
+Not currently enabled.
+
+#+begin_src emacs-lisp
+;; (add-to-list 'default-frame-alist '(alpha-background . 80))
+#+end_src
+
+* TAB LINE (ARCHIVED)
+Complex tab-line configuration, not currently used. Using tab-bar or perspective instead.
+
+#+begin_src emacs-lisp
+;; (use-package tab-line
+;;   :ensure nil
+;;   :hook (elpaca-after-init-hook . global-tab-line-mode)
+;;   :custom-face
+;;   (tab-line-tab ((t (:inherit tab-line :box nil))))
+;;   (tab-line-tab-current ((t (:inherit doom-modeline-highlight))))
+;;   (tab-line-tab-group ((t (:inherit doom-modeline-info))))
+;;   (tab-line-tab-inactive ((t (:inherit doom-modeline-buffer-minor-mode :foreground "gray50"))))
+;;   :config
+;;   (setq tab-line-close-button-show nil
+;;         tab-line-new-button-show nil
+;;         ;; tab-line-separator ""
+;;         tab-line-switch-cycling t
+;;         ;; tab-line-tab-name-function #'ismd/tab-line-name-buffer
+;;         tab-line-tabs-buffer-group-function #'ismd/tab-line-tabs-buffer-group-by-project
+;;         tab-line-tabs-buffer-group-sort-function #'ismd/tab-line-tabs-buffer-group-sort-by-creation-time
+;;         tab-line-tabs-buffer-list-function #'ismd/tab-line-tabs-buffer-list
+;;         tab-line-tabs-function #'tab-line-tabs-buffer-groups)
+
+;;   (add-to-list 'tab-line-tab-face-functions #'tab-line-tab-face-group))
+#+end_src
+
+** Tab Line Functions
+These functions were used to support custom tab-line behavior.
+
+#+begin_src emacs-lisp
+;; (defun ismd/get-project-file-buffers ()
+;;   (project-buffers (project-current)))
+
+;; (defun ismd/tab-line-tabs-buffer-group-by-project (buffer)
+;;   "Group buffers by project, excluding non-file buffers."
+;;   (when (buffer-file-name buffer)
+;;     (let ((group-name (tab-line-tabs-buffer-group-by-project buffer)))
+;;       (when group-name
+;;         (concat " " group-name " ")))))
+
+;; (defun ismd/tab-line-tabs-buffer-list ()
+;;   "Return buffer list without putting current buffer first."
+;;   (seq-filter (lambda (b) (and (buffer-live-p b)
+;;                                (/= (aref (buffer-name b) 0) ?\s)))
+;;               (seq-uniq (append (mapcar #'car (window-prev-buffers))
+;;                                 (buffer-list)))))
+
+;; (defvar buffer-creation-times (make-hash-table :test 'equal)
+;;   "Hash table storing buffer creation times by buffer name.")
+
+;; (defvar-local buffer-creation-time nil
+;;   "Time when buffer was created.")
+
+;; (defun track-buffer-creation ()
+;;   "Set creation time for new buffers."
+;;   (let ((buffer-key (buffer-file-name)))
+;;     (when buffer-key
+;;       (unless (gethash buffer-key buffer-creation-times)
+;;         (puthash buffer-key (current-time) buffer-creation-times))
+;;       (setq buffer-creation-time (gethash buffer-key buffer-creation-times)))))
+
+;; (defun cleanup-buffer-creation-time ()
+;;   "Remove creation time when buffer is killed."
+;;   (let ((buffer-key (buffer-file-name)))
+;;     (when buffer-key
+;;       (remhash buffer-key buffer-creation-times))))
+
+;; (add-hook 'find-file-hook #'track-buffer-creation)
+;; (add-hook 'buffer-list-update-hook #'track-buffer-creation)
+;; (add-hook 'kill-buffer-hook #'cleanup-buffer-creation-time)
+
+;; (defun ismd/tab-line-tabs-buffer-group-sort-by-creation-time (a b)
+;;   "Sort buffers by creation time (oldest first)."
+;;   (let ((time-a (buffer-local-value 'buffer-creation-time a))
+;;         (time-b (buffer-local-value 'buffer-creation-time b)))
+;;     (and time-a time-b (time-less-p time-a time-b))))
+
+;; (defcustom tab-line-tab-min-width 10
+;;   "Minimum width of a tab in characters."
+;;   :type 'integer
+;;   :group 'tab-line)
+
+;; (defcustom tab-line-tab-max-width 30
+;;   "Maximum width of a tab in characters."
+;;   :type 'integer
+;;   :group 'tab-line)
+
+;; (defun ismd/tab-line-name-buffer (buffer &rest _buffers)
+;;   "Create name for tab with padding and truncation.
+;; If buffer name is shorter than `tab-line-tab-max-width' it gets
+;; centered with spaces, otherwise it is truncated, to preserve
+;; equal width for all tabs.  This function also tries to fit as
+;; many tabs in window as possible, so if there are no room for tabs
+;; with maximum width, it calculates new width for each tab and
+;; truncates text if needed.  Minimal width can be set with
+;; `tab-line-tab-min-width' variable."
+;;   (with-current-buffer buffer
+;;     (let* ((window-width (window-width (get-buffer-window)))
+;;            (tab-amount (length (tab-line-tabs-window-buffers)))
+;;            (window-max-tab-width (if (>= (* (+ tab-line-tab-max-width 3) tab-amount) window-width)
+;;                                      (/ window-width tab-amount)
+;;                                    tab-line-tab-max-width))
+;;            (tab-width (- (cond ((> window-max-tab-width tab-line-tab-max-width)
+;;                                 tab-line-tab-max-width)
+;;                                ((< window-max-tab-width tab-line-tab-min-width)
+;;                                 tab-line-tab-min-width)
+;;                                (t window-max-tab-width))
+;;                          3)) ;; compensation for ' x ' button
+;;            (buffer-name (string-trim (buffer-name)))
+;;            (name-width (length buffer-name)))
+;;       (if (>= name-width tab-width)
+;;           (concat  " " (truncate-string-to-width buffer-name (- tab-width 2)) "…")
+;;         (concat " " buffer-name " ")))))
+#+end_src
+
+* XREF (ARCHIVED)
+** Xref Buffer Configuration
+Not needed with current setup.
+
+#+begin_src emacs-lisp
+;; (use-package xref
+;;   :ensure t
+;;   :hook
+;;   (xref--xref-buffer-mode . (lambda () (display-line-numbers-mode -1))))
+#+end_src

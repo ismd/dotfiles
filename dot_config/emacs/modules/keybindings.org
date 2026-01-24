@@ -1,0 +1,590 @@
+#+title: Keybindings
+#+author: Vladimir Kosteley
+#+description: General keybindings using general.el
+
+* GLOBAL KEYS
+#+begin_src emacs-lisp
+(use-package general
+  :ensure (:wait t)
+  :demand t
+  :config
+  (general-define-key
+
+   ;; Scroll
+   ;; "<next>" '(good-scroll-up-full-screen :wk "Scroll up full screen")
+   ;; "<prior>" '(good-scroll-down-full-screen :wk "Scroll down full screen")
+   ;; "C-v" '(good-scroll-up-full-screen :wk "Scroll up full screen")
+   ;; "M-v" '(good-scroll-down-full-screen :wk "Scroll down full screen")
+
+   "C-=" '(text-scale-increase :wk "Increase font size")
+   "C--" '(text-scale-decrease :wk "Decrease font size")
+   "C-0" '(text-scale-adjust :wk "Adjust font size")
+   ;; "C-1" '((lambda () (interactive) (tab-bar-select-tab 1)) :wk "Select tab 1")
+   ;; "C-2" '((lambda () (interactive) (tab-bar-select-tab 2)) :wk "Select tab 2")
+   ;; "C-3" '((lambda () (interactive) (tab-bar-select-tab 3)) :wk "Select tab 3")
+   ;; "C-4" '((lambda () (interactive) (tab-bar-select-tab 4)) :wk "Select tab 4")
+   ;; "C-5" '((lambda () (interactive) (tab-bar-select-tab 5)) :wk "Select tab 5")
+   ;; "C-6" '((lambda () (interactive) (tab-bar-select-tab 6)) :wk "Select tab 6")
+   ;; "C-7" '((lambda () (interactive) (tab-bar-select-tab 7)) :wk "Select tab 7")
+   ;; "C-8" '((lambda () (interactive) (tab-bar-select-tab 8)) :wk "Select tab 8")
+   ;; "C-9" '((lambda () (interactive) (tab-bar-select-tab 9)) :wk "Select tab 9")
+
+   ;; "C-<tab>" '(tab-line-switch-to-next-tab :wk "Switch to next tab")
+   ;; "C-<iso-lefttab>" '(tab-line-switch-to-prev-tab :wk "Switch to previous tab")
+
+   "C-S-r" '(ismd/reload-buffer :wk "Reload buffer")
+   "C-{" '(previous-buffer :wk "Previous buffer")
+   "C-}" '(next-buffer :wk "Next buffer")
+
+   "C-a" '(mwim-beginning-of-code-or-line :wk "Beginning of line or indentation")
+   "C-e" '(mwim-end-of-line-or-code :wk "End of line or indentation")
+   "C-k" '(ismd/delete-line :wk "Delete line")
+   "C-s" '(consult-line :wk "Search for string")
+   "C-M-s" '(isearch-forward :wk "Isearch forward")
+   "C-v" '(pixel-scroll-interpolate-down :wk "Scroll down")
+
+   "M-/" '(hippie-expand :wk "Hippie expand")
+   "M-<backspace>" '(ismd/delete-word-backward :wk "Delete word backward")
+   "M-d" '(ismd/delete-word :wk "Delete word")
+   "M-n" '(ismd/scroll-down-lines :wk "Scroll down")
+   "M-p" '(ismd/scroll-up-lines :wk "Scroll up")
+   "M-s" '(avy-goto-char-timer :wk "Jump to character")
+   "M-v" '(pixel-scroll-interpolate-up :wk "Scroll up")
+   "M-y" '(consult-yank-pop :wk "Yank pop")
+
+   "M-0" '(dirvish-side :wk "Dirvish side window")
+   ;; "M-0" '(winum-select-window-0-or-10 :wk "Select window 0 or 10")
+   "M-1" '(winum-select-window-1 :wk "Select window 1")
+   "M-2" '(winum-select-window-2 :wk "Select window 2")
+   "M-3" '(winum-select-window-3 :wk "Select window 3")
+   "M-4" '(winum-select-window-4 :wk "Select window 4")
+   "M-5" '(winum-select-window-5 :wk "Select window 5")
+   "M-6" '(winum-select-window-6 :wk "Select window 6")
+   "M-7" '(winum-select-window-7 :wk "Select window 7")
+   "M-8" '(winum-select-window-8 :wk "Select window 8")
+   "M-9" '(winum-select-window-9 :wk "Select window 9")
+   ))
+#+end_src
+
+* C-X PREFIX
+#+begin_src emacs-lisp
+(general-create-definer ismd/leader-keys-C-x
+  :prefix "C-x"
+  :keymaps 'override)
+
+(ismd/leader-keys-C-x
+  "b" '(consult-buffer :wk "Switch buffer")
+  "B" '(consult-buffer-other-window :wk "Switch buffer in other window")
+  "k" '(kill-current-buffer :wk "Kill this buffer")
+  "K" '(kill-buffer-and-window :wk "Kill buffer"))
+#+end_src
+
+* C-C PREFIX (LEADER KEYS)
+#+begin_src emacs-lisp
+(general-create-definer ismd/leader-keys
+  :prefix "C-c"
+  :keymaps 'override)
+
+(ismd/leader-keys
+  "RET" '(claude-code-ide-menu :wk "Claude Code IDE")
+  "TAB" '(indent-rigidly :wk "Indent region")
+  "." '(embark-act :wk "Embark act")
+  "=" '(er/expand-region :wk "Expand region")
+  "+" '(er/expand-region :wk "Expand region")
+  "-" '(er/contract-region :wk "Contract region")
+  "C-=" '(er/expand-region :wk "Expand region")
+  "C--" '(er/contract-region :wk "Contract region")
+  "C-r" '(vertico-repeat :wk "Vertico repeat"))
+
+(ismd/leader-keys
+  "C-f" '(:ignore t :wk "Fold")
+  "C-f C-f" '(ismd/fold-toggle :wk "Toggle fold")
+  "C-f C-a C-f" '(ismd/fold-close-all :wk "Fold all")
+  "C-f C-a C-u" '(ismd/fold-open-all :wk "Unfold all"))
+
+(ismd/leader-keys
+  "a" '(:ignore t :wk "AI")
+  "a a" '(aider-transient-menu :wk "Aider transient menu")
+  "a c" '(:ignore t :wk "Copilot Chat")
+  "a c RET" '(copilot-chat-display :wk "Chat display")
+  "a c M-RET" '(copilot-chat-transient :wk "Copilot chat transient")
+  "a c b" '(copilot-chat-transient-buffers :wk "Buffers")
+  "a c c" '(copilot-chat-transient-code :wk "Code")
+  "a g" '(:ignore t :wk "GPTel")
+  "a g RET" '(gptel :wk "GPTel")
+  "a g M-RET" '(gptel-menu :wk "GPTel menu")
+  "a g a" '(gptel-add :wk "GPTel add")
+  "a g g" '(gptel-send :wk "Send to GPTel")
+  "a g f" '(gptel-add-file :wk "GPTel add file")
+  "a g r" '(gptel-rewrite :wk "GPTel rewrite")
+  "a i" '(claude-code-ide-menu :wk "Claude Code IDE")
+  "a l" '(:keymap claude-code-command-map :package claude-code :wk "Claude Code"))
+
+(ismd/leader-keys
+  "b" '(:ignore t :wk "Bookmarks/Buffers")
+  "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
+  "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
+  "b d" '(bookmark-delete :wk "Delete bookmark")
+  "b I" '(persp-ibuffer :wk "Ibuffer")
+  "b k" '(kill-current-buffer :wk "Kill this buffer")
+  "b l" '(list-bookmarks :wk "List bookmarks")
+  "b m" '(bookmark-set :wk "Set bookmark")
+  "b n" '(next-buffer :wk "Next buffer")
+  "b p" '(previous-buffer :wk "Previous buffer")
+  "b r" '(ismd/reload-buffer :wk "Reload buffer")
+  "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file"))
+
+(ismd/leader-keys
+  "C" '(:ignore t :wk "Chezmoi")
+  "C f" '(chezmoi-find :wk "Find chezmoi managed file")
+  "C s" '(chezmoi-write :wk "Write changes to chezmoi managed file"))
+
+(ismd/leader-keys
+  "d" '(:ignore t :wk "Dired")
+  "d d" '(dirvish-dwim :wk "Open dirvish dwim")
+  "d D" '(ismd/dirvish-dual-pane :wk "Open dual pane dirvish")
+  "d t" '(treemacs-select-directory :wk "Open directory in treemacs"))
+
+(ismd/leader-keys
+  "E" '(:ignore t :wk "Embark/Evaluate")
+  "E b" '(eval-buffer :wk "Evaluate elisp in buffer")
+  "E c" '(embark-collect :wk "Embark collect")
+  "E e" '(embark-export :wk "Embark export")
+  "E l" '(embark-live :wk "Embark live")
+  "E r" '(eval-region :wk "Evaluate elisp in region")
+  "E v" '(eval-expression :wk "Evaluate elisp expression"))
+
+(ismd/leader-keys
+  "e" '(:ignore t :wk "Errors (Flymake)")
+  "e l" '(flymake-show-buffer-diagnostics :wk "List buffer errors")
+  "e n" '(flymake-goto-next-error :wk "Next error")
+  "e P" '(flymake-show-project-diagnostics :wk "List project errors")
+  "e p" '(flymake-goto-prev-error :wk "Previous error"))
+
+(ismd/leader-keys
+  "f" '(:ignore t :wk "Files")
+  "f c" '(ismd/open-emacs-config :wk "Open emacs config.org")
+  "f D" '(ismd/delete-this-file :wk "Delete this file")
+  "f e" '(ismd/open-emacs-directory :wk "Open user-emacs-directory in dired")
+  "f f" '(find-file :wk "Find file")
+  "f F" '(find-file-temporarily :wk "Find file temporarily")
+  "f j" '(consult-fd :wk "Find file with fd")
+  "f l" '(consult-locate :wk "Locate a file")
+  "f r" '(consult-recent-file :wk "Recent file")
+  "f R" '(rename-visited-file :wk "Rename file")
+  "f u" '(sudo-edit-find-file :wk "Sudo find file")
+  "f U" '(sudo-edit :wk "Sudo edit this file")
+  "f x" '(scratch-buffer :wk "Scratch buffer"))
+
+(ismd/leader-keys
+  "h" '(:ignore t :wk "Help")
+  "h ." '(display-local-help :wk "Display local help")
+  "h b" '(describe-bindings :wk "Describe bindings")
+  "h c" '(describe-char :wk "Describe character under cursor")
+  "h f" '(describe-function :wk "Describe function")
+  "h F" '(describe-face :wk "Describe face")
+  "h g" '(describe-gnu-project :wk "Describe GNU Project")
+  "h i" '(consult-info :wk "Info")
+  "h I" '(describe-input-method :wk "Describe input method")
+  "h k" '(describe-key :wk "Describe key")
+  "h K" '(describe-keymap :wk "Describe keymap")
+  "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
+  "h L" '(describe-language-environment :wk "Describe language environment")
+  "h m" '(describe-mode :wk "Describe mode")
+  "h o" '(describe-symbol :wk "Describe symbol at point")
+  "h r" '(:ignore t :wk "Reload")
+  "h r r" '((lambda () (interactive)
+              (load-file "~/.config/emacs/init.el")
+              (ignore (elpaca-process-queues)))
+            :wk "Reload emacs config")
+  "h t" '(consult-theme :wk "Load theme")
+  "h v" '(describe-variable :wk "Describe variable")
+  "h w" '(where-is :wk "Prints keybinding for command if set")
+  "h x" '(describe-command :wk "Display full documentation for command"))
+
+(ismd/leader-keys
+  "k" '(:ignore t :wk "Kubernetes")
+  "k d" '(:keymap kubed-prefix-map :package kubed :wk "Kubed")
+  "k l" '(kubel :package kubel :wk "Kubel"))
+
+(ismd/leader-keys
+  "l" '(:ignore t :wk "LSP")
+  "l =" '(:ignore t :wk "Format")
+  "l = =" '(eglot-format-buffer :wk "Format buffer")
+  "l = r" '(eglot-format :wk "Format region")
+  "l a" '(eglot-code-actions :wk "Code actions")
+  "l g" '(eglot-find-implementation :wk "Find implementation")
+  "l h" '(eldoc :wk "Show eldoc info")
+  "l i" '(eglot-code-action-organize-imports :wk "Organize imports")
+  "l r" '(eglot-rename :wk "Rename symbol"))
+
+(ismd/leader-keys
+  "m" '(:ignore t :wk "Multiple cursors")
+  "m a" '(mc/mark-all-like-this :wk "Mark all like this")
+  "m d" '(mc/mark-all-dwim :wk "Mark all dwim")
+  "m l" '(mc/edit-lines :wk "Edit lines"))
+
+(ismd/leader-keys
+  "M" '(:ignore t :wk "Music")
+  "M a" '(vuiet-play-artist :wk "Play artist")
+  "M A" '(vuiet-play-album :wk "Play album")
+  ;; "M c" '(vuiet-info-playing-track-album :wk "Currently playing track album")
+  "M g" '(vuiet-play-tag-similar :wk "Play tag")
+  "M i" '(:ignore t :wk "Info")
+  "M i a" '(vuiet-artist-info :wk "Artist info")
+  "M i A" '(vuiet-album-info :wk "Album info")
+  "M i t" '(vuiet-tag-info :wk "Tag info")
+  "M l" '(vuiet-playing-track-lyrics :wk "Playing track lyrics")
+  "M p" '(:ignore t :wk "Player")
+  "M p l" '(vuiet-love-track :wk "Love track")
+  "M p L" '(vuiet-love-unlove-track :wk "Unlove track")
+  "M p n" '(vuiet-next :wk "Next")
+  "M p s" '(vuiet-stop :wk "Stop")
+  "M p p" '(vuiet-play-pause :wk "Play/pause")
+  "M r" '(vuiet-play-loved-tracks-similar :wk "Play similar loved tracks")
+  "M s" '(vuiet-play-artist-similar :wk "Play similar artist")
+  ;; "M S" '(vuiet-play-playing-artist-similar :wk "Play similar currently playing artist")
+  "M t" '(vuiet-play-track :wk "Play track")
+  "M T" '(vuiet-play-track-search :wk "Play track search"))
+
+(ismd/leader-keys
+  "n" '(:ignore t :wk "Notes")
+  "n b" '(denote-backlinks :wk "Backlinks")
+  "n d" '(denote-dired :wk "Dired")
+  "n f" '(denote-open-or-create :wk "Open or create note")
+  "n g" '(denote-grep :wk "Grep")
+  "n l" '(denote-link :wk "Link")
+  "n n" '(denote :wk "Denote")
+  "n N" '(denote-subdirectory :wk "Denote subdirectory")
+  "n r" '(denote-rename-file :wk "Rename file"))
+
+(ismd/leader-keys
+  "o" '(:ignore t :wk "Org")
+  "o a" '(org-agenda :wk "Org agenda")
+  "o b" '(:ignore t :wk "Tables")
+  "o b -" '(org-table-insert-hline :wk "Insert hline in table")
+  "o B" '(org-babel-tangle :wk "Org babel tangle")
+  "o d" '(:ignore t :wk "Date/deadline")
+  "o d t" '(org-time-stamp :wk "Org time stamp")
+  "o e" '(org-export-dispatch :wk "Org export dispatch")
+  "o i" '(org-toggle-item :wk "Org toggle item")
+  "o o" '(org-emphasize :wk "Org emphasize")
+  "o T" '(org-todo-list :wk "Org todo list")
+  "o x" '(org-toggle-checkbox :wk "Org toggle checkbox"))
+
+(ismd/leader-keys
+  "p" '(:keymap project-prefix-map :package project :wk "Project"))
+
+(ismd/leader-keys
+  "q" '(:ignore t :wk "Quit")
+  "q f" '(delete-frame :wk "Delete frame")
+  "q q" '(save-buffers-kill-emacs :wk "Quit Emacs")
+  "q r" '(restart-emacs :wk "Restart Emacs"))
+
+(ismd/leader-keys
+  "s" '(:ignore t :wk "Search")
+  "s d" '(rg :wk "Ripgrep in directory")
+  "s g" '(consult-grep :wk "Grep")
+  "s G" '(consult-git-grep :wk "Git grep")
+  "s m" '(consult-man :wk "Man pages")
+  "s p" '(rg-project :wk "Ripgrep in project")
+  "s r" '(consult-ripgrep :wk "Consult ripgrep")
+  "s t" '(tldr :wk "Lookup TLDR docs for a command"))
+
+(ismd/leader-keys
+  "r" '(:ignore t :wk "Registers")
+  "r l" '(consult-register-load :wk "Consult register load")
+  "r r" '(consult-register :wk "Consult register")
+  "r s" '(consult-register-store :wk "Consult register store"))
+
+(ismd/leader-keys
+  "t" '(:ignore t :wk "Toggle")
+  "t c" '(claude-code-toggle :wk "Toggle Claude Code")
+  "t f" '(flymake-mode :wk "Toggle flymake")
+  "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
+  "t t" '(dirvish-side :wk "Toggle dirvish side window")
+  "t T" '(treemacs-add-and-display-current-project-exclusively :wk "Treemacs project")
+  "t v" '(vterm-toggle :wk "Toggle vterm")
+  "t w" '(visual-line-mode :wk "Toggle word wrap"))
+
+(ismd/leader-keys
+  "v" '(:ignore t :wk "Version control")
+  "v /" '(magit-dispatch :wk "Magit dispatch")
+  "v ." '(magit-file-dispatch :wk "Magit file dispatch")
+  "v g" '(magit-status :wk "Magit status")
+  "v m" '(magit-git-mergetool :wk "Magit git mergetool")
+  "v t" '(git-timemachine :wk "Git time machine"))
+
+(ismd/leader-keys
+  "w" '(:ignore t :wk "Workspaces/Windows")
+  "w m" '(:ignore t :wk "Move")
+  "w m b" '(buf-move-left :wk "Buffer move left")
+  "w m n" '(buf-move-down :wk "Buffer move down")
+  "w m p" '(buf-move-up :wk "Buffer move up")
+  "w m f" '(buf-move-right :wk "Buffer move right")
+  "w s" '(ismd/window-split-toggle :wk "Toggle window split")
+  "w w" '(persp-switch :wk "Switch workspace"))
+#+end_src
+
+* M-G PREFIX
+#+begin_src emacs-lisp
+(general-create-definer ismd/leader-keys-M-g
+  :prefix "M-g")
+
+(ismd/leader-keys-M-g
+  "g" '(consult-goto-line :wk "Go to line")
+  "i" '(consult-imenu :wk "Imenu")
+  "I" '(consult-imenu-multi :wk "Imenu multi")
+  "o" '(consult-outline :wk "Outline"))
+#+end_src
+
+* MODE-SPECIFIC KEYMAPS
+** Comint
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'comint-mode-map
+ "C-S-n" '(comint-next-prompt :wk "Next prompt")
+ "C-S-p" '(comint-previous-prompt :wk "Previous prompt")
+ "M-n" nil
+ "M-p" nil)
+#+end_src
+
+** Copilot
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'copilot-completion-map
+ "TAB" '(copilot-accept-completion :wk "Accept completion")
+ "C-e" '(copilot-accept-completion-by-line :wk "Accept completion by line")
+ "C-g" '(copilot-clear-overlay :wk "Clear overlay")
+ "C-c C-n" '(copilot-next-completion :wk "Next completion")
+ "C-c C-p" '(copilot-previous-completion :wk "Previous completion")
+ "M-f" '(copilot-accept-completion-by-word :wk "Accept completion by word"))
+#+end_src
+
+** Copilot Chat
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'copilot-chat-prompt-mode-map
+ "M-n" nil
+ "M-p" nil)
+#+end_src
+
+** Corfu
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'corfu-map
+ "TAB" nil
+ "<tab>" nil)
+#+end_src
+
+** Dirvish
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'dirvish-mode-map
+ "DEL" '(dired-up-directory :wk "Go up directory")
+ "TAB" '(dirvish-subtree-toggle :wk "Toggle subtree")
+ "*"   '(dirvish-mark-menu :wk "Mark menu")
+ "."   '(dired-create-empty-file :wk "Create empty file")
+ ","   '(dirvish-setup-menu :wk "Setup menu")
+ "?"   '(dirvish-dispatch :wk "Dispatch menu")
+ "e"   '(dirvish-emerge-menu :wk "Emerge menu")
+ "f"   '(dirvish-file-info-menu :wk "File info menu")
+ "h"   '(dirvish-history-menu :wk "History menu")
+ "j"   '(dirvish-quick-access :wk "Quick access jump")
+ "l"   '(dirvish-layout-toggle :wk "Toggle layout")
+ "N"   '(dirvish-narrow :wk "Narrow")
+ "r"   '(dirvish-history-jump :wk "Jump to history")
+ "s"   '(dirvish-quicksort :wk "Quicksort menu")
+ "y"   '(dirvish-yank-menu :wk "Yank menu"))
+#+end_src
+
+** Eat
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'eat-semi-char-mode-map
+ ;; "C-n" nil
+ ;; "C-p" nil
+ "M-n" nil
+ "M-p" nil
+ "M-1" nil
+ "M-2" nil
+ "M-3" nil
+ "M-4" nil
+ "M-5" nil
+ "M-6" nil
+ "M-7" nil
+ "M-8" nil
+ "M-9" nil
+ "M-0" nil)
+#+end_src
+
+** Git
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'git-commit-mode-map
+ "C-c v c" '(magit-generate-changelog :wk "Generate changelog"))
+#+end_src
+
+** Ibuffer
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'ibuffer-mode-map
+ "TAB" '(ibuffer-toggle-filter-group :wk "Toggle filter group")
+ "C-S-n" '(ibuffer-forward-filter-group :wk "Next filter group")
+ "C-S-p" '(ibuffer-backward-filter-group :wk "Previous filter group"))
+#+end_src
+
+** Indent Rigidly
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'indent-rigidly-map
+ "b" '(indent-rigidly-left :wk "Indent left")
+ "B" '(indent-rigidly-left-to-tab-stop :wk "Indent left to tab stop")
+ "f" '(indent-rigidly-right :wk "Indent right")
+ "F" '(indent-rigidly-right-to-tab-stop :wk "Indent right to tab stop"))
+#+end_src
+
+** JavaScript
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'js-ts-mode-map
+ "M-." '(xref-find-definitions :wk "Find definitions"))
+#+end_src
+
+** Kubernetes
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'kubernetes-mode-map
+ "M-n" nil
+ "M-p" nil)
+#+end_src
+
+** Magit
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'magit-mode-map
+ "C-<tab>" nil
+ "M-1" nil
+ "M-2" nil
+ "M-3" nil
+ "M-4" nil
+ "M-5" nil
+ "M-6" nil
+ "M-7" nil
+ "M-8" nil
+ "M-9" nil
+ "M-0" nil
+ "M-n" nil
+ "M-p" nil)
+#+end_src
+
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'magit-status-mode-map
+ "C" '(magit-gptcommit-commit-quick :wk "Quick GPTel commit"))
+#+end_src
+
+** Makefile
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'makefile-mode-map
+ "M-n" nil
+ "M-p" nil)
+#+end_src
+
+** Markdown
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'markdown-mode-map
+ "M-n" nil
+ "M-p" nil
+ "C-S-n" '(markdown-outline-next :wk "Next heading")
+ "C-S-p" '(markdown-outline-previous :wk "Previous heading"))
+#+end_src
+
+** Minibuffer
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'minibuffer-local-map
+ "C-v" 'scroll-up-command
+ "M-v" 'scroll-down-command)
+#+end_src
+
+** Minuet
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'minuet-active-mode-map
+ "TAB" '(minuet-accept-suggestion :wk "Accept suggestion")
+ "M-n" '(minuet-next-suggestion :wk "Next suggestion")
+ "M-p" '(minuet-previous-suggestion :wk"Previous suggestion")
+ "C-e" '(minuet-accept-suggestion-line :wk "Accept suggestion line")
+ "C-g" '(minuet-dismiss-suggestion :wk "Dismiss suggestion"))
+#+end_src
+
+** Org
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'org-mode-map
+ "M-g a" '(consult-org-agenda :wk "Org agenda")
+ "M-g o" '(consult-org-heading :wk "Org heading")
+ "C-M-i" '(completion-at-point :wk "Complete at point")
+ "C-S-n" '(org-forward-heading-same-level :wk "Next heading")
+ "C-S-p" '(org-backward-heading-same-level :wk "Previous heading"))
+#+end_src
+
+** Polymode
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'polymode-mode-map
+ "M-n" nil
+ "M-p" nil)
+#+end_src
+
+** Rg
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'rg-mode-map
+ "n" '(compilation-next-error :wk "Move to next line with a match")
+ "p" '(compilation-previous-error :wk "Move to previous line with a match")
+ "C-c n" '(rg-next-file :wk "Move to next file with a match")
+ "C-c p" '(rg-prev-file :wk "Move to previous file with a match"))
+#+end_src
+
+** Vterm
+#+begin_src emacs-lisp
+(general-define-key
+ :keymaps 'vterm-mode-map
+ "M-1" nil
+ "M-2" nil
+ "M-3" nil
+ "M-4" nil
+ "M-5" nil
+ "M-6" nil
+ "M-7" nil
+ "M-8" nil
+ "M-9" nil
+ "M-0" nil)
+#+end_src
+
+* CYRILLIC KEYBINDINGS
+#+begin_src emacs-lisp
+(define-key key-translation-map (kbd "C-а") (kbd "C-f"))
+(define-key key-translation-map (kbd "C-и") (kbd "C-b"))
+(define-key key-translation-map (kbd "C-т") (kbd "C-n"))
+(define-key key-translation-map (kbd "C-з") (kbd "C-p"))
+
+(define-key key-translation-map (kbd "M-а") (kbd "M-f"))
+(define-key key-translation-map (kbd "M-и") (kbd "M-b"))
+(define-key key-translation-map (kbd "M-т") (kbd "M-n"))
+(define-key key-translation-map (kbd "M-з") (kbd "M-p"))
+
+(define-key key-translation-map (kbd "C-ф") (kbd "C-a"))
+(define-key key-translation-map (kbd "C-у") (kbd "C-e"))
+
+(define-key key-translation-map (kbd "C-в") (kbd "C-d"))
+(define-key key-translation-map (kbd "M-в") (kbd "M-d"))
+
+(define-key key-translation-map (kbd "C-.") (kbd "C-/"))
+(define-key key-translation-map (kbd "M-Ю") (kbd "M->"))
+(define-key key-translation-map (kbd "M-Б") (kbd "M-<"))
+#+end_src

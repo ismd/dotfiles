@@ -1,0 +1,241 @@
+#+title: Languages
+#+author: Vladimir Kosteley
+#+description: Programming language support, LSP, and tree-sitter
+
+* EGLOT
+https://github.com/joaotavora/eglot
+
+#+begin_src emacs-lisp
+(use-package eglot
+  :ensure (:wait t)
+  :after (flymake jsonrpc)
+  :hook ((prog-mode . eglot-ensure))
+  :config
+  (advice-add 'eglot--message :around
+              (lambda (orig format &rest args)
+                (unless (string-prefix-p "Connected!" format)
+                  (apply orig format args)))))
+#+end_src
+
+* TREE SITTER
+Before Emacs 29, tree-sitter was a [[https://emacs-tree-sitter.github.io/][package]] that could be installed. With Emacs 29, tree-sitter is built-in in package =treesit.el=.
+
+** Treesit Auto
+#+begin_src emacs-lisp
+(use-package treesit-auto
+  :ensure t
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+#+end_src
+
+** Treesit Fold
+https://github.com/emacs-tree-sitter/treesit-fold
+
+#+begin_src emacs-lisp
+(use-package treesit-fold
+  :ensure (:host github :repo "emacs-tree-sitter/treesit-fold")
+  :custom
+  (treesit-fold-line-count-format (concat (truncate-string-ellipsis) " %d lines " (truncate-string-ellipsis)))
+  (treesit-fold-line-count-show t)
+  :config
+  (global-treesit-fold-mode 1)
+  ;; Disabled because it is too slow
+  ;; (global-treesit-fold-indicators-mode 1)
+  )
+#+end_src
+
+** Smart Folding Functions
+
+#+begin_src emacs-lisp
+(defun ismd/is-treesit-mode-p ()
+  "Check if current major mode is a tree-sitter mode."
+  (string-suffix-p "-ts-mode" (symbol-name major-mode)))
+
+(defun ismd/fold-toggle ()
+  "Toggle fold using treesit-fold for tree-sitter modes, kirigami otherwise."
+  (interactive)
+  (if (ismd/is-treesit-mode-p)
+      (treesit-fold-toggle)
+    (kirigami-toggle-fold)))
+
+(defun ismd/fold-close-all ()
+  "Close all folds using treesit-fold for tree-sitter modes, kirigami otherwise."
+  (interactive)
+  (if (ismd/is-treesit-mode-p)
+      (treesit-fold-close-all)
+    (kirigami-close-folds)))
+
+(defun ismd/fold-open-all ()
+  "Open all folds using treesit-fold for tree-sitter modes, kirigami otherwise."
+  (interactive)
+  (if (ismd/is-treesit-mode-p)
+      (treesit-fold-open-all)
+    (kirigami-open-folds)))
+#+end_src
+
+* KIRIGAMI
+https://github.com/jamescherti/kirigami.el
+
+#+begin_src emacs-lisp
+(use-package kirigami
+  ;; We can use version from MELPA later
+  :ensure (:host github :repo "jamescherti/kirigami.el"))
+#+end_src
+
+* LANGUAGE SUPPORT
+Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM, AWK, C, C++, Fortran, Icon, IDL (CORBA), IDLWAVE, Java, Javascript, M4, Makefiles, Metafont, Modula2, Object Pascal, Objective-C, Octave, Pascal, Perl, Pike, PostScript, Prolog, Python, Ruby, Simula, SQL, Tcl, Verilog, and VHDL.  Other languages will require you to install additional modes.
+
+** Dart
+https://github.com/emacsorphanage/dart-mode
+https://emacs-lsp.github.io/lsp-dart/
+
+#+begin_src emacs-lisp
+(use-package dart-mode
+  :ensure t)
+#+end_src
+
+*** Flutter
+https://github.com/amake/flutter.el
+
+#+begin_src emacs-lisp
+(use-package flutter
+  :ensure t
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-or-hot-reload)))
+#+end_src
+
+** Fish
+https://github.com/emacsmirror/fish-mode
+
+#+begin_src emacs-lisp
+(use-package fish-mode
+  :ensure t)
+#+end_src
+
+** Go
+https://github.com/dominikh/go-mode.el
+
+#+begin_src emacs-lisp
+(use-package go-mode
+  :ensure t)
+#+end_src
+
+** Markdown
+*** Grip
+https://github.com/seagle0128/grip-mode
+
+#+begin_src emacs-lisp
+(use-package grip-mode
+  :ensure t
+  :bind (:map markdown-mode-command-map
+              ("g" . grip-mode)))
+#+end_src
+
+** Python
+*** Elpy
+https://github.com/jorgenschaefer/elpy
+
+#+begin_src emacs-lisp
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+#+end_src
+
+*** Pet
+https://github.com/wyuenho/emacs-pet
+
+#+begin_src emacs-lisp
+(use-package pet
+  :ensure t
+  :custom
+  (python-indent-guess-indent-offset-verbose nil)
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
+#+end_src
+
+** QML
+https://github.com/coldnew/qml-mode
+
+#+begin_src emacs-lisp
+(use-package qml-mode
+  :ensure t)
+#+end_src
+
+** Terraform
+#+begin_src emacs-lisp
+(use-package terraform-mode
+  :ensure t
+  :custom
+  (terraform-indent-level 2)
+  (terraform-format-on-save nil))
+#+end_src
+
+* NVM
+https://github.com/rejeep/nvm.el
+
+#+begin_src emacs-lisp
+(use-package nvm
+  :ensure (:host github :repo "rejeep/nvm.el")
+  :config
+  (nvm-use "24"))
+#+end_src
+
+* PROTOBUF
+#+begin_src emacs-lisp
+(use-package protobuf-mode
+  :ensure t)
+#+end_src
+
+* KUBERNETES
+** kele
+https://github.com/jinnovation/kele.el
+
+Actively developed. Modern Emacs-native UI with Embark integration. Confusing keybindings.
+
+#+begin_src emacs-lisp
+(use-package kele
+  :ensure t
+  :defer t
+  :config
+  (kele-mode 1))
+#+end_src
+
+** Kubed
+https://github.com/eshelyaron/kubed
+
+Actively developed. Alternative to kele with TRAMP integration.
+
+#+begin_src emacs-lisp
+(use-package kubed
+  :ensure t
+  :defer t)
+#+end_src
+
+** kubel
+https://github.com/abrochard/kubel
+
+Maintained, accepts PRs. Good for limited RBAC permissions.
+
+#+begin_src emacs-lisp
+(use-package kubel
+  :ensure t
+  :defer t
+  :after vterm
+  :config (kubel-vterm-setup))
+#+end_src
+
+** kubernetes-el
+https://github.com/kubernetes-el/kubernetes-el
+
+Maintained (mostly CI updates). Most popular (679 stars) but has performance issues.
+
+#+begin_src emacs-lisp
+(use-package kubernetes
+  :ensure t
+  :defer t)
+#+end_src

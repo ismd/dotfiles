@@ -1,0 +1,230 @@
+#+title: Completion System
+#+author: Vladimir Kosteley
+#+description: Vertico, Corfu, Consult, and related completion packages
+
+* VERTICO
+https://github.com/minad/vertico
+
+vertico.el - VERTical Interactive COmpletion
+
+#+begin_src emacs-lisp
+(use-package vertico
+  :ensure t
+  :demand t
+  :init
+  (vertico-mode)
+
+  ;; Different scroll margin
+  ;; (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  ;; (setq vertico-count 20)
+
+  ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  ;; (setq vertico-cycle t)
+  )
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :ensure nil
+  :init
+  (savehist-mode))
+
+;; Add prompt indicator to `completing-read-multiple'.
+;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
+(defun crm-indicator (args)
+  (cons (format "[CRM%s] %s"
+                (replace-regexp-in-string
+                 "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                 crm-separator)
+                (car args))
+        (cdr args)))
+(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+#+end_src
+
+* CONSULT
+https://github.com/minad/consult
+
+#+begin_src emacs-lisp
+(use-package consult
+  :ensure t
+  :after perspective
+
+  ;; Enable automatic preview at point in the *Completions* buffer. This is
+  ;; relevant when you use the default completion UI.
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+
+  :custom
+  (consult-line-start-from-top t)
+
+  :init
+
+  ;; Tweak the register preview for `consult-register-load',
+  ;; `consult-register-store' and the built-in commands.  This improves the
+  ;; register formatting, adds thin separator lines, register sorting and hides
+  ;; the window mode line.
+  (advice-add #'register-preview :override #'consult-register-window)
+  (setq register-preview-delay 0.5)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+
+  ;; Configure other variables and modes in the :config section,
+  ;; after lazily loading the package.
+  :config
+
+  ;; Optionally configure preview. The default value
+  ;; is 'any, such that any key triggers the preview.
+  ;; (setq consult-preview-key 'any)
+  ;; (setq consult-preview-key "M-.")
+  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+  ;; For some commands and buffer sources it is useful to configure the
+  ;; :preview-key on a per-command basis using the `consult-customize' macro.
+  (consult-customize
+   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep consult-man
+   consult-bookmark consult-recent-file consult-xref
+   consult-source-bookmark consult-source-file-register
+   consult-source-recent-file consult-source-project-recent-file
+
+   ;; :preview-key "M-."
+   :preview-key '(:debounce 0.4 any))
+
+  ;; Optionally configure the narrowing key.
+  ;; Both < and C-+ work reasonably well.
+  (setq consult-narrow-key "<") ;; "C-+"
+
+  ;; Optionally make narrowing help available in the minibuffer.
+  ;; You may want to use `embark-prefix-help-command' or which-key instead.
+  ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
+
+  (consult-customize consult-source-buffer :hidden t :default nil)
+  (add-to-list 'consult-buffer-sources persp-consult-source))
+#+end_src
+
+** Embark
+https://github.com/oantolin/embark
+
+#+begin_src emacs-lisp
+(use-package embark
+  :ensure t
+  :init
+
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  ;; Show the Embark target at point via Eldoc. You may adjust the
+  ;; Eldoc strategy, if you want to see the documentation from
+  ;; multiple providers. Beware that using this can be a little
+  ;; jarring since the message shown in the minibuffer can be more
+  ;; than one line, causing the modeline to move up and down:
+
+  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+  :config
+
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+#+end_src
+
+** Embark Consult
+#+begin_src emacs-lisp
+(use-package embark-consult
+  :ensure t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+#+end_src
+
+* CORFU
+https://github.com/minad/corfu
+
+#+begin_src emacs-lisp
+(use-package corfu
+  :ensure t
+  :init
+  (global-corfu-mode)
+  (corfu-history-mode)
+  (corfu-popupinfo-mode))
+#+end_src
+
+* MARGINALIA
+https://github.com/minad/marginalia
+
+Enable rich annotations using the Marginalia package.
+
+#+begin_src emacs-lisp
+(use-package marginalia
+  :ensure t
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
+
+  ;; The :init section is always executed.
+  :init
+
+  ;; Marginalia must be activated in the :init section of use-package such that
+  ;; the mode gets enabled right away. Note that this forces loading the
+  ;; package.
+  (marginalia-mode))
+#+end_src
+
+* ORDERLESS
+https://github.com/oantolin/orderless
+
+#+begin_src emacs-lisp
+(use-package orderless
+  :ensure t
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+
+* EXPAND REGION
+https://github.com/magnars/expand-region.el
+
+#+begin_src emacs-lisp
+(use-package expand-region
+  :ensure t)
+#+end_src
+
+* MULTIPLE CURSORS
+https://github.com/magnars/multiple-cursors.el
+
+#+begin_src emacs-lisp
+(use-package multiple-cursors
+  :ensure t)
+#+end_src
+
+* MOVE WHERE I MEAN
+https://github.com/alezost/mwim.el
+
+This package allows you to move to the beginning/end of a line or code.
+
+#+begin_src emacs-lisp
+(use-package mwim
+  :ensure t
+  :config
+  (setq mwim-beginning-of-line-function 'beginning-of-line
+        mwim-end-of-line-function 'end-of-line))
+#+end_src
+
+* PERSISTENT SCRATCH
+https://github.com/Fanael/persistent-scratch
+
+#+begin_src emacs-lisp
+(use-package persistent-scratch
+  :ensure t
+  :config
+  (persistent-scratch-setup-default))
+#+end_src

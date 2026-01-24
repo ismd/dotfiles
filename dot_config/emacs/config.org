@@ -1,0 +1,111 @@
+#+title: GNU Emacs Config
+#+author: Vladimir Kosteley
+#+description: Personal Emacs config
+#+startup: showeverything
+#+options: toc:2
+
+* TABLE OF CONTENTS :toc:
+- [[#initial-setup][INITIAL SETUP]]
+  - [[#require-early-packages][Require Early Packages]]
+  - [[#built-in-package-overrides][Built-in Package Overrides]]
+  - [[#custom-file][Custom File]]
+  - [[#direnv][Direnv]]
+  - [[#themes][Themes]]
+- [[#load-modules][LOAD MODULES]]
+- [[#starting-the-daemon][STARTING THE DAEMON]]
+
+* INITIAL SETUP
+** Require Early Packages
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/.config/emacs/lisp/")
+
+(require 'elpaca-setup) ;; The Elpaca Package Manager
+(require 'buffer-move)  ;; Buffer-move for better window management
+#+end_src
+
+** Built-in Package Overrides
+These packages override built-in Emacs packages and must be loaded early to ensure the newer versions take precedence. Eglot requires newer versions of project, jsonrpc, and flymake.
+
+#+begin_src emacs-lisp
+;; Load newer project (required by eglot)
+(use-package project
+  :ensure (:wait t)
+  :demand t)
+
+;; Load newer jsonrpc (required by eglot)
+(use-package jsonrpc
+  :ensure (:wait t)
+  :demand t)
+
+;; Load newer flymake (required by eglot)
+(use-package flymake
+  :ensure (:wait t)
+  :demand t
+  :diminish)
+#+end_src
+
+** Custom File
+#+begin_src emacs-lisp
+(setq custom-file (expand-file-name "customs.el" user-emacs-directory))
+(add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
+
+;; Load custom.el early (before packages) for environment variables like API keys
+(setq ismd/custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load ismd/custom-file 'noerror)
+#+end_src
+
+** Direnv
+https://github.com/purcell/envrc
+
+#+begin_src emacs-lisp
+(use-package envrc
+  :ensure t
+  :init
+  (envrc-global-mode))
+#+end_src
+
+** Themes
+*** Init Themes
+#+begin_src emacs-lisp
+(org-babel-load-file
+  (expand-file-name
+    "modules/themes.org"
+    user-emacs-directory))
+#+end_src
+
+*** Load Theme
+#+begin_src emacs-lisp
+(defvar theme-name 'ef-owl "The name of the theme to use")
+(when (file-exists-p "~/.config/emacs/theme.el")
+  (load-file "~/.config/emacs/theme.el"))
+(add-hook 'elpaca-after-init-hook
+          (lambda ()
+            (load-theme theme-name t)))
+#+end_src
+
+* LOAD MODULES
+#+begin_src emacs-lisp
+(defun ismd/load-module (name)
+  "Load a configuration module from modules directory."
+  (org-babel-load-file
+   (expand-file-name (concat "modules/" name ".org") user-emacs-directory)))
+
+;; Core modules (load order matters)
+(ismd/load-module "core")       ;; Sane defaults, utilities
+(ismd/load-module "ui")         ;; Fonts, icons, modeline
+(ismd/load-module "completion") ;; Vertico, Corfu, Consult
+(ismd/load-module "keybindings");; General keybindings
+
+;; Feature modules
+(ismd/load-module "files")      ;; Dired, treemacs, project
+(ismd/load-module "git")        ;; Magit, git-gutter
+(ismd/load-module "org-config") ;; Org mode settings
+(ismd/load-module "languages")  ;; Eglot, treesit, languages
+(ismd/load-module "shells")     ;; Vterm, eshell
+(ismd/load-module "ai")         ;; Claude, Copilot, GPTel
+#+end_src
+
+* STARTING THE DAEMON
+#+begin_src emacs-lisp
+(server-start)
+#+end_src

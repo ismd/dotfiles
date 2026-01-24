@@ -1,0 +1,163 @@
+#+title: AI
+#+author: Vladimir Kosteley
+#+description: AI assistants and code completion
+
+* CHATGPT SHELL
+https://github.com/xenodium/chatgpt-shell
+
+#+begin_src emacs-lisp
+(use-package chatgpt-shell
+  :ensure t
+  :custom
+  ((chatgpt-shell-anthropic-key #'anthropic-api-key)
+   (chatgpt-shell-model-version "claude-sonnet-4-20250514")))
+#+end_src
+
+* CLAUDE CODE
+** claude-code.el
+https://github.com/stevemolitor/claude-code.el
+
+#+begin_src emacs-lisp
+(use-package eat
+  :ensure t
+  :hook (eat-mode . (lambda () (display-line-numbers-mode -1))))
+#+end_src
+
+#+begin_src emacs-lisp
+(defun ismd/claude-notify (title message)
+  "Display a Linux notification using notify-send."
+  (if (executable-find "notify-send")
+      (call-process "notify-send" nil nil nil title message)
+    (message "%s: %s" title message)))
+
+(defun ismd/claude-notify-with-sound (title message)
+  "Display a Linux notification with sound."
+  (when (executable-find "notify-send")
+    (call-process "notify-send" nil nil nil title message))
+  ;; Play sound if paplay is available
+  (when (executable-find "paplay")
+    (call-process "paplay" nil nil nil "/usr/share/sounds/freedesktop/stereo/message.oga")))
+
+(use-package claude-code
+  :ensure (:host github :repo "stevemolitor/claude-code.el" :rev :newest)
+  :custom
+  (claude-code-program "~/.claude/local/claude")
+  ;; (claude-code-notification-function #'ismd/claude-notify)
+  (claude-code-notification-function #'ismd/claude-notify-with-sound)
+  :config
+  (ismd/add-display-buffer-rule "^\\*claude")
+
+  (claude-code-mode))
+#+end_src
+
+** claude-code-ide
+https://github.com/manzaltu/claude-code-ide.el
+
+#+begin_src emacs-lisp
+(use-package claude-code-ide
+  :ensure (:host github :repo "manzaltu/claude-code-ide.el")
+  :custom
+  (claude-code-ide-cli-path "~/.local/bin/claude")
+  (claude-code-ide-show-claude-window-in-ediff nil)
+  :config
+  (claude-code-ide-emacs-tools-setup))
+#+end_src
+
+* ELYSIUM
+https://github.com/lanceberge/elysium
+
+This package integrates with gptel and provides capability to insert AI results into the current buffer.
+
+#+begin_src emacs-lisp
+(use-package elysium
+  :ensure t)
+#+end_src
+
+* GITHUB COPILOT
+https://github.com/copilot-emacs/copilot.el
+
+#+begin_src emacs-lisp
+;; This package is required for copilot
+(use-package track-changes
+  :ensure t
+  :demand t)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package copilot
+  :after (editorconfig track-changes)
+  :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
+  :hook
+  (conf-mode . copilot-mode)
+  (prog-mode . copilot-mode)
+  (text-mode . copilot-mode)
+  (copilot-mode . (lambda ()
+                    (setq-local copilot--indent-warning-printed-p t)))
+  :custom
+  (copilot-indent-offset-warning-disable t))
+#+end_src
+
+* GITHUB COPILOT CHAT
+https://github.com/chep/copilot-chat.el
+
+#+begin_src emacs-lisp
+(use-package copilot-chat
+  :ensure t
+  :hook (git-commit-setup . copilot-chat-insert-commit-message)
+  :custom
+  ;; (copilot-chat-backend 'request)
+  (copilot-chat-commit-model "claude-opus-4.5")
+  ;; (copilot-chat-follow nil)
+  (copilot-chat-frontend 'shell-maker)
+  :config
+  (ismd/add-display-buffer-rule "^\\*Copilot Chat"))
+#+end_src
+
+* GPTEL
+https://github.com/karthink/gptel
+
+#+begin_src emacs-lisp
+(use-package gptel
+  :ensure t
+  :config
+  (setq-default gptel-default-mode #'org-mode
+                gptel-model 'claude-sonnet-4-20250514
+                gptel-backend (gptel-make-anthropic "Claude"
+                                :stream t
+                                :key #'anthropic-api-key)))
+#+end_src
+
+* MAGIT-GPTCOMMIT
+https://github.com/douo/magit-gptcommit
+
+Generate commit messages using Claude.
+
+#+begin_src emacs-lisp
+;; (use-package llm
+;;   :ensure t
+;;   :init
+;;   (require 'llm-claude))
+
+;; (use-package magit-gptcommit
+;;   :ensure t
+;;   :after (llm magit)
+;;   :init
+;;   (setq magit-gptcommit-llm-provider
+;;         (make-llm-claude
+;;          :key (anthropic-api-key)
+;;          :chat-model "claude-haiku-4-5-20251001"))
+;;   ;; :config
+;;   ;; (magit-gptcommit-mode 1)
+;;   ;; (magit-gptcommit-status-buffer-setup)
+;;   )
+#+end_src
+
+* MINUET
+https://github.com/milanglacier/minuet-ai.el?tab=readme-ov-file
+
+#+begin_src emacs-lisp
+(use-package minuet
+  :ensure t
+  :config
+  (setq minuet-provider 'claude))
+#+end_src

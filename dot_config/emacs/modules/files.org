@@ -1,0 +1,171 @@
+#+title: Files
+#+author: Vladimir Kosteley
+#+description: File management with Dired, Dirvish, Project, and Treemacs
+
+* DIRED
+#+begin_src emacs-lisp
+(use-package dired
+  :config
+  (setq dired-dwim-target t)
+  (setq dired-listing-switches
+        "-l --almost-all --human-readable --group-directories-first --no-group")
+  (setq dired-kill-when-opening-new-dired-buffer nil)
+  (setq dired-mouse-drag-files t) ;; Not working in Wayland
+  (setq mouse-drag-and-drop-region-cross-program nil)
+  ;; this command is useful when you want to close the window of `dirvish-side'
+  ;; automatically when opening a file
+  (put 'dired-find-alternate-file 'disabled nil))
+#+end_src
+
+** Dired FL
+https://github.com/purcell/diredfl
+
+#+begin_src emacs-lisp
+(use-package diredfl
+  :ensure t
+  :hook
+  ((dired-mode . diredfl-mode)
+   (dirvish-directory-view-mode . diredfl-mode))
+  :config
+  (set-face-attribute 'diredfl-dir-name nil :bold t))
+#+end_src
+
+** Dirvish
+https://github.com/alexluigit/dirvish
+
+#+begin_src emacs-lisp
+(use-package dirvish
+  :ensure t
+  :after nerd-icons
+  :hook
+  (dirvish-directory-view-mode . (lambda ()
+                                   (visual-line-mode -1)))
+  :init
+  (dirvish-override-dired-mode)
+  :custom
+  (dirvish-quick-access-entries
+   '(("c" "~/coding/" "Coding")
+     ("d" "~/Downloads/" "Downloads")
+     ("E" "/sudo:root@localhost:/etc" "Etc")
+     ("h" "~/" "Home")
+     ("n" "~/Nextcloud/" "Nextcloud")
+     ("p" "~/Pictures/" "Pictures")
+     ("s" "~/src/" "Src")
+     ("t" "~/tmp/" "Tmp")
+     ("T" "~/.local/share/Trash/files/" "Trash")))
+  :config
+  (dirvish-peek-mode)
+  (dirvish-side-follow-mode)
+  (setq dirvish-mode-line-format
+        '(:left (sort symlink) :right (omit yank index)))
+  (setq dirvish-attributes           ; The order *MATTERS* for some attributes
+        ;; '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size)
+        '(vc-state subtree-state nerd-icons collapse git-msg file-size)
+        dirvish-side-attributes
+        '(vc-state nerd-icons collapse))
+  ;; open large directory (over 20000 files) asynchronously with `fd' command
+  (setq dirvish-large-directory-threshold 20000)
+
+  (dirvish-define-preview eza (file)
+    "Use `eza' to generate directory preview."
+    :require ("eza") ; tell Dirvish to check if we have the executable
+    (when (file-directory-p file) ; we only interest in directories here
+      `(shell . ("eza" "-al" "--color=always" "--icons=always"
+                 "--group-directories-first" ,file))))
+
+  (push 'eza dirvish-preview-dispatchers))
+
+;; Use project.el instead of vc-root-dir for project detection
+;; This allows dirvish to recognize projects marked with .project.el
+(define-advice dirvish--vc-root-dir (:override () use-project-root)
+  "Use project.el instead of vc-root-dir."
+  (when-let* ((proj (project-current)))
+    (expand-file-name (project-root proj))))
+
+(defun ismd/dirvish-dual-pane ()
+  "Open two dired/dirvish panes side by side.
+Left pane shows current directory, right pane shows home directory."
+  (interactive)
+  (let ((dir default-directory))
+    (delete-other-windows)
+    (dired dir)
+    (split-window-right)
+    (other-window 1)
+    (dired "~")
+    (other-window 1)))
+#+end_src
+
+* PROJECT
+#+begin_src emacs-lisp
+(setq project-file-history-behavior 'relativize
+      project-mode-line t)
+(setq project-switch-commands
+      '((consult-project-buffer "Buffer" "b")
+        (project-find-file "File" "f")
+        (project-dired "Directory" "d")
+        (magit-project-status "Magit" "m")
+        (consult-ripgrep "ripgrep" "r")))
+(setq project-vc-extra-root-markers '(".idea" ".project.el" ".projectile" "package.json"))
+#+end_src
+
+** Project Tab Groups
+https://github.com/fritzgrabo/project-tab-groups
+
+#+begin_src emacs-lisp
+(use-package project-tab-groups
+  :ensure t)
+#+end_src
+
+* RIPGREP
+https://github.com/dajva/rg.el
+
+#+begin_src emacs-lisp
+(use-package rg
+  :ensure t
+  :config
+  (setq rg-ignore-case 'smart))
+#+end_src
+
+* TREEMACS
+https://github.com/Alexander-Miller/treemacs
+
+#+begin_src emacs-lisp
+(use-package treemacs
+  :ensure t
+  :hook
+  (treemacs-mode . (lambda ()
+                     (display-line-numbers-mode -1)
+                     (visual-line-mode -1)))
+  :config
+  (progn
+    (setq treemacs-select-when-already-in-treemacs 'stay)
+    (setq treemacs-width 30)
+
+    ;; Set smaller font for treemacs
+    ;; (set-face-attribute 'treemacs-root-face nil :height 0.9)
+    ;; (set-face-attribute 'treemacs-directory-face nil :height 0.9)
+    ;; (set-face-attribute 'treemacs-file-face nil :height 0.9)
+
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;; (treemacs-resize-icons 44)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode 'always)
+    (when treemacs-python-executable
+      (treemacs-git-commit-diff-mode t))
+
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple)))
+
+    (treemacs-hide-gitignored-files-mode nil)))
+
+(use-package treemacs-magit
+  :ensure t
+  :after (treemacs magit))
+#+end_src

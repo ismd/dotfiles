@@ -1,0 +1,426 @@
+#+title: UI Settings
+#+author: Vladimir Kosteley
+#+description: Fonts, modeline, icons, and visual enhancements
+
+* FONTS
+Defining the various fonts that Emacs will use.
+
+** Setting the Font Face
+#+begin_src emacs-lisp
+(setq ismd/mono-font "FiraCode Nerd Font"
+      ismd/variable-font "FiraCode Nerd Font"
+      ismd/font-size 130
+      ismd/variable-font-size 140)
+
+(defun ismd/set-fonts ()
+  "Set the fonts for Emacs."
+  (set-face-attribute 'default nil
+                      :font ismd/mono-font
+                      :height ismd/font-size)
+  (set-face-attribute 'variable-pitch nil
+                      :font ismd/variable-font
+                      :height ismd/variable-font-size)
+  (set-face-attribute 'fixed-pitch nil
+                      :inherit 'default)
+
+  (set-face-attribute 'font-lock-comment-face nil
+                      :slant 'italic)
+  (set-face-attribute 'font-lock-keyword-face nil
+                      :slant 'italic)
+
+  ;; tab-bar
+  (set-face-attribute 'tab-bar-tab nil
+                      :inherit 'unspecified)
+
+  (setq use-default-font-for-symbols nil)
+  (set-fontset-font t 'emoji
+                    (font-spec :family "Noto Color Emoji")
+                    nil 'prepend))
+
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (ismd/set-fonts))))
+  (ismd/set-fonts))
+
+(add-to-list 'default-frame-alist
+             `(font . ,(format "%s-%d" ismd/mono-font (/ ismd/font-size 10))))
+#+end_src
+
+** Zooming In/Out
+You can use CTRL plus the mouse wheel for zooming in/out.
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+#+end_src
+
+* MODELINE
+The modeline is the bottom status bar that appears in Emacs windows.  For more information on what is available to configure in the Doom modeline, check out: [[https://github.com/seagle0128/doom-modeline][Doom Modeline]]
+
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :init
+  (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-battery nil
+        doom-modeline-buffer-encoding nil
+        doom-modeline-buffer-file-name-style 'relative-to-project
+        doom-modeline-buffer-modification-icon t
+        doom-modeline-buffer-name t
+        doom-modeline-buffer-state-icon t
+        doom-modeline-check 'simple
+        doom-modeline-check-icon t
+        doom-modeline-display-default-persp-name nil
+        doom-modeline-enable-buffer-position t
+        doom-modeline-env-version t
+        doom-modeline-github nil
+        ;; doom-modeline-height 35
+        doom-modeline-highlight-modified-buffer-name t
+        doom-modeline-icon t
+        doom-modeline-indent-info nil
+        doom-modeline-lsp t
+        doom-modeline-lsp-icon t
+        doom-modeline-major-mode-color-icon t
+        doom-modeline-major-mode-icon t
+        doom-modeline-minor-modes nil
+        doom-modeline-percent-position nil
+        doom-modeline-persp-name nil
+        doom-modeline-persp-icon nil
+        doom-modeline-project-detection 'project
+        doom-modeline-project-name nil
+        doom-modeline-remote-host t
+        doom-modeline-selection-info t
+        doom-modeline-time nil
+        doom-modeline-time-analogue-clock nil
+        doom-modeline-time-icon nil
+        doom-modeline-time-live-icon nil
+        doom-modeline-total-line-number t
+        doom-modeline-vcs-icon t
+        doom-modeline-workspace-name nil))
+#+end_src
+
+* NERD ICONS
+https://github.com/rainstormstudio/nerd-icons.el
+
+#+begin_src emacs-lisp
+(use-package nerd-icons
+  :ensure t)
+#+end_src
+
+** Nerd Icons Completion
+https://github.com/rainstormstudio/nerd-icons-completion
+
+#+begin_src emacs-lisp
+(use-package nerd-icons-completion
+  :ensure t
+  :after marginalia
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+#+end_src
+
+** Nerd Icons Corfu
+https://github.com/LuigiPiucco/nerd-icons-corfu
+
+#+begin_src emacs-lisp
+(use-package nerd-icons-corfu
+  :ensure t
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+
+  ;; Optionally:
+  (setq nerd-icons-corfu-mapping
+        '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+          (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
+          ;; ...
+          (t :style "cod" :icon "code" :face font-lock-warning-face)))
+  ;; Remember to add an entry for `t', the library uses that as default.
+  )
+#+end_src
+
+** Nerd Icons Ibuffer
+https://github.com/seagle0128/nerd-icons-ibuffer
+
+#+begin_src emacs-lisp
+(use-package nerd-icons-ibuffer
+  :ensure t
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+  :config
+  (setq nerd-icons-ibuffer-formats
+        '((mark " "
+                (icon 2 2)
+                (name 50 50 :left :elide)
+                " "
+                project-file-relative)
+          (mark " "
+                (name 50 -1)
+                " " filename))))
+#+end_src
+
+* LIGATURES
+https://github.com/mickeynp/ligature.el
+
+#+begin_src emacs-lisp
+(use-package ligature
+  :ensure t
+  :config
+  (ligature-set-ligatures 't '("www"))
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  (ligature-set-ligatures 'prog-mode
+                          '(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
+                            ;; =:= =!=
+                            ("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
+                            ;; ;; ;;;
+                            (";" (rx (+ ";")))
+                            ;; && &&&
+                            ("&" (rx (+ "&")))
+                            ;; !! !!! !. !: !!. != !== !~
+                            ("!" (rx (+ (or "=" "!" "\." ":" "~"))))
+                            ;; ?? ??? ?:  ?=  ?.
+                            ("?" (rx (or ":" "=" "\." (+ "?"))))
+                            ;; %% %%%
+                            ("%" (rx (+ "%")))
+                            ;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
+                            ;; |->>-||-<<-| |- |== ||=||
+                            ;; |==>>==<<==<=>==//==/=!==:===>
+                            ("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
+                                            "-" "=" ))))
+                            ;; \\ \\\ \/
+                            ("\\" (rx (or "/" (+ "\\"))))
+                            ;; ++ +++ ++++ +>
+                            ("+" (rx (or ">" (+ "+"))))
+                            ;; :: ::: :::: :> :< := :// ::=
+                            (":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
+                            ;; // /// //// /\ /* /> /===:===!=//===>>==>==/
+                            ("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
+                                            "="))))
+                            ;; .. ... .... .= .- .? ..= ..<
+                            ("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
+                            ;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
+                            ("-" (rx (+ (or ">" "<" "|" "~" "-"))))
+                            ;; *> */ *)  ** *** ****
+                            ("*" (rx (or ">" "/" ")" (+ "*"))))
+                            ;; www wwww
+                            ("w" (rx (+ "w")))
+                            ;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
+                            ;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
+                            ;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
+                            ;; << <<< <<<<
+                            ("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
+                                            "-"  "/" "|" "="))))
+                            ;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
+                            ;; >> >>> >>>>
+                            (">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
+                            ;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
+                            ("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
+                                         (+ "#"))))
+                            ;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
+                            ("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
+                            ;; __ ___ ____ _|_ __|____|_
+                            ("_" (rx (+ (or "_" "|"))))
+                            ;; Fira code: 0xFF 0x12
+                            ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
+                            ;; Fira code:
+                            "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
+                            ;; The few not covered by the regexps.
+                            "{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
+  (global-ligature-mode t))
+#+end_src
+
+* RAINBOW DELIMITERS
+Adding rainbow coloring to parentheses.
+
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :ensure t
+  :hook ((prog-mode . rainbow-delimiters-mode)))
+#+end_src
+
+* RAINBOW MODE
+Display the actual color as a background for any hex color value (ex. #ffffff).
+
+#+begin_src emacs-lisp
+(use-package rainbow-mode
+  :ensure t
+  :diminish
+  :hook
+  ((org-mode prog-mode) . rainbow-mode))
+#+end_src
+
+* HIGHLIGHT TODO
+Adding highlights to TODO and related words.
+
+#+begin_src emacs-lisp
+(use-package hl-todo
+  :ensure t
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(("TODO"       warning bold)
+          ("FIXME"      error bold)
+          ("HACK"       font-lock-constant-face bold)
+          ("REVIEW"     font-lock-keyword-face bold)
+          ("NOTE"       success bold)
+          ("DEPRECATED" font-lock-doc-face bold))))
+#+end_src
+
+* WHICH-KEY
+#+begin_src emacs-lisp
+(use-package which-key
+  :ensure t
+  :diminish
+  :init
+  (which-key-mode 1)
+  :config
+  (setq which-key-side-window-location 'bottom
+        which-key-sort-order #'which-key-key-order-alpha
+        which-key-sort-uppercase-first nil
+        which-key-add-column-padding 1
+        which-key-max-display-columns nil
+        which-key-min-display-lines 6
+        which-key-side-window-slot -10
+        which-key-side-window-max-height 0.25
+        which-key-idle-delay 0.8
+        which-key-max-description-length 25
+        which-key-allow-imprecise-window-fit nil
+        which-key-separator " → " ))
+#+end_src
+
+* DIMINISH
+This package implements hiding or abbreviation of the modeline displays (lighters) of minor-modes.
+
+#+begin_src emacs-lisp
+(use-package diminish
+  :ensure t)
+#+end_src
+
+* DASHBOARD
+Emacs Dashboard is an extensible startup screen showing you recent files, bookmarks, agenda items and an Emacs banner.
+
+#+begin_src emacs-lisp
+(use-package dashboard
+  :ensure t
+  :demand t
+  :init
+  (setq initial-buffer-choice 'dashboard-open)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+  (setq dashboard-startup-banner "~/Pictures/avatar.png")  ;; use custom image as banner
+  (setq dashboard-center-content nil) ;; set to 't' for centered content
+  (setq dashboard-projects-backend 'project-el)
+  (setq dashboard-items '((recents . 5)
+                          ;; (agenda . 5 )
+                          ;; (bookmarks . 5)
+                          (projects . 5)
+                          (registers . 5)))
+  :custom
+  (dashboard-modify-heading-icons '((recents . "file-text")
+                                    (bookmarks . "book")))
+  :hook
+  (elpaca-after-init . dashboard-insert-startupify-lists)
+  (elpaca-after-init . dashboard-initialize)
+  :config
+  (dashboard-setup-startup-hook))
+#+end_src
+
+* OLIVETTI
+https://github.com/rnkn/olivetti
+
+#+begin_src emacs-lisp
+(use-package olivetti
+  :ensure t
+  :custom
+  (olivetti-body-width 0.5)
+  (olivetti-style 'fancy))
+#+end_src
+
+* WINDOW MANAGEMENT
+#+begin_src emacs-lisp
+(defun ismd/window-split-toggle ()
+  "Toggle between horizontal and vertical split with two windows."
+  (interactive)
+  (if (not (= (length (window-list)) 2))
+      (error "Can't toggle with %d windows (need exactly 2)" (length (window-list)))
+    (let* ((this-win (selected-window))
+           (other-win (next-window))
+           (other-buf (window-buffer other-win))
+           (split-vertically (window-combined-p)))
+      (delete-other-windows)
+      (if split-vertically
+          (split-window-horizontally)
+        (split-window-vertically))
+      (other-window 1)
+      (switch-to-buffer other-buf))))
+#+end_src
+
+* WINDOW NUMBERING
+https://github.com/deb0ch/emacs-winum
+
+#+begin_src emacs-lisp
+(use-package winum
+  :ensure t
+  :config
+  (setq winum-auto-assign-0-to-minibuffer t
+        winum-scope 'frame-local
+        winum-ignored-buffers-regexp '("^ \\*SIDE"))
+  (winum-mode))
+#+end_src
+
+* PERSPECTIVE
+https://github.com/nex3/perspective-el
+
+#+begin_src emacs-lisp
+(defun ismd/persp-state-load ()
+  "Load perspective state from default file."
+  (when (file-exists-p persp-state-default-file)
+    (persp-state-load persp-state-default-file)))
+
+(use-package perspective
+  :ensure t
+  :bind
+  ("C-x C-b" . persp-list-buffers)
+  :hook
+  (elpaca-after-init . ismd/persp-state-load)
+  (kill-emacs . persp-state-save)
+  :custom
+  (persp-mode-prefix-key (kbd "C-c w p"))
+  (persp-modestring-short t)
+  (persp-sort 'access)
+  (persp-show-modestring t)
+  (persp-state-default-file (expand-file-name "~/.config/emacs/.perspectives"))
+  :init
+  (persp-mode)
+  :config
+  (setq switch-to-prev-buffer-skip
+        (lambda (win buff bury-or-kill)
+          (not (persp-is-current-buffer buff)))))
+#+end_src
+
+* POPWIN
+https://github.com/emacsorphanage/popwin
+
+#+begin_src emacs-lisp
+(use-package popwin
+  :ensure t
+  :config
+  (dolist (buffer '(
+                    "*Flutter*"
+                    "*Flycheck errors*"
+                    "*Flymake diagnostics*"
+                    "*Org Links*"
+                    "*Warnings*"
+                    "*eldoc*"
+                    "*lsp-help*"
+                    "*xref*"
+                    ))
+    (push buffer popwin:special-display-config))
+  (popwin-mode 1))
+#+end_src

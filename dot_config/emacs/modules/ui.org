@@ -29,8 +29,6 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
 (use-package dashboard
   :ensure t
   :init
-  (setq initial-buffer-choice 'dashboard-open)
-
   (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!"
         dashboard-center-content t
         dashboard-items '((recents . 5)
@@ -44,12 +42,7 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
         dashboard-startup-banner "~/Pictures/avatar.png")
   :custom
   (dashboard-modify-heading-icons '((recents . "file-text")
-                                    (bookmarks . "book")))
-  :hook
-  (elpaca-after-init . dashboard-insert-startupify-lists)
-  (elpaca-after-init . dashboard-initialize)
-  :config
-  (dashboard-setup-startup-hook))
+                                    (bookmarks . "book"))))
 #+end_src
 
 * Highlight TODO
@@ -268,9 +261,10 @@ https://github.com/nex3/perspective-el
 
 #+begin_src emacs-lisp
 (defun ismd/persp-state-load ()
-  "Load perspective state from default file."
-  (when (file-exists-p persp-state-default-file)
-    (persp-state-load persp-state-default-file)))
+  "Load perspective state from default file, or open dashboard if none exists."
+  (if (file-exists-p persp-state-default-file)
+      (persp-state-load persp-state-default-file)
+    (dashboard-open)))
 
 (use-package perspective
   :ensure t

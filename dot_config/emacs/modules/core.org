@@ -123,7 +123,8 @@ Disable scroll bar in minibuffer.
 
 ** Misc
 #+begin_src emacs-lisp
-(setq calendar-week-start-day 1)
+(setq calendar-week-start-day 1
+      use-short-answers t)
 #+end_src
 
 ** Performance

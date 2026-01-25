@@ -386,9 +386,10 @@ https://github.com/bbatsov/super-save
   :ensure t
   :config
   (super-save-mode +1)
-  (setq super-save-auto-save-when-idle t)
-  (setq auto-save-default nil)
-  (setq super-save-silent t))
+
+  (setq auto-save-default nil
+        super-save-auto-save-when-idle t
+        super-save-silent t))
 #+end_src
 
 * Track Changes

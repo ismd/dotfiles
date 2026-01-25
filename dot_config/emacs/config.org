@@ -4,49 +4,33 @@
 #+startup: showeverything
 #+options: toc:2
 
-* TABLE OF CONTENTS :toc:
-- [[#initial-setup][INITIAL SETUP]]
-  - [[#require-early-packages][Require Early Packages]]
-  - [[#built-in-package-overrides][Built-in Package Overrides]]
+* Table of Contents :toc:
+- [[#initial-setup][Initial Setup]]
+  - [[#load-path][Load Path]]
+  - [[#package-manager][Package Manager]]
   - [[#custom-file][Custom File]]
-  - [[#direnv][Direnv]]
+  - [[#fonts][Fonts]]
   - [[#themes][Themes]]
-- [[#load-modules][LOAD MODULES]]
-- [[#starting-the-daemon][STARTING THE DAEMON]]
+- [[#load-modules][Load Modules]]
+- [[#daemon][Daemon]]
 
-* INITIAL SETUP
-** Require Early Packages
+* Initial Setup
+** Load Path
 #+begin_src emacs-lisp
 (add-to-list 'load-path "~/.config/emacs/lisp/")
-
-(require 'elpaca-setup) ;; The Elpaca Package Manager
-(require 'buffer-move)  ;; Buffer-move for better window management
 #+end_src
 
-** Built-in Package Overrides
-These packages override built-in Emacs packages and must be loaded early to ensure the newer versions take precedence. Eglot requires newer versions of project, jsonrpc, and flymake.
-
+** Package Manager
 #+begin_src emacs-lisp
-;; Load newer project (required by eglot)
-(use-package project
-  :ensure (:wait t)
-  :demand t)
+;; Allow upgrading built-in packages (project.el, eglot, etc.)
+(setq package-install-upgrade-built-in t)
 
-;; Load newer jsonrpc (required by eglot)
-(use-package jsonrpc
-  :ensure (:wait t)
-  :demand t)
-
-;; Load newer flymake (required by eglot)
-(use-package flymake
-  :ensure (:wait t)
-  :demand t
-  :diminish)
+(require 'elpaca-setup)
 #+end_src
 
 ** Custom File
 #+begin_src emacs-lisp
-(setq custom-file (expand-file-name "customs.el" user-emacs-directory))
+(setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 
 ;; Load custom.el early (before packages) for environment variables like API keys
@@ -54,23 +38,54 @@ These packages override built-in Emacs packages and must be loaded early to ensu
 (load ismd/custom-file 'noerror)
 #+end_src
 
-** Direnv
-https://github.com/purcell/envrc
-
+** Fonts
 #+begin_src emacs-lisp
-(use-package envrc
-  :ensure t
-  :init
-  (envrc-global-mode))
+(setq ismd/mono-font "FiraCode Nerd Font"
+      ismd/variable-font "FiraCode Nerd Font"
+      ismd/font-size 130
+      ismd/variable-font-size 140)
+
+(defun ismd/set-fonts ()
+  "Set the fonts for Emacs."
+  (set-face-attribute 'default nil
+                      :font ismd/mono-font
+                      :height ismd/font-size)
+  (set-face-attribute 'variable-pitch nil
+                      :font ismd/variable-font
+                      :height ismd/variable-font-size)
+  (set-face-attribute 'fixed-pitch nil
+                      :inherit 'default)
+
+  (set-face-attribute 'font-lock-comment-face nil
+                      :slant 'italic)
+  (set-face-attribute 'font-lock-keyword-face nil
+                      :slant 'italic)
+
+  ;; tab-bar
+  (set-face-attribute 'tab-bar-tab nil
+                      :inherit 'unspecified)
+
+  (setq use-default-font-for-symbols nil)
+  (set-fontset-font t 'emoji
+                    (font-spec :family "Noto Color Emoji")
+                    nil 'prepend))
+
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (ismd/set-fonts))))
+  (ismd/set-fonts))
+
+(add-to-list 'default-frame-alist
+             `(font . ,(format "%s-%d" ismd/mono-font (/ ismd/font-size 10))))
 #+end_src
 
 ** Themes
 *** Init Themes
 #+begin_src emacs-lisp
 (org-babel-load-file
-  (expand-file-name
-    "modules/themes.org"
-    user-emacs-directory))
+  (expand-file-name "modules/themes.org" user-emacs-directory))
 #+end_src
 
 *** Load Theme
@@ -78,12 +93,13 @@ https://github.com/purcell/envrc
 (defvar theme-name 'ef-owl "The name of the theme to use")
 (when (file-exists-p "~/.config/emacs/theme.el")
   (load-file "~/.config/emacs/theme.el"))
+
 (add-hook 'elpaca-after-init-hook
           (lambda ()
             (load-theme theme-name t)))
 #+end_src
 
-* LOAD MODULES
+* Load Modules
 #+begin_src emacs-lisp
 (defun ismd/load-module (name)
   "Load a configuration module from modules directory."
@@ -91,21 +107,21 @@ https://github.com/purcell/envrc
    (expand-file-name (concat "modules/" name ".org") user-emacs-directory)))
 
 ;; Core modules (load order matters)
-(ismd/load-module "core")       ;; Sane defaults, utilities
-(ismd/load-module "ui")         ;; Fonts, icons, modeline
-(ismd/load-module "completion") ;; Vertico, Corfu, Consult
-(ismd/load-module "keybindings");; General keybindings
+(ismd/load-module "core")        ;; Sane defaults, utilities
+(ismd/load-module "ui")          ;; Fonts, icons, modeline
+(ismd/load-module "completion")  ;; Vertico, Corfu, Consult
+(ismd/load-module "keybindings") ;; General keybindings
 
-;; Feature modules
-(ismd/load-module "files")      ;; Dired, treemacs, project
-(ismd/load-module "git")        ;; Magit, git-gutter
-(ismd/load-module "org-config") ;; Org mode settings
-(ismd/load-module "languages")  ;; Eglot, treesit, languages
-(ismd/load-module "shells")     ;; Vterm, eshell
+;; ;; Feature modules
 (ismd/load-module "ai")         ;; Claude, Copilot, GPTel
+(ismd/load-module "files")      ;; Dired, treemacs, project
+(ismd/load-module "languages")  ;; Eglot, treesit, languages
+(ismd/load-module "org-config") ;; Org mode settings
+(ismd/load-module "shells")     ;; Vterm, eshell
+(ismd/load-module "vcs")        ;; Magit, git-gutter
 #+end_src
 
-* STARTING THE DAEMON
+* Daemon
 #+begin_src emacs-lisp
 (server-start)
 #+end_src

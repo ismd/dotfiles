@@ -1,8 +1,14 @@
 #+title: Git
 #+author: Vladimir Kosteley
 #+description: Git integration with Magit and related tools
+#+options: toc:2
 
-* GIT GUTTER
+* Table of Contents :toc:
+- [[#git-gutter][Git Gutter]]
+- [[#git-time-machine][Git Time Machine]]
+- [[#magit][Magit]]
+
+* Git Gutter
 https://github.com/emacsorphanage/git-gutter
 
 #+begin_src emacs-lisp
@@ -17,17 +23,15 @@ https://github.com/emacsorphanage/git-gutter
   (global-git-gutter-mode t))
 #+end_src
 
-* GIT TIME MACHINE
+* Git Time Machine
 [[https://github.com/emacsmirror/git-timemachine][git-timemachine]] is a program that allows you to move backwards and forwards through a file's commits.  'SPC g t' will open the time machine on a file if it is in a git repo.  Then, while in normal mode, you can use 'CTRL-j' and 'CTRL-k' to move backwards and forwards through the commits.
 
 #+begin_src emacs-lisp
 (use-package git-timemachine
-  :ensure t
-  :after magit
-  :hook (evil-normalize-keymaps . git-timemachine-hook))
+  :ensure t)
 #+end_src
 
-* MAGIT
+* Magit
 [[https://magit.vc/manual/][Magit]] is a full-featured git client for Emacs.
 
 #+begin_src emacs-lisp
@@ -39,12 +43,4 @@ https://github.com/emacsorphanage/git-gutter
   (magit-ediff-dwim-show-on-hunks t)
   ;; (transient-display-buffer-action '(display-buffer-below-selected))
   )
-#+end_src
-
-* SMERGE MODE
-#+begin_src emacs-lisp
-(use-package smerge-mode
-  :ensure nil
-  :hook
-  (prog-mode . smerge-mode))
 #+end_src

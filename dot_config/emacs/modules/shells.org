@@ -1,32 +1,45 @@
 #+title: Shells and Terminals
 #+author: Vladimir Kosteley
 #+description: Shell and terminal emulator configuration
+#+options: toc:2
 
-* ESHELL
+* Table of Contents :toc:
+- [[#eat][Eat]]
+- [[#eshell][Eshell]]
+- [[#vterm][Vterm]]
+  - [[#vterm-toggle][Vterm Toggle]]
+
+* Eat
+#+begin_src emacs-lisp
+(use-package eat
+  :ensure t
+  :hook (eat-mode . (lambda () (display-line-numbers-mode -1))))
+#+end_src
+
+* Eshell
 Eshell is an Emacs 'shell' that is written in Elisp.
 
 #+begin_src emacs-lisp
+;; eshell-syntax-highlighting -- adds fish/zsh-like syntax highlighting.
+;; eshell-rc-script -- your profile for eshell; like a bashrc for eshell.
+;; eshell-aliases-file -- sets an aliases file for the eshell.
+(setq eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
+      eshell-buffer-maximum-lines 5000
+      eshell-destroy-buffer-when-process-dies t
+      eshell-hist-ignoredups t
+      eshell-history-size 5000
+      eshell-rc-script (concat user-emacs-directory "eshell/profile")
+      eshell-scroll-to-bottom-on-input t
+      eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+
 (use-package eshell-syntax-highlighting
   :ensure t
   :after esh-mode
   :config
   (eshell-syntax-highlighting-global-mode +1))
-
-;; eshell-syntax-highlighting -- adds fish/zsh-like syntax highlighting.
-;; eshell-rc-script -- your profile for eshell; like a bashrc for eshell.
-;; eshell-aliases-file -- sets an aliases file for the eshell.
-
-(setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
-      eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
-      eshell-history-size 5000
-      eshell-buffer-maximum-lines 5000
-      eshell-hist-ignoredups t
-      eshell-scroll-to-bottom-on-input t
-      eshell-destroy-buffer-when-process-dies t
-      eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
 #+end_src
 
-* VTERM
+* Vterm
 Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets the shell to be used in M-x shell, M-x term, M-x ansi-term and M-x vterm.  By default, the shell is set to 'fish' but could change it to 'bash' or 'zsh' if you prefer.
 
 #+begin_src emacs-lisp
@@ -46,8 +59,9 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
   :ensure t
   :after vterm
   :config
-  (setq vterm-toggle-fullscreen-p nil)
-  (setq vterm-toggle-scope 'project)
+  (setq vterm-toggle-fullscreen-p nil
+        vterm-toggle-scope 'project)
+
   (add-to-list 'display-buffer-alist
                '((lambda (buffer-or-name _)
                    (let ((buffer (get-buffer buffer-or-name)))

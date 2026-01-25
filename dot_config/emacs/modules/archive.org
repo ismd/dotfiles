@@ -566,3 +566,75 @@ Not needed with current setup.
 ;;   :hook
 ;;   (xref--xref-buffer-mode . (lambda () (display-line-numbers-mode -1))))
 #+end_src
+
+* DIMINISH
+:PROPERTIES:
+:ARCHIVE_TIME: 2026-01-24 Sat 18:25
+:ARCHIVE_FILE: ~/.local/share/chezmoi/dot_config/emacs/modules/ui.org
+:ARCHIVE_CATEGORY: ui
+:END:
+This package implements hiding or abbreviation of the modeline displays (lighters) of minor-modes.
+
+#+begin_src emacs-lisp
+(use-package diminish
+  :ensure t)
+#+end_src
+
+* Project Tab Groups
+https://github.com/fritzgrabo/project-tab-groups
+
+#+begin_src emacs-lisp
+(use-package project-tab-groups
+  :ensure t)
+#+end_src
+
+* Chezmoi
+#+begin_src emacs-lisp
+(defun ismd/chezmoi-normalize-filename (name)
+  "Normalize chezmoi filename for mode detection.
+Strip .tmpl suffix and replace dot_ prefix with . in filename."
+  (when name
+    (let* ((dir (file-name-directory name))
+           (file (file-name-nondirectory name))
+           ;; Strip .tmpl suffix
+           (file (if (string-match "\\(.+\\)\\.tmpl$" file)
+                     (match-string 1 file)
+                   file))
+           ;; Replace dot_ prefix with .
+           (file (if (string-match "^dot_\\(.+\\)$" file)
+                     (concat "." (match-string 1 file))
+                   file)))
+      (concat dir file))))
+
+(defun ismd/chezmoi-set-auto-mode-advice (orig-fun &rest args)
+  "Advice for `set-auto-mode' to handle chezmoi template files."
+  (let ((buffer-file-name (ismd/chezmoi-normalize-filename buffer-file-name)))
+    (apply orig-fun args)))
+
+(advice-add 'set-auto-mode :around #'ismd/chezmoi-set-auto-mode-advice)
+#+end_src
+
+* Magit-Gptcommit
+https://github.com/douo/magit-gptcommit
+
+Generate commit messages using Claude.
+
+#+begin_src emacs-lisp
+(use-package llm
+  :ensure t
+  :init
+  (require 'llm-claude))
+
+(use-package magit-gptcommit
+  :ensure t
+  :after (llm magit)
+  :init
+  (setq magit-gptcommit-llm-provider
+        (make-llm-claude
+         :key (anthropic-api-key)
+         :chat-model "claude-haiku-4-5-20251001"))
+  ;; :config
+  ;; (magit-gptcommit-mode 1)
+  ;; (magit-gptcommit-status-buffer-setup)
+  )
+#+end_src

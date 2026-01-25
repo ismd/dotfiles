@@ -56,7 +56,7 @@
 ;;Turns off elpaca-use-package-mode current declaration
 ;;Note this will cause evaluate the declaration immediately. It is not deferred.
 ;;Useful for configuring built-in emacs features.
-(use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
+;;(use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
 
 (provide 'elpaca-setup)
 ;; Local Variables:

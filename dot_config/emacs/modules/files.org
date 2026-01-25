@@ -1,20 +1,25 @@
 #+title: Files
 #+author: Vladimir Kosteley
 #+description: File management with Dired, Dirvish, Project, and Treemacs
+#+options: toc:2
 
-* DIRED
+* Table of Contents :toc:
+- [[#dired][Dired]]
+  - [[#dired-fl][Dired FL]]
+  - [[#dirvish][Dirvish]]
+- [[#project][Project]]
+- [[#ripgrep][Ripgrep]]
+- [[#treemacs][Treemacs]]
+
+* Dired
 #+begin_src emacs-lisp
-(use-package dired
-  :config
-  (setq dired-dwim-target t)
-  (setq dired-listing-switches
-        "-l --almost-all --human-readable --group-directories-first --no-group")
-  (setq dired-kill-when-opening-new-dired-buffer nil)
-  (setq dired-mouse-drag-files t) ;; Not working in Wayland
-  (setq mouse-drag-and-drop-region-cross-program nil)
-  ;; this command is useful when you want to close the window of `dirvish-side'
-  ;; automatically when opening a file
-  (put 'dired-find-alternate-file 'disabled nil))
+(setq dired-dwim-target t
+      dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"
+      dired-kill-when-opening-new-dired-buffer nil
+      dired-mouse-drag-files t
+      mouse-drag-and-drop-region-cross-program nil)
+
+(put 'dired-find-alternate-file 'disabled nil)
 #+end_src
 
 ** Dired FL
@@ -95,28 +100,22 @@ Left pane shows current directory, right pane shows home directory."
     (other-window 1)))
 #+end_src
 
-* PROJECT
+* Project
 #+begin_src emacs-lisp
-(setq project-file-history-behavior 'relativize
-      project-mode-line t)
-(setq project-switch-commands
-      '((consult-project-buffer "Buffer" "b")
-        (project-find-file "File" "f")
-        (project-dired "Directory" "d")
-        (magit-project-status "Magit" "m")
-        (consult-ripgrep "ripgrep" "r")))
-(setq project-vc-extra-root-markers '(".idea" ".project.el" ".projectile" "package.json"))
+(use-package project
+  :ensure t
+  :config
+  (setq project-file-history-behavior 'relativize
+        project-mode-line t
+        project-switch-commands '((consult-project-buffer "Buffer" "b")
+                                  (project-find-file "File" "f")
+                                  (project-dired "Directory" "d")
+                                  (magit-project-status "Magit" "m")
+                                  (consult-ripgrep "ripgrep" "r"))
+        project-vc-extra-root-markers '(".idea" ".project.el" ".projectile" "package.json")))
 #+end_src
 
-** Project Tab Groups
-https://github.com/fritzgrabo/project-tab-groups
-
-#+begin_src emacs-lisp
-(use-package project-tab-groups
-  :ensure t)
-#+end_src
-
-* RIPGREP
+* Ripgrep
 https://github.com/dajva/rg.el
 
 #+begin_src emacs-lisp
@@ -126,7 +125,7 @@ https://github.com/dajva/rg.el
   (setq rg-ignore-case 'smart))
 #+end_src
 
-* TREEMACS
+* Treemacs
 https://github.com/Alexander-Miller/treemacs
 
 #+begin_src emacs-lisp
@@ -137,33 +136,24 @@ https://github.com/Alexander-Miller/treemacs
                      (display-line-numbers-mode -1)
                      (visual-line-mode -1)))
   :config
-  (progn
-    (setq treemacs-select-when-already-in-treemacs 'stay)
-    (setq treemacs-width 30)
+  (setq treemacs-select-when-already-in-treemacs 'stay
+        treemacs-width 30)
 
-    ;; Set smaller font for treemacs
-    ;; (set-face-attribute 'treemacs-root-face nil :height 0.9)
-    ;; (set-face-attribute 'treemacs-directory-face nil :height 0.9)
-    ;; (set-face-attribute 'treemacs-file-face nil :height 0.9)
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode 'always)
 
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;; (treemacs-resize-icons 44)
+  (when treemacs-python-executable
+    (treemacs-git-commit-diff-mode t))
 
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode 'always)
-    (when treemacs-python-executable
-      (treemacs-git-commit-diff-mode t))
+  (pcase (cons (not (null (executable-find "git")))
+               (not (null treemacs-python-executable)))
+    (`(t . t)
+     (treemacs-git-mode 'deferred))
+    (`(t . _)
+     (treemacs-git-mode 'simple)))
 
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable)))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple)))
-
-    (treemacs-hide-gitignored-files-mode nil)))
+  (treemacs-hide-gitignored-files-mode nil))
 
 (use-package treemacs-magit
   :ensure t

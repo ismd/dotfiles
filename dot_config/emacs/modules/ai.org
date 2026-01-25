@@ -1,8 +1,20 @@
 #+title: AI
 #+author: Vladimir Kosteley
 #+description: AI assistants and code completion
+#+options: toc:2
 
-* CHATGPT SHELL
+* Table of Contents :toc:
+- [[#chatgpt-shell][Chatgpt Shell]]
+- [[#claude-code][Claude Code]]
+  - [[#claude-codeel][claude-code.el]]
+  - [[#claude-code-ide][claude-code-ide]]
+- [[#elysium][Elysium]]
+- [[#github-copilot][Github Copilot]]
+- [[#github-copilot-chat][Github Copilot Chat]]
+- [[#gptel][Gptel]]
+- [[#minuet][Minuet]]
+
+* Chatgpt Shell
 https://github.com/xenodium/chatgpt-shell
 
 #+begin_src emacs-lisp
@@ -13,15 +25,9 @@ https://github.com/xenodium/chatgpt-shell
    (chatgpt-shell-model-version "claude-sonnet-4-20250514")))
 #+end_src
 
-* CLAUDE CODE
+* Claude Code
 ** claude-code.el
 https://github.com/stevemolitor/claude-code.el
-
-#+begin_src emacs-lisp
-(use-package eat
-  :ensure t
-  :hook (eat-mode . (lambda () (display-line-numbers-mode -1))))
-#+end_src
 
 #+begin_src emacs-lisp
 (defun ismd/claude-notify (title message)
@@ -63,7 +69,7 @@ https://github.com/manzaltu/claude-code-ide.el
   (claude-code-ide-emacs-tools-setup))
 #+end_src
 
-* ELYSIUM
+* Elysium
 https://github.com/lanceberge/elysium
 
 This package integrates with gptel and provides capability to insert AI results into the current buffer.
@@ -73,19 +79,11 @@ This package integrates with gptel and provides capability to insert AI results 
   :ensure t)
 #+end_src
 
-* GITHUB COPILOT
+* Github Copilot
 https://github.com/copilot-emacs/copilot.el
 
 #+begin_src emacs-lisp
-;; This package is required for copilot
-(use-package track-changes
-  :ensure t
-  :demand t)
-#+end_src
-
-#+begin_src emacs-lisp
 (use-package copilot
-  :after (editorconfig track-changes)
   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
   :hook
   (conf-mode . copilot-mode)
@@ -97,7 +95,7 @@ https://github.com/copilot-emacs/copilot.el
   (copilot-indent-offset-warning-disable t))
 #+end_src
 
-* GITHUB COPILOT CHAT
+* Github Copilot Chat
 https://github.com/chep/copilot-chat.el
 
 #+begin_src emacs-lisp
@@ -105,54 +103,27 @@ https://github.com/chep/copilot-chat.el
   :ensure t
   :hook (git-commit-setup . copilot-chat-insert-commit-message)
   :custom
-  ;; (copilot-chat-backend 'request)
   (copilot-chat-commit-model "claude-opus-4.5")
-  ;; (copilot-chat-follow nil)
   (copilot-chat-frontend 'shell-maker)
   :config
   (ismd/add-display-buffer-rule "^\\*Copilot Chat"))
 #+end_src
 
-* GPTEL
+* Gptel
 https://github.com/karthink/gptel
 
 #+begin_src emacs-lisp
 (use-package gptel
   :ensure t
   :config
-  (setq-default gptel-default-mode #'org-mode
-                gptel-model 'claude-sonnet-4-20250514
-                gptel-backend (gptel-make-anthropic "Claude"
-                                :stream t
-                                :key #'anthropic-api-key)))
+  (setq gptel-default-mode #'org-mode
+        gptel-model 'claude-sonnet-4-20250514
+        gptel-backend (gptel-make-anthropic "Claude"
+                        :stream t
+                        :key #'anthropic-api-key)))
 #+end_src
 
-* MAGIT-GPTCOMMIT
-https://github.com/douo/magit-gptcommit
-
-Generate commit messages using Claude.
-
-#+begin_src emacs-lisp
-;; (use-package llm
-;;   :ensure t
-;;   :init
-;;   (require 'llm-claude))
-
-;; (use-package magit-gptcommit
-;;   :ensure t
-;;   :after (llm magit)
-;;   :init
-;;   (setq magit-gptcommit-llm-provider
-;;         (make-llm-claude
-;;          :key (anthropic-api-key)
-;;          :chat-model "claude-haiku-4-5-20251001"))
-;;   ;; :config
-;;   ;; (magit-gptcommit-mode 1)
-;;   ;; (magit-gptcommit-status-buffer-setup)
-;;   )
-#+end_src
-
-* MINUET
+* Minuet
 https://github.com/milanglacier/minuet-ai.el?tab=readme-ov-file
 
 #+begin_src emacs-lisp

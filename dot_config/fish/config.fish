@@ -34,6 +34,7 @@ abbr -a gs git status
 
 abbr -a i yay -S
 abbr -a k kubectl
+abbr -a p python
 abbr -a s yay -Ss
 
 # Aliases

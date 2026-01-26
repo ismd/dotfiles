@@ -78,7 +78,9 @@ https://github.com/alexluigit/dirvish
       `(shell . ("eza" "-al" "--color=always" "--icons=always"
                  "--group-directories-first" ,file))))
 
-  (push 'eza dirvish-preview-dispatchers))
+  (push 'eza dirvish-preview-dispatchers)
+
+  (setq dirvish-subtree-prefix "  "))
 
 ;; Use project.el instead of vc-root-dir for project detection
 ;; This allows dirvish to recognize projects marked with .project.el

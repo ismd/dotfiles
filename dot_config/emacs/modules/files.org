@@ -106,7 +106,7 @@ Left pane shows current directory, right pane shows home directory."
 * Project
 #+begin_src emacs-lisp
 (use-package project
-  :ensure t
+  :ensure nil
   :config
   (setq project-file-history-behavior 'relativize
         project-mode-line t

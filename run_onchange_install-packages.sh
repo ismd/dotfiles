@@ -35,6 +35,7 @@ yay -S --noconfirm --needed \
     ffmpeg \
     ffmpegthumbnailer \
     ffuf \
+    fish-lsp \
     fwupd \
     gimp \
     git \

@@ -32,9 +32,10 @@ https://github.com/joaotavora/eglot
 
 #+begin_src emacs-lisp
 (use-package eglot
-  :ensure t
+  :ensure nil
   :hook ((prog-mode . eglot-ensure))
   :config
+  (add-to-list 'eglot-server-programs '(fish-mode "fish-lsp" "start"))
   (advice-add 'eglot--message :around
               (lambda (orig format &rest args)
                 (unless (string-prefix-p "Connected!" format)
@@ -44,13 +45,13 @@ https://github.com/joaotavora/eglot
 * Flymake
 #+begin_src emacs-lisp
 (use-package flymake
-  :ensure t)
+  :ensure nil)
 #+end_src
 
 * JSONRPC
 #+begin_src emacs-lisp
 (use-package jsonrpc
-  :ensure t)
+  :ensure nil)
 #+end_src
 
 * Kirigami

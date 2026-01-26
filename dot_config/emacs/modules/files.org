@@ -80,7 +80,8 @@ https://github.com/alexluigit/dirvish
 
   (push 'eza dirvish-preview-dispatchers)
 
-  (setq dirvish-subtree-prefix "  "))
+  (setq dirvish-side-width 26
+        dirvish-subtree-prefix "  "))
 
 ;; Use project.el instead of vc-root-dir for project detection
 ;; This allows dirvish to recognize projects marked with .project.el

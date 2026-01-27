@@ -2,10 +2,6 @@ function fish_greeting
     fortune | cowsay | lolcat
 end
 
-if status is-interactive
-    set -U fish_greeting
-end
-
 # PATH
 fish_add_path -p ~/.bin
 fish_add_path -p ~/.local/bin
@@ -47,16 +43,16 @@ alias nv nvim
 alias pk 'set pid (ps -aux | fzf | awk "{print \$2}"); and kill -9 $pid'
 
 # eza
-set EZA_STANDARD_OPTIONS --group --header --group-directories-first --icons --hyperlink
+set -gx EZA_STANDARD_OPTIONS --group --header --group-directories-first --icons --hyperlink
 alias llt 'eza $EZA_STANDARD_OPTIONS --tree'
 
 # fzf
-set FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --margin 1,2'
+set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --margin 1,2'
 fzf --fish | source
 
 # nvm
-set -U nvm_default_version 24
-set -U nvm_data ~/.nvm
+set -gx nvm_default_version 24
+set -gx nvm_data ~/.nvm
 
 # Secrets
 if test -f ~/.config/fish/secrets.fish

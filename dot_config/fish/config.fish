@@ -39,7 +39,6 @@ abbr -a s yay -Ss
 
 # Aliases
 alias cat bat
-alias claude="~/.claude/local/claude"
 alias nv nvim
 alias pk 'set pid (ps -aux | fzf | awk "{print \$2}"); and kill -9 $pid'
 

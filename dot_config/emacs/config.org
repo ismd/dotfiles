@@ -115,7 +115,7 @@
 (ismd/load-module "ai")         ;; Claude, Copilot, GPTel
 (ismd/load-module "files")      ;; Dired, treemacs, project
 (ismd/load-module "languages")  ;; Eglot, treesit, languages
-(ismd/load-module "org-config") ;; Org mode settings
+(ismd/load-module "notes")      ;; Org mode, Denote
 (ismd/load-module "shells")     ;; Vterm, eshell
 (ismd/load-module "vcs")        ;; Magit, git-gutter
 #+end_src

@@ -1,4 +1,4 @@
-#+title: Org Mode Configuration
+#+title: Notes Configuration
 #+author: Vladimir Kosteley
 #+description: Org mode and note-taking configuration
 #+startup: showeverything

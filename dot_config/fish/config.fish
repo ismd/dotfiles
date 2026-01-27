@@ -19,6 +19,10 @@ abbr -a ap arc pull
 abbr -a apush arc push
 abbr -a as arc status
 
+abbr -a c chezmoi
+abbr -a ca chezmoi apply
+abbr -a cs chezmoi status
+
 abbr -a ga git add
 abbr -a gci git commit
 abbr -a gco git checkout
@@ -34,11 +38,8 @@ abbr -a p python
 abbr -a s yay -Ss
 
 # Aliases
-alias b bluetoothctl
-alias c 'set dir (command ls -lah | fzf | awk "{print \$9}"); and cd $dir'
 alias cat bat
 alias claude="~/.claude/local/claude"
-alias guitar-pro 'wine ~/.wine/drive_c/Program\ Files/Arobas\ Music/Guitar\ Pro\ 8/GuitarPro.exe'
 alias nv nvim
 alias pk 'set pid (ps -aux | fzf | awk "{print \$2}"); and kill -9 $pid'
 

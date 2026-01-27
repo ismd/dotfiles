@@ -151,6 +151,13 @@ https://github.com/dominikh/go-mode.el
 #+end_src
 
 ** Markdown
+https://github.com/jrblevin/markdown-mode
+
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t)
+#+end_src
+
 *** Grip
 https://github.com/seagle0128/grip-mode
 

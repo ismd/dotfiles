@@ -82,10 +82,10 @@ sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 
 ## Platform Abbreviations
 
-| Platform | Abbreviation |
-|----------|--------------|
-| TryHackMe | THM |
-| HackTheBox | HTB |
-| PicoCTF | PicoCTF |
-| OverTheWire | OTW |
-| VulnHub | VH |
+| Platform    | Abbreviation |
+|-------------|--------------|
+| TryHackMe   | THM          |
+| HackTheBox  | HTB          |
+| PicoCTF     | PicoCTF      |
+| OverTheWire | OTW          |
+| VulnHub     | VH           |

@@ -1,10 +1,9 @@
-#+TITLE: Loading Themes
-#+AUTHOR: Vladimir Kosteley
-#+DESCRIPTION: This file installs themes for Emacs
-#+STARTUP: showeverything
-#+OPTIONS: toc:2
+#+title: Loading Themes
+#+author: Vladimir Kosteley
+#+description: This file installs themes for Emacs
+#+startup: showeverything
 
-* TABLE OF CONTENTS :toc:
+* Table of Contents :toc:
 - [[#themes][Themes]]
   - [[#color-theme-sanityinc-tomorrow][Color Theme Sanityinc Tomorrow]]
   - [[#doom-themes][Doom Themes]]

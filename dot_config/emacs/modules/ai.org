@@ -1,7 +1,7 @@
 #+title: AI
 #+author: Vladimir Kosteley
 #+description: AI assistants and code completion
-#+options: toc:2
+#+startup: showeverything
 
 * Table of Contents :toc:
 - [[#chatgpt-shell][Chatgpt Shell]]

@@ -2,7 +2,6 @@
 #+author: Vladimir Kosteley
 #+description: Personal Emacs config
 #+startup: showeverything
-#+options: toc:2
 
 * Table of Contents :toc:
 - [[#initial-setup][Initial Setup]]

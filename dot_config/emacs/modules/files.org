@@ -1,7 +1,7 @@
 #+title: Files
 #+author: Vladimir Kosteley
 #+description: File management with Dired, Dirvish, Project, and Treemacs
-#+options: toc:2
+#+startup: showeverything
 
 * Table of Contents :toc:
 - [[#dired][Dired]]

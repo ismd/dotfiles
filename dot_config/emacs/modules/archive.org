@@ -1,6 +1,7 @@
 #+title: Archived Configurations
 #+author: Vladimir Kosteley
 #+description: Previously used configurations kept for reference
+#+startup: showeverything
 
 This file contains previously used configurations that have been replaced or are no longer needed.
 They are kept here for reference and potential future use.

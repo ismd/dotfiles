@@ -1,7 +1,7 @@
 #+title: Git
 #+author: Vladimir Kosteley
 #+description: Git integration with Magit and related tools
-#+options: toc:2
+#+startup: showeverything
 
 * Table of Contents :toc:
 - [[#git-gutter][Git Gutter]]

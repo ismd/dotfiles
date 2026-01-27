@@ -1,7 +1,7 @@
 #+title: Shells and Terminals
 #+author: Vladimir Kosteley
 #+description: Shell and terminal emulator configuration
-#+options: toc:2
+#+startup: showeverything
 
 * Table of Contents :toc:
 - [[#eat][Eat]]

@@ -179,9 +179,16 @@ Disable scroll bar in minibuffer.
 
 ** UI
 #+begin_src emacs-lisp
+(fringe-mode 0)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+
+;; Custom line continuation/truncation indicators
+(unless standard-display-table
+  (setq standard-display-table (make-display-table)))
+(set-display-table-slot standard-display-table 'truncation ?…)
+(set-display-table-slot standard-display-table 'wrap ?↩)
 
 (add-hook 'text-mode-hook #'visual-line-mode)
 (add-hook 'text-mode-hook #'visual-wrap-prefix-mode)

@@ -179,13 +179,14 @@ Disable scroll bar in minibuffer.
 
 ** UI
 #+begin_src emacs-lisp
-(global-visual-line-mode 1)
-(global-visual-wrap-prefix-mode 1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'text-mode-hook #'visual-line-mode)
+(add-hook 'text-mode-hook #'visual-wrap-prefix-mode)
+
+(setq-default truncate-lines t)
 
 (setq ring-bell-function #'ignore
       vc-display-status nil

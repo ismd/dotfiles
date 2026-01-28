@@ -16,7 +16,6 @@
   - [[#dart][Dart]]
   - [[#fish][Fish]]
   - [[#go][Go]]
-  - [[#markdown][Markdown]]
   - [[#python][Python]]
   - [[#qml][QML]]
   - [[#terraform][Terraform]]
@@ -139,30 +138,6 @@ https://github.com/dominikh/go-mode.el
 #+begin_src emacs-lisp
 (use-package go-mode
   :ensure t)
-#+end_src
-
-** Markdown
-https://github.com/jrblevin/markdown-mode
-
-#+begin_src emacs-lisp
-(use-package markdown-mode
-  :ensure t
-  :custom
-  (markdown-fontify-code-blocks-natively t)
-  (markdown-header-scaling t)
-  (markdown-hide-markup t)
-  (markdown-italic-underscore t)
-  (markdown-list-indent-width 2))
-#+end_src
-
-*** Grip
-https://github.com/seagle0128/grip-mode
-
-#+begin_src emacs-lisp
-(use-package grip-mode
-  :ensure t
-  :bind (:map markdown-mode-command-map
-              ("g" . grip-mode)))
 #+end_src
 
 ** Python

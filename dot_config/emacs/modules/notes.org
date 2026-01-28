@@ -5,6 +5,7 @@
 
 * Table of Contents :toc:
 - [[#denote][Denote]]
+- [[#markdown][Markdown]]
 - [[#org-mode][Org Mode]]
   - [[#export-to-markdown][Export to Markdown]]
   - [[#modern-org-style][Modern Org Style]]
@@ -25,6 +26,30 @@ https://github.com/protesilaos/denote
   (setq denote-infer-keywords t)
   (setq denote-known-keywords '("it" "people" "private"))
   (denote-rename-buffer-mode 1))
+#+end_src
+
+* Markdown
+https://github.com/jrblevin/markdown-mode
+
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :custom
+  (markdown-fontify-code-blocks-natively t)
+  (markdown-header-scaling t)
+  (markdown-hide-markup t)
+  (markdown-italic-underscore t)
+  (markdown-list-indent-width 2))
+#+end_src
+
+*** Grip
+https://github.com/seagle0128/grip-mode
+
+#+begin_src emacs-lisp
+(use-package grip-mode
+  :ensure t
+  :bind (:map markdown-mode-command-map
+              ("g" . grip-mode)))
 #+end_src
 
 * Org Mode

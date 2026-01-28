@@ -31,6 +31,7 @@
   - [[#scroll-1][Scroll]]
 - [[#editorconfig][Editorconfig]]
 - [[#expand-region][Expand Region]]
+- [[#kirigami][Kirigami]]
 - [[#move-where-i-mean][Move Where I Mean]]
 - [[#multiple-cursors][Multiple Cursors]]
 - [[#sudo-edit][Sudo Edit]]
@@ -350,6 +351,14 @@ https://github.com/magnars/expand-region.el
 
 #+begin_src emacs-lisp
 (use-package expand-region
+  :ensure t)
+#+end_src
+
+* Kirigami
+https://github.com/jamescherti/kirigami.el
+
+#+begin_src emacs-lisp
+(use-package kirigami
   :ensure t)
 #+end_src
 

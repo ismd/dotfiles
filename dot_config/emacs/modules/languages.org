@@ -7,7 +7,6 @@
 - [[#eglot][Eglot]]
 - [[#flymake][Flymake]]
 - [[#jsonrpc][JSONRPC]]
-- [[#kirigami][Kirigami]]
 - [[#kubernetes][Kubernetes]]
   - [[#kele][kele]]
   - [[#kubed][Kubed]]
@@ -52,14 +51,6 @@ https://github.com/joaotavora/eglot
 #+begin_src emacs-lisp
 (use-package jsonrpc
   :ensure nil)
-#+end_src
-
-* Kirigami
-https://github.com/jamescherti/kirigami.el
-
-#+begin_src emacs-lisp
-(use-package kirigami
-  :ensure t)
 #+end_src
 
 * Kubernetes

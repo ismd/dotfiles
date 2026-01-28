@@ -103,7 +103,7 @@ https://github.com/chep/copilot-chat.el
   :ensure t
   :hook (git-commit-setup . copilot-chat-insert-commit-message)
   :custom
-  (copilot-chat-commit-model "claude-opus-4.5")
+  (copilot-chat-commit-model "claude-sonnet-4.5")
   (copilot-chat-frontend 'shell-maker)
   :config
   (ismd/add-display-buffer-rule "^\\*Copilot Chat"))

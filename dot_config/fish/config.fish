@@ -2,13 +2,6 @@ function fish_greeting
     fortune | cowsay | lolcat
 end
 
-# PATH
-fish_add_path -p ~/.bin
-fish_add_path -p ~/.local/bin
-fish_add_path -p ~/.config/emacs/bin
-fish_add_path -p ~/src/flutter/bin
-fish_add_path -p ~/.pub-cache/bin
-
 # Abbreviations
 abbr -a aa arc add
 abbr -a aci arc commit

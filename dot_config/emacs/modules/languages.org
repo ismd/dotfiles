@@ -146,7 +146,13 @@ https://github.com/jrblevin/markdown-mode
 
 #+begin_src emacs-lisp
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :custom
+  (markdown-fontify-code-blocks-natively t)
+  (markdown-header-scaling t)
+  (markdown-hide-markup t)
+  (markdown-italic-underscore t)
+  (markdown-list-indent-width 2))
 #+end_src
 
 *** Grip

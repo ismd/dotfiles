@@ -17,6 +17,8 @@
       dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"
       dired-kill-when-opening-new-dired-buffer nil
       dired-mouse-drag-files t
+      dired-recursive-copies 'always
+      dired-recursive-deletes 'always
       mouse-drag-and-drop-region-cross-program nil)
 
 (put 'dired-find-alternate-file 'disabled nil)

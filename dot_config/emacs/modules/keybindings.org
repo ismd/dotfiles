@@ -356,6 +356,7 @@
   "t t" '(dirvish-side :wk "Toggle dirvish side window")
   "t T" '(treemacs-add-and-display-current-project-exclusively :wk "Treemacs project")
   "t v" '(vterm-toggle :wk "Toggle vterm")
+  "t W" '(whitespace-mode :wk "Toggle whitespace mode")
   "t w" '(visual-line-mode :wk "Toggle word wrap"))
 #+end_src
 

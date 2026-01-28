@@ -639,3 +639,12 @@ Generate commit messages using Claude.
   ;; (magit-gptcommit-status-buffer-setup)
   )
 #+end_src
+
+* Bullets
+Org-bullets gives us attractive bullets rather than asterisks.
+
+#+begin_src emacs-lisp
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . org-bullets-mode))
+#+end_src

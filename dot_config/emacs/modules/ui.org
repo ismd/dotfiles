@@ -51,8 +51,7 @@ Adding highlights to TODO and related words.
 #+begin_src emacs-lisp
 (use-package hl-todo
   :ensure t
-  :hook ((org-mode . hl-todo-mode)
-         (prog-mode . hl-todo-mode))
+  :hook (prog-mode . hl-todo-mode)
   :config
   (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces

@@ -6,9 +6,10 @@
 * Table of Contents :toc:
 - [[#denote][Denote]]
 - [[#org-mode][Org Mode]]
-  - [[#bullets][Bullets]]
   - [[#export-to-markdown][Export to Markdown]]
+  - [[#modern-org-style][Modern Org Style]]
   - [[#org-appear][Org Appear]]
+  - [[#org-modern-indent][Org Modern Indent]]
   - [[#table-of-contents][Table of Contents]]
 
 * Denote
@@ -33,23 +34,24 @@ https://github.com/protesilaos/denote
 (require 'org-tempo)
 
 (setq org-agenda-files (list (expand-file-name "~/Nextcloud/Notes/"))
+      org-agenda-tags-column 0
+      org-auto-align-tags nil
       org-complete-tags-always-offer-all-agenda-tags t
       org-directory (expand-file-name "~/Nextcloud/Notes/")
       org-edit-src-content-indentation 0
+      org-ellipsis "…"
+      org-fold-catch-invisible-edits 'smart
+      org-fontify-quote-and-verse-blocks t
       org-hide-emphasis-markers t
+      org-insert-heading-respect-content t
       org-link-descriptive t
       org-pretty-entities t
+      org-special-ctrl-a/e t
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      org-tags-column 0
       org-todo-keywords '((sequence "TODO(t)" "IN-PROGRESS(i)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))
       org-use-sub-superscripts '{})
-#+end_src
-
-** Bullets
-Org-bullets gives us attractive bullets rather than asterisks.
-
-#+begin_src emacs-lisp
-(use-package org-bullets
-  :ensure t
-  :hook (org-mode . org-bullets-mode))
 #+end_src
 
 ** Export to Markdown
@@ -59,6 +61,21 @@ https://github.com/larstvei/ox-gfm
 (use-package ox-gfm
   :ensure t
   :after org)
+#+end_src
+
+** Modern Org Style
+https://github.com/minad/org-modern
+
+#+begin_src emacs-lisp
+(use-package org-modern
+  :ensure t
+  :custom
+  (org-modern-hide-stars nil)
+  (org-modern-list '((?- . "•") (?+ . "‣") (?* . "◦")))
+  (org-modern-star '("◉" "○" "◈" "◇" "✦"))
+  (org-modern-table nil)
+  :config
+  (global-org-modern-mode))
 #+end_src
 
 ** Org Appear
@@ -77,6 +94,16 @@ Make invisible parts of Org elements appear visible.
   (org-appear-autolinks t)
   (org-appear-autokeywords t)
   (org-appear-trigger 'on-change))
+#+end_src
+
+** Org Modern Indent
+https://github.com/jdtsmith/org-modern-indent
+
+#+begin_src emacs-lisp
+(use-package org-modern-indent
+  :ensure (:host github :repo "jdtsmith/org-modern-indent")
+  :config
+  (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
 #+end_src
 
 ** Table of Contents

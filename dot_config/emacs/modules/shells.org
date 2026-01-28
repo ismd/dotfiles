@@ -13,7 +13,7 @@
 #+begin_src emacs-lisp
 (use-package eat
   :ensure t
-  :hook (eat-mode . (lambda () (display-line-numbers-mode -1))))
+  :hook (eat-mode . ismd/disable-line-numbers))
 #+end_src
 
 * Eshell
@@ -45,7 +45,7 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 #+begin_src emacs-lisp
 (use-package vterm
   :ensure t
-  :hook (vterm-mode . (lambda () (display-line-numbers-mode -1)))
+  :hook (vterm-mode . ismd/disable-line-numbers)
   :config
   (setq shell-file-name "/bin/fish"
         vterm-max-scrollback 5000))

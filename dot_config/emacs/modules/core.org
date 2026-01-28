@@ -249,6 +249,10 @@ Disable scroll bar in minibuffer.
 
 ** Display
 #+begin_src emacs-lisp
+(defun ismd/disable-line-numbers ()
+  "Disable line numbers in current buffer."
+  (display-line-numbers-mode -1))
+
 (defun ismd/add-display-buffer-rule (buffer-name &optional window-width)
   "Add a display-buffer rule for BUFFER-NAME with optional WINDOW-WIDTH (default 0.35)."
   (let ((width (or window-width 0.35)))

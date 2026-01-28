@@ -46,7 +46,7 @@ exec-once = kdeconnect-indicator
 # exec-once = dconf load /org/gnome/desktop/interface/ < ~/.config/dconf/gnome-interface.conf
 # exec-once = flameshot
 
-{{- if eq .chezmoi.hostname "mighty" "ismd-work" "ismd-black" }}
+{{- if eq .chezmoi.hostname "mighty" }}
 exec-once = ~/.bin/monitors.sh
 exec = ~/.bin/thinkpad-leds.sh
 {{- end }}
@@ -248,12 +248,10 @@ input {
 gesture = 3, horizontal, workspace
 
 # See https://wiki.hypr.land/Configuring/Keywords/#per-device-input-configs for more
-{{- if eq .chezmoi.hostname "mighty" }}
 device {
     name = elan0676:00-04f3:3195-touchpad
     sensitivity = 0.2
 }
-{{- end }}
 
 cursor {
     inactive_timeout = 2
@@ -368,7 +366,7 @@ bind = $mainMod, L, exec, dms ipc call lock lock
 # Lid toggle
 # bindl = , switch:on:Lid Switch, exec, hyprlock
 
-{{- if eq .chezmoi.hostname "mighty" "ismd-work" "ismd-black" }}
+{{- if eq .chezmoi.hostname "mighty" }}
 bindl = , switch:off:Lid Switch, exec, ~/.bin/thinkpad-leds.sh
 {{- end }}
 

@@ -71,6 +71,7 @@ yay -S --noconfirm --needed \
     python-pip \
     python-pylint \
     python-pywal \
+    qemu-full \
     quickshell-git \
     remmina \
     ripgrep \

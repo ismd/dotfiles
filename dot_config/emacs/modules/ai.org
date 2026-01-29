@@ -124,7 +124,7 @@ https://github.com/karthink/gptel
 #+end_src
 
 * Minuet
-https://github.com/milanglacier/minuet-ai.el?tab=readme-ov-file
+https://github.com/milanglacier/minuet-ai.el
 
 #+begin_src emacs-lisp
 (use-package minuet

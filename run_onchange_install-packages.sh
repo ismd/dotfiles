@@ -49,8 +49,9 @@ yay -S --noconfirm --needed \
     inetutils \
     k9s \
     kubectl \
-    libvips \
     libreoffice-still \
+    libvips \
+    libvirt \
     libvterm \
     libtool \
     lsp-plugins-lv2 \

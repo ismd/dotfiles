@@ -30,7 +30,7 @@ dot_config/emacs/
     ├── ai.org              # Claude, Copilot, GPTel
     ├── files.org           # Dired, Dirvish, Treemacs, project.el
     ├── languages.org       # LSP (Eglot), tree-sitter, language modes
-    ├── org-config.org      # Org mode, Denote notes
+    ├── notes.org           # Org mode, Denote notes
     ├── shells.org          # Vterm, Eshell, Eat terminals
     ├── vcs.org             # Magit, git-gutter, git-timemachine
     ├── themes.org          # Theme packages

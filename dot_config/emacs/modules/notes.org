@@ -77,6 +77,8 @@ https://github.com/seagle0128/grip-mode
       org-tags-column 0
       org-todo-keywords '((sequence "TODO(t)" "IN-PROGRESS(i)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))
       org-use-sub-superscripts '{})
+
+(setf (alist-get 'file org-link-frame-setup) #'find-file)
 #+end_src
 
 ** Export to Markdown

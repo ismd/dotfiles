@@ -20,6 +20,7 @@ yay -S --noconfirm --needed \
     cmake \
     discord \
     dms-shell-git \
+    dnsmasq \
     docker \
     docker-buildx \
     docker-compose \

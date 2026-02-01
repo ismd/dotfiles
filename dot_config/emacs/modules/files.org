@@ -82,7 +82,7 @@ https://github.com/alexluigit/dirvish
 
   (push 'eza dirvish-preview-dispatchers)
 
-  (setq dirvish-side-width 26
+  (setq dirvish-side-width 28
         dirvish-subtree-prefix "  "))
 
 ;; Use project.el instead of vc-root-dir for project detection

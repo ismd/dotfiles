@@ -51,6 +51,7 @@ By default, Emacs creates automatic backups of files in their original directori
 ** Buffer-local defaults
 #+begin_src emacs-lisp
 (setq-default cursor-type '(bar . 2)
+              fill-column 120
               indent-tabs-mode nil
               line-spacing 0.12)
 #+end_src

@@ -251,8 +251,8 @@ https://github.com/rnkn/olivetti
 (use-package olivetti
   :ensure t
   :custom
-  (olivetti-body-width 0.5)
-  (olivetti-style 'fancy))
+  (olivetti-body-width nil)
+  (olivetti-style nil))
 #+end_src
 
 * Perspective

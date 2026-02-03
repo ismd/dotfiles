@@ -234,13 +234,18 @@ https://github.com/seagle0128/nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
   (setq nerd-icons-ibuffer-formats
-        '((mark " "
-                (icon 2 2)
-                (name 50 50 :left :elide)
+        '((mark modified read-only locked
                 " "
-                project-file-relative)
+                (icon 2 2)
+                (name 30 30 :left :elide)
+                " "
+                (size-h 9 -1 :right)
+                " "
+                (mode+ 16 16 :left :elide)
+                " "
+                filename-and-process+)
           (mark " "
-                (name 50 -1)
+                (name 16 -1)
                 " " filename))))
 #+end_src
 

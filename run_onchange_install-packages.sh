@@ -19,7 +19,8 @@ yay -S --noconfirm --needed \
     calf \
     cmake \
     discord \
-    dms-shell-git \
+    dms-shell-bin \
+    dms-shell-hyprland \
     dnsmasq \
     docker \
     docker-buildx \

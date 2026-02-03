@@ -103,6 +103,18 @@ Left pane shows current directory, right pane shows home directory."
     (other-window 1)
     (dired "~")
     (other-window 1)))
+
+(defun ismd/dired-do-delete (&optional permanently)
+  "Delete marked files. With prefix argument PERMANENTLY, bypass trash."
+  (interactive "P")
+  (let ((delete-by-moving-to-trash (not permanently)))
+    (dired-do-delete)))
+
+(defun ismd/dired-do-flagged-delete (&optional permanently)
+  "Delete flagged files. With prefix argument PERMANENTLY, bypass trash."
+  (interactive "P")
+  (let ((delete-by-moving-to-trash (not permanently)))
+    (dired-do-flagged-delete)))
 #+end_src
 
 * Project

@@ -300,18 +300,34 @@ If at end of line, delete the following newline char."
 
 ** Files
 #+begin_src emacs-lisp
-(defun ismd/delete-this-file ()
-  "Delete the file associated with the current buffer and kill the buffer with confirmation."
-  (interactive)
+(defun ismd/delete-this-file (&optional permanently)
+  "Delete the file associated with the current buffer and kill the buffer.
+With prefix argument PERMANENTLY, bypass trash and delete permanently."
+  (interactive "P")
   (let ((filename (buffer-file-name)))
     (if filename
-        (if (y-or-n-p (format "Are you sure you want to delete %s? " filename))
-            (progn
-              (delete-file filename)
-              (message "Deleted file %s" filename)
-              (kill-current-buffer))
-          (message "Canceled"))
+        (let ((prompt (if permanently
+                         (format "PERMANENTLY delete %s? " filename)
+                       (format "Delete %s? " filename))))
+          (if (y-or-n-p prompt)
+              (let ((delete-by-moving-to-trash (not permanently)))
+                (delete-file filename delete-by-moving-to-trash)
+                (message "%s file %s"
+                         (if permanently "Permanently deleted" "Deleted")
+                         filename)
+                (kill-current-buffer))
+            (message "Canceled")))
       (message "Not a file"))))
+
+(defun ismd/delete-file-permanently (filename)
+  "Delete FILENAME permanently, bypassing trash.
+Useful for TRAMP and temporary files."
+  (interactive "fDelete permanently: ")
+  (if (y-or-n-p (format "PERMANENTLY delete %s? " filename))
+      (let ((delete-by-moving-to-trash nil))
+        (delete-file filename nil)
+        (message "Permanently deleted %s" filename))
+    (message "Canceled")))
 #+end_src
 
 ** Folding

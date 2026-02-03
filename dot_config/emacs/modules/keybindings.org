@@ -179,7 +179,8 @@
 (ismd/leader-keys-C-c
   "f" '(:ignore t :wk "Files")
   "f c" '(ismd/open-emacs-config :wk "Open emacs config.org")
-  "f D" '(ismd/delete-this-file :wk "Delete this file")
+  "f D" '(ismd/delete-file-permanently :wk "Delete file permanently")
+  "f d" '(ismd/delete-this-file :wk "Delete this file")
   "f e" '(ismd/open-emacs-directory :wk "Open user-emacs-directory in dired")
   "f f" '(find-file :wk "Find file")
   "f F" '(ismd/find-file-temporarily :wk "Find file temporarily")
@@ -464,7 +465,9 @@
  "*"   '(dirvish-mark-menu :wk "Mark menu")
  "."   '(dired-create-empty-file :wk "Create empty file")
  ","   '(dirvish-setup-menu :wk "Setup menu")
+ "^"   '(dirvish-subtree-up :wk "Subtree up")
  "?"   '(dirvish-dispatch :wk "Dispatch menu")
+ "D"   '(ismd/dired-do-delete :wk "Delete (C-u = permanent)")
  "e"   '(dirvish-emerge-menu :wk "Emerge menu")
  "f"   '(dirvish-file-info-menu :wk "File info menu")
  "h"   '(dirvish-history-menu :wk "History menu")
@@ -473,7 +476,7 @@
  "N"   '(dirvish-narrow :wk "Narrow")
  "r"   '(dirvish-history-jump :wk "Jump to history")
  "s"   '(dirvish-quicksort :wk "Quicksort menu")
- "u"   '(dirvish-subtree-up :wk "Subtree up")
+ "x"   '(ismd/dired-do-flagged-delete :wk "Delete flagged (C-u = permanent)")
  "y"   '(dirvish-yank-menu :wk "Yank menu"))
 #+end_src
 

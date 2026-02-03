@@ -144,6 +144,7 @@ Disable scroll bar in minibuffer.
 (pixel-scroll-precision-mode 1)
 
 (setq auto-window-vscroll nil
+      pixel-scroll-precision-interpolate-mice t
       pixel-scroll-precision-interpolate-page t
       pixel-scroll-precision-large-scroll-height 40.0
       recenter-positions '(0.18 top bottom)

@@ -34,6 +34,7 @@ https://github.com/joaotavora/eglot
   :hook ((prog-mode . eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(fish-mode "fish-lsp" "start"))
+  (add-to-list 'eglot-server-programs '(qml-mode "qmlls6"))
   (advice-add 'eglot--message :around
               (lambda (orig format &rest args)
                 (unless (string-prefix-p "Connected!" format)

@@ -79,6 +79,8 @@ yay -S --noconfirm --needed \
     socat \
     swww \
     tigervnc \
+    tlp \
+    tlp-pd \
     viewnior \
     whois \
     xournalpp \

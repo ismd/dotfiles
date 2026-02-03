@@ -15,7 +15,7 @@
 #+begin_src emacs-lisp
 (setq dired-dwim-target t
       dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"
-      dired-kill-when-opening-new-dired-buffer nil
+      dired-kill-when-opening-new-dired-buffer t
       dired-mouse-drag-files t
       dired-recursive-copies 'always
       dired-recursive-deletes 'always
@@ -63,6 +63,7 @@ https://github.com/alexluigit/dirvish
   :config
   (dirvish-peek-mode)
   (dirvish-side-follow-mode)
+  (setq dirvish-reuse-session t)
   (setq dirvish-mode-line-format
         '(:left (sort symlink) :right (omit yank index)))
   (setq dirvish-attributes           ; The order *MATTERS* for some attributes

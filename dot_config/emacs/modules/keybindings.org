@@ -473,6 +473,7 @@
  "N"   '(dirvish-narrow :wk "Narrow")
  "r"   '(dirvish-history-jump :wk "Jump to history")
  "s"   '(dirvish-quicksort :wk "Quicksort menu")
+ "u"   '(dirvish-subtree-up :wk "Subtree up")
  "y"   '(dirvish-yank-menu :wk "Yank menu"))
 #+end_src
 

@@ -4,6 +4,7 @@
 #+startup: showeverything
 
 * Table of Contents :toc:
+- [[#breadcrumb][Breadcrumb]]
 - [[#dashboard][Dashboard]]
 - [[#highlight-todo][Highlight TODO]]
 - [[#ligatures][Ligatures]]
@@ -21,6 +22,16 @@
 - [[#window-management][Window Management]]
 - [[#window-numbering][Window Numbering]]
 - [[#zooming-inout][Zooming In/Out]]
+
+* Breadcrumb
+https://github.com/joaotavora/breadcrumb
+
+Display navigation breadcrumbs in the header line showing your position in code structure (imenu) and project hierarchy (project.el).
+
+#+begin_src emacs-lisp
+(use-package breadcrumb
+  :ensure t)
+#+end_src
 
 * Dashboard
 Emacs Dashboard is an extensible startup screen showing you recent files, bookmarks, agenda items and an Emacs banner.

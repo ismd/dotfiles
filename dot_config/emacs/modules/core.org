@@ -140,6 +140,8 @@ Disable scroll bar in minibuffer.
 #+end_src
 
 ** Scroll
+I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
+
 #+begin_src emacs-lisp
 (pixel-scroll-precision-mode 1)
 

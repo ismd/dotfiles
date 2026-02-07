@@ -18,6 +18,7 @@ yay -S --noconfirm --needed \
     caido-desktop \
     calf \
     cmake \
+    direnv \
     discord \
     dms-shell-bin \
     dms-shell-hyprland \

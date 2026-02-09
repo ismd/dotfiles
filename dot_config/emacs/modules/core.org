@@ -89,6 +89,7 @@ https://github.com/purcell/envrc
 ** Files
 #+begin_src emacs-lisp
 (global-auto-revert-mode t)
+(recentf-mode 1)
 (save-place-mode 1)
 (savehist-mode 1)
 

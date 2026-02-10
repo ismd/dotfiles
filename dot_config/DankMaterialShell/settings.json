@@ -173,7 +173,7 @@
   "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "wifi",
-  "vpnLastConnected": "",
+  "vpnLastConnected": "0c10cb91-92ee-4ee1-bd14-9317c3d077fe",
   "iconTheme": "System Default",
   "cursorSettings": {
     "theme": "System Default",

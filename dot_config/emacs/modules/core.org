@@ -322,6 +322,11 @@ With prefix argument PERMANENTLY, bypass trash and delete permanently."
             (message "Canceled")))
       (message "Not a file"))))
 
+(defun ismd/delete-this-file-permanently ()
+  "Delete the file associated with the current buffer permanently and kill the buffer."
+  (interactive)
+  (ismd/delete-this-file t))
+
 (defun ismd/delete-file-permanently (filename)
   "Delete FILENAME permanently, bypassing trash.
 Useful for TRAMP and temporary files."

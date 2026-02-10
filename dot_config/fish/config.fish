@@ -42,8 +42,7 @@ set -gx EZA_STANDARD_OPTIONS --group --header --group-directories-first --icons 
 alias llt 'eza $EZA_STANDARD_OPTIONS --tree'
 
 # fzf
-set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --margin 1,2'
-fzf --fish | source
+set -gx FZF_DEFAULT_OPTS '--height 50% --layout=reverse --border --margin 1,2'
 
 # nvm
 set -gx nvm_default_version 24

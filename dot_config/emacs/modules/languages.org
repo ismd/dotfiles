@@ -31,7 +31,19 @@ https://github.com/joaotavora/eglot
 #+begin_src emacs-lisp
 (use-package eglot
   :ensure nil
-  :hook ((prog-mode . eglot-ensure))
+  :hook ((bash-ts-mode
+          dart-mode
+          fish-mode
+          go-mode go-ts-mode
+          js-mode js-ts-mode
+          json-mode json-ts-mode
+          python-mode python-ts-mode
+          qml-mode
+          sh-mode
+          terraform-mode
+          tsx-ts-mode
+          typescript-mode typescript-ts-mode
+          yaml-mode yaml-ts-mode) . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs '(fish-mode "fish-lsp" "start"))
   (add-to-list 'eglot-server-programs '(qml-mode "qmlls6"))

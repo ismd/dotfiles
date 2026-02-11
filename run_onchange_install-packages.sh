@@ -13,6 +13,7 @@ yay -S --noconfirm --needed \
     7zip \
     ark \
     avahi \
+    bash-language-server \
     bind \
     bitwarden-desktop \
     caido-desktop \
@@ -84,6 +85,8 @@ yay -S --noconfirm --needed \
     tlp \
     tlp-pd \
     viewnior \
+    vscode-json-languageserver \
     whois \
     xournalpp \
+    yaml-language-server \
     zoom

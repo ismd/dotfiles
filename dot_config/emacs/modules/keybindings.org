@@ -460,6 +460,7 @@
 #+begin_src emacs-lisp
 (general-define-key
  :keymaps 'dirvish-mode-map
+ "RET" '(ismd/dirvish-find-file :wk "Find file (smart)")
  "DEL" '(dired-up-directory :wk "Go up directory")
  "TAB" '(dirvish-subtree-toggle :wk "Toggle subtree")
  "*"   '(dirvish-mark-menu :wk "Mark menu")

@@ -116,6 +116,27 @@ Left pane shows current directory, right pane shows home directory."
       (other-window 1)
       (find-file file))))
 
+(defun ismd/dirvish-dual-pane-p ()
+  "Return non-nil if we are in a dual-pane dirvish layout.
+That is, there are exactly two windows and both show dired buffers."
+  (and (= (length (window-list)) 2)
+       (cl-every (lambda (w)
+                   (with-current-buffer (window-buffer w)
+                     (derived-mode-p 'dired-mode)))
+                 (window-list))))
+
+(defun ismd/dirvish-find-file ()
+  "Smart find-file for dirvish.
+In dual-pane layout, open files in the other window.
+Otherwise, use standard `dired-find-file'."
+  (interactive)
+  (if (and (ismd/dirvish-dual-pane-p)
+           (not (file-directory-p (dired-get-file-for-visit))))
+      (let ((file (dired-get-file-for-visit)))
+        (other-window 1)
+        (find-file file))
+    (dired-find-file)))
+
 (defun ismd/dired-do-delete (&optional permanently)
   "Delete marked files. With prefix argument PERMANENTLY, bypass trash."
   (interactive "P")

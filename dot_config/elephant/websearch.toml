@@ -1,0 +1,14 @@
+[[entries]]
+default = true
+name = "Google"
+url = "https://www.google.com/search?q=%TERM%"
+
+[[entries]]
+name = "Wikipedia"
+prefix = "w"
+url = "https://en.wikipedia.org/w/index.php?search=%TERM%"
+
+[[entries]]
+name = "Arch Wiki"
+prefix = "aw"
+url = "https://wiki.archlinux.org/index.php?search=%TERM%"

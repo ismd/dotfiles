@@ -32,6 +32,7 @@ yay -S --noconfirm --needed \
     easyeffects \
     easytag \
     elephant \
+    elephant-bitwarden \
     elephant-calc \
     elephant-desktopapplications \
     elephant-providerlist \
@@ -83,6 +84,7 @@ yay -S --noconfirm --needed \
     python-pywal \
     qemu-full \
     quickshell-git \
+    rbw \
     remmina \
     ripgrep \
     socat \

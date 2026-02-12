@@ -474,6 +474,7 @@
  "j"   '(dirvish-quick-access :wk "Quick access jump")
  "l"   '(dirvish-layout-toggle :wk "Toggle layout")
  "N"   '(dirvish-narrow :wk "Narrow")
+ "o"   '(ismd/dirvish-open-in-other-window :wk "Open in other window")
  "r"   '(dirvish-history-jump :wk "Jump to history")
  "s"   '(dirvish-quicksort :wk "Quicksort menu")
  "x"   '(ismd/dired-do-flagged-delete :wk "Delete flagged (C-u = permanent)")

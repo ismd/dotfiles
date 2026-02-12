@@ -105,6 +105,17 @@ Left pane shows current directory, right pane shows home directory."
     (dired "~")
     (other-window 1)))
 
+(defun ismd/dirvish-open-in-other-window ()
+  "Open file at point in the other window, keeping current dired buffer."
+  (interactive)
+  (let ((file (dired-get-file-for-visit)))
+    (if (file-directory-p file)
+        (progn
+          (other-window 1)
+          (dired file))
+      (other-window 1)
+      (find-file file))))
+
 (defun ismd/dired-do-delete (&optional permanently)
   "Delete marked files. With prefix argument PERMANENTLY, bypass trash."
   (interactive "P")

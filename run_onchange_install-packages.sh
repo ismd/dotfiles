@@ -36,6 +36,7 @@ yay -S --noconfirm --needed \
     elephant-desktopapplications \
     elephant-providerlist \
     elephant-symbols \
+    elephant-unicode \
     elephant-websearch \
     emacs-wayland \
     evince \

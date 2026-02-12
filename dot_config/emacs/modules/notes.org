@@ -7,6 +7,7 @@
 - [[#denote][Denote]]
 - [[#markdown][Markdown]]
 - [[#org-mode][Org Mode]]
+  - [[#org-agenda][Org Agenda]]
   - [[#export-to-markdown][Export to Markdown]]
   - [[#modern-org-style][Modern Org Style]]
   - [[#org-appear][Org Appear]]
@@ -58,9 +59,7 @@ https://github.com/seagle0128/grip-mode
 
 (require 'org-tempo)
 
-(setq org-agenda-files (list (expand-file-name "~/Nextcloud/Notes/"))
-      org-agenda-tags-column 0
-      org-auto-align-tags nil
+(setq org-auto-align-tags nil
       org-complete-tags-always-offer-all-agenda-tags t
       org-directory (expand-file-name "~/Nextcloud/Notes/")
       org-edit-src-content-indentation 0
@@ -79,6 +78,82 @@ https://github.com/seagle0128/grip-mode
       org-use-sub-superscripts '{})
 
 (setf (alist-get 'file org-link-frame-setup) #'find-file)
+#+end_src
+
+** Org Agenda
+#+begin_src emacs-lisp
+(setq
+ ;; Files and directories
+ org-agenda-files (list (expand-file-name "~/Nextcloud/Notes/"))
+
+ ;; View settings
+ org-agenda-start-on-weekday nil  ;; Start from today, not Monday
+ org-agenda-span 'week            ;; Show 7 days ahead
+ org-agenda-start-day nil
+ org-agenda-show-all-dates nil    ;; Hide days without tasks
+
+ ;; Time settings
+ org-extend-today-until 3         ;; Day ends at 3:00 AM
+ org-deadline-warning-days 3      ;; Warn 3 days before deadline
+
+ ;; Skip completed tasks
+ org-agenda-skip-scheduled-if-done t
+ org-agenda-skip-deadline-if-done t
+ org-agenda-skip-timestamp-if-done t
+
+ ;; Hide scheduled/deadline tasks in TODO list
+ org-agenda-todo-ignore-scheduled t
+ org-agenda-todo-ignore-deadlines t
+
+ ;; Display format
+ org-agenda-compact-blocks t
+ org-agenda-block-separator ?─
+ org-agenda-tags-column 0
+ org-agenda-prefix-format
+ '((agenda . " %i %-12:c%?-12t% s")
+   (todo . " %i %-12:c")
+   (tags . " %i %-12:c")
+   (search . " %i %-12:c"))
+
+ ;; Window settings
+ org-agenda-window-setup 'current-window
+ org-agenda-restore-windows-after-quit t
+
+ ;; Sorting strategy
+ org-agenda-sorting-strategy
+ '((agenda habit-down time-up priority-down category-keep)
+   (todo priority-down category-keep)
+   (tags priority-down category-keep)
+   (search category-keep))
+
+ ;; Time grid
+ org-agenda-time-grid
+ '((daily today require-timed)
+   (800 1000 1200 1400 1600 1800 2000)
+   "......" "────────────────")
+
+ org-agenda-current-time-string "← now ───────────────────────────────────────────────")
+
+(setq org-agenda-custom-commands
+      '(("d" "Dashboard"
+         ((agenda "" ((org-agenda-span 1)
+                      (org-agenda-overriding-header "Today")))
+          (todo "IN-PROGRESS"
+                ((org-agenda-overriding-header "In Progress")))
+          (todo "TODO"
+                ((org-agenda-overriding-header "To Do")
+                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled))))
+          (todo "WAIT"
+                ((org-agenda-overriding-header "Waiting")))))
+
+        ("w" "Week Ahead"
+         ((agenda "" ((org-agenda-span 7)
+                      (org-agenda-overriding-header "Week Ahead")))))
+
+        ("n" "Next Tasks"
+         ((todo "TODO"
+                ((org-agenda-overriding-header "Unscheduled Tasks")
+                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
 #+end_src
 
 ** Export to Markdown

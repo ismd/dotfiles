@@ -150,7 +150,7 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
       pixel-scroll-precision-interpolate-mice t
       pixel-scroll-precision-interpolate-page t
       pixel-scroll-precision-large-scroll-height 40.0
-      recenter-positions '(0.18 top bottom)
+      recenter-positions '(0.2 top bottom)
       scroll-conservatively 0
       scroll-margin 0
       scroll-preserve-screen-position t

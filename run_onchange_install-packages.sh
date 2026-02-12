@@ -32,6 +32,11 @@ yay -S --noconfirm --needed \
     easyeffects \
     easytag \
     elephant \
+    elephant-calc \
+    elephant-desktopapplications \
+    elephant-providerlist \
+    elephant-symbols \
+    elephant-websearch \
     emacs-wayland \
     evince \
     eza \

@@ -32,10 +32,10 @@ anchor_right = true
 close = ["Escape", "ctrl g"]
 next = ["Down", "ctrl n"]
 previous = ["Up", "ctrl p"]
-left = ["Left"]
-right = ["Right"]
-down = ["Down"]
-up = ["Up"]
+left = ["Left", "ctrl b"]
+right = ["Right", "ctrl f"]
+down = ["Down", "ctrl n"]
+up = ["Up" ,"ctrl p"]
 toggle_exact = ["ctrl e"]
 resume_last_query = ["ctrl r"]
 quick_activate = ["F1", "F2", "F3", "F4"]
@@ -122,7 +122,7 @@ providerlist = [
 ]
 
 bluetooth = [
-  { action = "find", bind = "ctrl f", after = "AsyncClearReload" },
+  { action = "find", bind = "ctrl F", after = "AsyncClearReload" },
   { action = "remove", bind = "ctrl d", after = "AsyncReload" },
   { action = "trust", bind = "ctrl t", after = "AsyncReload" },
   { action = "untrust", bind = "ctrl t", after = "AsyncReload" },
@@ -205,7 +205,7 @@ todo = [
   { action = "delete", bind = "ctrl d", after = "AsyncClearReload" },
   { action = "active", default = true, bind = "Return", after = "Nothing" },
   { action = "inactive", default = true, bind = "Return", after = "Nothing" },
-  { action = "done", bind = "ctrl f", after = "Nothing" },
+  { action = "done", bind = "ctrl F", after = "Nothing" },
   { action = "change_category", bind = "ctrl y", label = "change category", after = "Nothing" },
   { action = "clear", bind = "ctrl x", after = "AsyncClearReload" },
   { action = "create", bind = "ctrl a", after = "AsyncClearReload" },
@@ -250,7 +250,7 @@ bookmarks = [
   { action = "open", default = true, bind = "Return" },
   { action = "delete", bind = "ctrl d", after = "AsyncClearReload" },
   { action = "change_category", label = "Change category", bind = "ctrl y", after = "Nothing" },
-  { action = "change_browser", label = "Change browser", bind = "ctrl b", after = "Nothing" },
+  { action = "change_browser", label = "Change browser", bind = "ctrl B", after = "Nothing" },
   { action = "import", label = "Import", bind = "ctrl i", after = "AsyncClearReload" },
   { action = "create", bind = "ctrl a", after = "AsyncClearReload" },
   { action = "search", bind = "ctrl a", after = "AsyncClearReload" },

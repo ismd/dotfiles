@@ -7,6 +7,7 @@
 - [[#git-gutter][Git Gutter]]
 - [[#git-time-machine][Git Time Machine]]
 - [[#magit][Magit]]
+  - [[#magit-todos][Magit Todos]]
 
 * Git Gutter
 https://github.com/emacsorphanage/git-gutter
@@ -43,4 +44,15 @@ https://github.com/emacsorphanage/git-gutter
   (magit-ediff-dwim-show-on-hunks t)
   ;; (transient-display-buffer-action '(display-buffer-below-selected))
   )
+#+end_src
+
+** Magit Todos
+[[https://github.com/alphapapa/magit-todos][magit-todos]] displays TODO/FIXME/etc items in the Magit status buffer.
+
+#+begin_src emacs-lisp
+(use-package magit-todos
+  :ensure t
+  :after magit
+  :config
+  (magit-todos-mode 1))
 #+end_src

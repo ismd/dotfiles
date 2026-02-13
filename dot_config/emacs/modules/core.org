@@ -159,7 +159,7 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
 
 ** SSH Agent
 #+begin_src emacs-lisp
-(setenv "SSH_AUTH_SOCK" "/run/user/1000/ssh-agent.socket")
+(setenv "SSH_AUTH_SOCK" "~/.bitwarden-ssh-agent.sock")
 #+end_src
 
 ** Startup

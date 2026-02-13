@@ -306,8 +306,7 @@
   "o e" '(org-export-dispatch :wk "Org export dispatch")
   "o i" '(org-toggle-item :wk "Org toggle item")
   "o o" '(org-emphasize :wk "Org emphasize")
-  "o T" '(org-todo-list :wk "Org todo list")
-  "o x" '(org-toggle-checkbox :wk "Org toggle checkbox"))
+  "o T" '(org-todo-list :wk "Org todo list"))
 #+end_src
 
 *** Project

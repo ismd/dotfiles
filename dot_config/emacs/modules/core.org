@@ -81,8 +81,7 @@ https://github.com/purcell/envrc
 #+begin_src emacs-lisp
 (use-package envrc
   :ensure t
-  :init
-  (envrc-global-mode))
+  :hook (after-init . envrc-global-mode))
 #+end_src
 
 ** Files

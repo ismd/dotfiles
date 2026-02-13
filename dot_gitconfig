@@ -1,7 +1,7 @@
 [user]
     name = Vladimir Kosteley
     email = github@ismd.dev
-    signingkey = 211552B61746DD5F629EDC7361DEFD5434C80F0F
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHV/H644P4eLij7h9tdK91B7MJoKyKiCgWqqZ703IV7O
 
 [github]
     user = ismd
@@ -43,7 +43,13 @@
     st = status
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [commit]
-	gpgsign = true
+    gpgsign = true
+
+[gpg]
+    format = ssh
+
+[gpg "ssh"]
+    allowedSignersFile = /home/ismd/.ssh/allowed_signers

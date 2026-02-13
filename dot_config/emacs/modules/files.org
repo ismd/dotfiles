@@ -127,14 +127,13 @@ That is, there are exactly two windows and both show dired buffers."
 
 (defun ismd/dirvish-find-file ()
   "Smart find-file for dirvish.
-In dual-pane layout, open files in the other window.
+In dual-pane layout, use `find-file' directly to bypass dirvish
+session cleanup, keeping the dired buffer in window history.
 Otherwise, use standard `dired-find-file'."
   (interactive)
   (if (and (ismd/dirvish-dual-pane-p)
            (not (file-directory-p (dired-get-file-for-visit))))
-      (let ((file (dired-get-file-for-visit)))
-        (other-window 1)
-        (find-file file))
+      (find-file (dired-get-file-for-visit))
     (dired-find-file)))
 
 (defun ismd/dired-do-delete (&optional permanently)

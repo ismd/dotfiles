@@ -16,7 +16,6 @@
   - [[#misc][Misc]]
   - [[#performance][Performance]]
   - [[#scroll][Scroll]]
-  - [[#ssh-agent][SSH Agent]]
   - [[#startup][Startup]]
   - [[#tab-bar][Tab Bar]]
   - [[#ui][UI]]
@@ -155,11 +154,6 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
       scroll-margin 0
       scroll-preserve-screen-position t
       scroll-step 0)
-#+end_src
-
-** SSH Agent
-#+begin_src emacs-lisp
-(setenv "SSH_AUTH_SOCK" "~/.bitwarden-ssh-agent.sock")
 #+end_src
 
 ** Startup

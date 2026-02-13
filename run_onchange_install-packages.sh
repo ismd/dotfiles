@@ -29,6 +29,7 @@ yay -S --noconfirm --needed \
     docker-compose \
     docker-credential-secretservice \
     dolphin \
+    downgrade \
     easyeffects \
     easytag \
     elephant \

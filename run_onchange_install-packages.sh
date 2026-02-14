@@ -56,6 +56,7 @@ yay -S --noconfirm --needed \
     hydra \
     hypridle \
     hyprpolkitagent \
+    i2c-tools \
     imagemagick \
     imhex-bin \
     inetutils \

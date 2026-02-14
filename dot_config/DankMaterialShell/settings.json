@@ -7,7 +7,7 @@
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
   "popupTransparency": 0.97,
-  "dockTransparency": 0.97,
+  "dockTransparency": 1,
   "widgetBackgroundColor": "sch",
   "widgetColorMode": "default",
   "cornerRadius": 12,
@@ -16,7 +16,7 @@
   "niriLayoutBorderSize": -1,
   "hyprlandLayoutGapsOverride": -1,
   "hyprlandLayoutRadiusOverride": -1,
-  "hyprlandLayoutBorderSize": -1,
+  "hyprlandLayoutBorderSize": 0,
   "mangoLayoutGapsOverride": -1,
   "mangoLayoutRadiusOverride": -1,
   "mangoLayoutBorderSize": -1,
@@ -24,7 +24,7 @@
   "showSeconds": false,
   "useFahrenheit": false,
   "nightModeEnabled": false,
-  "animationSpeed": 2,
+  "animationSpeed": 1,
   "customAnimationDuration": 500,
   "wallpaperFillMode": "Fill",
   "blurredWallpaperLayer": false,
@@ -55,7 +55,7 @@
   "controlCenterShowBrightnessIcon": false,
   "controlCenterShowBrightnessPercent": false,
   "controlCenterShowMicIcon": false,
-  "controlCenterShowMicPercent": false,
+  "controlCenterShowMicPercent": true,
   "controlCenterShowBatteryIcon": false,
   "controlCenterShowPrinterIcon": false,
   "controlCenterShowScreenSharingIcon": true,
@@ -111,9 +111,9 @@
   "workspaceScrolling": false,
   "showWorkspaceApps": true,
   "maxWorkspaceIcons": 1,
-  "groupWorkspaceApps": false,
+  "groupWorkspaceApps": true,
   "workspaceFollowFocus": false,
-  "showOccupiedWorkspacesOnly": true,
+  "showOccupiedWorkspacesOnly": false,
   "reverseScrolling": false,
   "dwlShowAllTags": false,
   "workspaceColorMode": "default",
@@ -126,45 +126,19 @@
   "waveProgressEnabled": true,
   "scrollTitleEnabled": false,
   "audioVisualizerEnabled": true,
-  "audioScrollMode": "volume",
+  "audioScrollMode": "nothing",
   "clockCompactMode": false,
   "focusedWindowCompactMode": false,
   "runningAppsCompactMode": true,
   "keyboardLayoutNameCompactMode": false,
   "runningAppsCurrentWorkspace": false,
   "runningAppsGroupByApp": false,
-  "appIdSubstitutions": [
-    {
-      "pattern": "Spotify",
-      "replacement": "spotify",
-      "type": "exact"
-    },
-    {
-      "pattern": "beepertexts",
-      "replacement": "beeper",
-      "type": "exact"
-    },
-    {
-      "pattern": "home assistant desktop",
-      "replacement": "homeassistant-desktop",
-      "type": "exact"
-    },
-    {
-      "pattern": "com.transmissionbt.transmission",
-      "replacement": "transmission-gtk",
-      "type": "contains"
-    },
-    {
-      "pattern": "^steam_app_(\\d+)$",
-      "replacement": "steam_icon_$1",
-      "type": "regex"
-    }
-  ],
+  "appIdSubstitutions": [],
   "centeringMode": "index",
-  "clockDateFormat": "ddd MMM d",
+  "clockDateFormat": "",
   "lockDateFormat": "",
   "mediaSize": 1,
-  "appLauncherViewMode": "grid",
+  "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
   "sortAppsAlphabetically": false,
   "appLauncherGridColumns": 4,
@@ -172,11 +146,11 @@
   "niriOverviewOverlayEnabled": true,
   "useAutoLocation": true,
   "weatherEnabled": true,
-  "networkPreference": "wifi",
-  "vpnLastConnected": "0c10cb91-92ee-4ee1-bd14-9317c3d077fe",
+  "networkPreference": "auto",
+  "vpnLastConnected": "",
   "iconTheme": "System Default",
   "cursorSettings": {
-    "theme": "Qogir-Dark",
+    "theme": "System Default",
     "size": 32,
     "niri": {
       "hideWhenTyping": false,
@@ -191,17 +165,17 @@
       "cursorHideTimeout": 0
     }
   },
-  "launcherLogoMode": "os",
+  "launcherLogoMode": "apps",
   "launcherLogoCustomPath": "",
-  "launcherLogoColorOverride": "primary",
+  "launcherLogoColorOverride": "",
   "launcherLogoColorInvertOnMode": false,
   "launcherLogoBrightness": 0.5,
   "launcherLogoContrast": 1,
-  "launcherLogoSizeOffset": 4,
+  "launcherLogoSizeOffset": 0,
   "fontFamily": "Inter Variable",
   "monoFontFamily": "Fira Code",
   "fontWeight": 400,
-  "fontScale": 1.1,
+  "fontScale": 1,
   "notepadUseMonospace": true,
   "notepadFontFamily": "",
   "notepadFontSize": 14,
@@ -213,17 +187,17 @@
   "soundNewNotification": false,
   "soundVolumeChanged": true,
   "soundPluggedIn": true,
-  "acMonitorTimeout": 1800,
-  "acLockTimeout": 1200,
+  "acMonitorTimeout": 1200,
+  "acLockTimeout": 600,
   "acSuspendTimeout": 0,
   "acSuspendBehavior": 2,
   "acProfileName": "2",
-  "batteryMonitorTimeout": 0,
-  "batteryLockTimeout": 1200,
+  "batteryMonitorTimeout": 1200,
+  "batteryLockTimeout": 600,
   "batterySuspendTimeout": 1800,
   "batterySuspendBehavior": 2,
   "batteryProfileName": "1",
-  "batteryChargeLimit": 100,
+  "batteryChargeLimit": 80,
   "lockBeforeSuspend": true,
   "loginctlLockIntegration": true,
   "fadeToLockEnabled": true,
@@ -233,13 +207,9 @@
   "launchPrefix": "",
   "brightnessDevicePins": {},
   "wifiNetworkPins": {},
-  "bluetoothDevicePins": {
-    "preferredDevice": "C0:35:F7:C0:B2:EE"
-  },
+  "bluetoothDevicePins": {},
   "audioInputDevicePins": {},
-  "audioOutputDevicePins": {
-    "preferredOutput": "bluez_output.80_99_E7_65_81_8C.1"
-  },
+  "audioOutputDevicePins": {},
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
@@ -266,14 +236,14 @@
   "matugenTemplateKcolorscheme": true,
   "matugenTemplateVscode": true,
   "showDock": false,
-  "dockAutoHide": true,
+  "dockAutoHide": false,
   "dockGroupByApp": false,
   "dockOpenOnOverview": false,
-  "dockPosition": 0,
-  "dockSpacing": 15,
+  "dockPosition": 1,
+  "dockSpacing": 4,
   "dockBottomGap": 0,
-  "dockMargin": 5,
-  "dockIconSize": 50,
+  "dockMargin": 0,
+  "dockIconSize": 40,
   "dockIndicatorStyle": "circle",
   "dockBorderEnabled": false,
   "dockBorderColor": "surfaceText",
@@ -305,7 +275,7 @@
   "notificationHistorySaveLow": true,
   "notificationHistorySaveNormal": true,
   "notificationHistorySaveCritical": true,
-  "osdAlwaysShowValue": false,
+  "osdAlwaysShowValue": true,
   "osdPosition": 5,
   "osdVolumeEnabled": true,
   "osdMediaVolumeEnabled": true,
@@ -313,7 +283,7 @@
   "osdIdleInhibitorEnabled": true,
   "osdMicMuteEnabled": true,
   "osdCapsLockEnabled": true,
-  "osdPowerProfileEnabled": false,
+  "osdPowerProfileEnabled": true,
   "osdAudioOutputEnabled": true,
   "powerActionConfirm": true,
   "powerActionHoldDuration": 0.5,
@@ -334,16 +304,12 @@
   "customPowerActionHibernate": "",
   "customPowerActionReboot": "",
   "customPowerActionPowerOff": "",
-  "updaterHideWidget": false,
-  "updaterUseCustomCommand": true,
-  "updaterCustomCommand": "yay -Syu --noconfirm",
+  "updaterHideWidget": true,
+  "updaterUseCustomCommand": false,
+  "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
   "displayNameMode": "system",
-  "screenPreferences": {
-    "wallpaper": [
-      "all"
-    ]
-  },
+  "screenPreferences": {},
   "showOnLastDisplay": {},
   "niriOutputSettings": {},
   "hyprlandOutputSettings": {},
@@ -358,23 +324,25 @@
       ],
       "showOnLastDisplay": true,
       "leftWidgets": [
-        "launcherButton",
         "workspaceSwitcher",
-        {
-          "id": "focusedWindow",
-          "enabled": true
-        }
+        "focusedWindow"
       ],
       "centerWidgets": [
         "music",
-        {
-          "id": "weather",
-          "enabled": true
-        }
+        "clock",
+        "weather"
       ],
       "rightWidgets": [
         {
+          "id": "keyboard_layout_name",
+          "enabled": true
+        },
+        {
           "id": "systemTray",
+          "enabled": true
+        },
+        {
+          "id": "notificationButton",
           "enabled": true
         },
         {
@@ -386,7 +354,7 @@
           "enabled": true
         },
         {
-          "id": "notificationButton",
+          "id": "vpn",
           "enabled": true
         },
         {
@@ -394,28 +362,12 @@
           "enabled": true
         },
         {
-          "id": "vpn",
+          "id": "controlCenterButton",
           "enabled": true
         },
         {
-          "id": "controlCenterButton",
-          "enabled": true,
-          "showNetworkIcon": true,
-          "showBluetoothIcon": true,
-          "showAudioIcon": true,
-          "showAudioPercent": false,
-          "showVpnIcon": false,
-          "showBrightnessIcon": false,
-          "showBrightnessPercent": false,
-          "showMicIcon": false,
-          "showMicPercent": false,
-          "showBatteryIcon": false,
-          "showPrinterIcon": false
-        },
-        {
-          "id": "clock",
-          "enabled": true,
-          "clockCompactMode": false
+          "id": "systemUpdate",
+          "enabled": true
         },
         {
           "id": "powerMenuButton",
@@ -425,8 +377,8 @@
       "spacing": 4,
       "innerPadding": 4,
       "bottomGap": 0,
-      "transparency": 0.97,
-      "widgetTransparency": 0.97,
+      "transparency": 0.9,
+      "widgetTransparency": 1,
       "squareCorners": false,
       "noBackground": false,
       "gothCornersEnabled": false,
@@ -440,15 +392,22 @@
       "widgetOutlineColor": "primary",
       "widgetOutlineOpacity": 1,
       "widgetOutlineThickness": 1,
-      "fontScale": 1.2,
+      "fontScale": 1,
       "autoHide": false,
       "autoHideDelay": 250,
+      "showOnWindowsOpen": false,
       "openOnOverview": false,
       "visible": true,
       "popupGapsAuto": true,
       "popupGapsManual": 4,
       "maximizeDetection": true,
-      "scrollEnabled": false
+      "scrollEnabled": false,
+      "scrollXBehavior": "column",
+      "scrollYBehavior": "workspace",
+      "shadowIntensity": 0,
+      "shadowOpacity": 60,
+      "shadowColorMode": "text",
+      "shadowCustomColor": "#000000"
     }
   ],
   "desktopClockEnabled": false,
@@ -522,6 +481,10 @@
   "desktopWidgetGridSettings": {},
   "desktopWidgetInstances": [],
   "desktopWidgetGroups": [],
-  "builtInPluginSettings": {},
+  "builtInPluginSettings": {
+    "dms_settings_search": {
+      "trigger": "?"
+    }
+  },
   "configVersion": 5
 }

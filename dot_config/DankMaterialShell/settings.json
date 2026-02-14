@@ -185,7 +185,7 @@
     "hyprland": {
       "hideOnKeyPress": true,
       "hideOnTouch": false,
-      "inactiveTimeout": 4
+      "inactiveTimeout": 2
     },
     "dwl": {
       "cursorHideTimeout": 0

@@ -11,6 +11,7 @@ fi
 
 yay -S --noconfirm --needed \
     7zip \
+    adw-gtk-theme \
     ark \
     avahi \
     bash-language-server \

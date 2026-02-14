@@ -47,7 +47,7 @@ https://github.com/stevemolitor/claude-code.el
 (use-package claude-code
   :ensure (:host github :repo "stevemolitor/claude-code.el" :rev :newest)
   :custom
-  (claude-code-program "~/.claude/local/claude")
+  (claude-code-program "~/.local/bin/claude")
   ;; (claude-code-notification-function #'ismd/claude-notify)
   (claude-code-notification-function #'ismd/claude-notify-with-sound)
   :config
@@ -64,7 +64,9 @@ https://github.com/manzaltu/claude-code-ide.el
   :ensure (:host github :repo "manzaltu/claude-code-ide.el")
   :custom
   (claude-code-ide-cli-path "~/.local/bin/claude")
+  (claude-code-ide-diagnostics-backend 'flymake)
   (claude-code-ide-show-claude-window-in-ediff nil)
+  (claude-code-ide-vterm-anti-flicker t)
   :config
   (claude-code-ide-emacs-tools-setup))
 #+end_src

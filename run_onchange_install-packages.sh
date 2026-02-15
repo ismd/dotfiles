@@ -54,6 +54,7 @@ yay -S --noconfirm --needed \
     git \
     github-cli \
     gobuster \
+    gopls \
     hydra \
     hypridle \
     hyprpolkitagent \
@@ -82,6 +83,7 @@ yay -S --noconfirm --needed \
     perl-image-exiftool \
     plymouth \
     podman-desktop \
+    pyright \
     python-pip \
     python-pylint \
     python-pywal \

@@ -440,6 +440,17 @@ https://github.com/bbatsov/super-save
         super-save-silent t))
 #+end_src
 
+* Goggles
+https://github.com/minad/goggles
+
+Pulse modified regions after changes (yank, kill, delete, undo).
+
+#+begin_src emacs-lisp
+(use-package goggles
+  :ensure t
+  :hook ((prog-mode text-mode) . goggles-mode))
+#+end_src
+
 * Track Changes
 #+begin_src emacs-lisp
 (use-package track-changes

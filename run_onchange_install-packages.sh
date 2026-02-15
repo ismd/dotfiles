@@ -86,7 +86,7 @@ yay -S --noconfirm --needed \
     python-pylint \
     python-pywal \
     qemu-full \
-    quickshell-git \
+    quickshell \
     rbw \
     remmina \
     ripgrep \

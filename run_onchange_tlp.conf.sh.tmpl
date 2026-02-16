@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# hash: {{ include "etc/tlp.conf" | sha256sum }}
+
+set -euo pipefail
+
+CHEZMOI_SOURCE="${HOME}/.local/share/chezmoi"
+TLP_CONF="${CHEZMOI_SOURCE}/etc/tlp.conf"
+
+if [[ -f "$TLP_CONF" ]]; then
+    echo "Installing tlp.conf to /etc/..."
+    sudo cp "$TLP_CONF" /etc/tlp.conf
+fi

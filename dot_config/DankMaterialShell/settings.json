@@ -197,7 +197,7 @@
   "batterySuspendTimeout": 1800,
   "batterySuspendBehavior": 2,
   "batteryProfileName": "1",
-  "batteryChargeLimit": 70,
+  "batteryChargeLimit": 100,
   "lockBeforeSuspend": true,
   "loginctlLockIntegration": true,
   "fadeToLockEnabled": true,

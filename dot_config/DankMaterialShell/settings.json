@@ -125,7 +125,7 @@
   "workspaceNameIcons": {},
   "waveProgressEnabled": true,
   "scrollTitleEnabled": false,
-  "audioVisualizerEnabled": true,
+  "audioVisualizerEnabled": false,
   "audioScrollMode": "nothing",
   "clockCompactMode": false,
   "focusedWindowCompactMode": false,

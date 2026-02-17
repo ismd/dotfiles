@@ -383,6 +383,8 @@
   "w m p" '(buf-move-up :wk "Buffer move up")
   "w m f" '(buf-move-right :wk "Buffer move right")
   "w s" '(ismd/window-split-toggle :wk "Toggle window split")
+  "w u" '(winner-undo :wk "Winner undo")
+  "w r" '(winner-redo :wk "Winner redo")
   "w w" '(persp-switch :wk "Switch workspace"))
 #+end_src
 

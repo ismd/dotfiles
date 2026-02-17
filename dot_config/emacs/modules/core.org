@@ -203,6 +203,7 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
 ** Window
 #+begin_src emacs-lisp
 (require 'buffer-move)
+(winner-mode 1)
 #+end_src
 
 * Custom Functions

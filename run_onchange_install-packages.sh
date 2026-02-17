@@ -94,6 +94,7 @@ yay -S --noconfirm --needed \
     remmina \
     ripgrep \
     socat \
+    sshfs \
     swww \
     tigervnc \
     tlp \

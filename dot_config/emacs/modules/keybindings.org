@@ -343,7 +343,8 @@
   "r" '(:ignore t :wk "Registers")
   "r l" '(consult-register-load :wk "Consult register load")
   "r r" '(consult-register :wk "Consult register")
-  "r s" '(consult-register-store :wk "Consult register store"))
+  "r s" '(consult-register-store :wk "Consult register store")
+  "r w" '(window-configuration-to-register :wk "Save window configuration to register"))
 #+end_src
 
 *** Toggle

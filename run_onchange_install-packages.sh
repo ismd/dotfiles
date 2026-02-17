@@ -63,6 +63,7 @@ yay -S --noconfirm --needed \
     imhex-bin \
     inetutils \
     k9s \
+    kdeconnect \
     kimageformats \
     kubectl \
     libreoffice-still \

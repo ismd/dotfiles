@@ -20,6 +20,7 @@ yay -S --noconfirm --needed \
     caido-desktop \
     calf \
     cmake \
+    cups-pk-helper \
     direnv \
     discord \
     dms-shell-bin \

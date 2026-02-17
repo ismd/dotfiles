@@ -64,6 +64,7 @@ yay -S --noconfirm --needed \
     imhex-bin \
     inetutils \
     k9s \
+    kimageformats \
     kubectl \
     libreoffice-still \
     libvips \

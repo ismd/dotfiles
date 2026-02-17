@@ -12,8 +12,7 @@
     "pyright-lsp@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true,
-    "firebase@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high"

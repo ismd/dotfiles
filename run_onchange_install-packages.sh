@@ -24,7 +24,6 @@ yay -S --noconfirm --needed \
     direnv \
     discord \
     dms-shell-bin \
-    dms-shell-hyprland \
     dnsmasq \
     docker \
     docker-buildx \

@@ -7,6 +7,10 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
+;; Set initial frame colors to match modus-vivendi-tinted, preventing flash
+(push '(background-color . "#0d0e1c") default-frame-alist)
+(push '(foreground-color . "#ffffff") default-frame-alist)
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

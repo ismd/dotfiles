@@ -93,7 +93,7 @@
 
 *** Load Theme
 #+begin_src emacs-lisp
-(defvar theme-name 'ef-owl "The name of the theme to use")
+(defvar theme-name 'modus-vivendi-tinted "The name of the theme to use")
 (when (file-exists-p "~/.config/emacs/theme.el")
   (load-file "~/.config/emacs/theme.el"))
 

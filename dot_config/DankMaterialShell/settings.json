@@ -400,7 +400,6 @@
       ],
       "centerWidgets": [
         "music",
-        "clock",
         "weather"
       ],
       "rightWidgets": [
@@ -442,6 +441,10 @@
         },
         {
           "id": "systemUpdate",
+          "enabled": true
+        },
+        {
+          "id": "clock",
           "enabled": true
         },
         {

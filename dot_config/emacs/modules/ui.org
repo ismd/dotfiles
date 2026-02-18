@@ -266,6 +266,12 @@ https://github.com/rnkn/olivetti
 #+begin_src emacs-lisp
 (use-package olivetti
   :ensure t
+  :preface
+  (defun ismd/git-gutter-update-after-olivetti ()
+    "Update git-gutter after olivetti-mode is toggled."
+    (when (bound-and-true-p git-gutter-mode)
+      (git-gutter:update-all-windows)))
+  :hook (olivetti-mode . ismd/git-gutter-update-after-olivetti)
   :custom
   (olivetti-body-width nil)
   (olivetti-style nil))

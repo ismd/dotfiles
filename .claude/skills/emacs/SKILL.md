@@ -64,6 +64,22 @@ Description of what this package does.
 #+end_src
 ```
 
+### Adding hooks
+
+Use `:hook` with a **named function** (not a lambda) to avoid duplicate entries on re-evaluation. Define the function in `:preface` — it runs before the package loads and before other keywords, so it's always available even with deferred loading:
+
+```elisp
+(use-package some-package
+  :ensure t
+  :preface
+  (defun ismd/my-hook-function ()
+    "Docstring."
+    (do-something))
+  :hook (some-mode . ismd/my-hook-function))
+```
+
+Avoid `(add-hook ... (lambda ...))` — each re-evaluation adds a new lambda object since Emacs compares lambdas by identity, not equality.
+
 ### Adding keybindings
 
 All keybindings go in `modules/keybindings.org` using `general.el`:

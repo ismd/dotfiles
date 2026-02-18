@@ -331,7 +331,7 @@
   "notificationHistorySaveCritical": true,
   "notificationRules": [],
   "osdAlwaysShowValue": true,
-  "osdPosition": 5,
+  "osdPosition": 0,
   "osdVolumeEnabled": true,
   "osdMediaVolumeEnabled": true,
   "osdMediaPlaybackEnabled": true,

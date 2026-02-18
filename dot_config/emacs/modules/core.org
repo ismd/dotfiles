@@ -119,8 +119,10 @@ Enable recursive minibuffers.
 
 Disable scroll bar in minibuffer.
 #+begin_src emacs-lisp
-(add-hook 'minibuffer-setup-hook
-          #'(lambda () (set-window-scroll-bars (selected-window) 0 nil)))
+(defun ismd/minibuffer-disable-scrollbar ()
+  "Disable scroll bar in minibuffer window."
+  (set-window-scroll-bars (selected-window) 0 nil))
+(add-hook 'minibuffer-setup-hook #'ismd/minibuffer-disable-scrollbar)
 #+end_src
 
 ** Misc

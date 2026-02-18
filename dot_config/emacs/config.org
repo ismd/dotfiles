@@ -30,7 +30,10 @@
 ** Custom File
 #+begin_src emacs-lisp
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
-(add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
+(defun ismd/load-custom-file ()
+  "Load Emacs custom file after init."
+  (load custom-file 'noerror))
+(add-hook 'elpaca-after-init-hook #'ismd/load-custom-file)
 
 ;; Load custom.el early (before packages) for environment variables like API keys
 (setq ismd/custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -69,11 +72,12 @@
                     (font-spec :family "Noto Color Emoji")
                     nil 'prepend))
 
+(defun ismd/set-fonts-for-frame (frame)
+  "Set fonts in FRAME (used as hook for daemon mode)."
+  (with-selected-frame frame
+    (ismd/set-fonts)))
 (if (daemonp)
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (with-selected-frame frame
-                  (ismd/set-fonts))))
+    (add-hook 'after-make-frame-functions #'ismd/set-fonts-for-frame)
   (ismd/set-fonts))
 
 (add-to-list 'default-frame-alist
@@ -93,9 +97,10 @@
 (when (file-exists-p "~/.config/emacs/theme.el")
   (load-file "~/.config/emacs/theme.el"))
 
-(add-hook 'elpaca-after-init-hook
-          (lambda ()
-            (load-theme theme-name t)))
+(defun ismd/load-default-theme ()
+  "Load the default theme after Elpaca finishes initializing."
+  (load-theme theme-name t))
+(add-hook 'elpaca-after-init-hook #'ismd/load-default-theme)
 #+end_src
 
 * Load Modules

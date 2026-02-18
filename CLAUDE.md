@@ -40,6 +40,7 @@ Example pattern:
 ### Directory Structure
 - `dot_bin/` - Custom shell scripts
 - `dot_config/` - Application configs (hypr, fish, kitty, emacs, etc.)
+- `dot_emacs.d/` - Redirect stubs for `~/.emacs.d/` (see Emacs section)
 - `dot_local/` - User-local data (desktop files, icons)
 - `dot_var/` - Application data (EasyEffects profiles)
 
@@ -83,9 +84,13 @@ dot_config/emacs/
 
 ### Initialization Flow
 
-1. `early-init.el` → Disables built-in package.el
-2. `init.el` → Loads `config.org` via `org-babel-load-file`
-3. `config.org`:
+**Note:** Emacs prefers `~/.emacs.d/` over `~/.config/emacs/` if the directory exists — even without `init.el` inside. Since `~/.emacs.d/` is auto-generated and cannot be removed, `dot_emacs.d/early-init.el` and `dot_emacs.d/init.el` act as redirect stubs that set `user-emacs-directory` to `~/.config/emacs/` and delegate loading there.
+
+1. `~/.emacs.d/early-init.el` → sets `user-emacs-directory` to `~/.config/emacs/`, loads real `early-init.el`
+2. `~/.emacs.d/init.el` → loads `~/.config/emacs/init.el`
+3. `~/.config/emacs/early-init.el` → Disables built-in package.el
+4. `~/.config/emacs/init.el` → Loads `config.org` via `org-babel-load-file`
+5. `config.org`:
    - Sets up load path for `lisp/`
    - Initializes **Elpaca** package manager
    - Configures fonts (FiraCode Nerd Font)
@@ -94,3 +99,9 @@ dot_config/emacs/
    - Starts Emacs daemon
 
 For package management, module details, keybindings, custom functions, and editing guidelines, see `.claude/skills/emacs/SKILL.md`.
+
+---
+
+## Workflow Notes
+
+- **Do not suggest `chezmoi apply`** — the user applies changes themselves when ready.

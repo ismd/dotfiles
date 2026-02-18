@@ -197,9 +197,3 @@ Avoid `(add-hook ... (lambda ...))` — each re-evaluation adds a new lambda obj
 - Default theme: `ef-owl` (ef-themes)
 - Override: Create `~/.config/emacs/theme.el` with `(load-theme 'theme-name t)`
 - Available: ef-themes, doom-themes, modus-themes, nord-theme
-
-### After making changes
-
-Remind user to:
-1. Evaluate the changed code block with `C-c C-c` or restart Emacs
-2. Run `chezmoi apply` if changes should persist to home directory

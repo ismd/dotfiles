@@ -15,6 +15,14 @@
   - [[#nord-theme][Nord Theme]]
 
 * Themes
+** Local Themes
+Add local theme directories to the load path.
+
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path (expand-file-name "themes" "~/.emacs.d"))
+#+end_src
+
+
 ** Color Theme Sanityinc Tomorrow
 #+begin_src emacs-lisp
 (use-package color-theme-sanityinc-tomorrow

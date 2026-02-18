@@ -15,5 +15,6 @@
     "gopls-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "model": "opus"
 }

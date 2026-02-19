@@ -4,17 +4,17 @@
             "Brave"
         ],
         "compressor#0": {
-            "attack": 20.0,
+            "attack": 30.0,
             "boost-amount": 6.0,
             "boost-threshold": -72.0,
-            "bypass": true,
-            "dry": -80.01,
+            "bypass": false,
+            "dry": -6.0,
             "hpf-frequency": 10.0,
             "hpf-mode": "Off",
             "input-gain": 0.0,
             "input-to-link": 0.0,
             "input-to-sidechain": 0.0,
-            "knee": -6.0,
+            "knee": -3.0,
             "link-to-input": 0.0,
             "link-to-sidechain": 0.0,
             "lpf-frequency": 20000.0,
@@ -22,8 +22,8 @@
             "makeup": 0.0,
             "mode": "Downward",
             "output-gain": 0.0,
-            "ratio": 2.5,
-            "release": 150.0,
+            "ratio": 2.0,
+            "release": 200.0,
             "release-threshold": -80.01,
             "sidechain": {
                 "lookahead": 0.0,
@@ -37,8 +37,8 @@
             "sidechain-to-input": 0.0,
             "sidechain-to-link": 0.0,
             "stereo-split": false,
-            "threshold": -20.0,
-            "wet": 0.0
+            "threshold": -12.0,
+            "wet": -3.0
         },
         "equalizer#0": {
             "balance": 0.0,
@@ -213,7 +213,7 @@
             },
             "mode": "IIR",
             "num-bands": 15,
-            "output-gain": 0.0,
+            "output-gain": -3.0,
             "pitch-left": 0.0,
             "pitch-right": 0.0,
             "right": {

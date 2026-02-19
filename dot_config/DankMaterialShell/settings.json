@@ -331,7 +331,7 @@
   "notificationHistorySaveCritical": true,
   "notificationRules": [],
   "osdAlwaysShowValue": true,
-  "osdPosition": 0,
+  "osdPosition": 5,
   "osdVolumeEnabled": true,
   "osdMediaVolumeEnabled": true,
   "osdMediaPlaybackEnabled": true,
@@ -400,7 +400,7 @@
     }
   },
   "activeDisplayProfile": {
-    "hyprland": "profile_1771497263616_9yu3t3"
+    "hyprland": "profile_1771496775368_9ax1jv"
   },
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,

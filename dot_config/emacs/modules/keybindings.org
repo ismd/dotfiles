@@ -188,8 +188,8 @@
   "f l" '(consult-locate :wk "Locate a file")
   "f r" '(consult-recent-file :wk "Recent file")
   "f R" '(rename-visited-file :wk "Rename file")
-  "f u" '(sudo-edit-find-file :wk "Sudo find file")
-  "f U" '(sudo-edit :wk "Sudo edit this file")
+  "f U" '(sudo-edit-find-file :wk "Sudo find file")
+  "f u" '(sudo-edit :wk "Sudo edit this file")
   "f x" '(scratch-buffer :wk "Scratch buffer"))
 #+end_src
 

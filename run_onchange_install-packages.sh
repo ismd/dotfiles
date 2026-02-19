@@ -90,6 +90,7 @@ yay -S --noconfirm --needed \
     python-pylint \
     python-pywal \
     qemu-full \
+    qt6ct-kde \
     quickshell-git \
     rbw \
     remmina \

@@ -31,6 +31,7 @@ handle() {
   case $1 in
     monitoradded*) check_external_monitors ;;
     monitorremoved*) check_external_monitors ;;
+    configreloaded*) check_external_monitors ;;
   esac
 }
 

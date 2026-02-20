@@ -1,5 +1,5 @@
 ---
-name: ctf-writeup-org
+name: ctf
 description: Generate README.org files for CTF challenge writeups. Use when creating documentation for solved CTF challenges from platforms like TryHackMe, HackTheBox (HTB), PicoCTF, etc. Triggers on requests to document CTF solutions, create writeups, or initialize CTF project directories.
 user-invocable: true
 ---

@@ -1,12 +1,13 @@
 ---
 name: music
-description: Download music discographies from trackers and import into Navidrome library via beets. Use when user wants to download albums, discographies, or music.
+description: Download music (discographies or single tracks) from trackers and import into Navidrome library via beets.
 user-invocable: true
 ---
 
 # Music Download & Import
 
 Automates: artist lookup → tracker search → torrent download → CUE split → beet import.
+Supports two modes: **discography** (by artist name) and **single track** (by "Artist - Track").
 
 ## Configuration
 
@@ -20,6 +21,14 @@ Tracker script: $HOME/.claude/skills/music/rutracker.py
 ```
 
 ## Workflow
+
+### Mode Detection
+
+Parse the `/music <argument>`:
+- If argument contains ` - ` (space-dash-space) → **Track mode**: split into `<artist>` and `<track name>`, go to Step T1
+- Otherwise → **Discography mode**: treat as artist name, go to Step 1
+
+---
 
 ### Step 1: Find discography
 
@@ -127,4 +136,27 @@ For each album directory:
    ```
 3. Optionally: offer to delete downloaded files after successful import
 
-> **Future extension**: Single track import via `beet import -s <path>` for individual tracks/singles.
+---
+
+## Track Mode
+
+### Step T1: Search tracker for track
+
+1. Search rutracker: `$HOME/.claude/skills/music/rutracker.py search "<artist> <track> flac"`
+2. If few results — try alternative queries (transliteration, different language)
+3. Show results to user via AskUserQuestion (title, size, seeds)
+4. User selects torrent
+
+### Step T2: Download and select track file
+
+1. Download .torrent: `$HOME/.claude/skills/music/rutracker.py download <topic_id> $HOME/Downloads/Music`
+2. List files: `aria2c --show-files <torrent_file>`
+3. Identify the target track file (match by track name, fuzzy if needed)
+4. User confirms file selection via AskUserQuestion
+5. Download selected file: `aria2c --select-file=<index> --seed-time=0 --dir=$HOME/Downloads/Music <torrent_file>`
+
+### Step T3: Import as singleton
+
+1. If the file is part of a CUE+FLAC image — split first (same as Step 4.1), then pick the target track
+2. Import: `beet import -s <track_file_path>`
+3. Check result, report success or provide manual command: `beet import -s -t <path>`

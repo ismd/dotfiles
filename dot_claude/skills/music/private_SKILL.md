@@ -99,13 +99,15 @@ For each selected torrent, attempt to identify the exact MusicBrainz release (no
 For each album directory:
 
 1. **Check format**: if single FLAC + CUE — needs splitting
+   - There may be **multiple CUE files** (e.g., CP-1251 and UTF-8 variants). If so, pick the UTF-8 one and pass it explicitly as the second argument to `split-flac.sh`
    - Check CUE file encoding: `file <cue_file>`
    - If not UTF-8 (typical for Cyrillic releases): `$HOME/.bin/split-flac.sh -e <path>`
    - If UTF-8/ASCII: `$HOME/.bin/split-flac.sh <path>` (without `-e`)
+   - To use a specific CUE file: `$HOME/.bin/split-flac.sh <path> <cue_file>`
    - Script creates `.split/` subdirectory with split tracks
    - Use `.split/` path for beet import
 2. **Auto import**:
-   - If release ID resolved in step 3.5: `beet import --search-id https://musicbrainz.org/release/<id> <path>`
+   - If release ID resolved in step 3.5: `beet import --search-id <id> <path>`
    - Otherwise: `beet import <path>`
    - Do NOT use `-t` flag — let beet auto-match
    - If MusicBrainz lookup failed in step 1 — still use `beet import <path>`, beet will try its own matching
@@ -120,7 +122,7 @@ For each album directory:
    ```
    beet import -t <path>   # run in terminal for manual selection
    ```
-3. Optionally: offer to delete downloaded files after successful import
+3. **Clean up**: delete the downloaded directory (e.g., `rm -rf $HOME/Downloads/Music/<artist>`) and the .torrent file(s). Always do this — don't ask.
 
 ---
 

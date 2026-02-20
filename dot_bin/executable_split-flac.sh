@@ -32,11 +32,13 @@ if [ "$USE_ENCA" = true ]; then
 fi
 
 DIR=$1
+CUE_FILE=$2
 
 if [ -z "$DIR" ]; then
-    echo "Usage: $0 [-e] [-w] <directory>"
+    echo "Usage: $0 [-e] [-w] <directory> [cue_file]"
     echo "  -e  Enable encoding conversion with enca"
     echo "  -w  Output to wav instead of flac"
+    echo "  cue_file  Optional: specific CUE file to use (otherwise all CUE files in directory are processed)"
     exit 1
 fi
 
@@ -45,7 +47,16 @@ if [ ! -d "$DIR" ]; then
     exit 1
 fi
 
-fd . -e cue "$DIR" --print0 | while IFS= read -r -d '' FILE; do
+if [ -n "$CUE_FILE" ] && [ ! -f "$CUE_FILE" ]; then
+    echo "CUE file $CUE_FILE does not exist"
+    exit 1
+fi
+
+if [ -n "$CUE_FILE" ]; then
+    printf '%s\0' "$CUE_FILE"
+else
+    fd . -e cue "$DIR" --print0
+fi | while IFS= read -r -d '' FILE; do
   echo "Splitting $FILE"
   CUE_DIR=$(dirname "$FILE")
   

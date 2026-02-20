@@ -160,3 +160,8 @@ For each album directory:
 1. If the file is part of a CUE+FLAC image — split first (same as Step 4.1), then pick the target track
 2. Import: `beet import -s <track_file_path>`
 3. Check result, report success or provide manual command: `beet import -s -t <path>`
+4. **Embed cover art** — `fetchart`/`embedart` plugins don't work for singletons, so fetch manually:
+   - Get release MBID: `beet info path:<imported_file> -f '$mb_albumid'`
+   - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release/<MBID>/front" path:<imported_file>`
+   - If no art for release — try release group: `beet embedart -u "https://coverartarchive.org/release-group/<RG_MBID>/front" path:<imported_file>`
+   - Get RG MBID: `beet info path:<imported_file> -f '$mb_releasegroupid'`

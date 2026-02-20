@@ -81,6 +81,22 @@ sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 - root.txt: THM{80UN7Y_h4ck3r}
 ```
 
+## Wordlists
+
+Wordlists are stored at `/wordlists`. Always use this path in commands:
+
+```
+/wordlists/
+├── dirb/          # dirb wordlists (big.txt, common.txt, small.txt, etc.)
+├── rockyou.txt    # Password list
+└── SecLists/      # SecLists collection (Discovery/, Usernames/, etc.)
+```
+
+Examples:
+- `hydra -l admin -P /wordlists/rockyou.txt ssh://10.10.10.10`
+- `gobuster dir -u http://10.10.10.10 -w /wordlists/dirb/common.txt`
+- `ffuf -u http://10.10.10.10/FUZZ -w /wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt`
+
 ## Platform Abbreviations
 
 | Platform    | Abbreviation |

@@ -18,6 +18,7 @@ Music library: /mnt/qnap/Music/Music (from beets config)
 Beet database: /mnt/qnap/Music/beets.db
 Split script: $HOME/.bin/split-flac.sh
 Tracker script: $HOME/.claude/skills/music/rutracker.py
+MusicBrainz script: $HOME/.claude/skills/music/musicbrainz.py
 ```
 
 ## Workflow
@@ -33,17 +34,10 @@ Parse the `/music <argument>`:
 ### Step 1: Find discography
 
 1. User invokes `/music <artist>`
-2. Search MusicBrainz via Python `musicbrainzngs`:
-   ```python
-   import musicbrainzngs
-   musicbrainzngs.set_useragent("claude-music-skill", "1.0", "noreply@example.com")
-   musicbrainzngs.search_artists(artist="<name>")
-   ```
+2. Search MusicBrainz: `$HOME/.claude/skills/music/musicbrainz.py search-artist "<name>"`
 3. If multiple matches — show user via AskUserQuestion to clarify
-4. Get release groups:
-   ```python
-   musicbrainzngs.browse_release_groups(artist="<id>", release_type=["album"])
-   ```
+4. Get release groups: `$HOME/.claude/skills/music/musicbrainz.py artist-albums <id>`
+   - Use `--type all` to include compilations, EPs, singles, live
    - `Album` — studio albums (primary selection)
    - `Compilation` — compilations (secondary)
    - `EP`, `Single`, `Live` — others
@@ -95,16 +89,8 @@ For each selected torrent, attempt to identify the exact MusicBrainz release (no
    - Medium type (CD, WEB, Vinyl)
    - Country of release
 3. Query MusicBrainz to find the specific release within the release group:
-   ```python
-   import musicbrainzngs
-   musicbrainzngs.set_useragent("claude-music-skill", "1.0", "noreply@example.com")
-
-   # If catalog number found:
-   musicbrainzngs.search_releases(catno="<catno>", artist="<artist>")
-
-   # If no catno — browse all releases in the group and filter by format/label/country:
-   musicbrainzngs.browse_releases(release_group="<rg_id>", limit=100)
-   ```
+   - If catalog number found: `$HOME/.claude/skills/music/musicbrainz.py search-release --artist "<artist>" --catno "<catno>"`
+   - If no catno — browse all releases in the group: `$HOME/.claude/skills/music/musicbrainz.py release-group-releases <rg_id>`
 4. If a unique release is identified — store its ID for use in step 4
 5. If still ambiguous — skip, let beet handle matching on its own
 

@@ -5,7 +5,16 @@ plugins: embedart fetchart musicbrainz
 
 fetchart:
   auto: yes
-  sources: coverart itunes amazon albumart filesystem
+  sources:
+    - filesystem
+    - coverart: release
+    - itunes
+    - amazon
+    - albumart
+    - coverart: releasegroup
+    - spotify
+    - wikipedia
+    - lastfm
 
 embedart:
   auto: yes

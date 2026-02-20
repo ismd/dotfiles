@@ -51,26 +51,16 @@ def cmd_search_artist(args):
 
 
 def cmd_artist_albums(args):
-    type_map = {
-        "album": ["album"],
-        "compilation": ["compilation"],
-        "ep": ["ep"],
-        "single": ["single"],
-        "live": ["live"],
-        "all": ["album", "compilation", "ep", "single", "live"],
-    }
-    release_types = type_map.get(args.type, ["album"])
+    type_filter = None if args.type == "all" else [args.type]
 
     try:
         groups = []
         offset = 0
         while True:
-            result = musicbrainzngs.browse_release_groups(
-                artist=args.artist_id,
-                release_type=release_types,
-                limit=100,
-                offset=offset,
-            )
+            kwargs = dict(artist=args.artist_id, limit=100, offset=offset)
+            if type_filter is not None:
+                kwargs["release_type"] = type_filter
+            result = musicbrainzngs.browse_release_groups(**kwargs)
             batch = result.get("release-group-list", [])
             groups.extend(batch)
             if len(batch) < 100:

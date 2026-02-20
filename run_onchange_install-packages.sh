@@ -12,6 +12,7 @@ fi
 yay -S --noconfirm --needed \
     7zip \
     adw-gtk-theme \
+    aria2 \
     ark \
     avahi \
     bash-language-server \
@@ -87,6 +88,7 @@ yay -S --noconfirm --needed \
     plymouth \
     podman-desktop \
     pyright \
+    python-beautifulsoup4 \
     python-pip \
     python-pylint \
     python-pywal \

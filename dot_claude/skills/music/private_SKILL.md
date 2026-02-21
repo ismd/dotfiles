@@ -160,12 +160,21 @@ If rutracker has no results or user requests Yandex:
 4. User confirms file selection via AskUserQuestion
 5. Download selected file: `aria2c --select-file=<index> --seed-time=0 --dir=$HOME/Downloads/Music <torrent_file>`
 
-### Step T3: Import as singleton
+### Step T3: Import track
 
 1. If the file is part of a CUE+FLAC image (rutracker only) — split first (same as Step 4.1), then pick the target track
-2. Import: `beet import -s <track_file_path>`
-3. Check result, report success or provide manual command: `beet import -s -t <path>`
-4. **Embed cover art** — `fetchart`/`embedart` plugins don't work for singletons, so fetch manually:
+2. **Check if the track has a single/EP release** on MusicBrainz (from step 1's artist-albums output or by searching). If yes — import as album:
+   - `beet import --search-id <release_id> <path>`
+   - This works because a single is just an album with one track
+3. **If no single release exists** (track only on a full album) — import as singleton:
+   - `beet import -s <path>` — let beet auto-match
+   - If beet fails to match, get the recording ID manually:
+     - Find the release containing this track: `$HOME/.claude/skills/music/musicbrainz.py release-group-releases <rg_id>`
+     - Get the recording ID: `$HOME/.claude/skills/music/musicbrainz.py release-tracks <release_id>`
+     - Import with recording ID: `beet import -s --search-id <recording_id> <path>`
+   - If still fails — provide manual command: `beet import -s -t <path>`
+4. **Important**: `--search-id` with `-s` expects a **recording ID** (not release ID). Without `-s`, it expects a **release ID**.
+5. **Embed cover art** (only for singleton imports — album imports handle this automatically):
    - Yandex downloads already have cover art embedded — verify with `metaflac --list <file>` and skip if present
    - For rutracker downloads (or if cover is missing):
      - Get release MBID: `beet list -f '$mb_albumid' path:<imported_file>`

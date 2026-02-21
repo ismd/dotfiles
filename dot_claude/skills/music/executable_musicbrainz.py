@@ -226,6 +226,53 @@ def cmd_release_group_releases(args):
         )
 
 
+def cmd_release_tracks(args):
+    try:
+        result = musicbrainzngs.get_release_by_id(
+            args.release_id, includes=["recordings"]
+        )
+    except musicbrainzngs.WebServiceError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    release = result.get("release", {})
+    media = release.get("medium-list", [])
+    if not media:
+        print("No tracks found")
+        return
+
+    rows = []
+    for medium in media:
+        disc = medium.get("position", "1")
+        for track in medium.get("track-list", []):
+            rec = track.get("recording", {})
+            length_ms = int(rec.get("length", 0) or 0)
+            s = length_ms // 1000
+            dur = f"{s // 60}:{s % 60:02d}"
+            rows.append(
+                {
+                    "disc": disc,
+                    "num": track.get("number", ""),
+                    "title": rec.get("title", ""),
+                    "recording_id": rec.get("id", ""),
+                    "duration": dur,
+                }
+            )
+
+    title_w = max(len(r["title"]) for r in rows)
+    id_w = max(len(r["recording_id"]) for r in rows)
+
+    header = f"{'#':<4}  {'Title':<{title_w}}  {'Recording ID':<{id_w}}  Dur"
+    print(header)
+    print("-" * len(header))
+
+    for r in rows:
+        num = f"{r['disc']}.{r['num']}" if len(media) > 1 else r["num"]
+        print(
+            f"{num:<4}  {r['title']:<{title_w}}  {r['recording_id']:<{id_w}}  {r['duration']}"
+        )
+
+
 def main():
     parser = argparse.ArgumentParser(description="MusicBrainz CLI")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -251,12 +298,18 @@ def main():
     )
     rr_p.add_argument("rg_id", help="Release group ID")
 
+    rt_p = sub.add_parser(
+        "release-tracks", help="List tracks of a release with recording IDs"
+    )
+    rt_p.add_argument("release_id", help="MusicBrainz release ID")
+
     args = parser.parse_args()
     commands = {
         "search-artist": cmd_search_artist,
         "artist-albums": cmd_artist_albums,
         "search-release": cmd_search_release,
         "release-group-releases": cmd_release_group_releases,
+        "release-tracks": cmd_release_tracks,
     }
     commands[args.command](args)
 

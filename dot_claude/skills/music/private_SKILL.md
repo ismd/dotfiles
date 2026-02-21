@@ -169,9 +169,10 @@ If rutracker has no results or user requests Yandex:
 ### Step T3: Import track
 
 1. If the file is part of a CUE+FLAC image (rutracker only) — split first (same as Step 4.1), then pick the target track
-2. **Check if the track has a single/EP release** on MusicBrainz (from step 1's artist-albums output or by searching). If yes — import as album:
-   - `beet import --search-id <release_id> <path>`
-   - This works because a single is just an album with one track
+2. **Check if the track has a single/EP release** on MusicBrainz (from step 1's artist-albums output or by searching). If yes:
+   - **Important**: If the audio was extracted from an album source (rutracker album rip), the single version may differ (different mix, radio edit, different length). Compare the duration of the extracted track with the single's duration on MusicBrainz.
+   - If durations match (within ~2 seconds) — import as album: `beet import --search-id <release_id> <path>` (a single is just an album with one track)
+   - If durations differ — the audio is the album version, not the single. Import as singleton (step 3 below) using the album's recording ID instead.
 3. **If no single release exists** (track only on a full album) — import as singleton:
    - `beet import -s <path>` — let beet auto-match
    - If beet fails to match, get the recording ID manually:

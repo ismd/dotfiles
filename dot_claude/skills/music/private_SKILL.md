@@ -14,10 +14,12 @@ Supports two modes: **discography** (by artist name) and **single track** (by "A
 ```
 Download directory: $HOME/Downloads/Music
 Rutracker credentials: RUTRACKER_USER, RUTRACKER_PASS (environment variables)
+Yandex Music token: YANDEX_MUSIC_TOKEN (environment variable)
 Music library: /mnt/qnap/Music/Music (from beets config)
 Beet database: /mnt/qnap/Music/beets.db
 Split script: $HOME/.bin/split-flac.sh
 Tracker script: $HOME/.claude/skills/music/rutracker.py
+Yandex Music script: $HOME/.claude/skills/music/yandex.py
 MusicBrainz script: $HOME/.claude/skills/music/musicbrainz.py
 ```
 
@@ -63,7 +65,11 @@ Strategy depends on number of selected albums:
 5. User selects torrent(s) via AskUserQuestion
 6. If FLAC not found — search for other lossless formats (APE, WAV, ALAC)
 
-> **Future extension**: Other tracker sources may be added as separate scripts following the same interface (`<tracker>.py search/download`). Steps 1, 4, 5 are source-agnostic; steps 2-3 are tracker-specific.
+**Yandex Music fallback** — if rutracker has no results:
+1. Run `$HOME/.claude/skills/music/yandex.py search-albums "<artist>"`
+2. Show results to user, let them select
+3. Download via `$HOME/.claude/skills/music/yandex.py download-album <album_id> $HOME/Downloads/Music`
+4. Yandex downloads produce individual FLAC files with embedded metadata and cover — no CUE splitting needed, skip step 3.5, go directly to step 4 (import)
 
 ### Step 3: Download via torrent
 
@@ -128,14 +134,25 @@ For each album directory:
 
 ## Track Mode
 
-### Step T1: Search tracker for track
+### Step T1: Search rutracker for track
 
 1. Search rutracker: `$HOME/.claude/skills/music/rutracker.py search "<artist> <track> flac"`
 2. If few results — try alternative queries (transliteration, different language)
 3. Show results to user via AskUserQuestion (title, size, seeds)
-4. User selects torrent
+4. User selects torrent — or if no good results, go to step T1b
 
-### Step T2: Download and select track file
+### Step T1b: Yandex Music fallback
+
+If rutracker has no results or user requests Yandex:
+
+1. Search Yandex: `$HOME/.claude/skills/music/yandex.py search-tracks "<artist> <track>"`
+2. Show results to user via AskUserQuestion (artist, title, album, duration)
+3. User selects track
+4. Download: `$HOME/.claude/skills/music/yandex.py download-track <track_id> $HOME/Downloads/Music`
+5. File arrives as FLAC with embedded metadata and cover art — no CUE splitting needed
+6. Go to step T3
+
+### Step T2: Download and select track file from rutracker
 
 1. Download .torrent: `$HOME/.claude/skills/music/rutracker.py download <topic_id> $HOME/Downloads/Music`
 2. List files: `aria2c --show-files <torrent_file>`
@@ -145,11 +162,13 @@ For each album directory:
 
 ### Step T3: Import as singleton
 
-1. If the file is part of a CUE+FLAC image — split first (same as Step 4.1), then pick the target track
+1. If the file is part of a CUE+FLAC image (rutracker only) — split first (same as Step 4.1), then pick the target track
 2. Import: `beet import -s <track_file_path>`
 3. Check result, report success or provide manual command: `beet import -s -t <path>`
 4. **Embed cover art** — `fetchart`/`embedart` plugins don't work for singletons, so fetch manually:
-   - Get release MBID: `beet list -f '$mb_albumid' path:<imported_file>`
-   - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release/<MBID>/front" path:<imported_file>`
-   - If no art for release — try release group: `beet embedart -u "https://coverartarchive.org/release-group/<RG_MBID>/front" path:<imported_file>`
-   - Get RG MBID: `beet list -f '$mb_releasegroupid' path:<imported_file>`
+   - Yandex downloads already have cover art embedded — verify with `metaflac --list <file>` and skip if present
+   - For rutracker downloads (or if cover is missing):
+     - Get release MBID: `beet list -f '$mb_albumid' path:<imported_file>`
+     - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release/<MBID>/front" path:<imported_file>`
+     - If no art for release — try release group: `beet embedart -u "https://coverartarchive.org/release-group/<RG_MBID>/front" path:<imported_file>`
+     - Get RG MBID: `beet list -f '$mb_releasegroupid' path:<imported_file>`

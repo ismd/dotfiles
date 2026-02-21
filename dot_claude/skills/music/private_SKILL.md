@@ -69,7 +69,10 @@ Strategy depends on number of selected albums:
 1. Run `$HOME/.claude/skills/music/yandex.py search-albums "<artist>"`
 2. Show results to user, let them select
 3. Download via `$HOME/.claude/skills/music/yandex.py download-album <album_id> $HOME/Downloads/Music`
-4. Yandex downloads produce individual FLAC files with embedded metadata and cover — no CUE splitting needed, skip step 3.5, go directly to step 4 (import)
+4. Yandex downloads arrive as `.m4a` files (FLAC stream inside M4A container). Convert to proper `.flac` before import:
+   - `ffmpeg -i <file.m4a> -c:a copy <file.flac>` (lossless remux, no re-encoding)
+   - Delete the original `.m4a` after conversion
+   - No CUE splitting needed, skip step 3.5, go directly to step 4 (import)
 
 ### Step 3: Download via torrent
 
@@ -149,7 +152,9 @@ If rutracker has no results or user requests Yandex:
 2. Show results to user via AskUserQuestion (artist, title, album, duration)
 3. User selects track
 4. Download: `$HOME/.claude/skills/music/yandex.py download-track <track_id> $HOME/Downloads/Music`
-5. File arrives as FLAC with embedded metadata and cover art — no CUE splitting needed
+5. File arrives as `.m4a` (FLAC stream inside M4A container). Convert to proper `.flac`:
+   - `ffmpeg -i <file.m4a> -c:a copy <file.flac>` (lossless remux, no re-encoding)
+   - Delete the original `.m4a` after conversion
 6. Go to step T3
 
 ### Step T2: Download and select track file from rutracker

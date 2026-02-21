@@ -90,6 +90,7 @@ yay -S --noconfirm --needed \
     pyright \
     python-beautifulsoup4 \
     python-pip \
+    python-pipx \
     python-pylint \
     python-pywal \
     qemu-full \

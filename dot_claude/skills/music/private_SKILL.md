@@ -115,13 +115,23 @@ For each album directory:
    - To use a specific CUE file: `$HOME/.bin/split-flac.sh <path> <cue_file>`
    - Script creates `.split/` subdirectory with split tracks
    - Use `.split/` path for beet import
-2. **Auto import**:
+2. **Pre-tag files** (ensures high match % even for untagged files like vinyl rips):
+   - If release ID was resolved in step 3.5 — write tags from MusicBrainz data before importing:
+     - Get track list: `$HOME/.claude/skills/music/musicbrainz.py release-tracks <release_id>`
+     - For each FLAC file, match it to a track (by filename/order) and write tags:
+       ```
+       metaflac --set-tag="ARTIST=<artist>" --set-tag="ALBUM=<album>" \
+         --set-tag="TITLE=<track_title>" --set-tag="TRACKNUMBER=<n>" <file>
+       ```
+     - This step is idempotent — if files already have correct tags, it just overwrites with the same values
+   - If no release ID — skip this step, beet will try its own matching
+3. **Auto import**:
    - If release ID resolved in step 3.5: `beet import --search-id <id> <path>`
    - Otherwise: `beet import <path>`
    - Do NOT use `-t` flag — let beet auto-match
    - If MusicBrainz lookup failed in step 1 — still use `beet import <path>`, beet will try its own matching
    - **Important**: When beet displays a match and exits with code 0, the import is **already complete**. Do NOT re-run `beet import` — a successful return means tracks have been moved to the library. If the output shows a match percentage (e.g., "Match (100.0%)"), the album was applied automatically.
-3. **Check result**: analyze beet output
+4. **Check result**: analyze beet output
    - If beet exited with code 0 and showed a match → import succeeded, do not re-run
    - Skipped/error → add to manual import list
 
@@ -170,6 +180,11 @@ If rutracker has no results or user requests Yandex:
 
 1. If the file is part of a CUE+FLAC image (rutracker only) — split first (same as Step 4.1), then pick the target track
    - **Important**: After splitting, strip all tags from the extracted track file before importing: `metaflac --remove-all-tags <file>`. CUE-sourced tags often contain junk (catalog numbers in album title, inconsistent artist names) that pollute beet's import.
+   - **Then pre-tag** with correct MusicBrainz data so beet can match:
+     ```
+     metaflac --set-tag="ARTIST=<artist>" --set-tag="TITLE=<track_title>" <file>
+     ```
+   - For album/single imports, also add `--set-tag="ALBUM=<album>" --set-tag="TRACKNUMBER=<n>"`
 2. **Check if the track has a single/EP release** on MusicBrainz (from step 1's artist-albums output or by searching). If yes:
    - **Important**: If the audio was extracted from an album source (rutracker album rip), the single version may differ (different mix, radio edit, different length). Compare the duration of the extracted track with the single's duration on MusicBrainz.
    - If durations match (within ~2 seconds) — import as album: `beet import --search-id <release_id> <path>` (a single is just an album with one track)

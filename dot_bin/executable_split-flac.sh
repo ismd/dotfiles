@@ -32,7 +32,7 @@ if [ "$USE_ENCA" = true ]; then
 fi
 
 DIR=$1
-CUE_FILE=$2
+CUE_FILE=${2:-}
 
 if [ -z "$DIR" ]; then
     echo "Usage: $0 [-e] [-w] <directory> [cue_file]"

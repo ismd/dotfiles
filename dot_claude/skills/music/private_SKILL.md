@@ -120,8 +120,9 @@ For each album directory:
    - Otherwise: `beet import <path>`
    - Do NOT use `-t` flag — let beet auto-match
    - If MusicBrainz lookup failed in step 1 — still use `beet import <path>`, beet will try its own matching
+   - **Important**: When beet displays a match and exits with code 0, the import is **already complete**. Do NOT re-run `beet import` — a successful return means tracks have been moved to the library. If the output shows a match percentage (e.g., "Match (100.0%)"), the album was applied automatically.
 3. **Check result**: analyze beet output
-   - Success → mark album as imported
+   - If beet exited with code 0 and showed a match → import succeeded, do not re-run
    - Skipped/error → add to manual import list
 
 ### Step 5: Summary

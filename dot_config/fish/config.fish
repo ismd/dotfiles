@@ -31,6 +31,10 @@ abbr -a k kubectl
 abbr -a kk kubectl --kubeconfig ./kubeconfig
 abbr -a p python
 abbr -a s yay -Ss
+abbr -a sc systemctl
+abbr -a scs systemctl status
+abbr -a scu systemctl --user
+abbr -a scus systemctl --user status
 
 # Aliases
 alias cat bat

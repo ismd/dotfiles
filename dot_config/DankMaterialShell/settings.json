@@ -383,30 +383,10 @@
     }
   },
   "displayProfiles": {
-    "hyprland": {
-      "profile_1771496775368_9ax1jv": {
-        "id": "profile_1771496775368_9ax1jv",
-        "name": "External",
-        "outputSet": [
-          "HDMI-A-1",
-          "eDP-1"
-        ],
-        "createdAt": 1771496775368,
-        "updatedAt": 1771496775368
-      },
-      "profile_1771497263616_9yu3t3": {
-        "id": "profile_1771497263616_9yu3t3",
-        "name": "Internal",
-        "outputSet": [
-          "eDP-1"
-        ],
-        "createdAt": 1771497263616,
-        "updatedAt": 1771497263616
-      }
-    }
+    "hyprland": {}
   },
   "activeDisplayProfile": {
-    "hyprland": "profile_1771496775368_9ax1jv"
+    "hyprland": ""
   },
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,

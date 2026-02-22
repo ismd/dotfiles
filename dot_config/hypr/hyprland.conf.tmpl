@@ -37,8 +37,7 @@ exec-once = kdeconnectd
 # exec-once = flameshot
 
 {{- if eq .chezmoi.hostname "mighty" }}
-# exec-once = ~/.bin/monitors.sh
-exec-once = ~/.bin/display-profile.sh
+exec-once = ~/.bin/monitors.sh
 exec = ~/.bin/thinkpad-leds.sh
 {{- end }}
 
@@ -424,5 +423,5 @@ xwayland {
 source = ./dms/colors.conf
 source = ./dms/cursor.conf
 source = ./dms/layout.conf
-source = ./dms/outputs.conf
+# source = ./dms/outputs.conf
 source = ./dms/windowrules.conf

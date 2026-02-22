@@ -2,37 +2,51 @@
 set -euo pipefail
 
 INTERNAL_MONITOR="eDP-1"
+DEBOUNCE_SECS=1
+debounce_pid=
 
-check_external_monitors() {
-  local MONITOR_LIST=$(hyprctl monitors -j)
-  local EXTERNAL_MONITORS=$(echo "$MONITOR_LIST" | jq -r '.[] | .name' | grep -v "$INTERNAL_MONITOR")
+apply_monitors() {
+  local monitors external
+  monitors=$(hyprctl monitors -j)
+  external=$(echo "$monitors" | jq -r '.[].name' | grep -v "$INTERNAL_MONITOR" || true)
 
-  if [ -n "$EXTERNAL_MONITORS" ]; then
-    # External monitor(s) connected - disable internal and ensure external monitors have correct scale
-    hyprctl keyword monitor $INTERNAL_MONITOR, disable
-
-    # Apply scale to each external monitor
-    echo "$EXTERNAL_MONITORS" | while read -r monitor; do
-      hyprctl keyword monitor $monitor, preferred, auto, 1.5
+  if [[ -n "$external" ]]; then
+    hyprctl keyword monitor "$INTERNAL_MONITOR, disable"
+    echo "$external" | while read -r mon; do
+      hyprctl keyword monitor "$mon, preferred, auto, 1.5"
     done
   else
-    # No external monitors - enable internal with correct scale
-    {{- if eq .chezmoi.hostname "mighty" }}
-    hyprctl keyword monitor $INTERNAL_MONITOR, preferred, auto, 1.6
-    {{- else }}
-    hyprctl keyword monitor $INTERNAL_MONITOR, preferred, auto, 1.2
-    {{- end }}
+    hyprctl keyword monitor "$INTERNAL_MONITOR, preferred, auto, 1.5"
   fi
 }
 
-check_external_monitors
-
-handle() {
-  case $1 in
-    monitoradded*) check_external_monitors ;;
-    monitorremoved*) check_external_monitors ;;
-    configreloaded*) check_external_monitors ;;
-  esac
+schedule_apply() {
+  if [[ -n "$debounce_pid" ]] && kill -0 "$debounce_pid" 2>/dev/null; then
+    kill "$debounce_pid" 2>/dev/null || true
+  fi
+  (sleep "$DEBOUNCE_SECS" && apply_monitors) &
+  debounce_pid=$!
 }
 
-socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do handle "$line"; done
+cleanup() {
+  if [[ -n "$debounce_pid" ]] && kill -0 "$debounce_pid" 2>/dev/null; then
+    kill "$debounce_pid" 2>/dev/null || true
+  fi
+  exit 0
+}
+trap cleanup EXIT INT TERM
+
+apply_monitors
+
+SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+while true; do
+  socat -u "UNIX-CONNECT:$SOCKET" - | while IFS= read -r line; do
+    case "$line" in
+      monitoradded\>*|monitorremoved\>*|configreloaded\>*)
+        schedule_apply
+        ;;
+    esac
+  done || true
+  sleep 1
+  apply_monitors
+done

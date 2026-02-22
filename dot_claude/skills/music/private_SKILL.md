@@ -134,8 +134,10 @@ For each album directory:
    - Do NOT use `-t` flag — let beet auto-match
    - If MusicBrainz lookup failed in step 1 — still use `beet import <path>`, beet will try its own matching
    - **Important**: When beet displays a match and exits with code 0, the import is **already complete**. Do NOT re-run `beet import` — a successful return means tracks have been moved to the library. If the output shows a match percentage (e.g., "Match (100.0%)"), the album was applied automatically.
+   - **If beet exits with code 1** and shows a match but doesn't auto-apply (match % below threshold, or missing tracks penalty) — re-run with `printf 'a\n' | beet import ...` to pipe Apply confirmation. This happens when importing partial albums (e.g., 1 track from a 5-track single).
 4. **Check result**: analyze beet output
    - If beet exited with code 0 and showed a match → import succeeded, do not re-run
+   - If beet exited with code 1 and showed a match with `[A]pply` prompt → re-run with `printf 'a\n' |` prefix
    - Skipped/error → add to manual import list
 
 ### Step 5: Summary
@@ -195,15 +197,15 @@ If rutracker has no results or user requests Yandex:
 2. **Check if the track has a single/EP release** on MusicBrainz (from step 1's artist-albums output or by searching). If yes:
    - **Important**: If the audio was extracted from an album source (rutracker album rip), the single version may differ (different mix, radio edit, different length). Compare the duration of the extracted track with the single's duration on MusicBrainz.
    - If durations match (within ~2 seconds) — import as album: `beet import --search-id <release_id> <path>` (a single is just an album with one track)
-   - If durations differ — the audio is the album version, not the single. Import as singleton (step 3 below) using the album's recording ID instead.
-3. **If no single release exists** (track only on a full album) — import as singleton:
-   - `beet import -s <path>` — let beet auto-match
-   - If beet fails to match, get the recording ID manually:
-     - Find the release containing this track: `$HOME/.claude/skills/music/musicbrainz.py release-group-releases <rg_id>`
-     - Get the recording ID: `$HOME/.claude/skills/music/musicbrainz.py release-tracks <release_id>`
-     - Import with recording ID: `beet import -s --search-id <recording_id> <path>`
-   - If still fails — provide manual command: `beet import -s -t <path>`
-4. **Important**: `--search-id` with `-s` expects a **recording ID** (not release ID). Without `-s`, it expects a **release ID**.
+   - **If beet doesn't auto-apply** (exit code 1 with match + `[A]pply` prompt) — this is expected when importing 1 track from a multi-track single. Re-run with: `printf 'a\n' | beet import --search-id <release_id> <path>`
+   - If durations differ — the audio is the album version, not the single. Still prefer album import (see step 3), NOT singleton.
+3. **If no single release exists** (track only on a full album) — import as album with the full album release ID:
+   - Pre-tag the file with correct ALBUM, ARTIST, TITLE, TRACKNUMBER from MusicBrainz
+   - `printf 'a\n' | beet import --search-id <release_id> <path>` — beet will show missing tracks but Apply will work
+   - **NEVER use singleton import (`-s`)** as primary strategy — it loses all album metadata (album name, year, label, catalog number). The imported track ends up in `Non-Album/` with empty album/year fields.
+   - Singleton import (`beet import -s`) is the **absolute last resort** — only if no release can be matched at all
+   - If still fails — provide manual command: `beet import -t <path>`
+4. **Important**: `--search-id` without `-s` expects a **release ID**. With `-s`, it expects a **recording ID**.
 5. **Embed cover art** (only for singleton imports — album imports handle this automatically):
    - Yandex downloads already have cover art embedded — verify with `metaflac --list <file>` and skip if present
    - For rutracker downloads (or if cover is missing):

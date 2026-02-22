@@ -15,6 +15,9 @@ Supports two modes: **discography** (by artist name) and **single track** (by "A
 Download directory: $HOME/Downloads/Music
 Rutracker credentials: RUTRACKER_USER, RUTRACKER_PASS (environment variables)
 Yandex Music token: YANDEX_MUSIC_TOKEN (environment variable)
+Navidrome URL: NAVIDROME_URL (environment variable, e.g. https://music.example.com)
+Navidrome user: NAVIDROME_USER (environment variable)
+Navidrome auth: NAVIDROME_TOKEN, NAVIDROME_SALT (environment variables, token = md5(password + salt))
 Music library: /mnt/qnap/Music/Music (from beets config)
 Beet database: /mnt/qnap/Music/beets.db
 Split script: $HOME/.bin/split-flac.sh
@@ -143,6 +146,10 @@ For each album directory:
    beet import -t <path>   # run in terminal for manual selection
    ```
 3. **Clean up**: delete the downloaded directory (e.g., `rm -rf $HOME/Downloads/Music/<artist>`) and the .torrent file(s). Always do this — don't ask.
+4. **Trigger Navidrome scan** (so new music appears immediately):
+   ```bash
+   curl "$NAVIDROME_URL/rest/startScan.view?u=$NAVIDROME_USER&t=$NAVIDROME_TOKEN&s=$NAVIDROME_SALT&v=1.13.0&c=claude-music&f=json"
+   ```
 
 ---
 
@@ -204,3 +211,7 @@ If rutracker has no results or user requests Yandex:
      - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release/<MBID>/front" path:<imported_file>`
      - If no art for release — try release group: `beet embedart -u "https://coverartarchive.org/release-group/<RG_MBID>/front" path:<imported_file>`
      - Get RG MBID: `beet list -f '$mb_releasegroupid' path:<imported_file>`
+6. **Clean up & trigger scan**: delete downloaded files, then trigger Navidrome scan:
+   ```bash
+   curl "$NAVIDROME_URL/rest/startScan.view?u=$NAVIDROME_USER&t=$NAVIDROME_TOKEN&s=$NAVIDROME_SALT&v=1.13.0&c=claude-music&f=json"
+   ```

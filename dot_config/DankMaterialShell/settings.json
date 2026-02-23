@@ -173,7 +173,9 @@
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "spotlightSectionViewModes": {},
-  "appDrawerSectionViewModes": {},
+  "appDrawerSectionViewModes": {
+    "apps": "grid"
+  },
   "niriOverviewOverlayEnabled": true,
   "dankLauncherV2Size": "compact",
   "dankLauncherV2BorderEnabled": false,

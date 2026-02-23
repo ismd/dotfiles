@@ -20,6 +20,11 @@ $menu = walker -t hypr
 # Export XDG_SESSION_ID to systemd for DMS loginctl integration
 exec-once = systemctl --user import-environment XDG_SESSION_ID
 
+{{- if eq .chezmoi.hostname "mighty" }}
+exec-once = ~/.bin/monitors.sh
+exec = ~/.bin/thinkpad-leds.sh
+{{- end }}
+
 # exec-once = swww-daemon
 exec-once = sleep 3s && bitwarden-desktop
 exec-once = walker --gapplication-service
@@ -35,11 +40,6 @@ exec-once = kdeconnectd
 # exec-once = blueman-applet
 # exec-once = dconf load /org/gnome/desktop/interface/ < ~/.config/dconf/gnome-interface.conf
 # exec-once = flameshot
-
-{{- if eq .chezmoi.hostname "mighty" }}
-exec-once = ~/.bin/monitors.sh
-exec = ~/.bin/thinkpad-leds.sh
-{{- end }}
 
 
 #############################

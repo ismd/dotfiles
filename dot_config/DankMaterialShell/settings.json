@@ -83,7 +83,7 @@
       "id": "brightnessSlider",
       "enabled": true,
       "width": 50,
-      "deviceName": "backlight:intel_backlight"
+      "deviceName": "ddc:i2c-2"
     },
     {
       "id": "wifi",

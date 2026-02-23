@@ -6,18 +6,20 @@ DEBOUNCE_SECS=1
 debounce_pid=
 
 apply_monitors() {
-  local monitors external
+  local monitors external batch=""
   monitors=$(hyprctl monitors -j)
   external=$(echo "$monitors" | jq -r '.[].name' | grep -v "$INTERNAL_MONITOR" || true)
 
   if [[ -n "$external" ]]; then
-    hyprctl keyword monitor "$INTERNAL_MONITOR, disable"
-    echo "$external" | while read -r mon; do
-      hyprctl keyword monitor "$mon, preferred, auto, 1.5"
-    done
+    batch="keyword monitor $INTERNAL_MONITOR, disable"
+    while read -r mon; do
+      batch="$batch ; keyword monitor $mon, preferred, auto, 1.5"
+    done <<< "$external"
   else
-    hyprctl keyword monitor "$INTERNAL_MONITOR, preferred, auto, 1.5"
+    batch="keyword monitor $INTERNAL_MONITOR, preferred, auto, 1.5"
   fi
+
+  hyprctl --batch "$batch"
 }
 
 schedule_apply() {

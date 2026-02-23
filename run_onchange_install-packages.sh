@@ -96,7 +96,6 @@ yay -S --noconfirm --needed \
     qemu-full \
     qt6ct-kde \
     quickshell-git \
-    rbw \
     remmina \
     ripgrep \
     socat \

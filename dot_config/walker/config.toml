@@ -92,9 +92,9 @@ provider = "calc"
 prefix = "@"
 provider = "websearch"
 
-[[providers.prefixes]]
-prefix = "&"
-provider = "bitwarden"
+# [[providers.prefixes]]
+# prefix = "&"
+# provider = "bitwarden"
 
 [[providers.prefixes]]
 prefix = "~"

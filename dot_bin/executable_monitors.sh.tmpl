@@ -2,24 +2,26 @@
 set -euo pipefail
 
 INTERNAL_MONITOR="eDP-1"
+MONITORS_CONF="$HOME/.config/hypr/monitors.conf"
 DEBOUNCE_SECS=1
 debounce_pid=
 
 apply_monitors() {
-  local monitors external batch=""
+  local monitors external conf=""
   monitors=$(hyprctl monitors -j)
   external=$(echo "$monitors" | jq -r '.[].name' | grep -v "$INTERNAL_MONITOR" || true)
 
   if [[ -n "$external" ]]; then
-    batch="keyword monitor $INTERNAL_MONITOR, disable"
+    conf="monitor = $INTERNAL_MONITOR, disable"
     while read -r mon; do
-      batch="$batch ; keyword monitor $mon, preferred, auto, 1.5"
+      conf="$conf"$'\n'"monitor = $mon, preferred, auto, 1.5"
     done <<< "$external"
   else
-    batch="keyword monitor $INTERNAL_MONITOR, preferred, auto, 1.5"
+    conf="monitor = $INTERNAL_MONITOR, preferred, auto, 1.5"
   fi
 
-  hyprctl --batch "$batch"
+  # Write to config file so state persists across Hyprland config reloads
+  echo "$conf" > "$MONITORS_CONF"
 }
 
 schedule_apply() {

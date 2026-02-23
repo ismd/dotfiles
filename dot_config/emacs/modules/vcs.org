@@ -4,24 +4,26 @@
 #+startup: showeverything
 
 * Table of Contents :toc:
-- [[#git-gutter][Git Gutter]]
+- [[#git-gutter-fringe][Git Gutter Fringe]]
 - [[#git-time-machine][Git Time Machine]]
 - [[#magit][Magit]]
   - [[#magit-todos][Magit Todos]]
 
-* Git Gutter
-https://github.com/emacsorphanage/git-gutter
+* Git Gutter Fringe
+https://github.com/emacsorphanage/git-gutter-fringe
 
 #+begin_src emacs-lisp
-(use-package git-gutter
+(use-package git-gutter-fringe
   :ensure t
-  :custom
-  (git-gutter:added-sign " ")
-  (git-gutter:deleted-sign " ")
-  (git-gutter:modified-sign " ")
-  (git-gutter:update-interval 2)
   :config
-  (global-git-gutter-mode t))
+  (global-git-gutter-mode t)
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [224] nil nil '(center repeated))
+  (custom-set-faces
+   '(git-gutter-fr:added    ((t :foreground "#4a7d56" :background unspecified)))
+   '(git-gutter-fr:modified ((t :foreground "#4c4f7d" :background unspecified)))
+   '(git-gutter-fr:deleted  ((t :foreground "#7d4c52" :background unspecified)))))
 #+end_src
 
 * Git Time Machine

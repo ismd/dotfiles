@@ -35,6 +35,7 @@
 - [[#multiple-cursors][Multiple Cursors]]
 - [[#sudo-edit][Sudo Edit]]
 - [[#super-save][Super Save]]
+- [[#goggles][Goggles]]
 - [[#track-changes][Track Changes]]
 - [[#transient][Transient]]
 - [[#trimming-whitespace][Trimming Whitespace]]
@@ -180,7 +181,8 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
 
 ** UI
 #+begin_src emacs-lisp
-(fringe-mode 0)
+(custom-set-faces '(fringe ((t :background nil))))
+(fringe-mode '(8 . 0))
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)

@@ -92,9 +92,9 @@ provider = "calc"
 prefix = "@"
 provider = "websearch"
 
-# [[providers.prefixes]]
-# prefix = "&"
-# provider = "bitwarden"
+[[providers.prefixes]]
+prefix = "&"
+provider = "bitwarden"
 
 [[providers.prefixes]]
 prefix = "~"
@@ -193,15 +193,15 @@ files = [
   { action = "copy_2fa", label = "copy 2fa", bind = "ctrl Return" },
 ]
 
-# bitwarden = [
-#   { action = "copypassword", label = "copy password", default = true, bind = "Return" },
-#   { action = "typepassword", label = "type password", default = true, bind = "ctrl shift p" },
-#   { action = "copyusername", label = "copy username", bind = "shift Return" },
-#   { action = "typeusername", label = "type username", bind = "ctrl u" },
-#   { action = "copyotp", label = "copy 2fa", bind = "ctrl Return" },
-#   { action = "typeotp", label = "type 2fa", bind = "ctrl t" },
-#   { action = "syncvault", label = "sync", bind = "ctrl s" },
-# ]
+bitwarden = [
+  { action = "copypassword", label = "copy password", default = true, bind = "Return" },
+  { action = "typepassword", label = "type password", default = true, bind = "ctrl shift p" },
+  { action = "copyusername", label = "copy username", bind = "shift Return" },
+  { action = "typeusername", label = "type username", bind = "ctrl u" },
+  { action = "copyotp", label = "copy 2fa", bind = "ctrl Return" },
+  { action = "typeotp", label = "type 2fa", bind = "ctrl t" },
+  { action = "syncvault", label = "sync", bind = "ctrl s" },
+]
 
 todo = [
   { action = "save", default = true, bind = "Return", after = "AsyncClearReload" },

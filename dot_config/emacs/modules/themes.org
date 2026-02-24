@@ -5,6 +5,7 @@
 
 * Table of Contents :toc:
 - [[#themes][Themes]]
+  - [[#local-themes][Local Themes]]
   - [[#color-theme-sanityinc-tomorrow][Color Theme Sanityinc Tomorrow]]
   - [[#doom-themes][Doom Themes]]
   - [[#ef-themes][Ef Themes]]
@@ -71,10 +72,10 @@ Add local theme directories to the load path.
 #+end_src
 
 ** IntelliJ Theme
-#+begin_src emacs-lisp
-;; (use-package intellij-theme
-;;   :ensure t)
-#+end_src
+#+begin_comment
+(use-package intellij-theme
+  :ensure t)
+#+end_comment
 
 ** Leuven Theme
 https://github.com/fniessen/emacs-leuven-theme
@@ -87,13 +88,13 @@ https://github.com/fniessen/emacs-leuven-theme
 ** Mindre Theme
 https://github.com/erikbackman/mindre-theme
 
-#+begin_src emacs-lisp
-;; (use-package mindre-theme
-;;   :ensure t
-;;   :custom
-;;   (mindre-use-more-bold nil)
-;;   (mindre-use-faded-lisp-parens t))
-#+end_src
+#+begin_comment
+(use-package mindre-theme
+  :ensure t
+  :custom
+  (mindre-use-more-bold nil)
+  (mindre-use-faded-lisp-parens t))
+#+end_comment
 
 ** Modus Themes
 https://github.com/protesilaos/modus-themes

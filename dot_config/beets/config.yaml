@@ -1,7 +1,10 @@
 library: /mnt/qnap/Music/beets.db
 directory: /mnt/qnap/Music/Music
 
-plugins: embedart fetchart musicbrainz
+plugins: embedart fetchart lastgenre musicbrainz
+
+embedart:
+  auto: yes
 
 fetchart:
   auto: yes
@@ -16,5 +19,10 @@ fetchart:
     - wikipedia
     - lastfm
 
-embedart:
-  auto: yes
+lastgenre:
+    auto: yes
+    canonical: yes
+    count: 1
+    prefer_specific: yes
+    source: album
+    whitelist: yes

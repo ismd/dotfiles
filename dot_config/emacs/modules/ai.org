@@ -17,19 +17,19 @@
 * Chatgpt Shell
 https://github.com/xenodium/chatgpt-shell
 
-#+begin_src emacs-lisp
+#+begin_comment
 (use-package chatgpt-shell
   :ensure t
   :custom
   ((chatgpt-shell-anthropic-key #'anthropic-api-key)
    (chatgpt-shell-model-version "claude-sonnet-4-20250514")))
-#+end_src
+#+end_comment
 
 * Claude Code
 ** claude-code.el
 https://github.com/stevemolitor/claude-code.el
 
-#+begin_src emacs-lisp
+#+begin_comment
 (defun ismd/claude-notify (title message)
   "Display a Linux notification using notify-send."
   (if (executable-find "notify-send")
@@ -54,7 +54,7 @@ https://github.com/stevemolitor/claude-code.el
   (ismd/add-display-buffer-rule "^\\*claude")
 
   (claude-code-mode))
-#+end_src
+#+end_comment
 
 ** claude-code-ide
 https://github.com/manzaltu/claude-code-ide.el
@@ -76,10 +76,10 @@ https://github.com/lanceberge/elysium
 
 This package integrates with gptel and provides capability to insert AI results into the current buffer.
 
-#+begin_src emacs-lisp
+#+begin_comment
 (use-package elysium
   :ensure t)
-#+end_src
+#+end_comment
 
 * Github Copilot
 https://github.com/copilot-emacs/copilot.el
@@ -128,9 +128,9 @@ https://github.com/karthink/gptel
 * Minuet
 https://github.com/milanglacier/minuet-ai.el
 
-#+begin_src emacs-lisp
+#+begin_comment
 (use-package minuet
   :ensure t
   :config
   (setq minuet-provider 'claude))
-#+end_src
+#+end_comment

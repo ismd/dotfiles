@@ -56,6 +56,7 @@ yay -S --noconfirm --needed \
     github-cli \
     gobuster \
     gopls \
+    helm \
     hydra \
     hypridle \
     hyprpolkitagent \

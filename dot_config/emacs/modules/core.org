@@ -183,9 +183,6 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
 #+begin_src emacs-lisp
 (custom-set-faces '(fringe ((t :background nil))))
 (fringe-mode '(8 . 0))
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
 
 ;; Custom line continuation/truncation indicators
 (unless standard-display-table

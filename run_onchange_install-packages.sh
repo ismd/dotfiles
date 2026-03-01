@@ -57,6 +57,8 @@ yay -S --noconfirm --needed \
     gobuster \
     gopls \
     helm \
+    hunspell-en_US \
+    hunspell-ru \
     hydra \
     hypridle \
     hyprpolkitagent \

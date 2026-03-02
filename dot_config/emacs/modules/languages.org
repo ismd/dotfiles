@@ -274,7 +274,7 @@ Before Emacs 29, tree-sitter was a [[https://emacs-tree-sitter.github.io/][packa
 (use-package treesit-auto
   :ensure t
   :custom
-  (treesit-auto-install 'prompt)
+  (treesit-auto-install t)
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))

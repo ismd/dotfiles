@@ -46,6 +46,8 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 (use-package vterm
   :ensure t
   :hook (vterm-mode . ismd/disable-line-numbers)
+  :custom
+  (vterm-always-compile-module t)
   :config
   (setq shell-file-name "/bin/fish"
         vterm-max-scrollback 5000))

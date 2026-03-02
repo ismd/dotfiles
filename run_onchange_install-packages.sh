@@ -113,4 +113,5 @@ yay -S --noconfirm --needed \
     whois \
     xournalpp \
     yaml-language-server \
+    zen-browser-bin \
     zoom

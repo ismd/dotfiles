@@ -375,6 +375,16 @@ Useful for TRAMP and temporary files."
   (scroll-down-command 3))
 #+end_src
 
+* Helpful
+https://github.com/Wilfred/helpful
+
+A better Emacs *help* buffer with more contextual information.
+
+#+begin_src emacs-lisp
+(use-package helpful
+  :ensure t)
+#+end_src
+
 * Editorconfig
 https://github.com/editorconfig/editorconfig-emacs
 

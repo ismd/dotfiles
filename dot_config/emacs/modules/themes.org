@@ -11,7 +11,6 @@
   - [[#ef-themes][Ef Themes]]
   - [[#intellij-theme][IntelliJ Theme]]
   - [[#leuven-theme][Leuven Theme]]
-  - [[#mindre-theme][Mindre Theme]]
   - [[#modus-themes][Modus Themes]]
   - [[#nord-theme][Nord Theme]]
 
@@ -84,17 +83,6 @@ https://github.com/fniessen/emacs-leuven-theme
 (use-package leuven-theme
   :ensure t)
 #+end_src
-
-** Mindre Theme
-https://github.com/erikbackman/mindre-theme
-
-#+begin_comment
-(use-package mindre-theme
-  :ensure t
-  :custom
-  (mindre-use-more-bold nil)
-  (mindre-use-faded-lisp-parens t))
-#+end_comment
 
 ** Modus Themes
 https://github.com/protesilaos/modus-themes

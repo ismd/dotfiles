@@ -103,8 +103,9 @@ For each selected torrent, attempt to identify the exact MusicBrainz release (no
 3. Query MusicBrainz to find the specific release within the release group:
    - If catalog number found: `$HOME/.claude/skills/music/musicbrainz.py search-release --artist "<artist>" --catno "<catno>"`
    - If no catno — browse all releases in the group: `$HOME/.claude/skills/music/musicbrainz.py release-group-releases <rg_id>`
-4. If a unique release is identified — store its ID for use in step 4
-5. If still ambiguous — skip, let beet handle matching on its own
+4. **When multiple releases match — prefer Japanese releases** (country: JP, or Japanese label/catalog number like UICR-, TOCT-, WPCL-, etc.)
+5. If a unique release is identified — store its ID for use in step 4
+6. If still ambiguous — skip, let beet handle matching on its own
 
 ### Step 4: Process albums
 

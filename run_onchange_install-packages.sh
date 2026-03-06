@@ -108,6 +108,11 @@ yay -S --noconfirm --needed \
     tigervnc \
     tlp \
     tlp-pd \
+    ttf-firacode-nerd \
+    ttf-meslo-nerd \
+    ttf-nerd-fonts-symbols \
+    ttf-sourcecodepro-nerd \
+    ttf-ubuntu-nerd \
     viewnior \
     vscode-json-languageserver \
     whois \

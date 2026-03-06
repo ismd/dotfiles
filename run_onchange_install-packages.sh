@@ -117,6 +117,7 @@ yay -S --noconfirm --needed \
     viewnior \
     vscode-json-languageserver \
     whois \
+    xdg-desktop-portal-hyprland \
     xournalpp \
     yaml-language-server \
     zen-browser-bin \

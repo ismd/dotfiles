@@ -67,6 +67,7 @@ yay -S --noconfirm --needed \
     imagemagick \
     imhex-bin \
     inetutils \
+    intel-media-driver \
     k9s \
     kdeconnect \
     kimageformats \
@@ -115,6 +116,7 @@ yay -S --noconfirm --needed \
     ttf-sourcecodepro-nerd \
     ttf-ubuntu-nerd \
     viewnior \
+    vpl-gpu-rt \
     vscode-json-languageserver \
     whois \
     xdg-desktop-portal-hyprland \

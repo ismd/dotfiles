@@ -72,6 +72,7 @@ yay -S --noconfirm --needed \
     kimageformats \
     kubectl \
     libreoffice-still \
+    libva-utils \
     libvips \
     libvirt \
     libvterm \

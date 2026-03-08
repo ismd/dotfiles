@@ -165,11 +165,11 @@ https://github.com/kubernetes-el/kubernetes-el
 
 Maintained (mostly CI updates). Most popular (679 stars) but has performance issues.
 
-#+begin_src emacs-lisp
+#+begin_comment
 (use-package kubernetes
   :ensure t
   :defer t)
-#+end_src
+#+end_comment
 
 * Language Support
 Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM, AWK, C, C++, Fortran, Icon, IDL (CORBA), IDLWAVE, Java, Javascript, M4, Makefiles, Metafont, Modula2, Object Pascal, Objective-C, Octave, Pascal, Perl, Pike, PostScript, Prolog, Python, Ruby, Simula, SQL, Tcl, Verilog, and VHDL.  Other languages will require you to install additional modes.

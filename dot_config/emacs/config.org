@@ -82,6 +82,29 @@
 
 (add-to-list 'default-frame-alist
              `(font . ,(format "%s-%d" ismd/mono-font (/ ismd/font-size 10))))
+
+(defvar ismd/streaming-mode nil
+  "Non-nil when streaming mode (larger fonts) is active.")
+
+(defvar ismd/streaming-font-size 160
+  "Font size to use in streaming mode.")
+
+(defvar ismd/streaming-variable-font-size 170
+  "Variable pitch font size to use in streaming mode.")
+
+(defun ismd/toggle-streaming-mode ()
+  "Toggle streaming mode with larger fonts."
+  (interactive)
+  (setq ismd/streaming-mode (not ismd/streaming-mode))
+  (if ismd/streaming-mode
+      (setq ismd/font-size ismd/streaming-font-size
+            ismd/variable-font-size ismd/streaming-variable-font-size)
+    (setq ismd/font-size 130
+          ismd/variable-font-size 140))
+  (ismd/set-fonts)
+  (message "Streaming mode %s (font size: %dpt)"
+           (if ismd/streaming-mode "ON" "OFF")
+           (/ ismd/font-size 10)))
 #+end_src
 
 ** Themes

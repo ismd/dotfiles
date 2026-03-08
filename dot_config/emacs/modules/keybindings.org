@@ -355,6 +355,7 @@
   "t f" '(flymake-mode :wk "Toggle flymake")
   "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
   "t o" '(olivetti-mode :wk "Toggle olivetti")
+  "t s" '(ismd/toggle-streaming-mode :wk "Toggle streaming mode")
   "t T" '(treemacs-add-and-display-current-project-exclusively :wk "Treemacs project")
   "t t" '(dirvish-side :wk "Toggle dirvish side window")
   "t v" '(vterm-toggle :wk "Toggle vterm")

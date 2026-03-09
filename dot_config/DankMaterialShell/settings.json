@@ -378,10 +378,12 @@
   "niriOutputSettings": {},
   "hyprlandOutputSettings": {
     "eDP-1": {
-      "disabled": false
+      "disabled": false,
+      "bitdepth": 10
     },
     "HDMI-A-1": {
-      "disabled": true
+      "disabled": false,
+      "bitdepth": 10
     }
   },
   "displayProfiles": {
@@ -392,7 +394,7 @@
   },
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,
-  "displaySnapToEdge": false,
+  "displaySnapToEdge": true,
   "barConfigs": [
     {
       "id": "default",

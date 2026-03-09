@@ -193,34 +193,23 @@ If rutracker has no results or user requests Yandex:
    - **Important**: After splitting, strip all tags from the extracted track file before importing: `metaflac --remove-all-tags <file>`. CUE-sourced tags often contain junk (catalog numbers in album title, inconsistent artist names) that pollute beet's import.
    - **Then pre-tag** with correct MusicBrainz data so beet can match:
      ```
-     metaflac --set-tag="ARTIST=<artist>" --set-tag="TITLE=<track_title>" <file>
+     metaflac --set-tag="ARTIST=<artist>" --set-tag="TITLE=<track_title>" \
+       --set-tag="DATE=<year>" <file>
      ```
-   - For album/single imports, also add `--set-tag="ALBUM=<album>" --set-tag="TRACKNUMBER=<n>"`
-2. **Check if the track has a single/EP release** on MusicBrainz (from step 1's artist-albums output or by searching). If yes:
-   - **Important**: If the audio was extracted from an album source (rutracker album rip), the single version may differ (different mix, radio edit, different length). Compare the duration of the extracted track with the single's duration on MusicBrainz.
-   - If durations match (within ~2 seconds) — import as album: `beet import --search-id <release_id> <path>` (a single is just an album with one track)
-   - **If beet doesn't auto-apply** (exit code 1 with match + `[A]pply` prompt) — this is expected when importing 1 track from a multi-track single. Re-run with: `beet import --search-id <release_id> <path> <<< "a"`
-   - If durations differ — the audio is the album version, not the single. Still prefer album import (see step 3), NOT singleton.
-3. **If no single release exists** (track only on a full album) — import as album with the full album release ID:
-   - Pre-tag the file with correct ALBUM, ARTIST, TITLE, TRACKNUMBER from MusicBrainz
-   - `beet import --search-id <release_id> <path> <<< "a"` — beet will show missing tracks but Apply will work
-   - **NEVER use singleton import (`-s`)** as primary strategy — it loses all album metadata (album name, year, label, catalog number). The imported track ends up in `Non-Album/` with empty album/year fields.
-   - Singleton import (`beet import -s`) is the **absolute last resort** — only if no release can be matched at all
-   - If still fails — provide manual command: `beet import -t <path>`
-4. **Important**: `--search-id` without `-s` expects a **release ID**. With `-s`, it expects a **recording ID**.
-5. **Set year** (only for singleton imports — album imports set year automatically):
-   - Singleton imports match a MusicBrainz **recording**, which has no year. The year must be set manually from the source album's release year.
-   - Use `beet modify` to set both `year` and `original_year`:
-     ```
-     beet modify -y artist:"<artist>" title:"<title>" year=<YYYY> original_year=<YYYY>
-     ```
-   - Get the year from the MusicBrainz release group data (already fetched in step 1 / artist-albums output).
-6. **Embed cover art** (only for singleton imports — album imports handle this automatically):
+   - Get the year from the MusicBrainz release group data (already fetched in the discography lookup)
+   - The `DATE` tag ensures beet picks up the year during singleton import — no need for post-import `beet modify`
+2. **Import as singleton** (primary strategy for track mode):
+   - `beet import -s --search-id <recording_id> <path>`
+   - `--search-id` with `-s` expects a **recording ID** (not release ID)
+   - If beet doesn't auto-apply (exit code 1 with match + `[A]pply` prompt) — re-run with: `beet import -s --search-id <recording_id> <path> <<< "a"`
+   - **NEVER use `printf | beet` or `echo | beet`** — pipes cause `$HOME` to resolve to empty string. Always use here-string: `beet import <path> <<< "a"`
+   - If still fails — provide manual command: `beet import -st <path>`
+3. **Embed cover art** (singletons don't fetch art automatically):
    - Yandex downloads already have cover art embedded — verify with `metaflac --list <file>` and skip if present
    - For rutracker downloads (or if cover is missing):
-     - **Singletons don't store `mb_albumid` / `mb_releasegroupid`** — use the release group ID from the MusicBrainz discography lookup (step 1 / artist-albums output) for the album the track belongs to.
-     - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release-group/<RG_ID>/front" path:<imported_file> <<< "y"`
-7. **Clean up & trigger scan**: delete downloaded files, then trigger Navidrome scan:
+     - Use the release group ID from the MusicBrainz discography lookup for the album the track belongs to
+     - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release-group/<RG_ID>/front" title:<title> artist:<artist> <<< "y"`
+4. **Clean up & trigger scan**: delete downloaded files, then trigger Navidrome scan:
    ```bash
    curl "$NAVIDROME_URL/rest/startScan.view?u=$NAVIDROME_USER&t=$NAVIDROME_TOKEN&s=$NAVIDROME_SALT&v=1.13.0&c=claude-music&f=json"
    ```

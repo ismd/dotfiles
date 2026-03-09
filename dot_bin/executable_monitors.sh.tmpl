@@ -14,10 +14,10 @@ apply_monitors() {
   if [[ -n "$external" ]]; then
     conf="monitor = $INTERNAL_MONITOR, disable"
     while read -r mon; do
-      conf="$conf"$'\n'"monitor = $mon, preferred, auto, 1.5"
+      conf="$conf"$'\n'"monitor = $mon, preferred, auto, 1.5, vrr, 1, bitdepth, 10"
     done <<< "$external"
   else
-    conf="monitor = $INTERNAL_MONITOR, preferred, auto, 1.5"
+    conf="monitor = $INTERNAL_MONITOR, preferred, auto, 1.5, vrr, 0, bitdepth, 10"
   fi
 
   # Write to config file so state persists across Hyprland config reloads

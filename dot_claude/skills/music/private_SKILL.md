@@ -208,14 +208,19 @@ If rutracker has no results or user requests Yandex:
    - Singleton import (`beet import -s`) is the **absolute last resort** — only if no release can be matched at all
    - If still fails — provide manual command: `beet import -t <path>`
 4. **Important**: `--search-id` without `-s` expects a **release ID**. With `-s`, it expects a **recording ID**.
-5. **Embed cover art** (only for singleton imports — album imports handle this automatically):
+5. **Set year** (only for singleton imports — album imports set year automatically):
+   - Singleton imports match a MusicBrainz **recording**, which has no year. The year must be set manually from the source album's release year.
+   - Use `beet modify` to set both `year` and `original_year`:
+     ```
+     beet modify -y artist:"<artist>" title:"<title>" year=<YYYY> original_year=<YYYY>
+     ```
+   - Get the year from the MusicBrainz release group data (already fetched in step 1 / artist-albums output).
+6. **Embed cover art** (only for singleton imports — album imports handle this automatically):
    - Yandex downloads already have cover art embedded — verify with `metaflac --list <file>` and skip if present
    - For rutracker downloads (or if cover is missing):
-     - Get release MBID: `beet list -f '$mb_albumid' path:<imported_file>`
-     - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release/<MBID>/front" path:<imported_file>`
-     - If no art for release — try release group: `beet embedart -u "https://coverartarchive.org/release-group/<RG_MBID>/front" path:<imported_file>`
-     - Get RG MBID: `beet list -f '$mb_releasegroupid' path:<imported_file>`
-6. **Clean up & trigger scan**: delete downloaded files, then trigger Navidrome scan:
+     - **Singletons don't store `mb_albumid` / `mb_releasegroupid`** — use the release group ID from the MusicBrainz discography lookup (step 1 / artist-albums output) for the album the track belongs to.
+     - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release-group/<RG_ID>/front" path:<imported_file> <<< "y"`
+7. **Clean up & trigger scan**: delete downloaded files, then trigger Navidrome scan:
    ```bash
    curl "$NAVIDROME_URL/rest/startScan.view?u=$NAVIDROME_USER&t=$NAVIDROME_TOKEN&s=$NAVIDROME_SALT&v=1.13.0&c=claude-music&f=json"
    ```

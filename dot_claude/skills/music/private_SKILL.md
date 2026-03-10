@@ -112,11 +112,12 @@ For each selected torrent, attempt to identify the exact MusicBrainz release (no
 For each album directory:
 
 1. **Check format**: if single FLAC + CUE — needs splitting
-   - There may be **multiple CUE files** (e.g., CP-1251 and UTF-8 variants). If so, pick the UTF-8 one and pass it explicitly as the second argument to `split-flac.sh`
-   - Check CUE file encoding: `file <cue_file>`
-   - If not UTF-8 (typical for Cyrillic releases): `$HOME/.bin/split-flac.sh -e <path>`
+   - **Important**: There may be **multiple CUE files** (e.g., `Cue.cue` and `Cue_RepG.cue`). Delete all but one before splitting — `split-flac.sh` processes every CUE it finds, creating duplicate tracks with garbled names from the CP-1251 one
+   - Pick the best CUE: check encoding with `file *.cue`, prefer the one that's UTF-8/ASCII. If both are CP-1251, keep just one
+   - Delete the extra CUE file(s): `rm <extra_cue_file>`
+   - Check remaining CUE file encoding: `file <cue_file>`
+   - If not UTF-8 (typical for Cyrillic releases): convert with `iconv -f CP1251 -t UTF-8 <cue> > <cue>.utf8 && mv <cue>.utf8 <cue>`, then run `$HOME/.bin/split-flac.sh <path>`
    - If UTF-8/ASCII: `$HOME/.bin/split-flac.sh <path>` (without `-e`)
-   - To use a specific CUE file: `$HOME/.bin/split-flac.sh <path> <cue_file>`
    - Script creates `.split/` subdirectory with split tracks
    - Use `.split/` path for beet import
 2. **Pre-tag files** (ensures high match % even for untagged files like vinyl rips):
@@ -205,10 +206,10 @@ If rutracker has no results or user requests Yandex:
    - Only re-run with `<<< "a"` if beet exits with code 1 **and** shows an `[A]pply` prompt (match % below auto-apply threshold).
    - **NEVER use `printf | beet` or `echo | beet`** — pipes cause `$HOME` to resolve to empty string. Always use here-string: `beet import <path> <<< "a"`
    - If still fails — provide manual command: `beet import -st <path>`
-3. **Set album & year on singleton** (singletons have no album by default → "Unknown Album" in players):
-   - Determine the album name and year from MusicBrainz (the release group the recording belongs to — prefer the original/earliest release group)
-   - `beet modify title:<title> artist:<artist> album="<album>" year=<year> <<< "y"`
-   - This ensures the track displays correctly in Navidrome/Feishin instead of "Unknown Album"
+3. **Set album, year, track number on singleton** (singletons have no album/track by default → "Unknown Album" and no track order in players):
+   - Determine the album name, year, track number and total tracks from MusicBrainz (the release group the recording belongs to — prefer the original/earliest release group; get tracklist via `musicbrainz.py release-tracks <release_id>`)
+   - `beet modify title:<title> artist:<artist> album="<album>" year=<year> track=<n> tracktotal=<total> <<< "y"`
+   - This ensures the track displays correctly in Navidrome/Feishin instead of "Unknown Album" and has proper track ordering
 5. **Embed cover art** (singletons don't fetch art automatically):
    - Yandex downloads already have cover art embedded — verify with `metaflac --list <file>` and skip if present
    - For rutracker downloads (or if cover is missing):

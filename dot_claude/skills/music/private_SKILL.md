@@ -162,14 +162,18 @@ For each album directory:
 
 ### Step T1: Search rutracker for track
 
-1. Search rutracker: `$HOME/.claude/skills/music/rutracker.py search "<artist> <track> flac"`
+Escalating search strategy — try each level until results are found:
+
+1. **Search for the track directly**: `$HOME/.claude/skills/music/rutracker.py search "<artist> <track> flac"`
 2. If few results — try alternative queries (transliteration, different language)
-3. Show results to user via AskUserQuestion (title, size, seeds)
-4. User selects torrent — or if no good results, go to step T1b
+3. **If no results — search for the album** containing the track (use MusicBrainz data to identify the album): `$HOME/.claude/skills/music/rutracker.py search "<artist> <album> flac"`
+4. **If still no results — search for the full discography**: `$HOME/.claude/skills/music/rutracker.py search "<artist> дискография flac"` (or `"<artist> discography flac"`)
+5. Show results to user via AskUserQuestion (title, size, seeds)
+6. User selects torrent — or if no good results, go to step T1b
 
 ### Step T1b: Yandex Music fallback
 
-If rutracker has no results or user requests Yandex:
+If rutracker has no results at any level or user requests Yandex:
 
 1. Search Yandex: `$HOME/.claude/skills/music/yandex.py search-tracks "<artist> <track>"`
 2. Show results to user via AskUserQuestion (artist, title, album, duration)

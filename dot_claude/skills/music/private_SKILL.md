@@ -201,7 +201,8 @@ If rutracker has no results or user requests Yandex:
 2. **Import as singleton** (primary strategy for track mode):
    - `beet import -s --search-id <recording_id> <path>`
    - `--search-id` with `-s` expects a **recording ID** (not release ID)
-   - If beet doesn't auto-apply (exit code 1 with match + `[A]pply` prompt) — re-run with: `beet import -s --search-id <recording_id> <path> <<< "a"`
+   - **Trust the first run**: if beet exits with code 0 and shows a match (e.g., "Match (100.0%)"), the import is **already complete**. Do NOT re-run — the track has been moved to the library.
+   - Only re-run with `<<< "a"` if beet exits with code 1 **and** shows an `[A]pply` prompt (match % below auto-apply threshold).
    - **NEVER use `printf | beet` or `echo | beet`** — pipes cause `$HOME` to resolve to empty string. Always use here-string: `beet import <path> <<< "a"`
    - If still fails — provide manual command: `beet import -st <path>`
 3. **Embed cover art** (singletons don't fetch art automatically):

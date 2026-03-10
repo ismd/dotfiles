@@ -205,12 +205,16 @@ If rutracker has no results or user requests Yandex:
    - Only re-run with `<<< "a"` if beet exits with code 1 **and** shows an `[A]pply` prompt (match % below auto-apply threshold).
    - **NEVER use `printf | beet` or `echo | beet`** — pipes cause `$HOME` to resolve to empty string. Always use here-string: `beet import <path> <<< "a"`
    - If still fails — provide manual command: `beet import -st <path>`
-3. **Embed cover art** (singletons don't fetch art automatically):
+3. **Set album & year on singleton** (singletons have no album by default → "Unknown Album" in players):
+   - Determine the album name and year from MusicBrainz (the release group the recording belongs to — prefer the original/earliest release group)
+   - `beet modify title:<title> artist:<artist> album="<album>" year=<year> <<< "y"`
+   - This ensures the track displays correctly in Navidrome/Feishin instead of "Unknown Album"
+5. **Embed cover art** (singletons don't fetch art automatically):
    - Yandex downloads already have cover art embedded — verify with `metaflac --list <file>` and skip if present
    - For rutracker downloads (or if cover is missing):
      - Use the release group ID from the MusicBrainz discography lookup for the album the track belongs to
      - Embed from Cover Art Archive: `beet embedart -u "https://coverartarchive.org/release-group/<RG_ID>/front" title:<title> artist:<artist> <<< "y"`
-4. **Clean up & trigger scan**: delete downloaded files, then trigger Navidrome scan:
+6. **Clean up & trigger scan**: delete downloaded files, then trigger Navidrome scan:
    ```bash
    curl "$NAVIDROME_URL/rest/startScan.view?u=$NAVIDROME_USER&t=$NAVIDROME_TOKEN&s=$NAVIDROME_SALT&v=1.13.0&c=claude-music&f=json"
    ```

@@ -4,6 +4,7 @@
 #+startup: showeverything
 
 * Table of Contents :toc:
+- [[#cape][Cape]]
 - [[#consult][Consult]]
 - [[#corfu][Corfu]]
 - [[#embark][Embark]]
@@ -12,6 +13,14 @@
 - [[#marginalia][Marginalia]]
 - [[#orderless][Orderless]]
 - [[#vertico][Vertico]]
+
+* Cape
+https://github.com/minad/cape
+
+#+begin_src emacs-lisp
+(use-package cape
+  :ensure t)
+#+end_src
 
 * Consult
 https://github.com/minad/consult

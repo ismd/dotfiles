@@ -194,26 +194,25 @@ If rutracker has no results at any level or user requests Yandex:
 
 ### Step T3: Import track
 
-1. If the file is part of a CUE+FLAC image (rutracker only) — split first (same as Step 4.1), then pick the target track
-   - **Important**: After splitting, strip all tags from the extracted track file before importing: `metaflac --remove-all-tags <file>`. CUE-sourced tags often contain junk (catalog numbers in album title, inconsistent artist names) that pollute beet's import.
-   - **Then pre-tag** with correct MusicBrainz data so beet can match:
+1. **CUE splitting** (if needed): if the file is part of a CUE+FLAC image (rutracker only) — split first (same as Step 4.1), then pick the target track
+   - **Important**: After splitting, strip all tags from the extracted track file: `metaflac --remove-all-tags <file>`. CUE-sourced tags often contain junk (catalog numbers in album title, inconsistent artist names) that pollute beet's import.
+2. **Pre-tag with metaflac** (always, before import):
+   - Determine album name, year, track number and total tracks from MusicBrainz (the release group the recording belongs to — prefer the original/earliest release group; get tracklist via `musicbrainz.py release-tracks <release_id>`)
+   - Write all tags so beet picks them up during import:
      ```
      metaflac --set-tag="ARTIST=<artist>" --set-tag="TITLE=<track_title>" \
-       --set-tag="DATE=<year>" <file>
+       --set-tag="ALBUM=<album>" --set-tag="DATE=<year>" \
+       --set-tag="TRACKNUMBER=<n>" --set-tag="TRACKTOTAL=<total>" <file>
      ```
-   - Get the year from the MusicBrainz release group data (already fetched in the discography lookup)
-   - The `DATE` tag ensures beet picks up the year during singleton import — no need for post-import `beet modify`
-2. **Import as singleton** (primary strategy for track mode):
+   - This ensures beet gets a high match % and the track displays correctly in Navidrome/Feishin (no "Unknown Album", proper track ordering)
+3. **Import as singleton**:
    - `beet import -s --search-id <recording_id> <path>`
    - `--search-id` with `-s` expects a **recording ID** (not release ID)
    - **Trust the first run**: if beet exits with code 0 and shows a match (e.g., "Match (100.0%)"), the import is **already complete**. Do NOT re-run — the track has been moved to the library.
    - Only re-run with `<<< "a"` if beet exits with code 1 **and** shows an `[A]pply` prompt (match % below auto-apply threshold).
    - **NEVER use `printf | beet` or `echo | beet`** — pipes cause `$HOME` to resolve to empty string. Always use here-string: `beet import <path> <<< "a"`
    - If still fails — provide manual command: `beet import -st <path>`
-3. **Set album, year, track number on singleton** (singletons have no album/track by default → "Unknown Album" and no track order in players):
-   - Determine the album name, year, track number and total tracks from MusicBrainz (the release group the recording belongs to — prefer the original/earliest release group; get tracklist via `musicbrainz.py release-tracks <release_id>`)
-   - `beet modify title:<title> artist:<artist> album="<album>" year=<year> track=<n> tracktotal=<total> <<< "y"`
-   - This ensures the track displays correctly in Navidrome/Feishin instead of "Unknown Album" and has proper track ordering
+4. **Verify tags**: check beet output after import — if album/year/track are wrong or missing, fix with targeted `beet modify`. This should rarely be needed if pre-tagging was done correctly.
 5. **Embed cover art** (singletons don't fetch art automatically):
    - Yandex downloads already have cover art embedded — verify with `metaflac --list <file>` and skip if present
    - For rutracker downloads (or if cover is missing):

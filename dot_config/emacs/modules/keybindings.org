@@ -190,7 +190,8 @@
   "f R" '(rename-visited-file :wk "Rename file")
   "f U" '(sudo-edit-find-file :wk "Sudo find file")
   "f u" '(sudo-edit :wk "Sudo edit this file")
-  "f x" '(scratch-buffer :wk "Scratch buffer"))
+  "f x" '(scratch-buffer :wk "Scratch buffer")
+  "f y" '(ismd/copy-file-path :wk "Copy file path"))
 #+end_src
 
 *** Help

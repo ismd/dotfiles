@@ -333,6 +333,15 @@ Useful for TRAMP and temporary files."
         (delete-file filename nil)
         (message "Permanently deleted %s" filename))
     (message "Canceled")))
+
+(defun ismd/copy-file-path ()
+  "Copy the current buffer's file path to the kill ring and clipboard."
+  (interactive)
+  (if-let ((path (buffer-file-name)))
+      (progn
+        (kill-new path)
+        (message "Copied: %s" path))
+    (message "Buffer is not visiting a file")))
 #+end_src
 
 ** Folding

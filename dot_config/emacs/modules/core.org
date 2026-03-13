@@ -28,6 +28,7 @@
   - [[#files-1][Files]]
   - [[#folding][Folding]]
   - [[#scroll-1][Scroll]]
+- [[#helpful][Helpful]]
 - [[#editorconfig][Editorconfig]]
 - [[#expand-region][Expand Region]]
 - [[#kirigami][Kirigami]]
@@ -93,8 +94,16 @@ https://github.com/purcell/envrc
 (save-place-mode 1)
 (savehist-mode 1)
 
-(setq delete-by-moving-to-trash t
-      save-place-file (concat user-emacs-directory ".emacs-places"))
+(setq create-lockfiles nil
+      delete-by-moving-to-trash t
+      find-file-visit-truename t
+      global-auto-revert-non-file-buffers t
+      kill-do-not-save-duplicates t
+      require-final-newline t
+      save-place-file (concat user-emacs-directory ".emacs-places")
+      savehist-additional-variables '(compile-command kill-ring search-ring regexp-search-ring)
+      sentence-end-double-space nil
+      vc-follow-symlinks t)
 #+end_src
 
 *** Persistent Scratch
@@ -135,12 +144,27 @@ Disable scroll bar in minibuffer.
 
 ** Performance
 #+begin_src emacs-lisp
-(setq gc-cons-threshold (* 100 1024 1024)
-      read-process-output-max (* 1024 1024))
+;; Restore GC threshold after startup (set to most-positive-fixnum in early-init.el)
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold (* 64 1024 1024))))
+
+(setq read-process-output-max (* 1024 1024))
 
 (setq jit-lock-chunk-size 4000
       jit-lock-stealth-nice 0.1
       jit-lock-stealth-time 1)
+
+(setq fast-but-imprecise-scrolling t
+      frame-inhibit-implied-resize t
+      highlight-nonselected-windows nil
+      inhibit-compacting-font-caches t
+      process-adaptive-read-buffering nil
+      redisplay-skip-fontification-on-input t)
+
+;; Bidi optimizations — no right-to-left text in this config
+(setq bidi-display-reordering 'left-to-right
+      bidi-inhibit-bpa t
+      bidi-paragraph-direction 'left-to-right)
 #+end_src
 
 ** Scroll

@@ -45,6 +45,11 @@ https://github.com/joaotavora/eglot
           tsx-ts-mode
           typescript-mode typescript-ts-mode
           yaml-mode yaml-ts-mode) . eglot-ensure)
+  :custom
+  (eglot-autoshutdown t)
+  (eglot-events-buffer-config '(:size 0 :format short))
+  (eglot-extend-to-xref t)
+  (eglot-sync-connect 0)
   :config
   (add-to-list 'eglot-server-programs '(fish-mode "fish-lsp" "start"))
   (add-to-list 'eglot-server-programs '(qml-mode "qmlls6"))

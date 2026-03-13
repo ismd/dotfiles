@@ -352,7 +352,7 @@
 (ismd/leader-keys-C-c
   "t" '(:ignore t :wk "Toggle")
   "t c" '(claude-code-toggle :wk "Toggle Claude Code")
-  "t f" '(flymake-mode :wk "Toggle flymake")
+  "t e" '(flymake-mode :wk "Toggle error checking")
   "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
   "t o" '(olivetti-mode :wk "Toggle olivetti")
   "t s" '(ismd/toggle-streaming-mode :wk "Toggle streaming mode")

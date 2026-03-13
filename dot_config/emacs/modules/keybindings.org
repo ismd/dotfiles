@@ -456,7 +456,9 @@
 (general-define-key
  :keymaps 'corfu-map
  "TAB" nil
- "<tab>" nil)
+ "<tab>" nil
+ "C-v" '(corfu-scroll-up :wk "Scroll down")
+ "M-v" '(corfu-scroll-down :wk "Scroll up"))
 #+end_src
 
 ** Dirvish

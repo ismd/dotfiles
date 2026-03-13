@@ -98,8 +98,8 @@ https://github.com/konrad1977/flyover
   ;; Display settings
   (flyover-hide-checker-name t)
   (flyover-show-virtual-line t)
-  (flyover-virtual-line-type 'curved-dotted-arrow)
-  (flyover-line-position-offset 1)
+  (flyover-virtual-line-type nil)
+  (flyover-line-position-offset 0)
 
   ;; Message wrapping
   (flyover-wrap-messages t)

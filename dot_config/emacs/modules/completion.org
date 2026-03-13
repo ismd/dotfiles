@@ -5,6 +5,7 @@
 
 * Table of Contents :toc:
 - [[#cape][Cape]]
+- [[#completion-preview][Completion Preview]]
 - [[#consult][Consult]]
 - [[#corfu][Corfu]]
 - [[#embark][Embark]]
@@ -20,6 +21,14 @@ https://github.com/minad/cape
 #+begin_src emacs-lisp
 (use-package cape
   :ensure t)
+#+end_src
+
+* Completion Preview
+Built-in inline completion preview (Emacs 30+).
+
+#+begin_src emacs-lisp
+(global-completion-preview-mode)
+(keymap-set completion-preview-active-mode-map "TAB" #'completion-preview-insert)
 #+end_src
 
 * Consult

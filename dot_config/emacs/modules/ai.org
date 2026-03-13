@@ -91,8 +91,9 @@ https://github.com/Exafunction/codeium.el
 
     (defun ismd/eglot-codeium-capf-setup ()
       (setq-local completion-at-point-functions
-                  (list #'codeium-completion-at-point
-                        (cape-capf-nonexclusive #'eglot-completion-at-point))))
+                  (list (cape-capf-super
+                         #'eglot-completion-at-point
+                         #'codeium-completion-at-point))))
 
     (add-hook 'emacs-startup-hook
               (lambda () (run-with-timer 0.1 nil #'codeium-init)))
@@ -146,7 +147,7 @@ https://github.com/copilot-emacs/copilot.el
 * Github Copilot Chat
 https://github.com/chep/copilot-chat.el
 
-#+begin_comment
+#+begin_src emacs-lisp
 (use-package copilot-chat
   :ensure t
   :hook (git-commit-setup . copilot-chat-insert-commit-message)
@@ -155,7 +156,7 @@ https://github.com/chep/copilot-chat.el
   (copilot-chat-frontend 'shell-maker)
   :config
   (ismd/add-display-buffer-rule "^\\*Copilot Chat"))
-#+end_comment
+#+end_src
 
 * Gptel
 https://github.com/karthink/gptel

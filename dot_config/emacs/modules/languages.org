@@ -51,6 +51,7 @@ https://github.com/joaotavora/eglot
   (eglot-extend-to-xref t)
   (eglot-sync-connect 0)
   :config
+  (setq jsonrpc-event-hook nil)
   (add-to-list 'eglot-server-programs '(fish-mode "fish-lsp" "start"))
   (add-to-list 'eglot-server-programs '(qml-mode "qmlls6"))
   (advice-add 'eglot--message :around

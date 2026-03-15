@@ -7,18 +7,23 @@
 - [[#sane-defaults][Sane Defaults]]
   - [[#backup][Backup]]
   - [[#buffer-local-defaults][Buffer-local defaults]]
+  - [[#compilation][Compilation]]
   - [[#completion][Completion]]
+  - [[#dired][Dired]]
   - [[#ediff][Ediff]]
   - [[#editing][Editing]]
   - [[#environment][Environment]]
   - [[#files][Files]]
+  - [[#imenu][Imenu]]
   - [[#minibuffer][Minibuffer]]
   - [[#misc][Misc]]
   - [[#performance][Performance]]
   - [[#scroll][Scroll]]
+  - [[#show-paren][Show Paren]]
   - [[#startup][Startup]]
   - [[#tab-bar][Tab Bar]]
   - [[#ui][UI]]
+  - [[#undo][Undo]]
   - [[#window][Window]]
 - [[#custom-functions][Custom Functions]]
   - [[#buffer][Buffer]]
@@ -57,12 +62,29 @@ By default, Emacs creates automatic backups of files in their original directori
               line-spacing 0.12)
 #+end_src
 
+** Compilation
+#+begin_src emacs-lisp
+(setq compilation-ask-about-save nil
+      compilation-always-kill t
+      compilation-scroll-output 'first-error)
+#+end_src
+
 ** Completion
 #+begin_src emacs-lisp
 (setq completion-cycle-threshold nil
       read-extended-command-predicate #'command-completion-default-include-p
       tab-always-indent t
       text-mode-ispell-word-completion nil)
+#+end_src
+
+** Dired
+#+begin_src emacs-lisp
+(setq dired-dwim-target t
+      dired-recursive-copies 'always
+      dired-recursive-deletes 'top
+      dired-create-destination-dirs 'ask
+      dired-vc-rename-file t
+      dired-clean-confirm-killing-deleted-buffers nil)
 #+end_src
 
 ** Ediff
@@ -90,7 +112,6 @@ https://github.com/purcell/envrc
 #+begin_src emacs-lisp
 (global-auto-revert-mode t)
 (recentf-mode 1)
-(setq recentf-max-saved-items 200)
 (save-place-mode 1)
 (savehist-mode 1)
 
@@ -98,11 +119,16 @@ https://github.com/purcell/envrc
       delete-by-moving-to-trash t
       find-file-visit-truename t
       global-auto-revert-non-file-buffers t
+      history-length 300
       kill-do-not-save-duplicates t
+      recentf-auto-cleanup 'mode
+      recentf-max-saved-items 300
       require-final-newline t
       save-place-file (concat user-emacs-directory ".emacs-places")
-      savehist-additional-variables '(compile-command kill-ring search-ring regexp-search-ring)
+      savehist-additional-variables '(compile-command kill-ring search-ring regexp-search-ring
+                                      register-alist mark-ring global-mark-ring)
       sentence-end-double-space nil
+      uniquify-buffer-name-style 'forward
       vc-follow-symlinks t)
 #+end_src
 
@@ -114,6 +140,12 @@ https://github.com/Fanael/persistent-scratch
   :ensure t
   :config
   (persistent-scratch-setup-default))
+#+end_src
+
+** Imenu
+#+begin_src emacs-lisp
+(setq imenu-auto-rescan t
+      imenu-max-item-length 160)
 #+end_src
 
 ** Minibuffer
@@ -135,9 +167,22 @@ Disable scroll bar in minibuffer.
 (add-hook 'minibuffer-setup-hook #'ismd/minibuffer-disable-scrollbar)
 #+end_src
 
+Protect minibuffer prompt from cursor entry.
+#+begin_src emacs-lisp
+(minibuffer-depth-indicate-mode 1)
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (cursor-intangible-mode 1)
+            (let ((inhibit-read-only t))
+              (put-text-property (minibuffer-prompt-end) (minibuffer-prompt-end)
+                                 'cursor-intangible t))))
+#+end_src
+
 ** Misc
 #+begin_src emacs-lisp
 (setq calendar-week-start-day 1
+      help-window-select t
+      lazy-highlight-initial-delay 0
       use-dialog-box nil
       use-short-answers t)
 #+end_src
@@ -184,10 +229,19 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
       scroll-step 0)
 #+end_src
 
+** Show Paren
+#+begin_src emacs-lisp
+(setq show-paren-delay 0.1
+      show-paren-highlight-openparen t
+      show-paren-when-point-inside-paren t
+      show-paren-when-point-in-periphery t)
+(show-paren-mode 1)
+#+end_src
+
 ** Startup
 #+begin_src emacs-lisp
 (setq inhibit-startup-screen t
-      initial-major-mode 'text-mode
+      initial-major-mode 'fundamental-mode
       initial-scratch-message nil)
 #+end_src
 
@@ -226,10 +280,20 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
       warning-minimum-level :error)
 #+end_src
 
+** Undo
+#+begin_src emacs-lisp
+(setq undo-limit (* 2 1024 1024)
+      undo-strong-limit (* 3 1024 1024)
+      undo-outer-limit (* 300 1024 1024))
+#+end_src
+
 ** Window
 #+begin_src emacs-lisp
 (require 'buffer-move)
 (winner-mode 1)
+
+(setq split-width-threshold 170
+      split-height-threshold nil)
 #+end_src
 
 * Custom Functions

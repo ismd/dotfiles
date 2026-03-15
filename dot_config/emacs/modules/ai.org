@@ -75,7 +75,7 @@ https://github.com/manzaltu/claude-code-ide.el
 * Codeium
 https://github.com/Exafunction/codeium.el
 
-#+begin_src emacs-lisp
+#+begin_comment
 (use-package codeium
     :ensure (:host github :repo "Exafunction/codeium.el")
 
@@ -87,7 +87,7 @@ https://github.com/Exafunction/codeium.el
     :init
     (defun ismd/codeium-capf-setup ()
       (unless (bound-and-true-p eglot--managed-mode)
-        (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)))
+        (add-to-list 'completion-at-point-functions #'codeium-completion-at-point t)))
 
     (defun ismd/eglot-codeium-capf-setup ()
       (setq-local completion-at-point-functions
@@ -116,7 +116,7 @@ https://github.com/Exafunction/codeium.el
 
     (setq codeium/document/text 'my-codeium/document/text)
     (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
-#+end_src
+#+end_comment
 
 * Elysium
 https://github.com/lanceberge/elysium
@@ -131,7 +131,7 @@ This package integrates with gptel and provides capability to insert AI results 
 * Github Copilot
 https://github.com/copilot-emacs/copilot.el
 
-#+begin_comment
+#+begin_src emacs-lisp
 (use-package copilot
   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
   :hook
@@ -142,7 +142,7 @@ https://github.com/copilot-emacs/copilot.el
                     (setq-local copilot--indent-warning-printed-p t)))
   :custom
   (copilot-indent-offset-warning-disable t))
-#+end_comment
+#+end_src
 
 * Github Copilot Chat
 https://github.com/chep/copilot-chat.el

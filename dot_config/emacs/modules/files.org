@@ -136,6 +136,18 @@ Otherwise, use standard `dired-find-file'."
       (find-file (dired-get-file-for-visit))
     (dired-find-file)))
 
+(defun ismd/dired-do-copy (&optional arg)
+  "Like `dired-do-copy', but with prefix ARG use current directory as default."
+  (interactive "P")
+  (let ((dired-dwim-target (unless arg dired-dwim-target)))
+    (dired-do-copy)))
+
+(defun ismd/dired-do-rename (&optional arg)
+  "Like `dired-do-rename', but with prefix ARG use current directory as default."
+  (interactive "P")
+  (let ((dired-dwim-target (unless arg dired-dwim-target)))
+    (dired-do-rename)))
+
 (defun ismd/dired-do-delete (&optional permanently)
   "Delete marked files. With prefix argument PERMANENTLY, bypass trash."
   (interactive "P")

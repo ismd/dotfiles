@@ -425,10 +425,6 @@
       ],
       "rightWidgets": [
         {
-          "id": "keyboard_layout_name",
-          "enabled": true
-        },
-        {
           "id": "systemTray",
           "enabled": true
         },

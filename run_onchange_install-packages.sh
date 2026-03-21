@@ -88,6 +88,7 @@ yay -S --noconfirm --needed \
     nss-mdns \
     openbsd-netcat \
     openlens-bin \
+    pam-fprint-grosshack \
     pavucontrol \
     perl-image-exiftool \
     plymouth \

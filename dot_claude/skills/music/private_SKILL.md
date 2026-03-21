@@ -26,6 +26,10 @@ Yandex Music script: $HOME/.claude/skills/music/yandex.py
 MusicBrainz script: $HOME/.claude/skills/music/musicbrainz.py
 ```
 
+## Documentation
+
+Before running any `beet` commands, always fetch the latest beets documentation via Context7 (`resolve-library-id` → `query-docs` for `beets`). Beets CLI flags and behavior change between versions — do not rely on cached knowledge.
+
 ## Workflow
 
 ### Mode Detection

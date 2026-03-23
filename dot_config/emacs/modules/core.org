@@ -33,15 +33,15 @@
   - [[#files-1][Files]]
   - [[#folding][Folding]]
   - [[#scroll-1][Scroll]]
-- [[#helpful][Helpful]]
+- [[#goggles][Goggles]]
 - [[#editorconfig][Editorconfig]]
 - [[#expand-region][Expand Region]]
+- [[#helpful][Helpful]]
 - [[#kirigami][Kirigami]]
 - [[#move-where-i-mean][Move Where I Mean]]
 - [[#multiple-cursors][Multiple Cursors]]
 - [[#sudo-edit][Sudo Edit]]
 - [[#super-save][Super Save]]
-- [[#goggles][Goggles]]
 - [[#track-changes][Track Changes]]
 - [[#transient][Transient]]
 - [[#trimming-whitespace][Trimming Whitespace]]
@@ -473,14 +473,15 @@ Useful for TRAMP and temporary files."
   (scroll-down-command 3))
 #+end_src
 
-* Helpful
-https://github.com/Wilfred/helpful
+* Goggles
+https://github.com/minad/goggles
 
-A better Emacs *help* buffer with more contextual information.
+Pulse modified regions after changes (yank, kill, delete, undo).
 
 #+begin_src emacs-lisp
-(use-package helpful
-  :ensure t)
+(use-package goggles
+  :ensure t
+  :hook ((prog-mode text-mode) . goggles-mode))
 #+end_src
 
 * Editorconfig
@@ -498,6 +499,16 @@ https://github.com/magnars/expand-region.el
 
 #+begin_src emacs-lisp
 (use-package expand-region
+  :ensure t)
+#+end_src
+
+* Helpful
+https://github.com/Wilfred/helpful
+
+A better Emacs *help* buffer with more contextual information.
+
+#+begin_src emacs-lisp
+(use-package helpful
   :ensure t)
 #+end_src
 
@@ -548,17 +559,6 @@ https://github.com/bbatsov/super-save
   (setq auto-save-default nil
         super-save-auto-save-when-idle t
         super-save-silent t))
-#+end_src
-
-* Goggles
-https://github.com/minad/goggles
-
-Pulse modified regions after changes (yank, kill, delete, undo).
-
-#+begin_src emacs-lisp
-(use-package goggles
-  :ensure t
-  :hook ((prog-mode text-mode) . goggles-mode))
 #+end_src
 
 * Track Changes

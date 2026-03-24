@@ -31,7 +31,9 @@ yay -S --noconfirm --needed \
     docker-compose \
     docker-credential-secretservice \
     dolphin \
+    dosfstools \
     downgrade \
+    e2fsprogs \
     easyeffects \
     easytag \
     elephant \
@@ -44,7 +46,9 @@ yay -S --noconfirm --needed \
     elephant-websearch \
     emacs-wayland \
     evince \
+    exfat-utils \
     eza \
+    fatresize \
     fd \
     ffmpeg \
     ffmpegthumbnailer \
@@ -86,8 +90,10 @@ yay -S --noconfirm --needed \
     nmap \
     noto-fonts-emoji \
     nss-mdns \
+    ntfs-3g \
     openbsd-netcat \
     openlens-bin \
+    partitionmanager \
     pavucontrol \
     perl-image-exiftool \
     plymouth \

@@ -2,26 +2,19 @@
 set -euo pipefail
 
 INTERNAL_MONITOR="eDP-1"
-MONITORS_CONF="$HOME/.config/hypr/monitors.conf"
 DEBOUNCE_SECS=1
 debounce_pid=
 
 apply_monitors() {
-  local monitors external conf=""
-  monitors=$(hyprctl monitors -j)
+  local monitors external
+  monitors=$(hyprctl monitors all -j) || return 1
   external=$(echo "$monitors" | jq -r '.[].name' | grep -v "$INTERNAL_MONITOR" || true)
 
   if [[ -n "$external" ]]; then
-    conf="monitor = $INTERNAL_MONITOR, disable"
-    while read -r mon; do
-      conf="$conf"$'\n'"monitor = $mon, preferred, auto, 1.5, vrr, 1, bitdepth, 10"
-    done <<< "$external"
+    hyprctl keyword monitor "$INTERNAL_MONITOR, disable" 2>/dev/null || true
   else
-    conf="monitor = $INTERNAL_MONITOR, preferred, auto, 1.5, vrr, 0, bitdepth, 10"
+    hyprctl keyword monitor "$INTERNAL_MONITOR, preferred, auto, 1.5, bitdepth, 10" 2>/dev/null || true
   fi
-
-  # Write to config file so state persists across Hyprland config reloads
-  echo "$conf" > "$MONITORS_CONF"
 }
 
 schedule_apply() {
@@ -46,7 +39,7 @@ SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
 while true; do
   socat -u "UNIX-CONNECT:$SOCKET" - | while IFS= read -r line; do
     case "$line" in
-      monitoradded\>*|monitorremoved\>*)
+      monitoradded\>*|monitorremoved\>*|configreloaded\>*)
         schedule_apply
         ;;
     esac

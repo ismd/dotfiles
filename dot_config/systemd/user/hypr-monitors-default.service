@@ -1,0 +1,10 @@
+[Unit]
+Description=Write safe default monitor config for Hyprland
+Before=graphical-session-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'printf "monitor = eDP-1, preferred, auto, 1.5, bitdepth, 10\nmonitor = , preferred, auto, 1.5, bitdepth, 10\n" > %h/.config/hypr/monitors.conf'
+
+[Install]
+WantedBy=graphical-session-pre.target

@@ -338,7 +338,7 @@ bind = $mainMod SHIFT, ESCAPE, exec, nwg-bar
 bind = $mainMod, L, exec, dms ipc call lock lock
 
 # Lid toggle
-# bindl = , switch:on:Lid Switch, exec, hyprlock
+bindl = , switch:on:Lid Switch, exec, dms ipc call lock lock
 
 {{- if eq .chezmoi.hostname "mighty" }}
 bindl = , switch:off:Lid Switch, exec, ~/.bin/thinkpad-leds.sh

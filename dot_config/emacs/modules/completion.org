@@ -26,10 +26,10 @@ https://github.com/minad/cape
 * Completion Preview
 Built-in inline completion preview (Emacs 30+).
 
-#+begin_src emacs-lisp
+#+begin_comment
 (global-completion-preview-mode)
 (keymap-set completion-preview-active-mode-map "TAB" #'completion-preview-insert)
-#+end_src
+#+end_comment
 
 * Consult
 https://github.com/minad/consult

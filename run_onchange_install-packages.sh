@@ -107,6 +107,7 @@ yay -S --noconfirm --needed \
     python-pylint \
     python-pywal \
     qemu-full \
+    qt6-tools \
     qt6ct-kde \
     quickshell-git \
     remmina \

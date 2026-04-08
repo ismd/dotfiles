@@ -24,7 +24,8 @@ yay -S --noconfirm --needed \
     cups-pk-helper \
     direnv \
     discord \
-    dms-shell-bin \
+    dms-shell \
+    dms-shell-hyprland \
     dnsmasq \
     docker \
     docker-buildx \

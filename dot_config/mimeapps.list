@@ -1,5 +1,5 @@
 [Added Associations]
-application/epub+zip=okularApplication_epub.desktop;org.gnome.Evince.desktop;
+application/epub+zip=com.github.johnfactotum.Foliate.desktop;okularApplication_epub.desktop;org.gnome.Evince.desktop;
 application/json=ec.desktop;
 application/pdf=org.gnome.Evince.desktop;org.pwmt.zathura-pdf-mupdf.desktop;okularApplication_pdf.desktop;
 application/x-cue=ec.desktop;
@@ -92,7 +92,7 @@ x-scheme-handler/tonsite=org.telegram.desktop.desktop;
 x-scheme-handler/yandexmusic=yandex-music.desktop;YandexMusic.desktop;
 
 [Default Applications]
-application/epub+zip=okularApplication_epub.desktop
+application/epub+zip=com.github.johnfactotum.Foliate.desktop;
 application/json=ec.desktop;
 application/pdf=org.gnome.Evince.desktop
 application/vnd.ms-publisher=ec.desktop
@@ -178,6 +178,7 @@ video/x-ogm+ogg=org.videolan.VLC.desktop;
 video/x-theora=org.videolan.VLC.desktop;
 video/x-theora+ogg=org.videolan.VLC.desktop;
 x-scheme-handler/chrome=zen.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 x-scheme-handler/figma=figma-linux.desktop
 x-scheme-handler/ftp=brave-browser.desktop
 x-scheme-handler/http=zen.desktop
@@ -187,4 +188,3 @@ x-scheme-handler/kdeconnect=org.kde.dolphin.desktop
 x-scheme-handler/lens=OpenLens.desktop
 x-scheme-handler/tonsite=org.telegram.desktop.desktop
 x-scheme-handler/yandexmusic=yandex-music.desktop
-x-scheme-handler/claude-cli=claude-code-url-handler.desktop

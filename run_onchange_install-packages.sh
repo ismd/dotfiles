@@ -38,7 +38,6 @@ yay -S --noconfirm --needed \
     easyeffects \
     easytag \
     elephant \
-    elephant-bitwarden \
     elephant-calc \
     elephant-desktopapplications \
     elephant-providerlist \

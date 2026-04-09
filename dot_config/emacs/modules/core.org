@@ -33,6 +33,7 @@
   - [[#files-1][Files]]
   - [[#folding][Folding]]
   - [[#scroll-1][Scroll]]
+- [[#atomic-chrome][Atomic Chrome]]
 - [[#goggles][Goggles]]
 - [[#editorconfig][Editorconfig]]
 - [[#expand-region][Expand Region]]
@@ -471,6 +472,23 @@ Useful for TRAMP and temporary files."
   "Scroll up 3 lines."
   (interactive)
   (scroll-down-command 3))
+#+end_src
+
+* Atomic Chrome
+https://github.com/KarimAziev/atomic-chrome
+
+Edit browser text areas in Emacs via WebSocket connection.
+Requires the [[https://github.com/KarimAziev/chrome-emacs][Chrome Emacs]] browser extension.
+
+#+begin_src emacs-lisp
+(use-package atomic-chrome
+  :ensure (:host github :repo "KarimAziev/atomic-chrome")
+  :config
+  (setq atomic-chrome-buffer-open-style 'frame
+        atomic-chrome-url-major-mode-alist '(("github\\.com" . gfm-mode)
+                                             ("gitlab\\.com" . gfm-mode)
+                                             ("reddit\\.com" . markdown-mode)))
+  (atomic-chrome-start-server))
 #+end_src
 
 * Goggles

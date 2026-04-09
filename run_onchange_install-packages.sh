@@ -54,6 +54,7 @@ yay -S --noconfirm --needed \
     ffmpegthumbnailer \
     ffuf \
     fish-lsp \
+    foliate \
     fwupd \
     gimp \
     git \

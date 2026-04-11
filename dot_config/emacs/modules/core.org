@@ -200,6 +200,14 @@ Protect minibuffer prompt from cursor entry.
       jit-lock-stealth-nice 0.1
       jit-lock-stealth-time 1)
 
+;; Suppress treesit-query-error spam from jit-lock-stealth-fontify
+;; (broken go-ts-mode builtin-face query triggers the timer repeatedly)
+(define-advice jit-lock-stealth-fontify
+    (:around (orig-fn &rest args) ismd/ignore-treesit-query-error)
+  (condition-case nil
+      (apply orig-fn args)
+    (treesit-query-error nil)))
+
 (setq fast-but-imprecise-scrolling t
       frame-inhibit-implied-resize t
       highlight-nonselected-windows nil

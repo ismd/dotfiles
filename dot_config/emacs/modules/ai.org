@@ -141,7 +141,7 @@ https://github.com/copilot-emacs/copilot.el
   (copilot-mode . (lambda ()
                     (setq-local copilot--indent-warning-printed-p t)))
   :custom
-  (copilot-idle-delay 1.5)
+  (copilot-idle-delay 1)
   (copilot-indent-offset-warning-disable t))
 #+end_src
 

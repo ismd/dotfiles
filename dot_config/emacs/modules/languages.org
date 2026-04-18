@@ -217,6 +217,40 @@ https://github.com/dominikh/go-mode.el
   :ensure t)
 #+end_src
 
+*** Fix broken builtin font-lock query in =go-ts-mode=
+Emacs 30.2's built-in =go-ts-mode= builds its =builtin= feature with a
+=(:match ...)= predicate that serializes to =#match= (no =?=). The
+tree-sitter C library in this build rejects predicate names without a
+=?= / =!= suffix with a =Syntax error=, while Emacs itself refuses to
+execute =#match?=. Net effect: the first =treesit-font-lock= query
+errors out, which aborts the entire region's fontification and Go
+buffers look unhighlighted.
+
+Workaround: replace the =builtin= rule with a predicate-free query that
+captures all =call_expression → identifier= nodes and decides at
+fontification time, via a capture-function, whether the identifier is a
+Go builtin.
+
+#+begin_src emacs-lisp
+(defun ismd-go-ts-fontify-builtin (node override start end &rest _)
+  "Apply `font-lock-builtin-face' to NODE when its text is a Go builtin."
+  (when (member (treesit-node-text node) go-ts-mode--builtin-functions)
+    (treesit-fontify-with-override
+     (treesit-node-start node) (treesit-node-end node)
+     'font-lock-builtin-face override start end)))
+
+(with-eval-after-load 'go-ts-mode
+  (when (treesit-ready-p 'go)
+    (let* ((query (treesit-query-compile
+                   'go
+                   "(call_expression function: (identifier) @ismd-go-ts-fontify-builtin)"))
+           (new-rule (list query t 'builtin nil)))
+      (setq go-ts-mode--font-lock-settings
+            (cl-substitute-if new-rule
+                              (lambda (s) (eq (nth 2 s) 'builtin))
+                              go-ts-mode--font-lock-settings)))))
+#+end_src
+
 ** Python
 *** Elpy
 https://github.com/jorgenschaefer/elpy

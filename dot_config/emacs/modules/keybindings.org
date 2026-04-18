@@ -281,7 +281,7 @@
 #+end_src
 
 *** Notes
-#+begin_src emacs-lisp
+#+begin_comment
 (ismd/leader-keys-C-c
   "n" '(:ignore t :wk "Notes")
   "n b" '(denote-backlinks :wk "Backlinks")
@@ -292,6 +292,17 @@
   "n n" '(denote :wk "Denote")
   "n N" '(denote-subdirectory :wk "Denote subdirectory")
   "n r" '(denote-rename-file :wk "Rename file"))
+#+end_comment
+
+#+begin_src emacs-lisp
+(ismd/leader-keys-C-c
+  "n" '(:ignore t :wk "Notes")
+  "n c" '(org-roam-capture :wk "Capture note")
+  "n f" '(org-roam-node-find :wk "Find node")
+  "n g" '(org-roam-graph :wk "Show graph")
+  "n i" '(org-roam-node-insert :wk "Insert node link")
+  "n j" '(org-roam-dailies-capture-today :wk "Daily note")
+  "n l" '(org-roam-buffer-toggle :wk "Toggle backlinks"))
 #+end_src
 
 *** Org

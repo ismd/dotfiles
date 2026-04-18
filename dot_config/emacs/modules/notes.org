@@ -12,12 +12,13 @@
   - [[#modern-org-style][Modern Org Style]]
   - [[#org-appear][Org Appear]]
   - [[#org-modern-indent][Org Modern Indent]]
+  - [[#roam][Roam]]
   - [[#table-of-contents][Table of Contents]]
 
 * Denote
 https://github.com/protesilaos/denote
 
-#+begin_src emacs-lisp
+#+begin_comment
 (use-package denote
   :ensure t
   :hook (dired-mode . denote-dired-mode)
@@ -27,7 +28,7 @@ https://github.com/protesilaos/denote
   (setq denote-infer-keywords t)
   (setq denote-known-keywords '("it" "people" "private"))
   (denote-rename-buffer-mode 1))
-#+end_src
+#+end_comment
 
 * Markdown
 https://github.com/jrblevin/markdown-mode
@@ -206,6 +207,21 @@ https://github.com/jdtsmith/org-modern-indent
   :ensure (:host github :repo "jdtsmith/org-modern-indent")
   :config
   (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
+#+end_src
+
+** Roam
+https://github.com/org-roam/org-roam
+
+#+begin_src emacs-lisp
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/Nextcloud/Roam"))
+  (org-roam-graph-executable "neato")
+  (org-roam-graph-link-hidden-types '("file" "https" "http"))
+  :config
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode))
 #+end_src
 
 ** Table of Contents

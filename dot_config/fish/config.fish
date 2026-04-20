@@ -15,6 +15,7 @@ abbr -a as arc status
 abbr -a cz chezmoi
 abbr -a cza chezmoi apply
 abbr -a czd chezmoi diff
+abbr -a czdd chezmoi add
 abbr -a czs chezmoi status
 
 abbr -a ga git add

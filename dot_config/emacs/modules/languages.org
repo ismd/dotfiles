@@ -69,7 +69,7 @@ https://github.com/joaotavora/eglot
 * Flyover
 https://github.com/konrad1977/flyover
 
-#+begin_src emacs-lisp
+#+begin_comment
 (use-package flyover
   :ensure t
   :hook ((flymake-mode . flyover-mode))
@@ -121,7 +121,7 @@ https://github.com/konrad1977/flyover
 
   ;; Completion integration
   (flyover-hide-during-completion t))
-#+end_src
+#+end_comment
 
 * JSONRPC
 #+begin_src emacs-lisp

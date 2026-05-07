@@ -18,6 +18,7 @@ yay -S --noconfirm --needed \
     bash-language-server \
     bind \
     bitwarden-desktop \
+    brave-bin \
     caido-desktop \
     calf \
     cmake \

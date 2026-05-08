@@ -66,7 +66,6 @@ https://github.com/manzaltu/claude-code-ide.el
   :custom
   (claude-code-ide-cli-path "~/.local/bin/claude")
   (claude-code-ide-diagnostics-backend 'flymake)
-  (claude-code-ide-no-flicker t)
   (claude-code-ide-show-claude-window-in-ediff nil)
   (claude-code-ide-vterm-anti-flicker t)
   :config

@@ -25,6 +25,8 @@
 (setq package-install-upgrade-built-in t)
 
 (require 'elpaca-setup)
+
+(use-package compat :ensure (:wait t) :demand t)
 #+end_src
 
 ** Custom File

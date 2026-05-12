@@ -14,10 +14,10 @@ apply_monitors() {
   if [[ -n "$external" ]]; then
     conf="monitor = $INTERNAL_MONITOR, disable"
     while read -r mon; do
-      conf="$conf"$'\n'"monitor = $mon, preferred, auto, 1.5, bitdepth, 10"
+      conf="$conf"$'\n'"monitor = $mon, preferred, auto, 1.5"
     done <<< "$external"
   else
-    conf="monitor = $INTERNAL_MONITOR, preferred, auto, 1.5, bitdepth, 10"
+    conf="monitor = $INTERNAL_MONITOR, preferred, auto, 1.5"
   fi
 
   echo "$conf" > "$MONITORS_CONF"

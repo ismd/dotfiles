@@ -363,7 +363,7 @@
 #+begin_src emacs-lisp
 (ismd/leader-keys-C-c
   "t" '(:ignore t :wk "Toggle")
-  "t c" '(claude-code-toggle :wk "Toggle Claude Code")
+  "t c" '(copilot-mode :wk "Toggle Copilot")
   "t e" '(flymake-mode :wk "Toggle error checking")
   "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
   "t o" '(olivetti-mode :wk "Toggle olivetti")

@@ -5,6 +5,7 @@
 
 * Table of Contents :toc:
 - [[#eglot][Eglot]]
+- [[#eldoc][Eldoc]]
 - [[#flymake][Flymake]]
 - [[#flyover][Flyover]]
 - [[#jsonrpc][JSONRPC]]
@@ -58,6 +59,15 @@ https://github.com/joaotavora/eglot
               (lambda (orig format &rest args)
                 (unless (string-prefix-p "Connected!" format)
                   (apply orig format args)))))
+#+end_src
+
+* Eldoc
+#+begin_src emacs-lisp
+(use-package eldoc
+  :ensure nil
+  :custom
+  (eldoc-echo-area-prefer-doc-buffer t)
+  (eldoc-echo-area-use-multiline-p t))
 #+end_src
 
 * Flymake

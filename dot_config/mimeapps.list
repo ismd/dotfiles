@@ -2,6 +2,7 @@
 application/epub+zip=com.github.johnfactotum.Foliate.desktop;okularApplication_epub.desktop;org.gnome.Evince.desktop;
 application/json=ec.desktop;
 application/pdf=org.gnome.Evince.desktop;org.pwmt.zathura-pdf-mupdf.desktop;okularApplication_pdf.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-startcenter.desktop;
 application/x-cue=ec.desktop;
 application/x-docbook+xml=ec.desktop;
 application/x-executable=ec.desktop;
@@ -96,6 +97,7 @@ application/epub+zip=com.github.johnfactotum.Foliate.desktop;
 application/json=ec.desktop;
 application/pdf=org.gnome.Evince.desktop
 application/vnd.ms-publisher=ec.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-startcenter.desktop;
 application/x-bittorrent=transmission-qt.desktop
 application/x-docbook+xml=ec.desktop;
 application/x-extension-htm=brave-browser.desktop

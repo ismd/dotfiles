@@ -134,7 +134,7 @@ https://github.com/copilot-emacs/copilot.el
 
 #+begin_src emacs-lisp
 (use-package copilot
-  :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist"))
+  :ensure t
   :hook
   (conf-mode . copilot-mode)
   (prog-mode . copilot-mode)
@@ -147,17 +147,17 @@ https://github.com/copilot-emacs/copilot.el
 #+end_src
 
 * Github Copilot Chat
-https://github.com/chep/copilot-chat.el
+https://github.com/chep/gh-copilot-chat.el
 
 #+begin_src emacs-lisp
-(use-package copilot-chat
-  :ensure t
-  :hook (git-commit-setup . copilot-chat-insert-commit-message)
-  :custom
-  (copilot-chat-commit-model "claude-sonnet-4.6")
-  (copilot-chat-frontend 'shell-maker)
-  :config
-  (ismd/add-display-buffer-rule "^\\*Copilot Chat"))
+  (use-package gh-copilot-chat
+    :ensure (:host github :repo "chep/gh-copilot-chat.el" :files ("*.el"))
+    :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)
+    :custom
+    (gh-copilot-chat-commit-model "claude-sonnet-4.6")
+    (gh-copilot-chat-frontend 'shell-maker)
+    :config
+    (ismd/add-display-buffer-rule "^\\*Copilot Chat"))
 #+end_src
 
 * Gptel

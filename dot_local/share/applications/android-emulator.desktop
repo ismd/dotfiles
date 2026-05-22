@@ -2,7 +2,7 @@
 Name=Android Emulator
 GenericName=Android Emulator
 Comment=Run Android Emulator
-Exec=emulator -avd pixel_emulator -no-metrics
+Exec=$HOME/.Android/Sdk/emulator/emulator -avd Pixel_emulator -no-metrics
 Icon=android-studio
 Type=Application
 Terminal=false

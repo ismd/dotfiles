@@ -5,9 +5,10 @@
 set -euo pipefail
 
 CHEZMOI_SOURCE="${HOME}/.local/share/chezmoi"
-SLEEP_CONF="${CHEZMOI_SOURCE}/etc/systemd/sleep.conf"
+SRC="${CHEZMOI_SOURCE}/etc/systemd/sleep.conf"
+DST="/etc/systemd/sleep.conf"
 
-if [[ -f "$SLEEP_CONF" ]]; then
-    echo "Installing sleep.conf to /etc/systemd/..."
-    sudo cp "$SLEEP_CONF" /etc/systemd/sleep.conf
+if [[ -f "$SRC" ]]; then
+    echo "Installing $DST..."
+    sudo install -D -m 0755 "$SRC" "$DST"
 fi

@@ -5,9 +5,10 @@
 set -euo pipefail
 
 CHEZMOI_SOURCE="${HOME}/.local/share/chezmoi"
-NFTABLES_CONF="${CHEZMOI_SOURCE}/etc/nftables.conf"
+SRC="${CHEZMOI_SOURCE}/etc/nftables.conf"
+DST="/etc/nftables.conf"
 
-if [[ -f "$NFTABLES_CONF" ]]; then
-    echo "Installing nftables.conf to /etc/..."
-    sudo cp "$NFTABLES_CONF" /etc/nftables.conf
+if [[ -f "$SRC" ]]; then
+    echo "Installing $DST..."
+    sudo install -D -m 0755 "$SRC" "$DST"
 fi

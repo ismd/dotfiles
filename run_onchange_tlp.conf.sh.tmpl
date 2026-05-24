@@ -5,9 +5,10 @@
 set -euo pipefail
 
 CHEZMOI_SOURCE="${HOME}/.local/share/chezmoi"
-TLP_CONF="${CHEZMOI_SOURCE}/etc/tlp.conf"
+SRC="${CHEZMOI_SOURCE}/etc/tlp.conf"
+DST="/etc/tlp.conf"
 
-if [[ -f "$TLP_CONF" ]]; then
-    echo "Installing tlp.conf to /etc/..."
-    sudo cp "$TLP_CONF" /etc/tlp.conf
+if [[ -f "$SRC" ]]; then
+    echo "Installing $DST..."
+    sudo install -D -m 0755 "$SRC" "$DST"
 fi

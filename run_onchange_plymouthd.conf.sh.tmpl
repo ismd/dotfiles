@@ -5,9 +5,10 @@
 set -euo pipefail
 
 CHEZMOI_SOURCE="${HOME}/.local/share/chezmoi"
-PLYMOUTH_CONF="${CHEZMOI_SOURCE}/etc/plymouth/plymouthd.conf"
+SRC="${CHEZMOI_SOURCE}/etc/plymouth/plymouthd.conf"
+DST="/etc/plymouth/plymouthd.conf"
 
-if [[ -f "$PLYMOUTH_CONF" ]]; then
-    echo "Installing plymouthd.conf to /etc/plymouth/..."
-    sudo cp "$PLYMOUTH_CONF" /etc/plymouth/plymouthd.conf
+if [[ -f "$SRC" ]]; then
+    echo "Installing $DST..."
+    sudo install -D -m 0755 "$SRC" "$DST"
 fi

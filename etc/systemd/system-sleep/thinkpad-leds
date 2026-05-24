@@ -1,0 +1,10 @@
+#!/bin/sh
+# Reset ThinkPad mute/power LEDs after resume from any sleep state.
+# Invoked by systemd-suspend/hibernate/suspend-then-hibernate/hybrid-sleep.
+
+case "$1" in
+    post)
+        echo 0 > /sys/class/leds/platform::mute/brightness
+        echo 0 > /sys/class/leds/tpacpi::power/brightness
+        ;;
+esac

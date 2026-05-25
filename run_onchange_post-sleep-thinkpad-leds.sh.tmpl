@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# hash: {{ include "etc/systemd/system-sleep/thinkpad-leds" | sha256sum }}
+# hash: {{ include "usr/lib/systemd/system-sleep/thinkpad-leds" | sha256sum }}
 
 set -euo pipefail
 
 CHEZMOI_SOURCE="${HOME}/.local/share/chezmoi"
-SRC="${CHEZMOI_SOURCE}/etc/systemd/system-sleep/thinkpad-leds"
-DST="/etc/systemd/system-sleep/thinkpad-leds"
+SRC="${CHEZMOI_SOURCE}/usr/lib/systemd/system-sleep/thinkpad-leds"
+DST="/usr/lib/systemd/system-sleep/thinkpad-leds"
 
 if [[ -f "$SRC" ]]; then
     echo "Installing $DST..."

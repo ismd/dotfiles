@@ -108,8 +108,6 @@ With argument ARG, do this that many times."
   (interactive)
   (scroll-down-command 5))
 
-(setq calendar-week-start-day 1)
-
 (map! "C-k"           #'ismd/delete-line
       "M-<backspace>" #'ismd/delete-word-backward
       "M-1"           #'winum-select-window-1
@@ -124,6 +122,9 @@ With argument ARG, do this that many times."
       "M-d"           #'ismd/delete-word
       "M-n"           #'ismd/scroll-down-lines
       "M-p"           #'ismd/scroll-up-lines)
+
+(after! calendar
+  (setq calendar-week-start-day 1))
 
 (use-package! gh-copilot-chat
   :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)

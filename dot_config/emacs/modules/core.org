@@ -270,7 +270,7 @@ I don't use =ultra-scroll= because it doesn't work with mouse wheel scrolling.
 
 ** UI
 #+begin_src emacs-lisp
-(custom-set-faces '(fringe ((t :background nil))))
+(custom-set-faces '(fringe ((t :background unspecified))))
 (fringe-mode '(8 . 0))
 
 ;; Custom line continuation/truncation indicators

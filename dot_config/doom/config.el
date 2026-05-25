@@ -132,3 +132,11 @@ With argument ARG, do this that many times."
   :custom
   (gh-copilot-chat-commit-model "claude-sonnet-4.6")
   (gh-copilot-chat-frontend 'shell-maker))
+
+(use-package! super-save
+  :custom
+  (auto-save-default nil)
+  (super-save-auto-save-when-idle t)
+  (super-save-silent t)
+  :config
+  (super-save-mode +1))

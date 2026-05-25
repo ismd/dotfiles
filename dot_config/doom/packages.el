@@ -56,3 +56,5 @@
 (package! gh-copilot-chat
   :recipe (:host github :repo "chep/gh-copilot-chat.el"
            :files ("*.el")))
+
+(package! super-save)

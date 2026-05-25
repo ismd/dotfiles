@@ -110,22 +110,20 @@ With argument ARG, do this that many times."
 
 (setq calendar-week-start-day 1)
 
-(map! "C-k" #'ismd/delete-line)
-(map! "M-<backspace>" #'ismd/delete-word-backward)
-(map! "M-d" #'ismd/delete-word)
-
-(map! "M-1" #'winum-select-window-1)
-(map! "M-2" #'winum-select-window-2)
-(map! "M-3" #'winum-select-window-3)
-(map! "M-4" #'winum-select-window-4)
-(map! "M-5" #'winum-select-window-5)
-(map! "M-6" #'winum-select-window-6)
-(map! "M-7" #'winum-select-window-7)
-(map! "M-8" #'winum-select-window-8)
-(map! "M-9" #'winum-select-window-9)
-
-(map! "M-n" #'ismd/scroll-down-lines)
-(map! "M-p" #'ismd/scroll-up-lines)
+(map! "C-k"           #'ismd/delete-line
+      "M-<backspace>" #'ismd/delete-word-backward
+      "M-1"           #'winum-select-window-1
+      "M-2"           #'winum-select-window-2
+      "M-3"           #'winum-select-window-3
+      "M-4"           #'winum-select-window-4
+      "M-5"           #'winum-select-window-5
+      "M-6"           #'winum-select-window-6
+      "M-7"           #'winum-select-window-7
+      "M-8"           #'winum-select-window-8
+      "M-9"           #'winum-select-window-9
+      "M-d"           #'ismd/delete-word
+      "M-n"           #'ismd/scroll-down-lines
+      "M-p"           #'ismd/scroll-up-lines)
 
 (use-package! gh-copilot-chat
   :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)

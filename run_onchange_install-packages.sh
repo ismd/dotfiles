@@ -115,6 +115,7 @@ yay -S --noconfirm --needed \
     quickshell-git \
     remmina \
     ripgrep \
+    shfmt \
     socat \
     sshfs \
     swww \

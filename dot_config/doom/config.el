@@ -156,8 +156,12 @@ With argument ARG, do this that many times."
       "M-Ю" (kbd "M->")
       "M-Б" (kbd "M-<"))
 
-(setq org-roam-directory "~/Nextcloud/Roam")
-(setq org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
+(setq-default explicit-shell-file-name "/bin/fish"
+              vterm-shell "/bin/fish")
+
+(setq org-roam-directory "~/Nextcloud/Roam"
+      org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))
+      shell-file-name (executable-find "bash"))
 
 (after! calendar
   (setq calendar-week-start-day 1))

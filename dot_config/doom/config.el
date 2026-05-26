@@ -194,3 +194,10 @@ With argument ARG, do this that many times."
   (super-save-silent t)
   :config
   (super-save-mode +1))
+
+(add-hook! '(git-commit-mode-hook
+             magit-diff-mode-hook
+             magit-mode-hook
+             magit-status-mode-hook
+             with-editor-mode-hook)
+  (display-line-numbers-mode -1))

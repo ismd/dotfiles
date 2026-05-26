@@ -123,6 +123,8 @@ With argument ARG, do this that many times."
       "M-n"           #'ismd/scroll-down-lines
       "M-p"           #'ismd/scroll-up-lines)
 
+(setq org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
+
 (after! calendar
   (setq calendar-week-start-day 1))
 

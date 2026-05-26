@@ -139,6 +139,23 @@ With argument ARG, do this that many times."
       "M-9" nil
       "M-0" nil)
 
+(map! :map key-translation-map
+      "C-а" (kbd "C-f")
+      "C-и" (kbd "C-b")
+      "C-т" (kbd "C-n")
+      "C-з" (kbd "C-p")
+      "M-а" (kbd "M-f")
+      "M-и" (kbd "M-b")
+      "M-т" (kbd "M-n")
+      "M-з" (kbd "M-p")
+      "C-ф" (kbd "C-a")
+      "C-у" (kbd "C-e")
+      "C-в" (kbd "C-d")
+      "M-в" (kbd "M-d")
+      "C-." (kbd "C-/")
+      "M-Ю" (kbd "M->")
+      "M-Б" (kbd "M-<"))
+
 (setq org-roam-directory "~/Nextcloud/Roam")
 (setq org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
 

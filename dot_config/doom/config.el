@@ -126,6 +126,14 @@ With argument ARG, do this that many times."
 (after! calendar
   (setq calendar-week-start-day 1))
 
+(use-package! claude-code-ide
+  :bind ("C-c RET" . claude-code-ide-menu)
+  :custom
+  (claude-code-ide-cli-path "~/.local/bin/claude")
+  (claude-code-ide-show-claude-window-in-ediff nil)
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
 (use-package! gh-copilot-chat
   :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)
   :custom

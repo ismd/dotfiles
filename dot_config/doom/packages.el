@@ -53,6 +53,9 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
+(package! claude-code-ide
+  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
+
 (package! gh-copilot-chat
   :recipe (:host github :repo "chep/gh-copilot-chat.el"
            :files ("*.el")))

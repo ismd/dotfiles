@@ -119,6 +119,7 @@ yay -S --noconfirm --needed \
     sshfs \
     swww \
     tigervnc \
+    tidy \
     tlp \
     tlp-pd \
     ttf-firacode-nerd \

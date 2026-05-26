@@ -85,6 +85,7 @@ yay -S --noconfirm --needed \
     libvterm \
     libtool \
     lsp-plugins-lv2 \
+    markdownlint-cli \
     mc \
     mediainfo \
     neovim \
@@ -95,6 +96,7 @@ yay -S --noconfirm --needed \
     ntfs-3g \
     openbsd-netcat \
     openlens-bin \
+    pandoc-cli \
     partitionmanager \
     pavucontrol \
     perl-image-exiftool \

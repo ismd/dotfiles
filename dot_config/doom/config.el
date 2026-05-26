@@ -169,6 +169,10 @@ With argument ARG, do this that many times."
 (after! magit
   (setq git-commit-summary-max-length 72))
 
+(after! undo-fu-session
+  (setq undo-fu-session-compression 'zst
+        undo-fu-session-linear t))
+
 (use-package! claude-code-ide
   :bind ("C-c RET" . claude-code-ide-menu)
   :custom

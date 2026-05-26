@@ -135,5 +135,4 @@ yay -S --noconfirm --needed \
     xdg-desktop-portal-hyprland \
     xournalpp \
     yaml-language-server \
-    zen-browser-bin \
     zoom

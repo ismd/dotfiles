@@ -135,6 +135,7 @@ With argument ARG, do this that many times."
       "M-9" nil
       "M-0" nil)
 
+(setq org-roam-directory "~/Nextcloud/Roam")
 (setq org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
 
 (after! calendar

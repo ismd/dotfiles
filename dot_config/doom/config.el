@@ -123,6 +123,10 @@ With argument ARG, do this that many times."
       "M-n"           #'ismd/scroll-down-lines
       "M-p"           #'ismd/scroll-up-lines)
 
+(map! :map markdown-mode-map
+      "M-n" nil
+      "M-p" nil)
+
 (map! :map vterm-mode-map
       "M-1" nil
       "M-2" nil

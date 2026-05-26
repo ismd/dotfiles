@@ -126,6 +126,9 @@ With argument ARG, do this that many times."
 (after! calendar
   (setq calendar-week-start-day 1))
 
+(after! magit
+  (setq git-commit-summary-max-length 72))
+
 (use-package! claude-code-ide
   :bind ("C-c RET" . claude-code-ide-menu)
   :custom

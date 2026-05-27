@@ -162,6 +162,8 @@ With argument ARG, do this that many times."
 (setq org-roam-directory "~/Nextcloud/Roam"
       shell-file-name (executable-find "bash"))
 
+(global-visual-line-mode +1)
+
 (after! calendar
   (setq calendar-week-start-day 1))
 

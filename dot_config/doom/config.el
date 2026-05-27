@@ -201,3 +201,8 @@ With argument ARG, do this that many times."
   (super-save-mode +1))
 
 (remove-hook 'text-mode-hook #'display-line-numbers-mode)
+(add-hook! '(magit-diff-mode-hook
+             magit-mode-hook
+             magit-status-mode-hook
+             with-editor-mode-hook)
+  (display-line-numbers-mode -1))

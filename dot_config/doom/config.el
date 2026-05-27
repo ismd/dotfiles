@@ -166,7 +166,8 @@ With argument ARG, do this that many times."
   (setq calendar-week-start-day 1))
 
 (after! magit
-  (setq git-commit-summary-max-length 72))
+  (setq git-commit-summary-max-length 72
+        magit-ediff-dwim-show-on-hunks t))
 
 (after! org
   (setq org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))

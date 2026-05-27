@@ -160,7 +160,6 @@ With argument ARG, do this that many times."
               vterm-shell "/bin/fish")
 
 (setq org-roam-directory "~/Nextcloud/Roam"
-      org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))
       shell-file-name (executable-find "bash"))
 
 (after! calendar
@@ -168,6 +167,9 @@ With argument ARG, do this that many times."
 
 (after! magit
   (setq git-commit-summary-max-length 72))
+
+(after! org
+  (setq org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))
 
 (after! undo-fu-session
   (setq undo-fu-session-compression 'zst

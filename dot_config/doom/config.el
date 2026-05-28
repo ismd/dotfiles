@@ -206,5 +206,5 @@ With argument ARG, do this that many times."
              with-editor-mode-hook)
   (display-line-numbers-mode -1))
 
-(remove-hook 'text-mode-hook #'display-line-numbers-mode)
+(remove-hook! '(text-mode-hook conf-mode-hook) #'display-line-numbers-mode)
 (remove-hook 'undo-fu-mode-hook #'global-undo-fu-session-mode)

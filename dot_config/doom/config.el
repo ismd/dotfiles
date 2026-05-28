@@ -174,10 +174,6 @@ With argument ARG, do this that many times."
 (after! org
   (setq org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))
 
-(after! undo-fu-session
-  (setq undo-fu-session-compression 'zst
-        undo-fu-session-linear t))
-
 (use-package! claude-code-ide
   :bind ("C-c RET" . claude-code-ide-menu)
   :custom
@@ -200,9 +196,11 @@ With argument ARG, do this that many times."
   :config
   (super-save-mode +1))
 
-(remove-hook 'text-mode-hook #'display-line-numbers-mode)
 (add-hook! '(magit-diff-mode-hook
              magit-mode-hook
              magit-status-mode-hook
              with-editor-mode-hook)
   (display-line-numbers-mode -1))
+
+(remove-hook 'text-mode-hook #'display-line-numbers-mode)
+(remove-hook 'undo-fu-mode-hook #'global-undo-fu-session-mode)

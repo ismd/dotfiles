@@ -167,6 +167,10 @@ With argument ARG, do this that many times."
 (after! calendar
   (setq calendar-week-start-day 1))
 
+(after! git-commit
+  (setq git-commit-style-convention-checks
+        (delq 'overlong-summary-line git-commit-style-convention-checks)))
+
 (after! magit
   (setq git-commit-summary-max-length 72
         magit-ediff-dwim-show-on-hunks t))

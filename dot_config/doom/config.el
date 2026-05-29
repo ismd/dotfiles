@@ -123,6 +123,11 @@ With argument ARG, do this that many times."
       "M-n"           #'ismd/scroll-down-lines
       "M-p"           #'ismd/scroll-up-lines)
 
+(map!
+ :prefix "C-x"
+ "K" #'kill-buffer-and-window
+ "k" #'kill-current-buffer)
+
 (map! :map markdown-mode-map
       "M-n" nil
       "M-p" nil)

@@ -164,7 +164,15 @@ With argument ARG, do this that many times."
 (setq-default explicit-shell-file-name "/bin/fish"
               vterm-shell "/bin/fish")
 
-(setq org-roam-directory "~/Nextcloud/Notes/Roam"
+(setq org-agenda-show-all-dates nil
+      org-agenda-skip-deadline-if-done t
+      org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-timestamp-if-done t
+      org-agenda-span 'week
+      org-agenda-start-day nil
+      org-agenda-start-on-weekday nil
+      org-deadline-warning-days 3
+      org-roam-directory "~/Nextcloud/Notes/Roam"
       shell-file-name (executable-find "bash"))
 
 (global-visual-line-mode +1)

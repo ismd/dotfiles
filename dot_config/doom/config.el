@@ -99,14 +99,14 @@ With argument ARG, do this that many times."
   (ismd/delete-word (- arg)))
 
 (defun ismd/scroll-down-lines ()
-  "Scroll down 5 lines."
+  "Scroll down 7 lines."
   (interactive)
-  (scroll-up-command 5))
+  (scroll-up-command 7))
 
 (defun ismd/scroll-up-lines ()
-  "Scroll up 5 lines."
+  "Scroll up 7 lines."
   (interactive)
-  (scroll-down-command 5))
+  (scroll-down-command 7))
 
 (map! "C-k"           #'ismd/delete-line
       "M-<backspace>" #'ismd/delete-word-backward

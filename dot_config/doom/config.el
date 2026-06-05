@@ -23,7 +23,7 @@
 ;;
 (setq doom-font                "MesloLGM Nerd Font Mono:size=17"
       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 17)
-      doom-big-font            "MesloLGM Nerd Font Mono:size=30"
+      doom-big-font            "MesloLGM Nerd Font Mono:size=25"
       doom-symbol-font         (font-spec :family "Symbols Nerd Font Mono")
       doom-serif-font          (font-spec :family "IBM Plex Serif"))
 ;;

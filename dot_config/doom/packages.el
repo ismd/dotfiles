@@ -60,4 +60,6 @@
   :recipe (:host github :repo "chep/gh-copilot-chat.el"
            :files ("*.el")))
 
+(package! ghostel)
+
 (package! super-save)

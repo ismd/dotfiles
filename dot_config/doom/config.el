@@ -194,6 +194,14 @@ With argument ARG, do this that many times."
         org-deadline-warning-days 3
         org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))
 
+(use-package! atomic-chrome
+  :config
+  (setq atomic-chrome-buffer-open-style 'frame
+        atomic-chrome-url-major-mode-alist '(("github\\.com" . gfm-mode)
+                                             ("gitlab\\.com" . gfm-mode)
+                                             ("reddit\\.com" . markdown-mode)))
+  (atomic-chrome-start-server))
+
 (use-package! claude-code-ide
   :bind ("C-c RET" . claude-code-ide-menu)
   :custom

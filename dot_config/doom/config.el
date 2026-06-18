@@ -110,6 +110,7 @@ With argument ARG, do this that many times."
 
 (map! "C-k"           #'ismd/delete-line
       "M-<backspace>" #'ismd/delete-word-backward
+      "M-0"           #'treemacs-select-window
       "M-1"           #'winum-select-window-1
       "M-2"           #'winum-select-window-2
       "M-3"           #'winum-select-window-3

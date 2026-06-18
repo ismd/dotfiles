@@ -179,7 +179,8 @@ With argument ARG, do this that many times."
 (setq-default explicit-shell-file-name "/bin/fish"
               vterm-shell "/bin/fish")
 
-(setq org-roam-directory "~/Nextcloud/Notes/Roam"
+(setq corfu-preview-current nil
+      org-roam-directory "~/Nextcloud/Notes/Roam"
       shell-file-name (executable-find "bash"))
 
 (global-visual-line-mode +1)

@@ -128,6 +128,18 @@ With argument ARG, do this that many times."
  "K" #'kill-buffer-and-window
  "k" #'kill-current-buffer)
 
+(map! :map ghostel-mode-map
+      "M-1" nil
+      "M-2" nil
+      "M-3" nil
+      "M-4" nil
+      "M-5" nil
+      "M-6" nil
+      "M-7" nil
+      "M-8" nil
+      "M-9" nil
+      "M-0" nil)
+
 (map! :map key-translation-map
       "C-а" (kbd "C-f")
       "C-и" (kbd "C-b")

@@ -349,6 +349,8 @@ bindl = , switch:off:Lid Switch, exec, ~/.bin/thinkpad-leds.sh
 
 # Notifications
 bind = $mainMod, N, exec, dms ipc call notifications open
+bind = $mainMod SHIFT, N, exec, dms ipc call notifications toggleDoNotDisturb
+bind = $mainMod, ESCAPE, exec, dms ipc call notifications dismissAllPopups
 
 # Translate
 bind = $mainMod SHIFT, T, exec, dmenu-translate

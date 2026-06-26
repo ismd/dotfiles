@@ -223,7 +223,7 @@ With argument ARG, do this that many times."
   ;; (claude-code-ide-no-flicker t)
   (claude-code-ide-show-claude-window-in-ediff nil)
   (claude-code-ide-terminal-backend 'ghostel)
-  (claude-code-ide-vterm-render-delay 0.01)
+  ;; (claude-code-ide-vterm-render-delay 0.01)
   :config
   (claude-code-ide-emacs-tools-setup))
 

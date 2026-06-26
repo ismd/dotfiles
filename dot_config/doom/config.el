@@ -129,7 +129,7 @@ With argument ARG, do this that many times."
  "K" #'kill-buffer-and-window
  "k" #'kill-current-buffer)
 
-(map! :map ghostel-mode-map
+(map! :map (ghostel-char-mode-map ghostel-semi-char-mode-map)
       "M-1" nil
       "M-2" nil
       "M-3" nil

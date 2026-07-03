@@ -129,6 +129,14 @@ With argument ARG, do this that many times."
  "K" #'kill-buffer-and-window
  "k" #'kill-current-buffer)
 
+(map! :map copilot-completion-map
+      "TAB" '(copilot-accept-completion :wk "Accept completion")
+      "C-e" '(copilot-accept-completion-by-line :wk "Accept completion by line")
+      "C-g" '(copilot-clear-overlay :wk "Clear overlay")
+      "C-c C-n" '(copilot-next-completion :wk "Next completion")
+      "C-c C-p" '(copilot-previous-completion :wk "Previous completion")
+      "M-f" '(copilot-accept-completion-by-word :wk "Accept completion by word"))
+
 (map! :map (ghostel-char-mode-map ghostel-semi-char-mode-map)
       "M-1" nil
       "M-2" nil
@@ -180,7 +188,8 @@ With argument ARG, do this that many times."
 (setq-default explicit-shell-file-name "/bin/fish"
               vterm-shell "/bin/fish")
 
-(setq corfu-preview-current nil
+(setq corfu-auto nil
+      corfu-preview-current nil
       org-roam-directory "~/Nextcloud/Notes/Roam"
       shell-file-name (executable-find "bash"))
 
@@ -232,6 +241,17 @@ With argument ARG, do this that many times."
   :custom
   (gh-copilot-chat-commit-model "claude-sonnet-4.6")
   (gh-copilot-chat-frontend 'shell-maker))
+
+(use-package! copilot
+  :hook
+  (conf-mode . copilot-mode)
+  (prog-mode . copilot-mode)
+  (text-mode . copilot-mode)
+  ;; (copilot-mode . (lambda ()
+  ;;                   (setq-local copilot--indent-warning-printed-p t)))
+  :custom
+  (copilot-idle-delay 1)
+  (copilot-indent-offset-warning-disable t))
 
 (use-package! super-save
   :custom

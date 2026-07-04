@@ -188,15 +188,17 @@ With argument ARG, do this that many times."
 (setq-default explicit-shell-file-name "/bin/fish"
               vterm-shell "/bin/fish")
 
-(setq corfu-auto nil
-      corfu-preview-current nil
-      org-roam-directory "~/Nextcloud/Notes/Roam"
+(setq org-roam-directory "~/Nextcloud/Notes/Roam"
       shell-file-name (executable-find "bash"))
 
 (global-visual-line-mode +1)
 
 (after! calendar
   (setq calendar-week-start-day 1))
+
+(after! corfu
+  (setq corfu-auto nil
+        corfu-preview-current nil))
 
 (after! git-commit
   (setq git-commit-style-convention-checks

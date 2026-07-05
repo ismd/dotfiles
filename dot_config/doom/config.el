@@ -219,6 +219,9 @@ With argument ARG, do this that many times."
         org-deadline-warning-days 3
         org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))
 
+(after! vertico
+  (setq vertico-cycle nil))
+
 (use-package! atomic-chrome
   :config
   (setq atomic-chrome-buffer-open-style 'frame

@@ -45,7 +45,7 @@ yay -S --noconfirm --needed \
     elephant-symbols \
     elephant-unicode \
     elephant-websearch \
-    emacs-wayland \
+    emacs \
     evince \
     exfat-utils \
     eza \

@@ -21,9 +21,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font                "MesloLGM Nerd Font Mono:size=17"
-      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 17)
-      doom-big-font            "MesloLGM Nerd Font Mono:size=25"
+(setq doom-font                "MesloLGM Nerd Font Mono:size=25"
+      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 25)
+      doom-big-font            "MesloLGM Nerd Font Mono:size=40"
       doom-symbol-font         (font-spec :family "Symbols Nerd Font Mono")
       doom-serif-font          (font-spec :family "IBM Plex Serif"))
 ;;

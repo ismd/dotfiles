@@ -123,6 +123,7 @@ yay -S --noconfirm --needed \
     tidy \
     tlp \
     tlp-pd \
+    ttf-fira-code \
     ttf-firacode-nerd \
     ttf-meslo-nerd \
     ttf-nerd-fonts-symbols \

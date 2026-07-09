@@ -13,7 +13,7 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1.5 })
 
 local terminal = "kitty"
 local fileManager = "dolphin"
-local menu = "walker -t hypr"
+local menu = "dms ipc call spotlight openWith apps"
 local screenshot = "dms screenshot"
 
 -------------------

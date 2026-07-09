@@ -198,7 +198,10 @@ With argument ARG, do this that many times."
 
 (after! corfu
   (setq corfu-auto nil
-        corfu-preview-current nil))
+        corfu-cycle nil
+        ;; corfu-preselect 'valid
+        ;; corfu-preview-current nil
+        ))
 
 (after! git-commit
   (setq git-commit-style-convention-checks

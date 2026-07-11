@@ -27,7 +27,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("sleep 3s && bitwarden-desktop")
   hl.exec_cmd("walker --gapplication-service")
   hl.exec_cmd("nm-applet")
-  -- easyeffects: managed by ~/.config/systemd/user/easyeffects.service (ordered after dms.service for tray)
   hl.exec_cmd("nextcloud")
   hl.exec_cmd("polychromatic-tray-applet")
   hl.exec_cmd("kdeconnectd")
@@ -43,7 +42,6 @@ hl.env("XDG_MENU_PREFIX", "arch-")
 ---- LOOK AND FEEL ----
 -----------------------
 
--- gaps, border_size, rounding, colors managed by DMS (dms/layout.lua, dms/colors.lua)
 hl.config({
   general = {
     allow_tearing = false,
@@ -157,8 +155,6 @@ hl.device({
   name = "logitech-mx-anywhere-3s",
   scroll_factor = 0.3,
 })
-
--- cursor managed by DMS
 
 ---------------------
 ---- KEYBINDINGS ----

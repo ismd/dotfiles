@@ -257,7 +257,9 @@
   "spotlightCloseNiriOverview": true,
   "rememberLastQuery": false,
   "rememberLastMode": true,
-  "spotlightSectionViewModes": {},
+  "spotlightSectionViewModes": {
+    "apps": "grid"
+  },
   "appDrawerSectionViewModes": {
     "apps": "grid"
   },
@@ -512,7 +514,7 @@
   "osdPosition": 5,
   "osdVolumeEnabled": true,
   "osdMediaVolumeEnabled": true,
-  "osdMediaPlaybackEnabled": true,
+  "osdMediaPlaybackEnabled": false,
   "osdBrightnessEnabled": true,
   "osdIdleInhibitorEnabled": true,
   "osdMicMuteEnabled": true,
@@ -552,7 +554,6 @@
   "niriOutputSettings": {},
   "hyprlandOutputSettings": {
     "eDP-1": {
-      "disabled": false,
       "bitdepth": 10
     },
     "HDMI-A-1": {
@@ -564,9 +565,9 @@
     "hyprland": {}
   },
   "activeDisplayProfile": {
-    "hyprland": ""
+    "hyprland": "auto_5af6115"
   },
-  "displayProfileAutoSelect": false,
+  "displayProfileAutoSelect": true,
   "displayShowDisconnected": false,
   "displaySnapToEdge": true,
   "connectedFrameBarStyleBackups": {},

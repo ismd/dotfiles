@@ -209,6 +209,7 @@ With argument ARG, do this that many times."
 
 (after! magit
   (setq git-commit-summary-max-length 72
+        magit-diff-fontify-hunk t
         magit-ediff-dwim-show-on-hunks t))
 
 (after! org

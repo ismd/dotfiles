@@ -248,7 +248,7 @@ With argument ARG, do this that many times."
 (use-package! gh-copilot-chat
   :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)
   :custom
-  (gh-copilot-chat-commit-model "claude-sonnet-4.6")
+  (gh-copilot-chat-commit-model "claude-sonnet-5")
   (gh-copilot-chat-frontend 'shell-maker))
 
 (use-package! copilot

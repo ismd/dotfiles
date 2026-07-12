@@ -29,7 +29,7 @@ Example pattern:
 
 ### Key Templated Files
 - `dot_config/hypr/hyprland.conf.tmpl` - Monitor configs, host-specific startup
-- `dot_bin/executable_monitors.sh.tmpl` - Display scaling per host
+- `dot_bin/executable_monitors.sh` - Display scaling per host
 - `dot_profile.tmpl` - Environment variables per host
 
 ### Automation Scripts

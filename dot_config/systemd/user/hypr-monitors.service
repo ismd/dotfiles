@@ -1,0 +1,14 @@
+[Unit]
+Description=Dynamic monitor config daemon for Hyprland
+PartOf=graphical-session.target
+After=graphical-session.target dms.service
+Requisite=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.bin/monitors.sh
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

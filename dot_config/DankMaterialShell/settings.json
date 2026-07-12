@@ -548,7 +548,7 @@
   "updaterIntervalSeconds": 1800,
   "updaterIncludeFlatpak": true,
   "updaterAllowAUR": true,
-  "displayNameMode": "model",
+  "displayNameMode": "system",
   "screenPreferences": {},
   "showOnLastDisplay": {},
   "niriOutputSettings": {},
@@ -559,7 +559,11 @@
     "HDMI-A-1": {
       "disabled": false,
       "bitdepth": 10
-    }
+    },
+    "desc:Lenovo Group Limited 0x8AB1": {
+      "disabled": false
+    },
+    "Lenovo Group Limited 0x8AB1": {}
   },
   "displayProfiles": {
     "hyprland": {}

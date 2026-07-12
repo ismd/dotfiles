@@ -4,7 +4,8 @@ Before=graphical-session-pre.target
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c 'printf "monitor = eDP-1, preferred, auto, 1.5\nmonitor = , preferred, auto, 1.5\n" > %h/.config/hypr/monitors.conf'
+RemainAfterExit=yes
+ExecStart=/usr/bin/cp -f %h/.config/hypr/monitors-default.lua %h/.config/hypr/monitors.lua
 
 [Install]
 WantedBy=graphical-session-pre.target

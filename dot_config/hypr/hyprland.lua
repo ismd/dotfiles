@@ -2,10 +2,7 @@
 ---- MONITORS ----
 ------------------
 
--- Monitors are managed via the DMS display settings GUI (dms/outputs.lua,
--- required at the bottom). These are just boot-time fallbacks.
-hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1.5 })
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1.5 })
+require("monitors")
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -21,14 +18,15 @@ local screenshot = "dms screenshot"
 -------------------
 
 hl.on("hyprland.start", function()
-  -- Export XDG_SESSION_ID to systemd for DMS loginctl integration
-  hl.exec_cmd("systemctl --user import-environment XDG_SESSION_ID")
+  -- Export env to systemd: XDG_SESSION_ID for DMS loginctl integration,
+  -- HYPRLAND_INSTANCE_SIGNATURE for hypr-monitors.service socket access
+  hl.exec_cmd("systemctl --user import-environment XDG_SESSION_ID HYPRLAND_INSTANCE_SIGNATURE")
   hl.exec_cmd("~/.bin/thinkpad-leds.sh")
   hl.exec_cmd("sleep 3s && bitwarden-desktop")
   hl.exec_cmd("walker --gapplication-service")
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("nextcloud")
-  hl.exec_cmd("polychromatic-tray-applet")
+  -- hl.exec_cmd("polychromatic-tray-applet")
   hl.exec_cmd("kdeconnectd")
 end)
 
@@ -153,7 +151,7 @@ hl.device({
 
 hl.device({
   name = "logitech-mx-anywhere-3s",
-  scroll_factor = 0.3,
+  scroll_factor = 4.0,
 })
 
 ---------------------
@@ -309,5 +307,4 @@ hl.window_rule({ match = { class = "^(kitty)$" }, border_size = 0 })
 require("dms.colors")
 require("dms.layout")
 require("dms.windowrules")
-require("dms.outputs")
 require("dms.cursor")

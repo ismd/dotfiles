@@ -4,3 +4,5 @@
 /dconf.ini
 /etc/
 /usr/
+
+flycheck_*

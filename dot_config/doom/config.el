@@ -270,6 +270,12 @@ With argument ARG, do this that many times."
   :config
   (super-save-mode +1))
 
+(use-package! systemd
+  :defer t
+  :hook (systemd-mode . eglot-ensure)
+  :config
+  (set-eglot-client! 'systemd-mode '("systemd-lsp")))
+
 (add-hook! '(magit-diff-mode-hook
              magit-mode-hook
              magit-status-mode-hook

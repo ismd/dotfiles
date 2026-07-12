@@ -108,7 +108,10 @@ With argument ARG, do this that many times."
   (interactive)
   (scroll-down-command 7))
 
-(map! "C-k"           #'ismd/delete-line
+(map! "C-="           #'doom/increase-font-size
+      "C--"           #'doom/decrease-font-size
+      "C-0"           #'doom/reset-font-size
+      "C-k"           #'ismd/delete-line
       "M-<backspace>" #'ismd/delete-word-backward
       "M-0"           #'treemacs-select-window
       "M-1"           #'winum-select-window-1
@@ -123,6 +126,11 @@ With argument ARG, do this that many times."
       "M-d"           #'ismd/delete-word
       "M-n"           #'ismd/scroll-down-lines
       "M-p"           #'ismd/scroll-up-lines)
+
+(map!
+ :prefix "C-c"
+ "C-=" #'er/expand-region
+ "C--" #'er/contract-region)
 
 (map!
  :prefix "C-x"

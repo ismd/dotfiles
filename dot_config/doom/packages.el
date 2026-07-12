@@ -68,3 +68,5 @@
 (package! ghostel)
 
 (package! super-save)
+
+(package! systemd)

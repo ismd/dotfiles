@@ -119,6 +119,7 @@ yay -S --noconfirm --needed \
     socat \
     sshfs \
     swww \
+    systemd-lsp \
     tigervnc \
     tidy \
     tlp \

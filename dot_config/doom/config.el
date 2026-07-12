@@ -197,6 +197,7 @@ With argument ARG, do this that many times."
               vterm-shell "/bin/fish")
 
 (setq org-roam-directory "~/Nextcloud/Notes/Roam"
+      recenter-positions '(0.2 top bottom)
       shell-file-name (executable-find "bash"))
 
 (global-visual-line-mode +1)

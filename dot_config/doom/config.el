@@ -203,6 +203,11 @@ With argument ARG, do this that many times."
         ;; corfu-preview-current nil
         ))
 
+(after! doom-modeline
+  (setq doom-modeline-percent-position nil
+        doom-modeline-position-column-line-format '("%l")
+        doom-modeline-total-line-number t))
+
 (after! git-commit
   (setq git-commit-style-convention-checks
         (delq 'overlong-summary-line git-commit-style-convention-checks)))

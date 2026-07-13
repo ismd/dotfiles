@@ -99,19 +99,24 @@ With argument ARG, do this that many times."
   (ismd/delete-word (- arg)))
 
 (defun ismd/scroll-down-lines ()
-  "Scroll down 7 lines."
+  "Scroll down 7 lines, interpolated like page scrolling."
   (interactive)
-  (scroll-up-command 7))
+  (if (bound-and-true-p pixel-scroll-precision-mode)
+      (pixel-scroll-precision-interpolate (- (* 7 (line-pixel-height))) nil 1)
+    (scroll-up-command 7)))
 
 (defun ismd/scroll-up-lines ()
-  "Scroll up 7 lines."
+  "Scroll up 7 lines, interpolated like page scrolling."
   (interactive)
-  (scroll-down-command 7))
+  (if (bound-and-true-p pixel-scroll-precision-mode)
+      (pixel-scroll-precision-interpolate (* 7 (line-pixel-height)) nil 1)
+    (scroll-down-command 7)))
 
 (map! "C-="           #'doom/increase-font-size
       "C--"           #'doom/decrease-font-size
       "C-0"           #'doom/reset-font-size
       "C-k"           #'ismd/delete-line
+      "C-v"           #'pixel-scroll-interpolate-down
       "M-<backspace>" #'ismd/delete-word-backward
       "M-0"           #'treemacs-select-window
       "M-1"           #'winum-select-window-1
@@ -125,7 +130,8 @@ With argument ARG, do this that many times."
       "M-9"           #'winum-select-window-9
       "M-d"           #'ismd/delete-word
       "M-n"           #'ismd/scroll-down-lines
-      "M-p"           #'ismd/scroll-up-lines)
+      "M-p"           #'ismd/scroll-up-lines
+      "M-v"           #'pixel-scroll-interpolate-up)
 
 (map!
  :prefix "C-c"
@@ -197,6 +203,7 @@ With argument ARG, do this that many times."
               vterm-shell "/bin/fish")
 
 (setq org-roam-directory "~/Nextcloud/Notes/Roam"
+      pixel-scroll-precision-interpolate-page t
       recenter-positions '(0.2 top bottom)
       shell-file-name (executable-find "bash"))
 

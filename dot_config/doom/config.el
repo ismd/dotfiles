@@ -143,26 +143,6 @@ With argument ARG, do this that many times."
  "K" #'kill-buffer-and-window
  "k" #'kill-current-buffer)
 
-(map! :map copilot-completion-map
-      "TAB" '(copilot-accept-completion :wk "Accept completion")
-      "C-e" '(copilot-accept-completion-by-line :wk "Accept completion by line")
-      "C-g" '(copilot-clear-overlay :wk "Clear overlay")
-      "C-c C-n" '(copilot-next-completion :wk "Next completion")
-      "C-c C-p" '(copilot-previous-completion :wk "Previous completion")
-      "M-f" '(copilot-accept-completion-by-word :wk "Accept completion by word"))
-
-(map! :map (ghostel-char-mode-map ghostel-semi-char-mode-map)
-      "M-1" nil
-      "M-2" nil
-      "M-3" nil
-      "M-4" nil
-      "M-5" nil
-      "M-6" nil
-      "M-7" nil
-      "M-8" nil
-      "M-9" nil
-      "M-0" nil)
-
 (map! :map key-translation-map
       "C-а" (kbd "C-f")
       "C-и" (kbd "C-b")
@@ -179,25 +159,6 @@ With argument ARG, do this that many times."
       "C-." (kbd "C-/")
       "M-Ю" (kbd "M->")
       "M-Б" (kbd "M-<"))
-
-(map! :map markdown-mode-map
-      "M-n" nil
-      "M-p" nil)
-
-(map! :map vertico-map
-      "C-SPC" #'+vertico/embark-preview)
-
-(map! :map vterm-mode-map
-      "M-1" nil
-      "M-2" nil
-      "M-3" nil
-      "M-4" nil
-      "M-5" nil
-      "M-6" nil
-      "M-7" nil
-      "M-8" nil
-      "M-9" nil
-      "M-0" nil)
 
 (setq-default explicit-shell-file-name "/bin/fish"
               vterm-shell "/bin/fish")
@@ -217,16 +178,38 @@ With argument ARG, do this that many times."
         corfu-cycle nil
         ;; corfu-preselect 'valid
         ;; corfu-preview-current nil
-        ))
+        )
+
+  (map! :map corfu-map
+        "C-v" #'corfu-scroll-up
+        "M-v" #'corfu-scroll-down))
 
 (after! doom-modeline
   (setq doom-modeline-percent-position nil
         doom-modeline-position-column-line-format '("%l")
         doom-modeline-total-line-number t))
 
+(after! ghostel
+  (map! :map (ghostel-char-mode-map ghostel-semi-char-mode-map)
+        "M-1" nil
+        "M-2" nil
+        "M-3" nil
+        "M-4" nil
+        "M-5" nil
+        "M-6" nil
+        "M-7" nil
+        "M-8" nil
+        "M-9" nil
+        "M-0" nil))
+
 (after! git-commit
   (setq git-commit-style-convention-checks
         (delq 'overlong-summary-line git-commit-style-convention-checks)))
+
+(after! markdown-mode
+  (map! :map markdown-mode-map
+        "M-n" nil
+        "M-p" nil))
 
 (after! magit
   (setq git-commit-summary-max-length 72
@@ -245,7 +228,23 @@ With argument ARG, do this that many times."
         org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))
 
 (after! vertico
-  (setq vertico-cycle nil))
+  (setq vertico-cycle nil)
+
+  (map! :map vertico-map
+        "C-SPC" #'+vertico/embark-preview))
+
+(after! vterm
+  (map! :map vterm-mode-map
+        "M-1" nil
+        "M-2" nil
+        "M-3" nil
+        "M-4" nil
+        "M-5" nil
+        "M-6" nil
+        "M-7" nil
+        "M-8" nil
+        "M-9" nil
+        "M-0" nil))
 
 (use-package! atomic-chrome
   :config
@@ -281,7 +280,15 @@ With argument ARG, do this that many times."
   ;;                   (setq-local copilot--indent-warning-printed-p t)))
   :custom
   (copilot-idle-delay 1)
-  (copilot-indent-offset-warning-disable t))
+  (copilot-indent-offset-warning-disable t)
+  :bind
+  (:map copilot-completion-map
+        ("TAB"     . copilot-accept-completion)
+        ("C-e"     . copilot-accept-completion-by-line)
+        ("C-g"     . copilot-clear-overlay)
+        ("C-c C-n" . copilot-next-completion)
+        ("C-c C-p" . copilot-previous-completion)
+        ("M-f"     . copilot-accept-completion-by-word)))
 
 (use-package! super-save
   :custom

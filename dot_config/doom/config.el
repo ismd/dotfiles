@@ -98,6 +98,32 @@ With argument ARG, do this that many times."
   (interactive "p")
   (ismd/delete-word (- arg)))
 
+;; Claude Code (and vim/less/htop) run as fullscreen alt-screen apps: they own
+;; the screen and keep no scrollback, so PageUp/PageDown on the Emacs side just
+;; hit an empty buffer. Forward them to the app when it's on the alternate
+;; screen; otherwise scroll ghostel's own scrollback as usual.
+(defun ismd/ghostel-alt-screen-p ()
+  "Non-nil when the current ghostel terminal is on the alternate screen."
+  (and (derived-mode-p 'ghostel-mode)
+       (bound-and-true-p ghostel--term)
+       (or (ghostel--mode-enabled ghostel--term 1049)
+           (ghostel--mode-enabled ghostel--term 1047)
+           (ghostel--mode-enabled ghostel--term 47))))
+
+(defun ismd/ghostel-page-down ()
+  "Send PageDown to a fullscreen ghostel app, else scroll scrollback down."
+  (interactive)
+  (if (ismd/ghostel-alt-screen-p)
+      (ghostel-send-key "next")
+    (pixel-scroll-interpolate-down)))
+
+(defun ismd/ghostel-page-up ()
+  "Send PageUp to a fullscreen ghostel app, else scroll scrollback up."
+  (interactive)
+  (if (ismd/ghostel-alt-screen-p)
+      (ghostel-send-key "prior")
+    (pixel-scroll-interpolate-up)))
+
 (defun ismd/scroll-down-lines ()
   "Scroll down 7 lines, interpolated like page scrolling."
   (interactive)
@@ -226,6 +252,15 @@ With argument ARG, do this that many times."
         org-agenda-start-on-weekday nil
         org-deadline-warning-days 3
         org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))
+
+;; `pixel-scroll-precision-mode' binds PageUp/PageDown in its own minor-mode
+;; keymap, which outranks ghostel's major-mode map — so bind the dispatcher
+;; there. Outside a fullscreen ghostel app it falls back to pixel scrolling,
+;; leaving behavior everywhere else unchanged.
+(after! pixel-scroll
+  (map! :map pixel-scroll-precision-mode-map
+        "<prior>" #'ismd/ghostel-page-up
+        "<next>"  #'ismd/ghostel-page-down))
 
 (after! vertico
   (setq vertico-cycle nil)

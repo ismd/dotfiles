@@ -319,6 +319,7 @@ With argument ARG, do this that many times."
   (copilot-idle-delay 1)
   (copilot-indent-offset-warning-disable t)
   :bind
+  ("C-c t C" . copilot-mode)
   (:map copilot-completion-map
         ("TAB"     . copilot-accept-completion)
         ("C-e"     . copilot-accept-completion-by-line)

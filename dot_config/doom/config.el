@@ -240,7 +240,19 @@ With argument ARG, do this that many times."
 (after! magit
   (setq git-commit-summary-max-length 72
         magit-diff-fontify-hunk t
-        magit-ediff-dwim-show-on-hunks t))
+        magit-ediff-dwim-show-on-hunks t)
+
+  (map! :map magit-mode-map
+        "M-1" nil
+        "M-2" nil
+        "M-3" nil
+        "M-4" nil
+        "M-5" nil
+        "M-6" nil
+        "M-7" nil
+        "M-8" nil
+        "M-9" nil
+        "M-0" nil))
 
 (after! org
   (setq org-agenda-show-all-dates nil

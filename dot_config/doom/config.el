@@ -231,7 +231,9 @@ With argument ARG, do this that many times."
   (setq vertico-cycle nil)
 
   (map! :map vertico-map
-        "C-SPC" #'+vertico/embark-preview))
+        "C-SPC" #'+vertico/embark-preview
+        "C-v" #'vertico-scroll-up
+        "M-v" #'vertico-scroll-down))
 
 (after! vterm
   (map! :map vterm-mode-map

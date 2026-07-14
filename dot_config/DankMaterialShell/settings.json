@@ -514,7 +514,7 @@
   "osdPosition": 5,
   "osdVolumeEnabled": true,
   "osdMediaVolumeEnabled": true,
-  "osdMediaPlaybackEnabled": false,
+  "osdMediaPlaybackEnabled": true,
   "osdBrightnessEnabled": true,
   "osdIdleInhibitorEnabled": true,
   "osdMicMuteEnabled": true,
@@ -580,7 +580,7 @@
       "id": "default",
       "name": "Main Bar",
       "enabled": true,
-      "position": 1,
+      "position": 3,
       "screenPreferences": [
         "all"
       ],
@@ -588,7 +588,7 @@
       "leftWidgets": [
         {
           "id": "launcherButton",
-          "enabled": true
+          "enabled": false
         },
         {
           "id": "workspaceSwitcher",
@@ -596,12 +596,18 @@
         },
         {
           "id": "focusedWindow",
-          "enabled": true
+          "enabled": false
         }
       ],
       "centerWidgets": [
-        "music",
-        "weather"
+        {
+          "id": "music",
+          "enabled": true
+        },
+        {
+          "id": "weather",
+          "enabled": true
+        }
       ],
       "rightWidgets": [
         {
@@ -618,15 +624,15 @@
         },
         {
           "id": "cpuUsage",
-          "enabled": true
+          "enabled": false
         },
         {
           "id": "memUsage",
-          "enabled": true
+          "enabled": false
         },
         {
           "id": "vpn",
-          "enabled": true
+          "enabled": false
         },
         {
           "id": "battery",
@@ -642,7 +648,7 @@
         },
         {
           "id": "powerMenuButton",
-          "enabled": true
+          "enabled": false
         }
       ],
       "spacing": 4,

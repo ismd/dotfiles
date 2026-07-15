@@ -200,7 +200,7 @@ With argument ARG, do this that many times."
   (setq calendar-week-start-day 1))
 
 (after! corfu
-  (setq corfu-auto nil
+  (setq corfu-auto t
         corfu-cycle nil
         ;; corfu-preselect 'valid
         ;; corfu-preview-current nil

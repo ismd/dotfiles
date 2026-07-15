@@ -372,11 +372,11 @@
   "batteryCriticalThreshold": 10,
   "batteryNotifyCritical": true,
   "batteryLowThreshold": 20,
-  "batteryNotifyLow": false,
+  "batteryNotifyLow": true,
   "batteryChargeLimitNotificationType": 0,
   "batteryLowNotificationType": 0,
   "batteryCriticalNotificationType": 1,
-  "batteryAutoPowerSaver": false,
+  "batteryAutoPowerSaver": true,
   "lockBeforeSuspend": true,
   "loginctlLockIntegration": true,
   "fadeToLockEnabled": true,
@@ -635,11 +635,11 @@
           "enabled": false
         },
         {
-          "id": "battery",
+          "id": "controlCenterButton",
           "enabled": true
         },
         {
-          "id": "controlCenterButton",
+          "id": "battery",
           "enabled": true
         },
         {

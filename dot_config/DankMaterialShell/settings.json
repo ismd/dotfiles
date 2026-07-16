@@ -611,7 +611,7 @@
       ],
       "rightWidgets": [
         {
-          "id": "systemTray",
+          "id": "dankKDEConnect",
           "enabled": true
         },
         {
@@ -619,7 +619,7 @@
           "enabled": true
         },
         {
-          "id": "dankKDEConnect",
+          "id": "systemTray",
           "enabled": true
         },
         {

@@ -192,7 +192,8 @@ With argument ARG, do this that many times."
 (setq org-roam-directory "~/Nextcloud/Notes/Roam"
       pixel-scroll-precision-interpolate-page t
       recenter-positions '(0.2 top bottom)
-      shell-file-name (executable-find "bash"))
+      shell-file-name (executable-find "bash")
+      tab-always-indent 'complete)
 
 (global-visual-line-mode +1)
 
@@ -200,7 +201,7 @@ With argument ARG, do this that many times."
   (setq calendar-week-start-day 1))
 
 (after! corfu
-  (setq corfu-auto t
+  (setq corfu-auto nil
         corfu-cycle nil
         ;; corfu-preselect 'valid
         ;; corfu-preview-current nil

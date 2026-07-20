@@ -315,12 +315,6 @@ With argument ARG, do this that many times."
   :config
   (claude-code-ide-emacs-tools-setup))
 
-(use-package! gh-copilot-chat
-  :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)
-  :custom
-  (gh-copilot-chat-commit-model "claude-sonnet-5")
-  (gh-copilot-chat-frontend 'shell-maker))
-
 (use-package! copilot
   :hook
   (conf-mode . copilot-mode)
@@ -340,6 +334,12 @@ With argument ARG, do this that many times."
         ("C-c C-n" . copilot-next-completion)
         ("C-c C-p" . copilot-previous-completion)
         ("M-f"     . copilot-accept-completion-by-word)))
+
+(use-package! gh-copilot-chat
+  :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)
+  :custom
+  (gh-copilot-chat-commit-model "claude-sonnet-5")
+  (gh-copilot-chat-frontend 'shell-maker))
 
 (use-package! super-save
   :custom

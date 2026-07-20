@@ -5,4 +5,4 @@
 /etc/
 /usr/
 
-flycheck_*
+**/flycheck_*

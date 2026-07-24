@@ -9,7 +9,7 @@ debounce_pid=
 apply_monitors() {
     local monitors external conf=""
     monitors=$(hyprctl monitors -j)
-    external=$(echo "$monitors" | jq -r '.[].name' | grep -v "$INTERNAL_MONITOR" || true)
+    external=$(echo "$monitors" | jq -r '.[].name | select(test("^(HDMI|DP)-"))')
 
     if [[ -n "$external" ]]; then
         conf="hl.monitor({ output = \"$INTERNAL_MONITOR\", disabled = true })"

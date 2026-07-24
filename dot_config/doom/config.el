@@ -333,7 +333,7 @@ With argument ARG, do this that many times."
   ;; (copilot-mode . (lambda ()
   ;;                   (setq-local copilot--indent-warning-printed-p t)))
   :custom
-  (copilot-idle-delay 0.5)
+  (copilot-idle-delay 0.2)
   (copilot-indent-offset-warning-disable t)
   :bind
   ("C-c t C" . copilot-mode)

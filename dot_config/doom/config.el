@@ -211,6 +211,9 @@ With argument ARG, do this that many times."
         "C-v" #'corfu-scroll-up
         "M-v" #'corfu-scroll-down))
 
+(after! dired
+  (setq dired-kill-when-opening-new-dired-buffer t))
+
 (after! doom-modeline
   (setq doom-modeline-percent-position nil
         doom-modeline-position-column-line-format '("%l")
@@ -275,6 +278,10 @@ With argument ARG, do this that many times."
         "<prior>" #'ismd/ghostel-page-up
         "<next>"  #'ismd/ghostel-page-down))
 
+(after! projectile
+  (setq projectile-project-search-path
+        '("~/coding")))
+
 (after! vertico
   (setq vertico-cycle nil)
 
@@ -304,6 +311,9 @@ With argument ARG, do this that many times."
                                              ("reddit\\.com" . markdown-mode)))
   (atomic-chrome-start-server))
 
+(use-package! avy
+  :bind ("M-s s" . avy-goto-char-timer))
+
 (use-package! claude-code-ide
   :bind ("C-c RET" . claude-code-ide-menu)
   :custom
@@ -323,7 +333,7 @@ With argument ARG, do this that many times."
   ;; (copilot-mode . (lambda ()
   ;;                   (setq-local copilot--indent-warning-printed-p t)))
   :custom
-  (copilot-idle-delay 1)
+  (copilot-idle-delay 0.5)
   (copilot-indent-offset-warning-disable t)
   :bind
   ("C-c t C" . copilot-mode)
@@ -334,6 +344,13 @@ With argument ARG, do this that many times."
         ("C-c C-n" . copilot-next-completion)
         ("C-c C-p" . copilot-previous-completion)
         ("M-f"     . copilot-accept-completion-by-word)))
+
+(use-package! dirvish
+  :bind
+  (:map dirvish-mode-map
+        ("RET" . dired-find-alternate-file)
+        ("DEL" . dired-up-directory)
+        ("TAB" . dirvish-subtree-toggle)))
 
 (use-package! gh-copilot-chat
   :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)

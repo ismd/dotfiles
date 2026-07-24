@@ -69,7 +69,7 @@
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       dired             ; making dired pretty [functional]
+       (dired +dirvish +icons) ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ;;eww               ; the internet is gross
        (ibuffer +icons)  ; interactive buffer management
@@ -84,7 +84,7 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       (syntax +childframe +icons) ; tasing you for every semicolon you forget
+       (syntax +childframe +flymake +icons) ; tasing you for every semicolon you forget
        ;;(spell +flyspell) ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 

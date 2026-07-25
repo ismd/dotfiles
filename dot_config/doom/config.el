@@ -191,7 +191,7 @@ With argument ARG, do this that many times."
 
 (setq org-roam-directory "~/Nextcloud/Notes/Roam"
       pixel-scroll-precision-interpolate-page t
-      recenter-positions '(0.2 top bottom)
+      recenter-positions '(0.1 top bottom)
       shell-file-name (executable-find "bash")
       tab-always-indent 'complete)
 

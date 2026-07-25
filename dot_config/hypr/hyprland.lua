@@ -146,12 +146,12 @@ hl.gesture({
 
 hl.device({
   name = "elan0676:00-04f3:3195-touchpad",
-  sensitivity = 0.6,
+  sensitivity = 0.5,
 })
 
 hl.device({
   name = "logitech-mx-anywhere-3s",
-  scroll_factor = 4.0,
+  scroll_factor = 8.0,
 })
 
 ---------------------

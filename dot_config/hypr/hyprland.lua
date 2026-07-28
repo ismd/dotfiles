@@ -74,7 +74,7 @@ hl.config({
   },
 
   master = {
-    mfact = 0.8,
+    mfact = 0.65,
     new_status = "inherit",
   },
 

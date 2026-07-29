@@ -138,6 +138,16 @@ With argument ARG, do this that many times."
       (pixel-scroll-precision-interpolate (* 7 (line-pixel-height)) nil 1)
     (scroll-down-command 7)))
 
+(defun ismd/dirvish-setup-pane ()
+  "Make a dirvish pane behave like a file listing.
+Doom turns on `dired-omit-mode' in dirvish, which hides dotfiles, and
+`global-visual-line-mode' wraps long file names; neither is wanted here.
+Disabling `dired-omit-mode' reverts the buffer, so only touch it when it
+is actually on."
+  (when (bound-and-true-p dired-omit-mode)
+    (dired-omit-mode -1))
+  (visual-line-mode -1))
+
 (map! "C-="           #'doom/increase-font-size
       "C--"           #'doom/decrease-font-size
       "C-0"           #'doom/reset-font-size
@@ -212,7 +222,8 @@ With argument ARG, do this that many times."
         "M-v" #'corfu-scroll-down))
 
 (after! dired
-  (setq dired-kill-when-opening-new-dired-buffer t))
+  (setq dired-kill-when-opening-new-dired-buffer t
+        dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"))
 
 (after! doom-modeline
   (setq doom-modeline-percent-position nil
@@ -326,10 +337,10 @@ With argument ARG, do this that many times."
   (claude-code-ide-emacs-tools-setup))
 
 (use-package! copilot
-  :hook
-  (conf-mode . copilot-mode)
-  (prog-mode . copilot-mode)
-  (text-mode . copilot-mode)
+  ;; :hook
+  ;; (conf-mode . copilot-mode)
+  ;; (prog-mode . copilot-mode)
+  ;; (text-mode . copilot-mode)
   ;; (copilot-mode . (lambda ()
   ;;                   (setq-local copilot--indent-warning-printed-p t)))
   :custom
@@ -346,12 +357,17 @@ With argument ARG, do this that many times."
         ("M-f"     . copilot-accept-completion-by-word)))
 
 (use-package! dirvish
+  :hook
+  (dirvish-directory-view-mode . ismd/dirvish-setup-pane)
+  (dirvish-setup-hook . ismd/dirvish-setup-pane)
   :bind
   (:map dirvish-mode-map
         ("RET" . dired-find-alternate-file)
         ("DEL" . dired-up-directory)
         ("TAB" . dirvish-subtree-toggle)
-        ("C-c C-c" . dired-create-empty-file)))
+        ("C-c C-c" . dired-create-empty-file))
+  :config
+  (setq dirvish-reuse-session t))
 
 (use-package! ef-themes
   :init

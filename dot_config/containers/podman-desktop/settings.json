@@ -6,8 +6,8 @@
   "window.bounds": {
     "x": 0,
     "y": 0,
-    "width": 2037,
-    "height": 1386
+    "width": 1293,
+    "height": 1272
   },
   "telemetry.check": true,
   "terminal.integrated.fontSize": 14,
@@ -15,5 +15,9 @@
   "window.restorePosition": false,
   "preferences.zoomLevel": 1,
   "kubectl.binary.installKubectlSystemWide": true,
-  "preferences.ExitOnClose": false
+  "preferences.ExitOnClose": false,
+  "statusbarProviders.showProviders": {
+    "remindAt": 1785416150867,
+    "disabled": false
+  }
 }

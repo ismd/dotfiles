@@ -395,9 +395,9 @@ is actually on."
   (modus-themes-load-theme 'ef-maris-dark))
 
 (use-package! gh-copilot-chat
-  :hook (git-commit-setup . gh-copilot-chat-insert-commit-message)
+  :hook (git-commit-setup . gh-copilot-chat-insert-commit-message-no-clobber)
   :custom
-  (gh-copilot-chat-commit-model "claude-sonnet-5")
+  ;; (gh-copilot-chat-commit-model "claude-sonnet-5")
   (gh-copilot-chat-frontend 'shell-maker))
 
 (use-package! super-save

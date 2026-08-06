@@ -1,8 +1,8 @@
-/README.md
+README.md
 
-/CLAUDE.md
-/dconf.ini
-/etc/
-/usr/
+CLAUDE.md
+dconf.ini
+etc/
+usr/
 
 **/flycheck_*

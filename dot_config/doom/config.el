@@ -205,6 +205,8 @@ is actually on."
       shell-file-name (executable-find "bash")
       tab-always-indent 'complete)
 
+(global-visual-line-mode +1)
+
 (after! calendar
   (setq calendar-week-start-day 1))
 
@@ -419,5 +421,4 @@ is actually on."
   (display-line-numbers-mode -1))
 
 (remove-hook! '(text-mode-hook conf-mode-hook) #'display-line-numbers-mode)
-(remove-hook 'text-mode-hook #'visual-line-mode)
 (remove-hook 'undo-fu-mode-hook #'global-undo-fu-session-mode)

@@ -148,26 +148,27 @@ is actually on."
     (dired-omit-mode -1))
   (visual-line-mode -1))
 
-(map! "C-="           #'doom/increase-font-size
-      "C--"           #'doom/decrease-font-size
-      "C-0"           #'doom/reset-font-size
-      "C-k"           #'ismd/delete-line
-      "C-v"           #'pixel-scroll-interpolate-down
-      "M-<backspace>" #'ismd/delete-word-backward
-      "M-0"           #'treemacs-select-window
-      "M-1"           #'winum-select-window-1
-      "M-2"           #'winum-select-window-2
-      "M-3"           #'winum-select-window-3
-      "M-4"           #'winum-select-window-4
-      "M-5"           #'winum-select-window-5
-      "M-6"           #'winum-select-window-6
-      "M-7"           #'winum-select-window-7
-      "M-8"           #'winum-select-window-8
-      "M-9"           #'winum-select-window-9
-      "M-d"           #'ismd/delete-word
-      "M-n"           #'ismd/scroll-down-lines
-      "M-p"           #'ismd/scroll-up-lines
-      "M-v"           #'pixel-scroll-interpolate-up)
+(map! "C-="                #'doom/increase-font-size
+      "C--"                #'doom/decrease-font-size
+      "C-0"                #'doom/reset-font-size
+      "C-k"                #'ismd/delete-line
+      "C-v"                #'pixel-scroll-interpolate-down
+      "M-<backspace>"      #'ismd/delete-word-backward
+      "M-0"                #'treemacs-select-window
+      "M-1"                #'winum-select-window-1
+      "M-2"                #'winum-select-window-2
+      "M-3"                #'winum-select-window-3
+      "M-4"                #'winum-select-window-4
+      "M-5"                #'winum-select-window-5
+      "M-6"                #'winum-select-window-6
+      "M-7"                #'winum-select-window-7
+      "M-8"                #'winum-select-window-8
+      "M-9"                #'winum-select-window-9
+      "M-d"                #'ismd/delete-word
+      "M-n"                #'ismd/scroll-down-lines
+      "M-p"                #'ismd/scroll-up-lines
+      "M-v"                #'pixel-scroll-interpolate-up
+      [remap forward-word] #'forward-to-word)
 
 (map!
  :prefix "C-c"

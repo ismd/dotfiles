@@ -196,6 +196,12 @@ is actually on."
       "M-Ю" (kbd "M->")
       "M-Б" (kbd "M-<"))
 
+(map! :map makefile-mode-map
+      "M-n" nil
+      "M-p" nil
+      "M-N" #'makefile-next-dependency
+      "M-P" #'makefile-previous-dependency)
+
 (setq-default explicit-shell-file-name "/bin/fish"
               vterm-shell "/bin/fish")
 

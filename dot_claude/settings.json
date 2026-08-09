@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
+      "Bash(* --version)",
+      "Bash(* --help)",
       "Bash(curl:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
       "Read",
       "WebFetch",
       "WebSearch"

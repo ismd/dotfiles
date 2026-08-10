@@ -26,6 +26,6 @@
     "feature-dev@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "tui": "fullscreen"
 }

@@ -170,15 +170,13 @@ is actually on."
       "M-v"                #'pixel-scroll-interpolate-up
       [remap forward-word] #'forward-to-word)
 
-(map!
- :prefix "C-c"
- "C-=" #'er/expand-region
- "C--" #'er/contract-region)
+(map! :prefix "C-c"
+      "C-=" #'er/expand-region
+      "C--" #'er/contract-region)
 
-(map!
- :prefix "C-x"
- "K" #'kill-buffer-and-window
- "k" #'kill-current-buffer)
+(map! :prefix "C-x"
+      "K" #'kill-buffer-and-window
+      "k" #'kill-current-buffer)
 
 (map! :map key-translation-map
       "C-а" (kbd "C-f")

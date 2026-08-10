@@ -164,11 +164,12 @@ is actually on."
       "M-7"                #'winum-select-window-7
       "M-8"                #'winum-select-window-8
       "M-9"                #'winum-select-window-9
+      "M-B"                #'backward-to-word
+      "M-F"                #'forward-to-word
       "M-d"                #'ismd/delete-word
       "M-n"                #'ismd/scroll-down-lines
       "M-p"                #'ismd/scroll-up-lines
-      "M-v"                #'pixel-scroll-interpolate-up
-      [remap forward-word] #'forward-to-word)
+      "M-v"                #'pixel-scroll-interpolate-up)
 
 (map! :prefix "C-c"
       "C-=" #'er/expand-region

@@ -120,7 +120,7 @@ hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" 
 hl.config({
   input = {
     kb_layout = "us,ru",
-    kb_options = "grp:toggle,ctrl:nocaps",
+    kb_options = "grp:toggle,ctrl:nocaps,copilot:compose",
 
     follow_mouse = 1,
 

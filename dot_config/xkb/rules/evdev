@@ -1,0 +1,5 @@
+// Extend the system ruleset with local keyboard options.
+! include %S/evdev
+
+! option = symbols
+  copilot:compose = +copilot(compose)

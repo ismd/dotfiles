@@ -1,0 +1,8 @@
+// Use the Microsoft Copilot key (Shift+Super+F23) as Compose.
+partial modifier_keys
+xkb_symbols "compose" {
+    replace key <FK23> {
+        type[Group1] = "TWO_LEVEL",
+        symbols[Group1] = [ Multi_key, Multi_key ]
+    };
+};

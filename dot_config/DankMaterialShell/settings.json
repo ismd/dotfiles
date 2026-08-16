@@ -358,7 +358,7 @@
   "muteSoundsWhenMediaPlaying": true,
   "acMonitorTimeout": 0,
   "acLockTimeout": 600,
-  "acSuspendTimeout": 1800,
+  "acSuspendTimeout": 0,
   "acSuspendBehavior": 2,
   "acProfileName": "1",
   "acPostLockMonitorTimeout": 0,

@@ -236,6 +236,13 @@ is actually on."
         doom-modeline-position-column-line-format '("%l")
         doom-modeline-total-line-number t))
 
+(after! eglot
+  (setq eglot-code-action-indications nil))
+
+(after! eldoc
+  (setq eldoc-echo-area-prefer-doc-buffer t
+        eldoc-echo-area-use-multiline-p 1))
+
 (after! ghostel
   (map! :map (ghostel-char-mode-map ghostel-semi-char-mode-map)
         "M-1" nil
@@ -398,7 +405,14 @@ is actually on."
   ;; Finally, load your theme of choice (or a random one with
   ;; `modus-themes-load-random', `modus-themes-load-random-dark',
   ;; `modus-themes-load-random-light').
-  (modus-themes-load-theme 'ef-maris-dark))
+  (modus-themes-load-theme 'ef-maris-light))
+
+(use-package! eldoc-box
+  :bind ("C-c c h" . eldoc-box-help-at-point)
+  :custom
+  ;; (eldoc-box-max-pixel-width 900)
+  ;; (eldoc-box-max-pixel-height 600)
+  (eldoc-box-clear-with-C-g t))
 
 (use-package! gh-copilot-chat
   :hook (git-commit-setup . gh-copilot-chat-insert-commit-message-no-clobber)

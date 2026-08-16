@@ -91,6 +91,8 @@ yay -S --noconfirm --needed \
     neovim \
     nftables \
     nmap \
+    nordzy-cursors \
+    nordzy-hyprcursors \
     noto-fonts-emoji \
     nss-mdns \
     ntfs-3g \

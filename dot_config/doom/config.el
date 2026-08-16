@@ -227,6 +227,22 @@ is actually on."
         "C-v" #'corfu-scroll-up
         "M-v" #'corfu-scroll-down))
 
+;; (after! dape
+;;   (add-to-list 'dape-configs
+;;                '(dlv-test
+;;                  modes (go-mode go-ts-mode)
+;;                  ensure dape-ensure-command
+;;                  command "dlv"
+;;                  command-args ("dap" "--listen" "127.0.0.1::autoport")
+;;                  command-cwd (file-name-directory (buffer-file-name))
+;;                  command-insert-stderr t
+;;                  port :autoport
+;;                  :request "launch"
+;;                  :type "go"
+;;                  :mode "test"
+;;                  :cwd "."
+;;                  :program ".")))
+
 (after! dired
   (setq dired-kill-when-opening-new-dired-buffer t
         dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"))

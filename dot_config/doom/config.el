@@ -219,9 +219,9 @@ is actually on."
 (after! corfu
   (setq corfu-auto nil
         corfu-cycle nil
-        ;; corfu-preselect 'valid
-        ;; corfu-preview-current nil
-        )
+        corfu-on-exact-match 'insert
+        corfu-preselect 'valid
+        corfu-preview-current nil)
 
   (map! :map corfu-map
         "C-v" #'corfu-scroll-up

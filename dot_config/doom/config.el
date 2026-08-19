@@ -148,8 +148,6 @@ is actually on."
     (dired-omit-mode -1))
   (visual-line-mode -1))
 
-(load! "lisp/preview-buffer")
-
 (map! "C-="                #'doom/increase-font-size
       "C--"                #'doom/decrease-font-size
       "C-0"                #'doom/reset-font-size
@@ -178,10 +176,10 @@ is actually on."
       "C--" #'er/contract-region)
 
 (map! :prefix "C-c f"
-      :desc "Find file (preview)" "t" #'ismd/preview-find-file)
+      :desc "Find file (preview)" "t" #'preview-tab-find-file)
 
 (map! :prefix "C-c t"
-      :desc "Keep preview buffer" "p" #'ismd/preview-keep)
+      :desc "Keep preview buffer" "p" #'preview-tab-keep)
 
 (map! :prefix "C-x"
       "K" #'kill-buffer-and-window
@@ -220,7 +218,6 @@ is actually on."
       tab-always-indent 'complete)
 
 (global-visual-line-mode +1)
-(ismd/preview-buffers-mode +1)
 
 (after! calendar
   (setq calendar-week-start-day 1))
@@ -463,6 +460,17 @@ is actually on."
   :custom
   ;; (gh-copilot-chat-commit-model "claude-sonnet-5")
   (gh-copilot-chat-frontend 'shell-maker))
+
+(use-package! preview-tab
+  :config
+  (dolist (cmd '(+default/search-cwd
+                 +default/search-project
+                 +lookup/definition
+                 +lookup/implementations
+                 +lookup/references
+                 +lookup/type-definition))
+    (add-to-list 'preview-tab-commands cmd))
+  (preview-tab-mode +1))
 
 (use-package! super-save
   :custom

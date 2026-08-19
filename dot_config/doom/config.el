@@ -148,6 +148,8 @@ is actually on."
     (dired-omit-mode -1))
   (visual-line-mode -1))
 
+(load! "lisp/preview-buffer")
+
 (map! "C-="                #'doom/increase-font-size
       "C--"                #'doom/decrease-font-size
       "C-0"                #'doom/reset-font-size
@@ -174,6 +176,12 @@ is actually on."
 (map! :prefix "C-c"
       "C-=" #'er/expand-region
       "C--" #'er/contract-region)
+
+(map! :prefix "C-c f"
+      :desc "Find file (preview)" "t" #'ismd/preview-find-file)
+
+(map! :prefix "C-c t"
+      :desc "Keep preview buffer" "p" #'ismd/preview-keep)
 
 (map! :prefix "C-x"
       "K" #'kill-buffer-and-window
@@ -212,9 +220,20 @@ is actually on."
       tab-always-indent 'complete)
 
 (global-visual-line-mode +1)
+(ismd/preview-buffers-mode +1)
 
 (after! calendar
   (setq calendar-week-start-day 1))
+
+(after! consult
+  (consult-customize
+   consult-ripgrep consult-git-grep consult-grep
+   consult-recent-file
+   consult-source-recent-file consult-source-project-recent-file
+   +default/search-project +default/search-other-project
+   +default/search-project-for-symbol-at-point
+   +default/search-cwd +default/search-other-cwd
+   :preview-key '(:debounce 0.2 any)))
 
 (after! corfu
   (setq corfu-auto nil

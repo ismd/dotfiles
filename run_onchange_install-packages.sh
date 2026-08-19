@@ -66,6 +66,7 @@ yay -S --noconfirm --needed \
     hunspell-en_US \
     hunspell-ru \
     hydra \
+    hypr-kdeconnect-fix-git \
     hypridle \
     hyprpolkitagent \
     hyprsunset \

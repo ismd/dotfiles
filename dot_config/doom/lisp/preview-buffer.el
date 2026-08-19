@@ -18,8 +18,20 @@
 (defvar-local ismd/preview-buffer-p nil
   "Non-nil when this buffer is the preview buffer.")
 
-(defvar-local ismd/preview--face-cookie nil
-  "Cookie from `face-remap-add-relative' italicising the modeline file name.")
+(defvar-local ismd/preview--face-cookies nil
+  "Cookies from `face-remap-add-relative' slanting the mode-line path.")
+
+(defvar ismd/preview-modeline-faces
+  '(doom-modeline-project-parent-dir
+    doom-modeline-project-dir
+    doom-modeline-project-root-dir
+    doom-modeline-buffer-path
+    doom-modeline-buffer-file)
+  "Mode-line faces italicised while a buffer is a preview.
+`doom-modeline' splits the buffer path across all of these, and which ones it
+uses depends on `doom-modeline-buffer-file-name-style' -- the project part alone
+can be drawn with any of the three project faces.  Remapping the whole set is
+what slants the path end to end.")
 
 (defvar ismd/preview--busy nil
   "Non-nil while a command from `ismd/preview-commands' is on the stack.
@@ -57,7 +69,43 @@ turned on.")
 
 (defface ismd/preview-modeline
   '((t (:inherit (doom-modeline-buffer-file italic))))
-  "Face for the preview marker in the mode line.")
+  "Face for the preview marker's text label in the mode line.")
+
+(defvar ismd/preview-modeline-icon "nf-md-eye_outline"
+  "Name of the `nerd-icons' Material Design icon marking a preview buffer.
+nil shows no icon.  Takes effect the next time `ismd/preview-buffers-mode' is
+turned on.")
+
+(defvar ismd/preview-modeline-label nil
+  "Text shown after the icon, or nil for the icon alone.
+Set to \"PREVIEW\" to get the old text label back, alongside the icon or
+instead of it.  Takes effect the next time `ismd/preview-buffers-mode' is
+turned on.")
+
+(defvar ismd/preview--indicator-cache nil
+  "Rendered mode-line marker.
+`nerd-icons' resolves a name by scanning a ~7000-entry alist, which is far too
+slow to redo on every redisplay.")
+
+(defun ismd/preview--indicator ()
+  "The mode-line marker for a preview buffer."
+  (or ismd/preview--indicator-cache
+      (let* ((wanted ismd/preview-modeline-icon)
+             (icon (and wanted
+                        (fboundp 'nerd-icons-mdicon)
+                        ;; nerd-icons signals on an unknown name, and this runs
+                        ;; inside redisplay, where an error is very unwelcome.
+                        (ignore-errors (nerd-icons-mdicon wanted))))
+             (label (and ismd/preview-modeline-label
+                         (propertize ismd/preview-modeline-label
+                                     'face 'ismd/preview-modeline)))
+             (marker (if (or icon label)
+                         (concat " " icon (and icon label " ") label)
+                       "")))
+        ;; Don't cache a missing icon: `nerd-icons' may just not be loaded yet.
+        (when (or icon (not wanted))
+          (setq ismd/preview--indicator-cache marker))
+        marker)))
 
 (defun ismd/preview--promote (&optional buffer)
   "Turn BUFFER (default current) into an ordinary, permanent buffer.
@@ -67,9 +115,8 @@ required argument."
     (when ismd/preview-buffer-p
       (setq ismd/preview-buffer-p nil)
       (remove-hook 'first-change-hook #'ismd/preview--promote t)
-      (when ismd/preview--face-cookie
-        (face-remap-remove-relative ismd/preview--face-cookie)
-        (setq ismd/preview--face-cookie nil))
+      (mapc #'face-remap-remove-relative ismd/preview--face-cookies)
+      (setq ismd/preview--face-cookies nil)
       (force-mode-line-update))
     (when (eq (current-buffer) ismd/preview-buffer)
       (setq ismd/preview-buffer nil))))
@@ -96,8 +143,9 @@ required argument."
       (unless ismd/preview-buffer-p
         (setq ismd/preview-buffer-p t)
         (add-hook 'first-change-hook #'ismd/preview--promote nil t)
-        (setq ismd/preview--face-cookie
-              (face-remap-add-relative 'doom-modeline-buffer-file 'italic)))
+        (setq ismd/preview--face-cookies
+              (mapcar (lambda (face) (face-remap-add-relative face 'italic))
+                      ismd/preview-modeline-faces)))
       (force-mode-line-update))
     (when (and old (not (eq old buffer)))
       ;; The old preview is still on screen right now; let redisplay swap it out
@@ -149,6 +197,7 @@ read exactly as `find-file' reads them."
   "Open browsed files in a single temporary buffer, like VS Code's preview tab."
   :global t
   :group 'convenience
+  (setq ismd/preview--indicator-cache nil)
   (if ismd/preview-buffers-mode
       (dolist (cmd ismd/preview-commands)
         (advice-add cmd :around #'ismd/preview--call))
@@ -160,8 +209,7 @@ read exactly as `find-file' reads them."
 ;; `misc-info' is part of doom-modeline's `main' modeline and renders
 ;; `mode-line-misc-info' in every window, active or not.
 (add-to-list 'mode-line-misc-info
-             '(ismd/preview-buffer-p
-               (:propertize " PREVIEW" face ismd/preview-modeline))
+             '(ismd/preview-buffer-p (:eval (ismd/preview--indicator)))
              t)
 
 (provide 'preview-buffer)

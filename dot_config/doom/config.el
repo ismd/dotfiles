@@ -338,15 +338,6 @@ is actually on."
   (setq projectile-project-search-path
         '("~/coding")))
 
-;; Doom's :lang dart module points the grammar at ast-grep/tree-sitter-dart,
-;; which was last updated in Jan 2023 and predates Dart 3: it lacks the `when',
-;; `sealed' and `base' keywords, so `dart-ts-mode' font-lock queries fail with
-;; treesit-query-error and Dart 3 sources don't even parse. Use the upstream
-;; grammar that dart-ts-mode is written against instead.
-(after! treesit
-  (setf (alist-get 'dart treesit-language-source-alist)
-        '("https://github.com/UserNobody14/tree-sitter-dart")))
-
 (after! vertico
   (setq vertico-cycle nil)
 

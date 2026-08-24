@@ -453,6 +453,8 @@ is actually on."
   (gh-copilot-chat-frontend 'shell-maker))
 
 (use-package! preview-tab
+  :custom
+  (preview-tab-include-find-file t)
   :config
   (dolist (cmd '(+default/search-cwd
                  +default/search-project

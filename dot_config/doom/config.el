@@ -21,11 +21,18 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
+;; X11
 (setq doom-font                "MesloLGM Nerd Font Mono:size=25"
       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 25)
       doom-big-font            "MesloLGM Nerd Font Mono:size=36"
       doom-symbol-font         (font-spec :family "Symbols Nerd Font Mono")
       doom-serif-font          (font-spec :family "IBM Plex Serif"))
+;; Wayland
+;; (setq doom-font                "MesloLGM Nerd Font Mono:size=17"
+;;       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 17)
+;;       doom-big-font            "MesloLGM Nerd Font Mono:size=24"
+;;       doom-symbol-font         (font-spec :family "Symbols Nerd Font Mono")
+;;       doom-serif-font          (font-spec :family "IBM Plex Serif"))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to

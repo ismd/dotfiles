@@ -22,6 +22,8 @@ yay -S --noconfirm --needed \
     caido-desktop \
     calf \
     cmake \
+    cups \
+    cups-pdf \
     cups-pk-helper \
     direnv \
     discord \
@@ -111,7 +113,6 @@ yay -S --noconfirm --needed \
     python-pipx \
     python-pylast \
     python-pylint \
-    python-pywal \
     qemu-full \
     qt6-tools \
     qt6ct-kde \

@@ -22,7 +22,7 @@ hl.on("hyprland.start", function()
   -- HYPRLAND_INSTANCE_SIGNATURE for hypr-monitors.service socket access
   hl.exec_cmd("systemctl --user import-environment XDG_SESSION_ID HYPRLAND_INSTANCE_SIGNATURE")
   hl.exec_cmd("~/.bin/thinkpad-leds.sh")
-  hl.exec_cmd("sleep 3s && bitwarden-desktop")
+  hl.exec_cmd("bitwarden-desktop")
   hl.exec_cmd("walker --gapplication-service")
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("nextcloud")

@@ -10,8 +10,8 @@
   "windSpeedUnit": "ms",
   "barElevationEnabled": false,
   "systemTrayIconTintMode": "primary",
-  "systemTrayIconTintSaturation": 30,
-  "systemTrayIconTintStrength": 30,
+  "systemTrayIconTintSaturation": 25,
+  "systemTrayIconTintStrength": 100,
   "controlCenterShowMicPercent": true,
   "controlCenterWidgets": [
     {
@@ -291,7 +291,8 @@
       "batteryColorMode": "theme",
       "widgetPadding": 12,
       "barInsetPadding": 4,
-      "hoverPopouts": false
+      "hoverPopouts": false,
+      "iconScale": 1.15
     }
   ],
   "desktopClockCustomColor": {

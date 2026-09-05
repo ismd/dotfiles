@@ -8,7 +8,6 @@ export CHROME_EXECUTABLE=google-chrome-stable
 export EDITOR=ec-editor
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
 export GOPATH=$HOME/.go
-export GTK_THEME=adw-gtk3-dark
 export GTK_USE_PORTAL=1
 export HISTCONTROL=ignoredups:erasedups
 export KUBE_EDITOR=ec-visual
@@ -31,13 +30,6 @@ export QT_QPA_PLATFORM="wayland;xcb"
 # env = QT_QPA_PLATFORMTHEME,gtk3 # Currently using kvantum instead of gtk3
 # export QT_STYLE_OVERRIDE=kvantum
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-
-{{- if eq .chezmoi.hostname "ismd-work" }}
-export CUPS_USER="ld\ismd"
-export YA_USER=ismd
-
-~/.bin/skotty.sh
-{{- end }}
 
 # Added by Toolbox App
 export PATH="$PATH:/home/ismd/.local/share/JetBrains/Toolbox/scripts"

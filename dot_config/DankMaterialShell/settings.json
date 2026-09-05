@@ -5,6 +5,7 @@
   "cornerRadius": 12,
   "hyprlandLayoutBorderSize": 0,
   "firstDayOfWeek": 1,
+  "calendarBackend": "dankcal",
   "clockFormat": "24h",
   "windSpeedUnit": "ms",
   "barElevationEnabled": false,

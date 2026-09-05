@@ -172,11 +172,6 @@
       ],
       "centerWidgets": [
         {
-          "id": "clock",
-          "enabled": true,
-          "clockCompactMode": false
-        },
-        {
           "id": "music",
           "enabled": true
         },
@@ -248,6 +243,10 @@
             "idleInhibitor",
             "doNotDisturb"
           ]
+        },
+        {
+          "id": "clock",
+          "enabled": true
         }
       ],
       "spacing": 4,

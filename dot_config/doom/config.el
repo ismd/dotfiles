@@ -345,6 +345,9 @@ is actually on."
   (setq projectile-project-search-path
         '("~/coding")))
 
+(after! treemacs
+  (treemacs-follow-mode +1))
+
 (after! vertico
   (setq vertico-cycle nil)
 

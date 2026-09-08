@@ -1,7 +1,7 @@
 [Added Associations]
 application/epub+zip=com.github.johnfactotum.Foliate.desktop;okularApplication_epub.desktop;org.gnome.Evince.desktop;
 application/json=ec.desktop;
-application/pdf=org.gnome.Evince.desktop;org.pwmt.zathura-pdf-mupdf.desktop;okularApplication_pdf.desktop;
+application/pdf=org.kde.okular.desktop;org.gnome.Evince.desktop;org.pwmt.zathura-pdf-mupdf.desktop;okularApplication_pdf.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-startcenter.desktop;
 application/x-cue=ec.desktop;
 application/x-docbook+xml=ec.desktop;
@@ -97,7 +97,7 @@ x-scheme-handler/yandexmusic=yandex-music.desktop;YandexMusic.desktop;
 [Default Applications]
 application/epub+zip=com.github.johnfactotum.Foliate.desktop
 application/json=ec.desktop
-application/pdf=org.gnome.Evince.desktop
+application/pdf=org.kde.okular.desktop;
 application/vnd.ms-publisher=ec.desktop
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-startcenter.desktop
 application/x-bittorrent=transmission-qt.desktop

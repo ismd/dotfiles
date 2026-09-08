@@ -266,6 +266,14 @@ is actually on."
 ;;                  :cwd "."
 ;;                  :program ".")))
 
+(after! dart-mode
+  (map! :map dart-mode-map
+        "C-M-x" #'flutter-run-or-hot-reload))
+
+(after! dart-ts-mode
+  (map! :map dart-ts-mode-map
+        "C-M-x" #'flutter-run-or-hot-reload))
+
 (after! dired
   (setq dired-kill-when-opening-new-dired-buffer t
         dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"))

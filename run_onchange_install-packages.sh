@@ -113,7 +113,7 @@ yay -S --noconfirm --needed \
     python-pipx \
     python-pylast \
     python-pylint \
-    qemu-full \
+    qemu-desktop \
     qt6-tools \
     qt6ct-kde \
     quickshell-git \

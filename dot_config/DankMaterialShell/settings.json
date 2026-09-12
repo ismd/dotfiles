@@ -9,8 +9,9 @@
   "clockFormat": "24h",
   "windSpeedUnit": "ms",
   "barElevationEnabled": false,
-  "systemTrayIconTintSaturation": 25,
-  "systemTrayIconTintStrength": 100,
+  "systemTrayIconTintMode": "monochrome",
+  "systemTrayIconTintSaturation": 100,
+  "systemTrayIconTintStrength": 75,
   "controlCenterShowMicPercent": true,
   "controlCenterWidgets": [
     {
@@ -103,40 +104,6 @@
   "lockBeforeSuspend": true,
   "matugenTemplateNeovim": true,
   "enableFprint": true,
-  "dankIslandReserveHeight": 34,
-  "dankIslandCompactHeight": 34,
-  "dankIslandOuterGap": 2,
-  "dankIslandHomeCompactTight": true,
-  "dankIslandHomeLayout": [
-    {
-      "id": "media",
-      "enabled": true
-    },
-    {
-      "id": "clock",
-      "enabled": true
-    },
-    {
-      "id": "weather",
-      "enabled": true
-    },
-    {
-      "id": "status",
-      "enabled": false
-    },
-    {
-      "id": "volume",
-      "enabled": false
-    },
-    {
-      "id": "brightness",
-      "enabled": false
-    },
-    {
-      "id": "notifications",
-      "enabled": true
-    }
-  ],
   "osdAlwaysShowValue": true,
   "osdPowerProfileEnabled": true,
   "powerMenuActions": [
@@ -181,10 +148,6 @@
         }
       ],
       "rightWidgets": [
-        {
-          "id": "notepadButton",
-          "enabled": true
-        },
         {
           "id": "dankKDEConnect",
           "enabled": true
@@ -252,7 +215,7 @@
       "spacing": 4,
       "innerPadding": 0,
       "bottomGap": 0,
-      "transparency": 0.9,
+      "transparency": 1,
       "widgetTransparency": 1,
       "squareCorners": false,
       "noBackground": false,
@@ -334,5 +297,5 @@
       "trigger": "qrg"
     }
   },
-  "configVersion": 17
+  "configVersion": 18
 }

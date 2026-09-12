@@ -18,16 +18,10 @@ local screenshot = "dms screenshot"
 -------------------
 
 hl.on("hyprland.start", function()
-  -- Export env to systemd: XDG_SESSION_ID for DMS loginctl integration,
-  -- HYPRLAND_INSTANCE_SIGNATURE for hypr-monitors.service socket access
-  hl.exec_cmd("systemctl --user import-environment XDG_SESSION_ID HYPRLAND_INSTANCE_SIGNATURE")
+  hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+  hl.exec_cmd("systemctl --user start hyprland-session.target")
+
   hl.exec_cmd("~/.bin/thinkpad-leds.sh")
-  hl.exec_cmd("bitwarden-desktop")
-  hl.exec_cmd("walker --gapplication-service")
-  hl.exec_cmd("nm-applet")
-  hl.exec_cmd("nextcloud")
-  -- hl.exec_cmd("polychromatic-tray-applet")
-  hl.exec_cmd("kdeconnectd")
 end)
 
 -------------------------------

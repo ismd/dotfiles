@@ -1,0 +1,11 @@
+[Unit]
+Description=Walker Application Launcher
+After=hyprland-session.target
+PartOf=hyprland-session.target
+
+[Service]
+ExecStart=/usr/bin/walker --gapplication-service
+Restart=on-failure
+
+[Install]
+WantedBy=hyprland-session.target

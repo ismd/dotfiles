@@ -314,7 +314,7 @@ is actually on."
 
 (after! magit
   (setq git-commit-summary-max-length 72
-        magit-diff-fontify-hunk t
+        ;; magit-diff-fontify-hunk t
         magit-ediff-dwim-show-on-hunks t)
 
   (map! :map magit-mode-map

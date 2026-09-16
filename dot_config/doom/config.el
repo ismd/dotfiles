@@ -159,6 +159,7 @@ is actually on."
       "C--"                #'doom/decrease-font-size
       "C-0"                #'doom/reset-font-size
       "C-k"                #'ismd/delete-line
+      "C-s"                #'+default/search-buffer
       "C-v"                #'pixel-scroll-interpolate-down
       "M-<backspace>"      #'ismd/delete-word-backward
       "M-0"                #'treemacs-select-window
@@ -178,15 +179,12 @@ is actually on."
       "M-p"                #'ismd/scroll-up-lines
       "M-v"                #'pixel-scroll-interpolate-up)
 
-(map! :prefix "C-c"
+(map! :leader
       "C-=" #'er/expand-region
-      "C--" #'er/contract-region)
-
-(map! :prefix "C-c f"
-      :desc "Find file (preview)" "t" #'preview-tab-find-file)
-
-(map! :prefix "C-c t"
-      :desc "Keep preview buffer" "p" #'preview-tab-keep)
+      "C--" #'er/contract-region
+      :desc "Find file (preview)" "f t" #'preview-tab-find-file
+      :desc "Isearch" "s s" #'isearch-forward
+      :desc "Keep preview buffer" "t p" #'preview-tab-keep)
 
 (map! :prefix "C-x"
       "K" #'kill-buffer-and-window

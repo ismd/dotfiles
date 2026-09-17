@@ -145,6 +145,7 @@ hl.device({
 
 hl.device({
   name = "logitech-mx-anywhere-3s",
+  sensitivity = 0.1,
   scroll_factor = 6.0,
 })
 

@@ -137,6 +137,7 @@ yay -S --noconfirm --needed \
     viewnior \
     vpl-gpu-rt \
     vscode-json-languageserver \
+    weston \
     whois \
     xdg-desktop-portal-hyprland \
     xournalpp \

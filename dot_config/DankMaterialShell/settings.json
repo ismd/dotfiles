@@ -102,6 +102,8 @@
   "batteryNotifyLow": true,
   "batteryAutoPowerSaver": true,
   "lockBeforeSuspend": true,
+  "fadeToLockGracePeriod": 10,
+  "fadeToDpmsGracePeriod": 10,
   "matugenTemplateNeovim": true,
   "enableFprint": true,
   "osdAlwaysShowValue": true,

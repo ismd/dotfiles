@@ -194,3 +194,4 @@ x-scheme-handler/kdeconnect=org.kde.dolphin.desktop
 x-scheme-handler/lens=OpenLens.desktop
 x-scheme-handler/tonsite=org.telegram.desktop.desktop
 x-scheme-handler/yandexmusic=yandex-music.desktop
+x-scheme-handler/tidal=sone-handler.desktop

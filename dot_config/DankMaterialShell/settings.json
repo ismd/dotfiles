@@ -257,7 +257,8 @@
       "widgetPadding": 12,
       "barInsetPadding": 4,
       "hoverPopouts": false,
-      "iconScale": 1.15
+      "iconScale": 1.2,
+      "island": false
     }
   ],
   "desktopClockCustomColor": {

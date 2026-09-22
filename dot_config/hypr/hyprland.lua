@@ -140,7 +140,7 @@ hl.gesture({
 
 hl.device({
   name = "elan0676:00-04f3:3195-touchpad",
-  sensitivity = 0.4,
+  sensitivity = 0.3,
 })
 
 hl.device({

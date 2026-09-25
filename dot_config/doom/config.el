@@ -470,16 +470,9 @@ is actually on."
 
 (use-package! preview-tab
   :custom
-  (preview-tab-include-find-file t)
+  (preview-tab-include-named-files t)
   :config
-  (dolist (cmd '(+default/search-cwd
-                 +default/search-project
-                 +lookup/definition
-                 +lookup/implementations
-                 +lookup/references
-                 +lookup/type-definition))
-    (add-to-list 'preview-tab-commands cmd))
-  (preview-tab-mode +1))
+  (preview-tab-mode 1))
 
 (use-package! super-save
   :custom

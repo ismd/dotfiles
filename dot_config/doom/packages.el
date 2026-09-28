@@ -71,8 +71,7 @@
 
 (package! ghostel)
 
-(package! preview-tab
-  :recipe (:host github :repo "ismd/preview-tab.el"))
+(package! preview-tab)
 
 (package! super-save)
 

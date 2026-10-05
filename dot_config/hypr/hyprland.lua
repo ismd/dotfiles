@@ -264,10 +264,7 @@ hl.window_rule({
 })
 
 -- Bitwarden
-hl.window_rule({
-  match = { class = "brave-nngceckbapebfimnlniiiahkandclblb-Default" },
-  float = true,
-})
+hl.window_rule({ match = { class = "brave-nngceckbapebfimnlniiiahkandclblb-Default" }, float = true })
 
 -- Choose files
 hl.window_rule({ match = { class = "^(xdg-desktop-portal-gtk)$" }, float = true })

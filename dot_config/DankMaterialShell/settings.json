@@ -9,7 +9,6 @@
   "clockFormat": "24h",
   "windSpeedUnit": "ms",
   "barElevationEnabled": false,
-  "systemTrayIconTintMode": "primary",
   "controlCenterShowMicPercent": true,
   "controlCenterWidgets": [
     {

@@ -338,10 +338,11 @@ is actually on."
         org-deadline-warning-days 3
         org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))
 
-;; `pixel-scroll-precision-mode' binds PageUp/PageDown in its own minor-mode
-;; keymap, which outranks ghostel's major-mode map — so bind the dispatcher
-;; there. Outside a fullscreen ghostel app it falls back to pixel scrolling,
-;; leaving behavior everywhere else unchanged.
+(after! org-roam-graph
+  (setq org-roam-graph-executable "fdp"
+        org-roam-graph-extra-config '(("overlap" . "false"))
+        org-roam-graph-link-hidden-types '("file" "fuzzy" "http" "https")))
+
 (after! pixel-scroll
   (map! :map pixel-scroll-precision-mode-map
         "<prior>" #'ismd/ghostel-page-up

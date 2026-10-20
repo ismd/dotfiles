@@ -422,15 +422,143 @@ is actually on."
 (use-package! dirvish
   :hook
   (dirvish-directory-view-mode . ismd/dirvish-setup-pane)
-  (dirvish-setup-hook . ismd/dirvish-setup-pane)
+  (dirvish-setup . ismd/dirvish-setup-pane)
   :bind
   (:map dirvish-mode-map
-        ("RET" . dired-find-alternate-file)
+        ("RET" . ismd/dirvish-find-file)
         ("DEL" . dired-up-directory)
         ("TAB" . dirvish-subtree-toggle)
-        ("C-c C-c" . dired-create-empty-file))
+        ("C-c C-c" . dired-create-empty-file)
+
+        ;; ("*" . '(dirvish-mark-menu :wk "Mark menu"))
+        ;; ("." . '(dired-create-empty-file :wk "Create empty file"))
+        ;; ("," . '(dirvish-setup-menu :wk "Setup menu"))
+        ;; ("^" . '(dirvish-subtree-up :wk "Subtree up"))
+        ;; ("?" . '(dirvish-dispatch :wk "Dispatch menu"))
+        ;; ("C" . '(ismd/dired-do-copy :wk "Copy (C-u = current dir)"))
+        ;; ("D" . '(ismd/dired-do-delete :wk "Delete (C-u = permanent)"))
+        ;; ("e" . '(dirvish-emerge-menu :wk "Emerge menu"))
+        ;; ("f" . '(dirvish-file-info-menu :wk "File info menu"))
+        ;; ("h" . '(dirvish-history-menu :wk "History menu"))
+        ;; ("j" . '(dirvish-quick-access :wk "Quick access jump"))
+        ("l" . dirvish-layout-toggle)
+        ;; ("N" . '(dirvish-narrow :wk "Narrow"))
+        ;; ("o" . '(ismd/dirvish-open-in-other-window :wk "Open in other window"))
+        ;; ("R" . '(ismd/dired-do-rename :wk "Rename (C-u = current dir)"))
+        ;; ("r" . '(dirvish-history-jump :wk "Jump to history"))
+        ;; ("s" . '(dirvish-quicksort :wk "Quicksort menu"))
+        ;; ("x" . '(ismd/dired-do-flagged-delete :wk "Delete flagged (C-u = permanent)"))
+        ;; ("y" . '(dirvish-yank-menu :wk "Yank menu"))
+        )
+  ;; :custom
+  ;; (dirvish-quick-access-entries
+  ;;  '(("c" "~/coding/" "Coding")
+  ;;    ("d" "~/Downloads/" "Downloads")
+  ;;    ("E" "/sudo:root@localhost:/etc" "Etc")
+  ;;    ("h" "~/" "Home")
+  ;;    ("n" "~/Nextcloud/" "Nextcloud")
+  ;;    ("p" "~/Pictures/" "Pictures")
+  ;;    ("s" "~/src/" "Src")
+  ;;    ("t" "~/tmp/" "Tmp")
+  ;;    ("T" "~/.local/share/Trash/files/" "Trash")))
   :config
-  (setq dirvish-reuse-session t))
+  ;; (setq dirvish-attributes           ; The order *MATTERS* for some attributes
+  ;;       ;; '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size)
+  ;;       '(vc-state subtree-state nerd-icons collapse git-msg file-size)
+  ;;       dirvish-side-attributes
+  ;;       '(vc-state nerd-icons collapse))
+  ;; (setq dirvish-large-directory-threshold 20000)
+  ;; (setq dirvish-mode-line-format
+  ;;       '(:left (sort symlink) :right (omit yank index)))
+  ;; (setq dirvish-reuse-session t)
+  ;; (setq dirvish-side-width 28)
+  ;; (setq dirvish-subtree-prefix "  ")
+
+  (dirvish-peek-mode)
+  (dirvish-side-follow-mode)
+
+  ;; (dirvish-define-preview eza (file)
+  ;;   "Use `eza' to generate directory preview."
+  ;;   :require ("eza") ; tell Dirvish to check if we have the executable
+  ;;   (when (file-directory-p file) ; we only interest in directories here
+  ;;     `(shell . ("eza" "-al" "--color=always" "--icons=always"
+  ;;                "--group-directories-first" ,file))))
+  ;;
+  ;; (push 'eza dirvish-preview-dispatchers)
+  ;;
+  ;; ;; Use project.el instead of vc-root-dir for project detection
+  ;; ;; This allows dirvish to recognize projects marked with .project.el
+  ;; (define-advice dirvish--vc-root-dir (:override () use-project-root)
+  ;;   "Use project.el instead of vc-root-dir."
+  ;;   (when-let* ((proj (project-current)))
+  ;;     (expand-file-name (project-root proj))))
+
+  (defun ismd/dirvish-dual-pane ()
+    "Open two dired/dirvish panes side by side.
+Left pane shows current directory, right pane shows home directory."
+    (interactive)
+    (let ((dir default-directory))
+      (delete-other-windows)
+      (dired dir)
+      (split-window-right)
+      (other-window 1)
+      (dired "~")
+      (other-window 1)))
+
+  (defun ismd/dirvish-open-in-other-window ()
+    "Open file at point in the other window, keeping current dired buffer."
+    (interactive)
+    (let ((file (dired-get-file-for-visit)))
+      (if (file-directory-p file)
+          (progn
+            (other-window 1)
+            (dired file))
+        (other-window 1)
+        (find-file file))))
+
+  (defun ismd/dirvish-dual-pane-p ()
+    "Return non-nil if we are in a dual-pane dirvish layout.
+That is, there are exactly two windows and both show dired buffers."
+    (and (= (length (window-list)) 2)
+         (cl-every (lambda (w)
+                     (with-current-buffer (window-buffer w)
+                       (derived-mode-p 'dired-mode)))
+                   (window-list))))
+
+  (defun ismd/dirvish-find-file ()
+    "Smart find-file for dirvish.
+In dual-pane layout, use `find-file' directly to bypass dirvish
+session cleanup, keeping the dired buffer in window history.
+Otherwise, use standard `dired-find-file'."
+    (interactive)
+    (if (and (ismd/dirvish-dual-pane-p)
+             (not (file-directory-p (dired-get-file-for-visit))))
+        (find-file (dired-get-file-for-visit))
+      (dired-find-file)))
+
+  (defun ismd/dired-do-copy (&optional arg)
+    "Like `dired-do-copy', but with prefix ARG use current directory as default."
+    (interactive "P")
+    (let ((dired-dwim-target (unless arg dired-dwim-target)))
+      (dired-do-copy)))
+
+  (defun ismd/dired-do-rename (&optional arg)
+    "Like `dired-do-rename', but with prefix ARG use current directory as default."
+    (interactive "P")
+    (let ((dired-dwim-target (unless arg dired-dwim-target)))
+      (dired-do-rename)))
+
+  (defun ismd/dired-do-delete (&optional permanently)
+    "Delete marked files. With prefix argument PERMANENTLY, bypass trash."
+    (interactive "P")
+    (let ((delete-by-moving-to-trash (not permanently)))
+      (dired-do-delete)))
+
+  (defun ismd/dired-do-flagged-delete (&optional permanently)
+    "Delete flagged files. With prefix argument PERMANENTLY, bypass trash."
+    (interactive "P")
+    (let ((delete-by-moving-to-trash (not permanently)))
+      (dired-do-flagged-delete))))
 
 (use-package! ef-themes
   :init

@@ -37,5 +37,6 @@
   },
   "tui": "fullscreen",
   "theme": "auto",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "switchModelsOnFlag": true
 }

@@ -11,7 +11,7 @@ require("monitors")
 local terminal = "kitty"
 local fileManager = "dolphin"
 local menu = "dms ipc call spotlight openWith apps"
-local screenshot = "dms screenshot"
+local screenshot = "dms ipc call quickCapture screenshot region edit"
 
 -------------------
 ---- AUTOSTART ----

@@ -88,6 +88,9 @@
     }
   },
   "launcherLogoMode": "os",
+  "fontFamily": "Ubuntu Nerd Font",
+  "monoFontFamily": "CaskaydiaCove Nerd Font",
+  "fontWeight": 300,
   "soundNewNotification": false,
   "acLockTimeout": 600,
   "acSuspendBehavior": 2,

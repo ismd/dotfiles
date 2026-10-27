@@ -9,7 +9,7 @@ require("monitors")
 ---------------------
 
 local terminal = "kitty"
-local fileManager = "dolphin"
+local fileManager = "dfiles show"
 local menu = "dms ipc call spotlight openWith apps"
 local screenshot = "dms ipc call quickCapture screenshot region edit"
 

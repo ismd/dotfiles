@@ -27,6 +27,8 @@ yay -S --noconfirm --needed \
     cups-pk-helper \
     direnv \
     discord \
+    dux-files-bin \
+    dux-gop \
     dux-shell \
     dnsmasq \
     docker \

@@ -128,6 +128,7 @@ yay -S --noconfirm --needed \
     tidy \
     tlp \
     tlp-pd \
+    ttf-cascadia-code-nerd \
     ttf-fira-code \
     ttf-firacode-nerd \
     ttf-meslo-nerd \

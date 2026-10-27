@@ -9,10 +9,18 @@ hl.config({
 	},
 	decoration = {
 		rounding = 12,
+		blur = {
+			passes = 2,
+		},
 	},
 })
 
 hl.layer_rule({
 	match = { namespace = "^dms:bar$" },
+	xray = true,
+})
+
+hl.layer_rule({
+	match = { namespace = "^dms:dankisland$" },
 	xray = true,
 })

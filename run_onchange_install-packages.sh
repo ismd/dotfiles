@@ -27,8 +27,7 @@ yay -S --noconfirm --needed \
     cups-pk-helper \
     direnv \
     discord \
-    dms-shell \
-    dms-shell-hyprland \
+    dux-shell \
     dnsmasq \
     docker \
     docker-buildx \
@@ -116,7 +115,6 @@ yay -S --noconfirm --needed \
     qemu-desktop \
     qt6-tools \
     qt6ct-kde \
-    quickshell-git \
     remmina \
     ripgrep \
     shfmt \

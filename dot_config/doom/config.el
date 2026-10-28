@@ -186,6 +186,28 @@ The previous window layout is restored by `ismd/dirvish-quit'."
       (other-window 1)
       (find-file file))))
 
+(defun ismd/dirvish-sync-other-pane ()
+  "Show the current directory in the other pane, like M-i in Midnight Commander.
+Both panes then display the same Dired buffer, which is safe: Dired does
+not kill a buffer on navigation while another window still shows it."
+  (interactive)
+  (unless (ismd/dirvish-dual-pane-p)
+    (user-error "Not in a dual-pane layout"))
+  (let ((dir (dired-current-directory)))
+    (other-window 1)
+    (dired dir)
+    (other-window 1)))
+
+(defun ismd/dirvish-quick-access-visit (path)
+  "Visit PATH for `dirvish-quick-access', like the default `dirvish-dwim'.
+With `dired-kill-when-opening-new-dired-buffer', `dirvish-dwim' kills
+the current Dired buffer even if the other pane shows it too.  Keep it
+in that case, the same way Dired's own navigation does."
+  (let ((dired-kill-when-opening-new-dired-buffer
+         (and dired-kill-when-opening-new-dired-buffer
+              (not (cdr (get-buffer-window-list))))))
+    (dirvish-dwim path)))
+
 (defun ismd/dirvish-dual-pane-p ()
   "Return non-nil if we are in a dual-pane dirvish layout.
 That is, there are exactly two windows and both show dired buffers."
@@ -525,6 +547,7 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
         ("DEL" . dired-up-directory)
         ("TAB" . dirvish-subtree-toggle)
         ("C-c C-c" . dired-create-empty-file)
+        ("M-i" . ismd/dirvish-sync-other-pane)
 
         ;; ("*" . '(dirvish-mark-menu :wk "Mark menu"))
         ;; ("." . '(dired-create-empty-file :wk "Create empty file"))
@@ -536,7 +559,7 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
         ;; ("e" . '(dirvish-emerge-menu :wk "Emerge menu"))
         ;; ("f" . '(dirvish-file-info-menu :wk "File info menu"))
         ;; ("h" . '(dirvish-history-menu :wk "History menu"))
-        ;; ("j" . '(dirvish-quick-access :wk "Quick access jump"))
+        ("j" . dirvish-quick-access)
         ("l" . dirvish-layout-toggle)
         ;; ("N" . '(dirvish-narrow :wk "Narrow"))
         ("o" . ismd/dirvish-open-in-other-window)
@@ -547,17 +570,17 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
         ("x" . ismd/dired-do-flagged-delete)
         ;; ("y" . '(dirvish-yank-menu :wk "Yank menu"))
         )
-  ;; :custom
-  ;; (dirvish-quick-access-entries
-  ;;  '(("c" "~/coding/" "Coding")
-  ;;    ("d" "~/Downloads/" "Downloads")
-  ;;    ("E" "/sudo:root@localhost:/etc" "Etc")
-  ;;    ("h" "~/" "Home")
-  ;;    ("n" "~/Nextcloud/" "Nextcloud")
-  ;;    ("p" "~/Pictures/" "Pictures")
-  ;;    ("s" "~/src/" "Src")
-  ;;    ("t" "~/tmp/" "Tmp")
-  ;;    ("T" "~/.local/share/Trash/files/" "Trash")))
+  :custom
+  ;; Custom option: its setter rebuilds the `dirvish-quick-access' menu,
+  ;; so `setq' won't work.
+  (dirvish-quick-access-entries
+   '(("~" "~/" "Home")
+     ("c" "~/coding/" "Coding")
+     ("d" "~/Downloads/" "Downloads")
+     ("n" "~/Nextcloud/" "Nextcloud")
+     ("s" "~/src/" "Src")
+     ("t" "~/tmp/" "Tmp")))
+  (dirvish-quick-access-function #'ismd/dirvish-quick-access-visit)
   :config
   ;; (setq dirvish-attributes           ; The order *MATTERS* for some attributes
   ;;       ;; '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size)

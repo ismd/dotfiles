@@ -160,6 +160,96 @@ is actually on."
     (dired-omit-mode -1))
   (visual-line-mode -1))
 
+(defun ismd/dirvish-dual-pane ()
+  "Open two dired/dirvish panes side by side.
+Left pane shows current directory, right pane shows home directory.
+The previous window layout is restored by `ismd/dirvish-quit'."
+  (interactive)
+  (let ((dir default-directory))
+    (set-frame-parameter nil 'ismd/dirvish-dual-pane-winconf
+                         (current-window-configuration))
+    (delete-other-windows)
+    (dired dir)
+    (split-window-right)
+    (other-window 1)
+    (dired "~")
+    (other-window 1)))
+
+(defun ismd/dirvish-open-in-other-window ()
+  "Open file at point in the other window, keeping current dired buffer."
+  (interactive)
+  (let ((file (dired-get-file-for-visit)))
+    (if (file-directory-p file)
+        (progn
+          (other-window 1)
+          (dired file))
+      (other-window 1)
+      (find-file file))))
+
+(defun ismd/dirvish-dual-pane-p ()
+  "Return non-nil if we are in a dual-pane dirvish layout.
+That is, there are exactly two windows and both show dired buffers."
+  (and (= (length (window-list)) 2)
+       (cl-every (lambda (w)
+                   (with-current-buffer (window-buffer w)
+                     (derived-mode-p 'dired-mode)))
+                 (window-list))))
+
+(defun ismd/dirvish-find-file ()
+  "Smart find-file for dirvish.
+In dual-pane layout, use `find-file' directly to bypass dirvish
+session cleanup, keeping the dired buffer in window history.
+Otherwise, use standard `dired-find-file'."
+  (interactive)
+  (if (and (ismd/dirvish-dual-pane-p)
+           (not (file-directory-p (dired-get-file-for-visit))))
+      (find-file (dired-get-file-for-visit))
+    (dired-find-file)))
+
+(defun ismd/dirvish-quit ()
+  "Quit dirvish, closing both panes of `ismd/dirvish-dual-pane'.
+Both panes share one dirvish session (the second `dired' call runs in
+the first pane's buffer and joins its session), so `dirvish-quit' only
+closes the current pane.  Instead, kill every Dired buffer of the
+session, which also clears the session itself, and restore the window
+layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
+`dirvish-quit'."
+  (interactive)
+  (let ((conf (frame-parameter nil 'ismd/dirvish-dual-pane-winconf)))
+    (if (not (and conf (ismd/dirvish-dual-pane-p)))
+        (dirvish-quit)
+      (let ((bufs (cl-loop for w in (window-list)
+                           for buf = (window-buffer w)
+                           for dv = (with-current-buffer buf (dirvish-curr))
+                           append (if dv (mapcar #'cdr (dv-roots dv)) (list buf)))))
+        (set-frame-parameter nil 'ismd/dirvish-dual-pane-winconf nil)
+        (mapc #'kill-buffer (delete-dups bufs))
+        (set-window-configuration conf)))))
+
+(defun ismd/dired-do-copy (&optional arg)
+  "Like `dired-do-copy', but with prefix ARG use current directory as default."
+  (interactive "P")
+  (let ((dired-dwim-target (unless arg dired-dwim-target)))
+    (dired-do-copy)))
+
+(defun ismd/dired-do-rename (&optional arg)
+  "Like `dired-do-rename', but with prefix ARG use current directory as default."
+  (interactive "P")
+  (let ((dired-dwim-target (unless arg dired-dwim-target)))
+    (dired-do-rename)))
+
+(defun ismd/dired-do-delete (&optional permanently)
+  "Delete marked files. With prefix argument PERMANENTLY, bypass trash."
+  (interactive "P")
+  (let ((delete-by-moving-to-trash (not permanently)))
+    (dired-do-delete)))
+
+(defun ismd/dired-do-flagged-delete (&optional permanently)
+  "Delete flagged files. With prefix argument PERMANENTLY, bypass trash."
+  (interactive "P")
+  (let ((delete-by-moving-to-trash (not permanently)))
+    (dired-do-flagged-delete)))
+
 (map! "C-="                #'doom/increase-font-size
       "C--"                #'doom/decrease-font-size
       "C-0"                #'doom/reset-font-size
@@ -188,6 +278,7 @@ is actually on."
       "C-=" #'er/expand-region
       "C--" #'er/contract-region
       :desc "Find file (preview)" "f t" #'preview-tab-find-file
+      :desc "Dual-pane dirvish" "o 2" #'ismd/dirvish-dual-pane
       :desc "Isearch" "s s" #'isearch-forward
       :desc "Keep preview buffer" "t p" #'preview-tab-keep)
 
@@ -449,6 +540,7 @@ is actually on."
         ("l" . dirvish-layout-toggle)
         ;; ("N" . '(dirvish-narrow :wk "Narrow"))
         ("o" . ismd/dirvish-open-in-other-window)
+        ("q" . ismd/dirvish-quit)
         ("R" . ismd/dired-do-rename)
         ;; ("r" . '(dirvish-history-jump :wk "Jump to history"))
         ;; ("s" . '(dirvish-quicksort :wk "Quicksort menu"))
@@ -497,73 +589,7 @@ is actually on."
   ;;   "Use project.el instead of vc-root-dir."
   ;;   (when-let* ((proj (project-current)))
   ;;     (expand-file-name (project-root proj))))
-
-  (defun ismd/dirvish-dual-pane ()
-    "Open two dired/dirvish panes side by side.
-Left pane shows current directory, right pane shows home directory."
-    (interactive)
-    (let ((dir default-directory))
-      (delete-other-windows)
-      (dired dir)
-      (split-window-right)
-      (other-window 1)
-      (dired "~")
-      (other-window 1)))
-
-  (defun ismd/dirvish-open-in-other-window ()
-    "Open file at point in the other window, keeping current dired buffer."
-    (interactive)
-    (let ((file (dired-get-file-for-visit)))
-      (if (file-directory-p file)
-          (progn
-            (other-window 1)
-            (dired file))
-        (other-window 1)
-        (find-file file))))
-
-  (defun ismd/dirvish-dual-pane-p ()
-    "Return non-nil if we are in a dual-pane dirvish layout.
-That is, there are exactly two windows and both show dired buffers."
-    (and (= (length (window-list)) 2)
-         (cl-every (lambda (w)
-                     (with-current-buffer (window-buffer w)
-                       (derived-mode-p 'dired-mode)))
-                   (window-list))))
-
-  (defun ismd/dirvish-find-file ()
-    "Smart find-file for dirvish.
-In dual-pane layout, use `find-file' directly to bypass dirvish
-session cleanup, keeping the dired buffer in window history.
-Otherwise, use standard `dired-find-file'."
-    (interactive)
-    (if (and (ismd/dirvish-dual-pane-p)
-             (not (file-directory-p (dired-get-file-for-visit))))
-        (find-file (dired-get-file-for-visit))
-      (dired-find-file)))
-
-  (defun ismd/dired-do-copy (&optional arg)
-    "Like `dired-do-copy', but with prefix ARG use current directory as default."
-    (interactive "P")
-    (let ((dired-dwim-target (unless arg dired-dwim-target)))
-      (dired-do-copy)))
-
-  (defun ismd/dired-do-rename (&optional arg)
-    "Like `dired-do-rename', but with prefix ARG use current directory as default."
-    (interactive "P")
-    (let ((dired-dwim-target (unless arg dired-dwim-target)))
-      (dired-do-rename)))
-
-  (defun ismd/dired-do-delete (&optional permanently)
-    "Delete marked files. With prefix argument PERMANENTLY, bypass trash."
-    (interactive "P")
-    (let ((delete-by-moving-to-trash (not permanently)))
-      (dired-do-delete)))
-
-  (defun ismd/dired-do-flagged-delete (&optional permanently)
-    "Delete flagged files. With prefix argument PERMANENTLY, bypass trash."
-    (interactive "P")
-    (let ((delete-by-moving-to-trash (not permanently)))
-      (dired-do-flagged-delete))))
+  )
 
 (use-package! ef-themes
   :init

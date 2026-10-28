@@ -22,11 +22,16 @@
 ;; accept. For example:
 ;;
 ;; X11
-(setq doom-font                "MesloLGM Nerd Font Mono:size=25"
-      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 25)
-      doom-big-font            "MesloLGM Nerd Font Mono:size=36"
+;; (setq doom-font                "MesloLGM Nerd Font Mono:size=25"
+;;       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 25)
+;;       doom-big-font            "MesloLGM Nerd Font Mono:size=36"
+;;       doom-symbol-font         (font-spec :family "Symbols Nerd Font Mono")
+;;       doom-serif-font          (font-spec :family "IBM Plex Serif"))
+(setq doom-font                (font-spec :family "CaskaydiaCove Nerd Font" :size 26 :weight 'light)
+      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 26 :weight 'light)
+      doom-big-font            (font-spec :family "CaskaydiaCove Nerd Font" :size 40 :weight 'light)
       doom-symbol-font         (font-spec :family "Symbols Nerd Font Mono")
-      doom-serif-font          (font-spec :family "IBM Plex Serif"))
+      doom-serif-font          (font-spec :family "IBM Plex Serif" :weight 'light))
 ;; Wayland
 ;; (setq doom-font                "MesloLGM Nerd Font Mono:size=17"
 ;;       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 17)

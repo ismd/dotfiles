@@ -592,5 +592,6 @@
     }
   ],
   "lockScreenFontFamily": "CaskaydiaCove Nerd Font",
-  "appLauncherGridColumns": 4
+  "appLauncherGridColumns": 4,
+  "lockScreenWallpaperPath": "/home/ismd/Pictures/Wallpapers/20260816_0011.jpg"
 }

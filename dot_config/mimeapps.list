@@ -93,6 +93,7 @@ x-scheme-handler/jetbrains=jetbrains-toolbox.desktop;
 x-scheme-handler/lens=OpenLens.desktop;
 x-scheme-handler/tonsite=org.telegram.desktop.desktop;
 x-scheme-handler/yandexmusic=yandex-music.desktop;YandexMusic.desktop;
+video/matroska=org.kde.haruna.desktop;
 
 [Default Applications]
 application/epub+zip=com.github.johnfactotum.Foliate.desktop

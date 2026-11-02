@@ -409,7 +409,7 @@
   "connectedFrameBarStyleBackups": {},
   "frameEnabled": false,
   "dankLauncherV2Size": "compact",
-  "notificationCompactMode": true,
+  "notificationCompactMode": false,
   "osdMediaPlaybackEnabled": true,
   "osdWorkspaceEnabled": false,
   "lockScreenWidgetInstances": [

@@ -80,6 +80,10 @@ hl.config({
   xwayland = {
     force_zero_scaling = true,
   },
+
+  render = {
+    cm_auto_hdr = 0,
+  },
 })
 
 -- Curves, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/

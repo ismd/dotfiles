@@ -140,6 +140,7 @@ yay -S --noconfirm --needed \
     vscode-json-languageserver \
     weston \
     whois \
+    wl-clip-persist \
     xdg-desktop-portal-hyprland \
     xournalpp \
     yaml-language-server \

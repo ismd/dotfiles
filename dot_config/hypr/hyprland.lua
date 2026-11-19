@@ -22,6 +22,9 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("systemctl --user start hyprland-session.target")
 
   hl.exec_cmd("~/.bin/thinkpad-leds.sh")
+
+  -- Keep clipboard contents after the source app closes (no history)
+  hl.exec_cmd("wl-clip-persist --clipboard regular")
 end)
 
 -------------------------------

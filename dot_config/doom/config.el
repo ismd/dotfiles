@@ -457,6 +457,9 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
         org-deadline-warning-days 3
         org-todo-keywords '((sequence "IN-PROGRESS(i)" "TODO(t)" "WAIT(w)" "HOLD(h)" "|" "DONE(d)" "CANCELLED(c)"))))
 
+(after! org-modern
+  (setq org-modern-timestamp '(" %d.%m.%Y %a " . " %H:%M ")))
+
 (after! org-roam-graph
   (setq org-roam-graph-executable "fdp"
         org-roam-graph-extra-config '(("overlap" . "false"))

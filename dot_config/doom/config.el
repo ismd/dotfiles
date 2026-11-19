@@ -396,6 +396,7 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
 
 (after! doom-modeline
   (setq doom-modeline-percent-position nil
+        doom-modeline-persp-name t
         doom-modeline-position-column-line-format '("%l")
         doom-modeline-total-line-number t))
 

@@ -477,7 +477,12 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
         '("~/coding")))
 
 (after! treemacs
-  (treemacs-follow-mode +1))
+  (setq treemacs-indentation '(20 px)
+        treemacs-width 30)
+  (treemacs-follow-mode +1)
+
+  (add-hook! 'treemacs-mode-hook
+    (face-remap-add-relative 'default :height 0.95)))
 
 (after! vertico
   (setq vertico-cycle nil)

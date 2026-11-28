@@ -484,6 +484,47 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
   (add-hook! 'treemacs-mode-hook
     (face-remap-add-relative 'default :height 0.95)))
 
+;; Slim down treemacs-nerd-icons icons:
+;; - Drop the expand/collapse chevrons: the open/closed folder icon already
+;;   shows the state.  They're baked into the dir icons as
+;;   "<chevron>\t<folder>\t", and file icons are padded with " \t" to line up
+;;   with them, so strip both prefixes to keep folders and files aligned.
+;; - Every icon ends with a tab, which with `tab-width' 1 snaps the label to the
+;;   next column: a 1-2 char gap that varies per row.  Icons all have the same
+;;   width, so a fixed narrow space keeps labels aligned.  GUI only, as a
+;;   fractional-width space can't render on a tty.
+(after! treemacs-nerd-icons
+  (let ((theme (treemacs--find-theme "nerd-icons"))
+        (gap (propertize " " 'display '(space :width 1.2)))
+        (prefixes (list ?\s
+                        (string-to-char (nerd-icons-octicon "nf-oct-chevron_down"))
+                        (string-to-char (nerd-icons-octicon "nf-oct-chevron_right")))))
+    (dolist (gui '(t nil))
+      (let ((icons (if gui
+                       (treemacs-theme->gui-icons theme)
+                     (treemacs-theme->tui-icons theme))))
+        (maphash
+         (lambda (ext icon)
+           ;; Some GUI icons are a " " carrying the real icon in its `display'
+           ;; property.  Keep the gap outside it: no nested display specs.
+           (let* ((display (get-text-property 0 'display icon))
+                  (wrapped (stringp display))
+                  (str (if wrapped display icon))
+                  (tail ""))
+             (when (and (> (length str) 2)
+                        (memq (aref str 0) prefixes)
+                        (eq (aref str 1) ?\t))
+               (setq str (substring str 2)))
+             (when (and gui (string-suffix-p "\t" str))
+               (setq str (substring str 0 -1)
+                     tail gap))
+             (puthash ext
+                      (concat (if wrapped (propertize icon 'display str) str)
+                              tail)
+                      icons)))
+         icons))))
+  (treemacs-load-theme "nerd-icons"))
+
 (after! vertico
   (setq vertico-cycle nil)
 

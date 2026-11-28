@@ -71,7 +71,15 @@
 
 (package! ghostel)
 
+(unpin! org-roam)
+
+(package! org-roam-ui)
+
 (package! preview-tab)
+
+(package! simple-httpd
+  :recipe (:host github :repo "skeeto/emacs-web-server"
+           :local-repo "simple-httpd"))
 
 (package! super-save)
 

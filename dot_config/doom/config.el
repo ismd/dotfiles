@@ -662,6 +662,14 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
   ;; (gh-copilot-chat-commit-model "claude-sonnet-5")
   (gh-copilot-chat-frontend 'shell-maker))
 
+(use-package! org-roam-ui
+  :after org-roam
+  :config
+  (setq org-roam-ui-follow t
+        org-roam-ui-open-on-start t
+        org-roam-ui-sync-theme t
+        org-roam-ui-update-on-save t))
+
 (use-package! preview-tab
   :custom
   (preview-tab-include-named-files t)
@@ -681,6 +689,9 @@ layout saved by `ismd/dirvish-dual-pane'.  Outside of it, just call
   :hook (systemd-mode . eglot-ensure)
   :config
   (set-eglot-client! 'systemd-mode '("systemd-lsp")))
+
+(use-package! websocket
+  :after org-roam)
 
 (add-hook! '(magit-diff-mode-hook
              magit-mode-hook
